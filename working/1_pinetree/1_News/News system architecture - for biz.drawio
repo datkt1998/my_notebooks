@@ -1,0 +1,408 @@
+<mxfile host="Electron" modified="2024-02-07T12:00:56.662Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.0.2 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="hUgRfKd1HFpYkfidA0R6" version="23.0.2" type="device">
+  <diagram name="Compact for biz" id="wN0mwDO_pFNNNWkEys0n">
+    <mxGraphModel dx="1434" dy="884" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#F7F7F7" math="0" shadow="0">
+      <root>
+        <mxCell id="nTN8sJjoOhgb6UXOudAq-0" />
+        <mxCell id="nTN8sJjoOhgb6UXOudAq-1" style="" parent="nTN8sJjoOhgb6UXOudAq-0" />
+        <mxCell id="nTN8sJjoOhgb6UXOudAq-2" value="" style="rounded=0;whiteSpace=wrap;html=1;align=right;fillColor=none;strokeColor=#4277BB;fontColor=#000000;fontStyle=1;startSize=0;shadow=0;labelBackgroundColor=#007FFF;gradientColor=none;strokeWidth=3;glass=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="nTN8sJjoOhgb6UXOudAq-1" vertex="1">
+          <mxGeometry x="30" y="31" width="790" height="770" as="geometry" />
+        </mxCell>
+        <mxCell id="nTN8sJjoOhgb6UXOudAq-3" value="NEWS SYSTEM" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=30;fontColor=#4277BB;shadow=0;dashed=1;labelBackgroundColor=#f7f7f7;fontStyle=1;spacingLeft=5;startSize=0;strokeWidth=1;rounded=0;labelBorderColor=none;" parent="nTN8sJjoOhgb6UXOudAq-1" vertex="1">
+          <mxGeometry x="340" width="250" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-60" value="" style="rounded=0;whiteSpace=wrap;html=1;align=right;fillColor=none;strokeColor=#4277BB;fontColor=#000000;fontStyle=1;startSize=0;shadow=0;labelBackgroundColor=#007FFF;gradientColor=none;strokeWidth=3;glass=0;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;" parent="nTN8sJjoOhgb6UXOudAq-1" vertex="1">
+          <mxGeometry x="820" y="31" width="320" height="770" as="geometry" />
+        </mxCell>
+        <object label="area" id="nTN8sJjoOhgb6UXOudAq-4">
+          <mxCell style="" parent="nTN8sJjoOhgb6UXOudAq-0" />
+        </object>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-2" value="" style="swimlane;shadow=0;labelBackgroundColor=#007FFF;strokeColor=#4277BB;fillColor=none;gradientColor=none;fontColor=#000000;align=right;collapsible=0;startSize=0;strokeWidth=2;swimlaneFillColor=none;dashed=1;opacity=50;" parent="nTN8sJjoOhgb6UXOudAq-4" vertex="1">
+          <mxGeometry x="235" y="50" width="370" height="720" as="geometry" />
+        </mxCell>
+        <mxCell id="nTN8sJjoOhgb6UXOudAq-11" value="flow" style="" parent="nTN8sJjoOhgb6UXOudAq-0" />
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-48" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;endArrow=classicThin;strokeColor=#cd23c7;fontColor=#000000;strokeWidth=2;endSize=4;startSize=4;startArrow=classicThin;startFill=1;endFill=1;" parent="nTN8sJjoOhgb6UXOudAq-11" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="300" y="610" as="sourcePoint" />
+            <mxPoint x="120" y="440" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="300" y="550" />
+              <mxPoint x="120" y="550" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-49" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;endArrow=classicThin;strokeColor=#4277BB;fontColor=#000000;strokeWidth=2;endSize=4;startSize=4;startArrow=none;startFill=0;endFill=1;" parent="nTN8sJjoOhgb6UXOudAq-11" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="470" y="650" as="sourcePoint" />
+            <mxPoint x="340" y="650" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="520" y="650" />
+              <mxPoint x="520" y="650" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-50" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;labelBackgroundColor=#ffffff;endArrow=classicThin;strokeColor=#4277BB;fontColor=#000000;strokeWidth=2;endSize=4;startSize=4;startArrow=none;startFill=0;endFill=1;" parent="nTN8sJjoOhgb6UXOudAq-11" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="510" y="320" as="sourcePoint" />
+            <mxPoint x="510" y="610" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-51" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;labelBackgroundColor=#ffffff;endArrow=classicThin;strokeColor=#4277BB;fontColor=#000000;strokeWidth=2;endSize=4;startSize=4;startArrow=none;startFill=0;endFill=1;" parent="nTN8sJjoOhgb6UXOudAq-11" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="300" y="420" as="sourcePoint" />
+            <mxPoint x="300" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-52" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;endArrow=classicThin;strokeColor=#4277BB;fontColor=#000000;strokeWidth=2;endSize=4;startSize=4;startArrow=none;startFill=0;endFill=1;" parent="nTN8sJjoOhgb6UXOudAq-11" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="340" y="280" as="sourcePoint" />
+            <mxPoint x="470" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-53" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;labelBackgroundColor=#ffffff;endArrow=classicThin;strokeColor=#4277BB;fontColor=#000000;strokeWidth=2;endSize=4;startSize=4;startArrow=none;startFill=0;endFill=1;" parent="nTN8sJjoOhgb6UXOudAq-11" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="300" y="140" as="sourcePoint" />
+            <mxPoint x="300" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-54" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;labelBackgroundColor=#ffffff;endArrow=classicThin;strokeColor=#4277BB;fontColor=#000000;strokeWidth=2;endSize=4;startSize=4;startArrow=none;startFill=0;endFill=1;" parent="nTN8sJjoOhgb6UXOudAq-11" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="120" y="190" as="sourcePoint" />
+            <mxPoint x="120" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-55" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;endArrow=classicThin;strokeColor=#cd23c7;fontColor=#000000;strokeWidth=2;endSize=4;startSize=4;startArrow=classicThin;startFill=1;endFill=1;" parent="nTN8sJjoOhgb6UXOudAq-11" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="400" as="sourcePoint" />
+            <mxPoint x="260" y="460" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="220" y="400" />
+              <mxPoint x="220" y="460" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-56" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;endArrow=classicThin;strokeColor=#cd23c7;fontColor=#000000;strokeWidth=2;endSize=4;startSize=4;startArrow=classicThin;startFill=1;endFill=1;" parent="nTN8sJjoOhgb6UXOudAq-11" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="400" as="sourcePoint" />
+            <mxPoint x="260" y="100" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="220" y="400" />
+              <mxPoint x="220" y="100" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-57" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;endArrow=classicThin;strokeColor=#cd23c7;fontColor=#000000;strokeWidth=2;endSize=4;startSize=4;startArrow=classicThin;startFill=1;endFill=1;" parent="nTN8sJjoOhgb6UXOudAq-11" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="400" as="sourcePoint" />
+            <mxPoint x="260" y="280" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="220" y="400" />
+              <mxPoint x="220" y="280" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-194" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;labelBackgroundColor=#ffffff;endArrow=classicThin;strokeColor=#4277BB;fontColor=#000000;strokeWidth=2;endSize=4;startSize=4;startArrow=none;startFill=0;endFill=1;" parent="nTN8sJjoOhgb6UXOudAq-11" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="540" y="280" as="sourcePoint" />
+            <mxPoint x="670" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-222" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=#ffffff;endArrow=classicThin;strokeColor=#4277BB;fontColor=#000000;strokeWidth=2;endSize=4;startSize=4;startArrow=none;startFill=0;endFill=1;" parent="nTN8sJjoOhgb6UXOudAq-11" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="710" y="320" as="sourcePoint" />
+            <mxPoint x="710" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-61" value="Legend" style="" parent="nTN8sJjoOhgb6UXOudAq-0" />
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-151" value="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;font style=&quot;font-weight: normal; font-size: 9px;&quot; color=&quot;#4277bb&quot;&gt;&amp;nbsp; &amp;nbsp;Build a system to crawl news from sources following the requirements.&lt;/font&gt;&lt;br&gt;&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=10;labelBorderColor=none;labelBackgroundColor=none;fillColor=none;dashed=1;strokeColor=#4277BB;fontColor=#000000;fontStyle=1;startSize=0;shadow=0;gradientColor=none;strokeWidth=1;swimlaneFillColor=none;opacity=50;spacing=0;" parent="rxHLFNSxN-ANhz3IYRMf-61" vertex="1">
+          <mxGeometry x="835" y="65" width="295" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-152" value="&lt;p style=&quot;line-height: 100%; font-size: 9px;&quot;&gt;&lt;font style=&quot;font-size: 9px; font-weight: normal;&quot; color=&quot;#4277bb&quot;&gt;&amp;nbsp; &amp;nbsp;Build a database system to store crawled news, customer taste, news summary, news labels, news recommendation, log system.&lt;/font&gt;&lt;br style=&quot;font-size: 9px;&quot;&gt;&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=10;labelBorderColor=none;labelBackgroundColor=none;fillColor=none;dashed=1;strokeColor=#4277BB;fontColor=#000000;fontStyle=1;startSize=0;shadow=0;gradientColor=none;strokeWidth=1;swimlaneFillColor=none;opacity=50;spacing=0;fontSize=9;" parent="rxHLFNSxN-ANhz3IYRMf-61" vertex="1">
+          <mxGeometry x="835" y="105" width="295" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-153" value="&lt;p style=&quot;line-height: 100%; font-size: 9px;&quot;&gt;&lt;font style=&quot;font-weight: normal; font-size: 9px;&quot; color=&quot;#4277bb&quot;&gt;&amp;nbsp; &amp;nbsp;Build an AI model that summarizes crawled news, following the requirements for accuracy and summary text length.&lt;/font&gt;&lt;br style=&quot;font-size: 9px;&quot;&gt;&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=10;labelBorderColor=none;labelBackgroundColor=none;fillColor=none;dashed=1;strokeColor=#4277BB;fontColor=#000000;fontStyle=1;startSize=0;shadow=0;gradientColor=none;strokeWidth=1;swimlaneFillColor=none;opacity=50;spacing=0;fontSize=9;" parent="rxHLFNSxN-ANhz3IYRMf-61" vertex="1">
+          <mxGeometry x="835" y="145" width="295" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-154" value="&lt;p style=&quot;line-height: 100%; font-size: 9px;&quot;&gt;&lt;font style=&quot;font-weight: normal; font-size: 9px;&quot; color=&quot;#4277bb&quot;&gt;&amp;nbsp; &amp;nbsp;Build an AI model to classify news into different groups of labels according to requirements and pre-existing labels.&lt;/font&gt;&lt;br style=&quot;font-size: 9px;&quot;&gt;&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=10;labelBorderColor=none;labelBackgroundColor=none;fillColor=none;dashed=1;strokeColor=#4277BB;fontColor=#000000;fontStyle=1;startSize=0;shadow=0;gradientColor=none;strokeWidth=1;swimlaneFillColor=none;opacity=50;spacing=0;fontSize=9;" parent="rxHLFNSxN-ANhz3IYRMf-61" vertex="1">
+          <mxGeometry x="835" y="185" width="295" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-157" value="&lt;p style=&quot;line-height: 100%; font-size: 9px;&quot;&gt;&lt;font style=&quot;font-weight: normal; font-size: 9px;&quot; color=&quot;#4277bb&quot;&gt;&amp;nbsp; &amp;nbsp;Build a model to determine customer taste profile based on usage behavior and habits.&lt;/font&gt;&lt;br style=&quot;font-size: 9px;&quot;&gt;&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=10;labelBorderColor=none;labelBackgroundColor=none;fillColor=none;dashed=1;strokeColor=#4277BB;fontColor=#000000;fontStyle=1;startSize=0;shadow=0;gradientColor=none;strokeWidth=1;swimlaneFillColor=none;opacity=50;spacing=0;fontSize=9;" parent="rxHLFNSxN-ANhz3IYRMf-61" vertex="1">
+          <mxGeometry x="835" y="255" width="295" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-158" value="&lt;p style=&quot;line-height: 100%; font-size: 9px;&quot;&gt;&lt;font style=&quot;font-weight: normal; font-size: 9px;&quot; color=&quot;#4277bb&quot;&gt;&amp;nbsp; &amp;nbsp;Build a system to record customer feedback from news reading behavior and habits.&lt;/font&gt;&lt;br style=&quot;font-size: 9px;&quot;&gt;&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=10;labelBorderColor=none;labelBackgroundColor=none;fillColor=none;dashed=1;strokeColor=#4277BB;fontColor=#000000;fontStyle=1;startSize=0;shadow=0;gradientColor=none;strokeWidth=1;swimlaneFillColor=none;opacity=50;spacing=0;fontSize=9;" parent="rxHLFNSxN-ANhz3IYRMf-61" vertex="1">
+          <mxGeometry x="835" y="295" width="295" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-159" value="&lt;p style=&quot;line-height: 100%; font-size: 9px;&quot;&gt;&lt;font style=&quot;font-size: 9px;&quot; color=&quot;#4277bb&quot;&gt;&amp;nbsp; &amp;nbsp;&lt;span style=&quot;font-weight: normal; font-size: 9px;&quot;&gt;Build ML model that scoring the r&lt;span style=&quot;font-size: 9px;&quot;&gt;elevance of news to each customer&lt;/span&gt;&lt;span style=&quot;font-size: 9px;&quot;&gt;.&lt;/span&gt;&lt;/span&gt;&lt;/font&gt;&lt;br style=&quot;font-size: 9px;&quot;&gt;&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=10;labelBorderColor=none;labelBackgroundColor=none;fillColor=none;dashed=1;strokeColor=#4277BB;fontColor=#000000;fontStyle=1;startSize=0;shadow=0;gradientColor=none;strokeWidth=1;swimlaneFillColor=none;opacity=50;spacing=0;fontSize=9;" parent="rxHLFNSxN-ANhz3IYRMf-61" vertex="1">
+          <mxGeometry x="835" y="225" width="295" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-160" value="&lt;p style=&quot;line-height: 100%; font-size: 9px;&quot;&gt;&lt;font style=&quot;font-weight: normal; font-size: 9px;&quot; color=&quot;#4277bb&quot;&gt;&amp;nbsp; &amp;nbsp;Build a news recommendation system that base on news scoring.&lt;/font&gt;&lt;br style=&quot;font-size: 9px;&quot;&gt;&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=10;labelBorderColor=none;labelBackgroundColor=none;fillColor=none;dashed=1;strokeColor=#4277BB;fontColor=#000000;fontStyle=1;startSize=0;shadow=0;gradientColor=none;strokeWidth=1;swimlaneFillColor=none;opacity=50;spacing=0;fontSize=9;" parent="rxHLFNSxN-ANhz3IYRMf-61" vertex="1">
+          <mxGeometry x="835" y="335" width="295" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-162" value="&lt;p style=&quot;line-height: 100%; font-size: 9px;&quot;&gt;&lt;font style=&quot;font-weight: normal; font-size: 9px;&quot; color=&quot;#4277bb&quot;&gt;&amp;nbsp; &amp;nbsp;Provide a requirement for the news crawl system: frequency, operating time, number of data sources, data information, list of news scources,...&lt;/font&gt;&lt;br style=&quot;font-size: 9px;&quot;&gt;&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=10;labelBorderColor=none;labelBackgroundColor=none;fillColor=none;dashed=1;strokeColor=#4277BB;fontColor=#000000;fontStyle=1;startSize=0;shadow=0;gradientColor=none;strokeWidth=1;swimlaneFillColor=none;opacity=50;spacing=0;fontSize=9;" parent="rxHLFNSxN-ANhz3IYRMf-61" vertex="1">
+          <mxGeometry x="835" y="390" width="295" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-163" value="&lt;p style=&quot;line-height: 100%; font-size: 9px;&quot;&gt;&lt;font style=&quot;font-size: 9px;&quot; color=&quot;#4277bb&quot;&gt;&lt;font style=&quot;font-size: 9px;&quot;&gt;&amp;nbsp; &amp;nbsp;&lt;span style=&quot;font-weight: 400; font-size: 9px;&quot;&gt;Research your competitors&#39; news systems and make requests to the news systems, the delivery channels for customers, frequency of AI system operations and news recommendation.&lt;/span&gt;&lt;span style=&quot;font-weight: normal; font-size: 9px;&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/font&gt;&lt;/font&gt;&lt;br style=&quot;font-size: 9px;&quot;&gt;&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=10;labelBorderColor=none;labelBackgroundColor=none;fillColor=none;dashed=1;strokeColor=#4277BB;fontColor=#000000;fontStyle=1;startSize=0;shadow=0;gradientColor=none;strokeWidth=1;swimlaneFillColor=none;opacity=50;spacing=0;fontSize=9;" parent="rxHLFNSxN-ANhz3IYRMf-61" vertex="1">
+          <mxGeometry x="835" y="445" width="295" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-165" value="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;font style=&quot;font-weight: normal;&quot; color=&quot;#4277bb&quot;&gt;&amp;nbsp; &amp;nbsp;Make a requirement of how to display news content on the app according to regulations, what information from the news is allowed to be used and delivered to customers&lt;/font&gt;&lt;br style=&quot;font-size: 9px;&quot;&gt;&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=10;labelBorderColor=none;labelBackgroundColor=none;fillColor=none;dashed=1;strokeColor=#4277BB;fontColor=#000000;fontStyle=1;startSize=0;shadow=0;gradientColor=none;strokeWidth=1;swimlaneFillColor=none;opacity=50;spacing=0;fontSize=9;" parent="rxHLFNSxN-ANhz3IYRMf-61" vertex="1">
+          <mxGeometry x="835" y="520" width="295" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-168" value="&lt;p style=&quot;line-height: 100%; font-size: 9px;&quot;&gt;&lt;font style=&quot;font-weight: normal;&quot; color=&quot;#4277bb&quot;&gt;&amp;nbsp; &amp;nbsp;Label for the training data and re-correct labels for fine-tune model: by categories, by sectors, by sentiments, by impact&lt;/font&gt;&lt;span style=&quot;font-weight: normal; color: rgb(66, 119, 187); background-color: initial;&quot;&gt;&amp;nbsp;levels,&lt;/span&gt;&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=10;labelBorderColor=none;labelBackgroundColor=none;fillColor=none;dashed=1;strokeColor=#4277BB;fontColor=#000000;fontStyle=1;startSize=0;shadow=0;gradientColor=none;strokeWidth=1;swimlaneFillColor=none;opacity=50;spacing=0;fontSize=9;" parent="rxHLFNSxN-ANhz3IYRMf-61" vertex="1">
+          <mxGeometry x="835" y="600" width="295" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-174" value="&lt;p style=&quot;line-height: 100%; font-size: 9px;&quot;&gt;&lt;font color=&quot;#4277bb&quot;&gt;&lt;span style=&quot;font-weight: 400;&quot;&gt;&amp;nbsp; &amp;nbsp;Build feaure to get feedback from read news behaviors and tracking statistics of reading news.&amp;nbsp;&lt;/span&gt;&lt;/font&gt;&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=10;labelBorderColor=none;labelBackgroundColor=none;fillColor=none;dashed=1;strokeColor=#4277BB;fontColor=#000000;fontStyle=1;startSize=0;shadow=0;gradientColor=none;strokeWidth=1;swimlaneFillColor=none;opacity=50;spacing=0;fontSize=9;" parent="rxHLFNSxN-ANhz3IYRMf-61" vertex="1">
+          <mxGeometry x="835" y="756" width="295" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-191" value="&lt;p style=&quot;line-height: 100%; font-size: 9px;&quot;&gt;&lt;font style=&quot;font-weight: normal;&quot; color=&quot;#4277bb&quot;&gt;&amp;nbsp; &amp;nbsp;Re-correct outputs of summary model to fine-tune model.&lt;/font&gt;&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=10;labelBorderColor=none;labelBackgroundColor=none;fillColor=none;dashed=1;strokeColor=#4277BB;fontColor=#000000;fontStyle=1;startSize=0;shadow=0;gradientColor=none;strokeWidth=1;swimlaneFillColor=none;opacity=50;spacing=0;fontSize=9;" parent="rxHLFNSxN-ANhz3IYRMf-61" vertex="1">
+          <mxGeometry x="835" y="640" width="295" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="nTN8sJjoOhgb6UXOudAq-50" value="component" style="" parent="nTN8sJjoOhgb6UXOudAq-0" />
+        <mxCell id="nTN8sJjoOhgb6UXOudAq-55" value="NEWS RECOMMENDATION ENGINE" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;fontSize=12;spacingTop=3;image=img/lib/ibm/devops/build_test.svg;fillColor=#FFFF66;strokeColor=#FF0000;gradientColor=none;container=0;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="468" y="240" width="80" height="80" as="geometry" />
+        </mxCell>
+        <UserObject label="CLASSIFIER" tooltip="The Machine Learning Classification Module leverages machine learning algorithms to categorize news articles into predefined topics or classes based on their content, enabling personalized content recommendations and targeted user engagement. &#xa;&#xa;Label &amp; tags news:&#xa;- By categories: `Stock market`, `International`, `Macro`, `Life style`,  `Events `, `Others` &#xa;- By sector: 19 sectors&#xa;- By sentiments: `Positive`, `Negative`, `Neutral" id="nTN8sJjoOhgb6UXOudAq-61">
+          <mxCell style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;fontSize=12;spacingTop=3;image=img/lib/ibm/vpc/LoadBalancer.svg;fillColor=#FFFF66;strokeColor=#FF0000;gradientColor=none;container=0;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+            <mxGeometry x="260" y="420" width="80" height="80" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="&lt;span style=&quot;color: rgb(66, 119, 187); font-family: Helvetica; font-size: 12px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: center; text-indent: 0px; text-transform: none; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(251, 251, 251); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;&quot;&gt;NEWS SCORING&lt;/span&gt;" tooltip="Estimate the interest of input news for each customer, thereby providing a list of news that is likely to be of interest to customers." id="nTN8sJjoOhgb6UXOudAq-62">
+          <mxCell style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;fontSize=12;spacingTop=3;image=img/lib/ibm/vpc/Rules.svg;fillColor=#FFFF66;strokeColor=#FF0000;gradientColor=none;container=0;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+            <mxGeometry x="260" y="240" width="80" height="80" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" tooltip="The AI Summarization Module employs natural language processing (NLP) techniques and machine learning algorithms to condense lengthy news articles into concise summaries while preserving key information and main points. It aims to provide users with quick and informative overviews of news content, facilitating efficient consumption and decision-making." id="nTN8sJjoOhgb6UXOudAq-63">
+          <mxCell style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=left;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;fontSize=12;spacingTop=3;image=img/lib/ibm/vpc/ObjectStorage.svg;fillColor=#FFFF66;strokeColor=#FF0000;gradientColor=none;container=0;labelPosition=right;verticalLabelPosition=middle;verticalAlign=middle;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+            <mxGeometry x="830" y="635" width="20" height="20" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="nTN8sJjoOhgb6UXOudAq-64" value="NEWS CRAWLER" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;fontSize=12;spacingTop=3;image=img/lib/ibm/applications/saas_applications.svg;fillColor=#FFFF66;strokeColor=#FF0000;gradientColor=none;container=0;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="80" y="110" width="80" height="80" as="geometry" />
+        </mxCell>
+        <UserObject label="CUSTOMER PREFERENCES" tooltip="Analyze historical data and user interactions to create individual taste profiles for each customer." id="nTN8sJjoOhgb6UXOudAq-67">
+          <mxCell style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;fontSize=12;spacingTop=3;image=img/lib/ibm/social/networking.svg;fillColor=#FFFF66;strokeColor=#FF0000;gradientColor=none;container=0;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+            <mxGeometry x="260" y="610" width="80" height="80" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="SYSTEM &lt;br&gt;REQUIREMENT" tooltip=" Crawling sources: &#xa;&#x9;- How many sources need to be configured to perform the crawl?&#xa;&#x9;- Which sources are allowed to crawl news?&#xa;&#x9;- Which sources are allowed to use the news article&#39;s URL link to display on the app?&#xa;&#x9;- Which sources are allowed to embed URL links on the app?&#xa;- Crawling SLA includes:&#xa;&#x9;- Crawl time frequency &#xa;&#x9;- Crawl performance&#xa;&#x9;- Maximum error occurrence frequency requirement&#xa;- SLA for a customer API request to receive a list of suggested news." id="nTN8sJjoOhgb6UXOudAq-69">
+          <mxCell style="aspect=fixed;perimeter=ellipsePerimeter;align=center;shadow=0;dashed=0;image;image=img/lib/ibm/management/information_governance.svg;strokeColor=#FF0000;fillColor=#FFFF66;gradientColor=none;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;spacingTop=3;html=1;container=0;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+            <mxGeometry x="80" y="610" width="80" height="80" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="DATA SYSTEM" tooltip="Stores the crawled news articles along their meta data, such as: title, content, tags, categories, publication date, source information, ingestion time and relevant attributes&#xa;&#xa;Backup and Recovery:&#xa;- Set up regular backups and disaster recovery mechanisms to ensure data integrity and availability.&#xa;- Test backup and recovery procedures periodically to validate their effectiveness." id="nTN8sJjoOhgb6UXOudAq-78">
+          <mxCell style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;fontSize=12;spacingTop=3;image=img/lib/ibm/data/data_services.svg;fillColor=#FFFF66;strokeColor=#FF0000;gradientColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+            <mxGeometry x="80" y="360" width="80" height="80" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="FEEDBACK LOOP" tooltip="Get infomation of feedback interaction of customer with news that they read, then fine-tunning news score model" id="nTN8sJjoOhgb6UXOudAq-79">
+          <mxCell style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;fontSize=12;spacingTop=3;image=img/lib/ibm/social/live_collaboration.svg;fillColor=#FFFF66;strokeColor=#FF0000;gradientColor=none;verticalAlign=top;labelPosition=center;verticalLabelPosition=bottom;container=0;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+            <mxGeometry x="468" y="610" width="80" height="80" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-155" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;strokeColor=#3977b7;strokeWidth=2;opacity=80;" parent="nTN8sJjoOhgb6UXOudAq-50" source="rxHLFNSxN-ANhz3IYRMf-131" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1130" y="47" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="970" y="47" />
+              <mxPoint x="1055" y="47" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-131" value="DA" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#d79b00;fillColor=#ffe6cc;fontStyle=1;fontSize=12;labelBorderColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="835" y="40" width="30" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-161" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;strokeColor=#3977b7;endFill=0;strokeWidth=2;opacity=80;" parent="nTN8sJjoOhgb6UXOudAq-50" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1130" y="375" as="targetPoint" />
+            <mxPoint x="865" y="373.48571428571427" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="960" y="373" />
+              <mxPoint x="1055" y="373" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-132" value="SPD" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#9673a6;fillColor=#e1d5e7;fontStyle=1;fontSize=12;labelBorderColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="835" y="365" width="30" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-164" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;strokeColor=#3977b7;endFill=0;strokeWidth=2;opacity=80;" parent="nTN8sJjoOhgb6UXOudAq-50" source="rxHLFNSxN-ANhz3IYRMf-133" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1130" y="503" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="970" y="503" />
+              <mxPoint x="1055" y="503" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-133" value="LEGAL" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#b85450;fillColor=#f8cecc;fontStyle=1;fontSize=12;labelBorderColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="835" y="495" width="50" height="15" as="geometry" />
+        </mxCell>
+        <UserObject label="" tooltip="Get infomation of feedback interaction of customer with news that they read, then fine-tunning news score model" id="rxHLFNSxN-ANhz3IYRMf-137">
+          <mxCell style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=left;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;fontSize=12;spacingTop=3;image=img/lib/ibm/social/live_collaboration.svg;fillColor=#FFFF66;strokeColor=#FF0000;gradientColor=none;verticalAlign=middle;labelPosition=right;verticalLabelPosition=middle;container=0;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+            <mxGeometry x="830" y="751" width="20" height="20" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-138" value="" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=left;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;fontSize=12;spacingTop=3;image=img/lib/ibm/applications/saas_applications.svg;fillColor=#FFFF66;strokeColor=#FF0000;gradientColor=none;container=0;labelPosition=right;verticalLabelPosition=middle;verticalAlign=top;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="830" y="59" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-167" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;strokeColor=#3977b7;endFill=0;strokeWidth=2;opacity=80;" parent="nTN8sJjoOhgb6UXOudAq-50" source="rxHLFNSxN-ANhz3IYRMf-139" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1130" y="585" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="960" y="583" />
+              <mxPoint x="1055" y="583" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-139" value="BIZ" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#6c8ebf;fillColor=#dae8fc;fontStyle=1;fontSize=12;labelBorderColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="835" y="575" width="30" height="15" as="geometry" />
+        </mxCell>
+        <UserObject label="" tooltip="Stores the crawled news articles along their meta data, such as: title, content, tags, categories, publication date, source information, ingestion time and relevant attributes&#xa;&#xa;Backup and Recovery:&#xa;- Set up regular backups and disaster recovery mechanisms to ensure data integrity and availability.&#xa;- Test backup and recovery procedures periodically to validate their effectiveness." id="rxHLFNSxN-ANhz3IYRMf-140">
+          <mxCell style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=left;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;fontSize=12;spacingTop=0;image=img/lib/ibm/data/data_services.svg;fillColor=#FFFF66;strokeColor=#FF0000;gradientColor=none;labelPosition=right;verticalLabelPosition=bottom;verticalAlign=middle;horizontal=1;spacing=0;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+            <mxGeometry x="830" y="100" width="20" height="20" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" tooltip=" Crawling sources: &#xa;&#x9;- How many sources need to be configured to perform the crawl?&#xa;&#x9;- Which sources are allowed to crawl news?&#xa;&#x9;- Which sources are allowed to use the news article&#39;s URL link to display on the app?&#xa;&#x9;- Which sources are allowed to embed URL links on the app?&#xa;- Crawling SLA includes:&#xa;&#x9;- Crawl time frequency &#xa;&#x9;- Crawl performance&#xa;&#x9;- Maximum error occurrence frequency requirement&#xa;- SLA for a customer API request to receive a list of suggested news." id="rxHLFNSxN-ANhz3IYRMf-141">
+          <mxCell style="aspect=fixed;perimeter=ellipsePerimeter;align=left;shadow=0;dashed=0;image;image=img/lib/ibm/management/information_governance.svg;strokeColor=#FF0000;fillColor=#FFFF66;gradientColor=none;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;spacingTop=3;html=1;container=0;labelPosition=right;verticalLabelPosition=middle;verticalAlign=middle;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+            <mxGeometry x="830" y="440" width="20" height="20" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" tooltip="The Machine Learning Classification Module leverages machine learning algorithms to categorize news articles into predefined topics or classes based on their content, enabling personalized content recommendations and targeted user engagement. &#xa;&#xa;Label &amp; tags news:&#xa;- By categories: `Stock market`, `International`, `Macro`, `Life style`,  `Events `, `Others` &#xa;- By sector: 19 sectors&#xa;- By sentiments: `Positive`, `Negative`, `Neutral" id="rxHLFNSxN-ANhz3IYRMf-142">
+          <mxCell style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=left;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;fontSize=12;spacingTop=3;image=img/lib/ibm/vpc/LoadBalancer.svg;fillColor=#FFFF66;strokeColor=#FF0000;gradientColor=none;container=0;labelPosition=right;verticalLabelPosition=middle;verticalAlign=middle;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+            <mxGeometry x="830" y="595" width="20" height="20" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" tooltip="The AI Summarization Module employs natural language processing (NLP) techniques and machine learning algorithms to condense lengthy news articles into concise summaries while preserving key information and main points. It aims to provide users with quick and informative overviews of news content, facilitating efficient consumption and decision-making." id="rxHLFNSxN-ANhz3IYRMf-143">
+          <mxCell style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=left;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;fontSize=12;spacingTop=3;image=img/lib/ibm/vpc/ObjectStorage.svg;fillColor=#FFFF66;strokeColor=#FF0000;gradientColor=none;container=0;labelPosition=right;verticalLabelPosition=middle;verticalAlign=middle;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+            <mxGeometry x="830" y="140" width="20" height="20" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" tooltip="Estimate the interest of input news for each customer, thereby providing a list of news that is likely to be of interest to customers." id="rxHLFNSxN-ANhz3IYRMf-144">
+          <mxCell style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=left;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;fontSize=12;spacingTop=3;image=img/lib/ibm/vpc/Rules.svg;fillColor=#FFFF66;strokeColor=#FF0000;gradientColor=none;container=0;labelPosition=right;verticalLabelPosition=middle;verticalAlign=middle;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+            <mxGeometry x="830" y="220" width="20" height="20" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" tooltip="The Machine Learning Classification Module leverages machine learning algorithms to categorize news articles into predefined topics or classes based on their content, enabling personalized content recommendations and targeted user engagement. &#xa;&#xa;Label &amp; tags news:&#xa;- By categories: `Stock market`, `International`, `Macro`, `Life style`,  `Events `, `Others` &#xa;- By sector: 19 sectors&#xa;- By sentiments: `Positive`, `Negative`, `Neutral" id="rxHLFNSxN-ANhz3IYRMf-145">
+          <mxCell style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=left;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;fontSize=12;spacingTop=3;image=img/lib/ibm/vpc/LoadBalancer.svg;fillColor=#FFFF66;strokeColor=#FF0000;gradientColor=none;container=0;labelPosition=right;verticalLabelPosition=middle;verticalAlign=middle;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+            <mxGeometry x="830" y="180" width="20" height="20" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" tooltip="Analyze historical data and user interactions to create individual taste profiles for each customer." id="rxHLFNSxN-ANhz3IYRMf-146">
+          <mxCell style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=left;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;fontSize=12;spacingTop=3;image=img/lib/ibm/social/networking.svg;fillColor=#FFFF66;strokeColor=#FF0000;gradientColor=none;container=0;labelPosition=right;verticalLabelPosition=middle;verticalAlign=middle;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+            <mxGeometry x="830" y="250" width="20" height="20" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <UserObject label="" tooltip="Get infomation of feedback interaction of customer with news that they read, then fine-tunning news score model" id="rxHLFNSxN-ANhz3IYRMf-147">
+          <mxCell style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=left;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;fontSize=12;spacingTop=3;image=img/lib/ibm/social/live_collaboration.svg;fillColor=#FFFF66;strokeColor=#FF0000;gradientColor=none;verticalAlign=middle;labelPosition=right;verticalLabelPosition=middle;container=0;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+            <mxGeometry x="830" y="290" width="20" height="20" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-148" value="" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=left;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;fontSize=12;spacingTop=3;image=img/lib/ibm/devops/build_test.svg;fillColor=#FFFF66;strokeColor=#FF0000;gradientColor=none;container=0;labelPosition=right;verticalLabelPosition=middle;verticalAlign=middle;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="830" y="330" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-149" value="" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=left;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;fontSize=12;spacingTop=3;image=img/lib/ibm/applications/saas_applications.svg;fillColor=#FFFF66;strokeColor=#FF0000;gradientColor=none;container=0;labelPosition=right;verticalLabelPosition=middle;verticalAlign=middle;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="830" y="385" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-198" value="Core" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#d6b656;fillColor=#fff2cc;fontStyle=1;fontSize=14;labelBorderColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="538" y="640" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-199" value="DP" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#82b366;fillColor=#d5e8d4;fontStyle=1;fontSize=14;labelBorderColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="538" y="660" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-200" value="DA" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#d79b00;fillColor=#ffe6cc;fontStyle=1;fontSize=14;labelBorderColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="538" y="620" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-201" value="DA" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#d79b00;fillColor=#ffe6cc;fontStyle=1;fontSize=14;labelBorderColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="330" y="620" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-202" value="DA" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#d79b00;fillColor=#ffe6cc;fontStyle=1;fontSize=14;labelBorderColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="330" y="430" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-203" value="DA" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#d79b00;fillColor=#ffe6cc;fontStyle=1;fontSize=14;labelBorderColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="330" y="250" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-205" value="DA" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#d79b00;fillColor=#ffe6cc;fontStyle=1;fontSize=14;labelBorderColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="538" y="250" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-207" value="DA" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#d79b00;fillColor=#ffe6cc;fontStyle=1;fontSize=14;labelBorderColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="150" y="370" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-208" value="DA" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#d79b00;fillColor=#ffe6cc;fontStyle=1;fontSize=14;labelBorderColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="150" y="120" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-209" value="SPD" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#9673a6;fillColor=#e1d5e7;fontStyle=1;fontSize=14;labelBorderColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="150" y="140" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-210" value="SPD" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#9673a6;fillColor=#e1d5e7;fontStyle=1;fontSize=14;labelBorderColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="150" y="620" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-211" value="LEGAL" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#b85450;fillColor=#f8cecc;fontStyle=1;fontSize=14;labelBorderColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="150" y="160" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-212" value="BIZ" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#6c8ebf;fillColor=#dae8fc;fontStyle=1;fontSize=14;labelBorderColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="330" y="450" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-213" value="" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=left;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;fontSize=12;spacingTop=3;image=img/lib/ibm/applications/saas_applications.svg;fillColor=#FFFF66;strokeColor=#FF0000;gradientColor=none;container=0;labelPosition=right;verticalLabelPosition=middle;verticalAlign=middle;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="830" y="515" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-214" value="DEPLOYMENT" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;fontSize=12;spacingTop=3;image=img/lib/ibm/devops/continuous_deploy.svg;fillColor=#FFFF66;strokeColor=#FF0000;gradientColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="669" y="240" width="80" height="80" as="geometry" />
+        </mxCell>
+        <UserObject label="SUMMARIZER" tooltip="The AI Summarization Module employs natural language processing (NLP) techniques and machine learning algorithms to condense lengthy news articles into concise summaries while preserving key information and main points. It aims to provide users with quick and informative overviews of news content, facilitating efficient consumption and decision-making." id="rxHLFNSxN-ANhz3IYRMf-218">
+          <mxCell style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;fontSize=12;spacingTop=3;image=img/lib/ibm/vpc/ObjectStorage.svg;fillColor=#FFFF66;strokeColor=#FF0000;gradientColor=none;container=0;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+            <mxGeometry x="260" y="60" width="80" height="80" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-196" value="BIZ" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#6c8ebf;fillColor=#dae8fc;fontStyle=1;fontSize=14;labelBorderColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="330" y="90" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-204" value="DA" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#d79b00;fillColor=#ffe6cc;fontStyle=1;fontSize=14;labelBorderColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="330" y="70" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-220" value="DELIVERY" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;fontSize=12;spacingTop=3;image=img/lib/ibm/users/integrated_digital_experiences.svg;fillColor=#FFFF66;strokeColor=#FF0000;gradientColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="669" y="420" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-197" value="Core" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#d6b656;fillColor=#fff2cc;fontStyle=1;fontSize=14;labelBorderColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="739" y="420" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-206" value="DP" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#82b366;fillColor=#d5e8d4;fontStyle=1;fontSize=14;labelBorderColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="739" y="440" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-224" value="DP" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#82b366;fillColor=#d5e8d4;fontStyle=1;fontSize=14;labelBorderColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="739" y="250" width="50" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-226" value="&lt;p style=&quot;line-height: 100%; font-size: 9px;&quot;&gt;&amp;nbsp; &amp;nbsp;Build feature to display news onto Apps and WTS.&lt;br&gt;&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=10;labelBorderColor=none;labelBackgroundColor=none;fillColor=none;dashed=1;strokeColor=#4277BB;fontColor=#3977b7;fontStyle=0;startSize=0;shadow=0;gradientColor=none;strokeWidth=1;swimlaneFillColor=none;opacity=50;spacing=0;fontSize=9;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="835" y="725" width="295" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-227" value="&lt;p style=&quot;line-height: 100%;&quot;&gt;&lt;font style=&quot;font-weight: normal; font-size: 9px;&quot; color=&quot;#3977b7&quot;&gt;&amp;nbsp; &amp;nbsp;Deploy AI model.&amp;nbsp;&lt;/font&gt;&lt;br&gt;&lt;/p&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;spacingLeft=10;labelBorderColor=none;labelBackgroundColor=none;fillColor=none;dashed=1;strokeColor=#4277BB;fontColor=#000000;fontStyle=1;startSize=0;shadow=0;gradientColor=none;strokeWidth=1;swimlaneFillColor=none;opacity=50;spacing=0;fontSize=9;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="835" y="695" width="295" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-229" value="" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=left;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;fontSize=12;spacingTop=3;image=img/lib/ibm/devops/continuous_deploy.svg;fillColor=#FFFF66;strokeColor=#FF0000;gradientColor=none;labelPosition=right;verticalLabelPosition=middle;verticalAlign=middle;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="830" y="690" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-233" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;strokeColor=#3977b7;endFill=0;strokeWidth=2;opacity=50;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" parent="nTN8sJjoOhgb6UXOudAq-50" source="rxHLFNSxN-ANhz3IYRMf-232" target="rxHLFNSxN-ANhz3IYRMf-215" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1130" y="674" as="targetPoint" />
+            <mxPoint x="865" y="674" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-234" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;strokeColor=#3977b7;endFill=0;strokeWidth=2;opacity=80;" parent="nTN8sJjoOhgb6UXOudAq-50" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1130" y="680" as="targetPoint" />
+            <mxPoint x="907" y="679.4957142857143" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="1019" y="679" />
+              <mxPoint x="1130" y="680" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-215" value="Core" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#d6b656;fillColor=#fff2cc;fontStyle=1;fontSize=12;labelBorderColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="867" y="670" width="40" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-232" value="DP" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=#82b366;fillColor=#d5e8d4;fontStyle=1;fontSize=12;labelBorderColor=none;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="835" y="670" width="30" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="rxHLFNSxN-ANhz3IYRMf-235" value="" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=left;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=#f7f7f7;fontSize=12;spacingTop=3;image=img/lib/ibm/users/integrated_digital_experiences.svg;fillColor=#FFFF66;strokeColor=#FF0000;gradientColor=none;labelPosition=right;verticalLabelPosition=middle;verticalAlign=middle;" parent="nTN8sJjoOhgb6UXOudAq-50" vertex="1">
+          <mxGeometry x="830" y="720" width="20" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

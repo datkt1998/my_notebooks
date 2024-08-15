@@ -1,0 +1,5 @@
+1. DA
+    Build a system to crawl news from sources following the requirements.
+    Build a database system to store crawled news, customer taste, news summary, news labels, news recommendation, log system.
+    Build an AI model that summarizes crawled news, following the requirements for accuracy and summary text length.
+       Build an AI model to classify news into different groups of labels according to requirements and pre-existing labels.

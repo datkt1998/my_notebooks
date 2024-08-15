@@ -1,0 +1,42 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: _jupyterbook_config/intro
+options:
+  numbered: true
+
+parts:
+
+- caption: PROGRAMMING & FRAMEWORKS
+  maxdepth: 4
+  numbered: true
+  chapters:
+  - glob: contents/1_programming_and_frameworks/* # load tất cả các file trong folder 1_programming_and_frameworks
+
+- caption: TOPICS & GUIDES
+  maxdepth: 4
+  numbered: true
+  chapters:
+  - title: 'Mathematics'
+    sections:
+    - file: contents/4_topics_and_guides/1_mathematics/1_Linear_algebra.ipynb
+
+
+
+# - caption: TOPICS & GUIDES
+#   maxdepth: 4
+#   numbered: true
+#   chapters:
+#   - file: contents/4_topics_and_guides/1_Python.ipynb
+#     title: 'Python'
+#   - file: contents/1_programming_and_frameworks/2_NoSQL.ipynb
+#     title: 'NoSQL'
+#   - file: contents/1_programming_and_frameworks/3_SQL.ipynb
+#     title: 'SQL'
+#   - file: contents/1_programming_and_frameworks/4_Git.ipynb
+#     title: 'Git'
+#   - file: contents/1_programming_and_frameworks/5_Docker.ipynb
+#     title: 'Docker'
+#   - file: contents/1_programming_and_frameworks/6_PySpark.ipynb
+#     title: 'PySpark'

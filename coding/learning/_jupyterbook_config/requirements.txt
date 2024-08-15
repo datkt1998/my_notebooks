@@ -1,0 +1,11 @@
+jupyter-book
+matplotlib
+numpy
+pandas
+sklearn
+feature-engine
+imbalanced-learn
+scikit-plot
+plotly
+nbmanips
+ghp-import
