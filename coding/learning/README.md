@@ -103,8 +103,12 @@ project-root/
 
     Nếu trong quá trình build gặp lỗi, sử dụng `jupyter-book clean ./coding/learning` để xóa các file build trước đó và thử build lại từ đầu. 
 
-4. **Publish to website**
+  ***Check***: Sau khi build xong, check offline website tại địa chỉ `./coding/learning/_build/html/index.html` trước khi publish to online (bằng việc merge `dev` vào nhánh `master` bằng pull request, sẽ tự động chạy workflow để deploy)
 
+4. **Publish to website**
+  - Sử dụng github workflow (đã setup automation deploy khi có push request vào nhánh `master` từ nhánh `dev`)
+
+  - Nếu sử dụng command
     ```bash
     pip install jupyter-book nbmanips ghp-import
     ghp-import -n -p -f ./coding/learning/_build/html
