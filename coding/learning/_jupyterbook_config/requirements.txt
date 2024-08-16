@@ -1,11 +1,14 @@
 jupyter-book
+cookiecutter
+ghp-import
+nbmanips
 matplotlib
 numpy
-pandas
-sklearn
-feature-engine
-imbalanced-learn
-scikit-plot
+# pandas
+# sklearn
+# feature-engine
+# imbalanced-learn
+# scikit-plot
 plotly
-nbmanips
-ghp-import
+
+
