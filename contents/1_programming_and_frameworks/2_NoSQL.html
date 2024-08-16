@@ -1,0 +1,1334 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2. NoSQL &#8212; Machine Learning book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'contents/1_programming_and_frameworks/2_NoSQL';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3. SQL" href="3_SQL.html" />
+    <link rel="prev" title="1. Python" href="1_Python.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../_jupyterbook_config/intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Machine Learning book - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Machine Learning book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../_jupyterbook_config/intro.html">
+                    Welcome to Dat’s Notebook
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">PROGRAMMING &amp; FRAMEWORKS</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_Python.html">1. Python</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. NoSQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_SQL.html">3. SQL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_Git.html">4. Git</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_Docker.html">5. Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_PySpark.html">6. PySpark</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">TOPICS &amp; GUIDES</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../4_topics_and_guides/1_mathematics/index.html">1. Mathematics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../4_topics_and_guides/1_mathematics/1_Linear_algebra.html">1.1. Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_topics_and_guides/1_mathematics/2_Calculus_and_optimization.html">1.2. Calculus and Optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_topics_and_guides/1_mathematics/3_Distribution_and_statistic.html">1.3. Distribution and Statistic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_topics_and_guides/1_mathematics/4_Information_theory.html">1.4. Information Theory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../4_topics_and_guides/1_mathematics/5_Graph_theory.html">1.5. Graph Theory</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/datkt1998/my_notebooks" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/contents/1_programming_and_frameworks/2_NoSQL.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>NoSQL</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic">2.1. Basic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mongodb-server-with-docker">2.2. MongoDB Server (with docker)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-a-connection">2.3. Making a Connection</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#without-authentication">2.3.1. without authentication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#with-authentication">2.3.2. with authentication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#listing-db-and-collections">2.3.3. listing db and collections</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#action-collection">2.4. Action collection</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write">2.4.1. Write</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#one-document">2.4.1.1. One document</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#many-document">2.4.1.2. many document</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#write-with-class">2.4.1.3. write with class</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#update">2.4.2. Update</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#find-document">2.4.3. Find document</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#find-1-and-many">2.4.3.1. find 1 and many</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fields-selector">2.4.3.2. fields selector</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#limit-skip">2.4.3.3. limit &amp; skip</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#filters">2.4.3.4. Filters</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison">2.4.3.4.1. Comparison</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#logical">2.4.3.4.2. Logical</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#exists-type">2.4.3.4.3. exists &amp; type</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#array">2.4.3.4.4. array</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-null">2.4.3.4.5. Filter Null</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#datetime">2.4.3.4.6. datetime</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#regex">2.4.3.4.7. regex</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting-documents">2.4.3.5. Sorting Documents</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregations-function">2.4.3.6. Aggregations - function</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#simple">2.4.3.6.1. Simple</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#groupby">2.4.3.6.2. groupby</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#join">2.4.3.6.3. join</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-index">2.4.4. Create index</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#delete-doc">2.4.5. Delete doc</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#delete-collection">2.4.6. Delete collection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#join-merge">2.4.7. Join &amp; merge</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#database-command">2.4.8. Database command</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#count">2.4.8.1. Count</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#distinct-values">2.4.8.2. Distinct values</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="nosql">
+<h1><span class="section-number">2. </span>NoSQL<a class="headerlink" href="#nosql" title="Link to this heading">#</a></h1>
+<section id="basic">
+<h2><span class="section-number">2.1. </span>Basic<a class="headerlink" href="#basic" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pymongo</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">pymongo</span><span class="o">.</span><span class="n">MongoClient</span><span class="p">(</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">27017</span><span class="p">)</span>
+
+<span class="c1"># check address</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">address</span>
+
+<span class="c1"># check list database</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">list_database_names</span><span class="p">()</span>
+
+<span class="c1"># check list collection</span>
+<span class="n">DAT_DB_TEST</span> <span class="o">=</span> <span class="n">conn</span><span class="p">[</span><span class="s2">&quot;DAT_DB_TEST&quot;</span><span class="p">]</span>
+<span class="n">DAT_DB_TEST</span><span class="o">.</span><span class="n">list_collection_names</span><span class="p">()</span>
+
+<span class="n">TEST_1</span> <span class="o">=</span> <span class="n">DAT_DB_TEST</span><span class="p">[</span><span class="s1">&#39;TEST_1&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pymongo</span>
+<span class="c1">#to convert our id to binary we need to import</span>
+<span class="kn">from</span> <span class="nn">bson</span> <span class="kn">import</span> <span class="n">ObjectId</span>
+<span class="c1">#to conncet with the localhost</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">pymongo</span><span class="o">.</span><span class="n">MongoClient</span><span class="p">(</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span><span class="mi">27017</span><span class="p">)</span>
+<span class="c1">#create your databse</span>
+<span class="n">database</span> <span class="o">=</span> <span class="n">conn</span><span class="p">[</span><span class="s1">&#39;DAT_DB_TEST&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Collection Created..&quot;</span><span class="p">)</span>
+<span class="c1">#create your collection</span>
+<span class="n">collection</span> <span class="o">=</span> <span class="n">database</span><span class="p">[</span><span class="s1">&#39;TEST_1&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Database Connected..&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">insert_data</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="c1">#     insert data</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">insert_one</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">document</span><span class="o">.</span><span class="n">inserted_id</span>
+
+<span class="k">def</span> <span class="nf">update_or_create</span><span class="p">(</span><span class="n">document_id</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="c1"># TO AVOID DUPLICATES - THIS WILL CREATE NEW DOCUMENT IF SAME ID NOT EXIST</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">update_one</span><span class="p">({</span><span class="s1">&#39;_id&#39;</span><span class="p">:</span> <span class="n">ObjectId</span><span class="p">(</span><span class="n">document_id</span><span class="p">)},</span> <span class="p">{</span><span class="s2">&quot;$set&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">},</span> <span class="n">upsert</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">document</span><span class="o">.</span><span class="n">acknowledged</span>
+
+<span class="k">def</span> <span class="nf">get_single_data</span><span class="p">(</span><span class="n">document_id</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">find_one</span><span class="p">({</span><span class="s1">&#39;_id&#39;</span><span class="p">:</span> <span class="n">ObjectId</span><span class="p">(</span><span class="n">document_id</span><span class="p">)})</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+<span class="k">def</span> <span class="nf">get_multiple_data</span><span class="p">():</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">update_existing</span><span class="p">(</span><span class="n">document_id</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="c1">#Update existing document data by document ID</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">update_one</span><span class="p">({</span><span class="s1">&#39;_id&#39;</span><span class="p">:</span> <span class="n">ObjectId</span><span class="p">(</span><span class="n">document_id</span><span class="p">)},</span> <span class="p">{</span><span class="s2">&quot;$set&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">document</span><span class="o">.</span><span class="n">acknowledged</span>
+
+
+<span class="k">def</span> <span class="nf">remove_data</span><span class="p">(</span><span class="n">document_id</span><span class="p">):</span>
+    <span class="n">document</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">delete_one</span><span class="p">({</span><span class="s1">&#39;_id&#39;</span><span class="p">:</span> <span class="n">ObjectId</span><span class="p">(</span><span class="n">document_id</span><span class="p">)})</span>
+    <span class="k">return</span> <span class="n">document</span><span class="o">.</span><span class="n">acknowledged</span>
+
+<span class="c1"># count document</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">count_documents</span><span class="p">({</span><span class="s1">&#39;TYPE_IMAGE&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
+
+<span class="c1"># CLOSE DATABASE</span>
+<span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Name&#39;</span><span class="p">:</span><span class="s2">&quot;Siya&quot;</span><span class="p">,</span><span class="s1">&#39;Gender&#39;</span><span class="p">:</span><span class="s2">&quot;Female&quot;</span><span class="p">,</span><span class="s1">&#39;Location&#39;</span><span class="p">:</span><span class="s2">&quot;Delhi&quot;</span><span class="p">}</span>
+<span class="n">data2</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Name&#39;</span><span class="p">:</span><span class="s2">&quot;Aman&quot;</span><span class="p">,</span><span class="s1">&#39;Gender&#39;</span><span class="p">:</span><span class="s2">&quot;Male&quot;</span><span class="p">,</span><span class="s1">&#39;Location&#39;</span><span class="p">:</span><span class="s2">&quot;Chennai&quot;</span><span class="p">}</span>
+<span class="n">data3</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Name&#39;</span><span class="p">:</span><span class="s2">&quot;Samar&quot;</span><span class="p">,</span><span class="s1">&#39;Gender&#39;</span><span class="p">:</span><span class="s2">&quot;Male&quot;</span><span class="p">,</span><span class="s1">&#39;Location&#39;</span><span class="p">:</span><span class="s2">&quot;Mumbai&quot;</span><span class="p">}</span>
+<span class="n">data4</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Name&#39;</span><span class="p">:</span><span class="s2">&quot;Mehak&quot;</span><span class="p">,</span><span class="s1">&#39;Gender&#39;</span><span class="p">:</span><span class="s2">&quot;FeMale&quot;</span><span class="p">,</span><span class="s1">&#39;Location&#39;</span><span class="p">:</span><span class="s2">&quot;Manali&quot;</span><span class="p">}</span>
+<span class="c1"># #add data to your collection</span>
+<span class="c1"># insert_data(data)</span>
+<span class="c1"># insert_data(data2)</span>
+<span class="c1"># insert_data(data3)</span>
+
+<span class="n">data_retrieved</span> <span class="o">=</span> <span class="n">get_single_data</span><span class="p">(</span><span class="s2">&quot;5fefe1ffeb44f9822e6f1fc2&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Single data&quot;</span><span class="p">,</span><span class="n">data_retrieved</span><span class="p">)</span>
+<span class="n">updated_data</span> <span class="o">=</span> <span class="n">update_or_create</span><span class="p">(</span><span class="s2">&quot;5fefe1ffeb44f9822e6f1fc2&quot;</span><span class="p">,</span><span class="n">data4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Updated data:&quot;</span><span class="p">,</span><span class="n">updated_data</span><span class="p">)</span>
+<span class="n">multiple_data</span> <span class="o">=</span> <span class="n">get_multiple_data</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;List of data is retreived&quot;</span><span class="p">,</span><span class="n">multiple_data</span><span class="p">)</span>
+<span class="n">data_removed</span> <span class="o">=</span> <span class="n">remove_data</span><span class="p">(</span><span class="s2">&quot;5fefe1ffeb44f9822e6f1fc2&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data is removed&quot;</span><span class="p">,</span><span class="n">data_removed</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collection Created..
+Database Connected..
+Single data None
+Updated data: True
+List of data is retreived [{&#39;_id&#39;: ObjectId(&#39;5fefe1ffeb44f9822e6f1fc2&#39;), &#39;Gender&#39;: &#39;FeMale&#39;, &#39;Location&#39;: &#39;Manali&#39;, &#39;Name&#39;: &#39;Mehak&#39;}]
+Data is removed True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">insert_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">insert_data</span><span class="p">(</span><span class="n">data2</span><span class="p">)</span>
+<span class="n">insert_data</span><span class="p">(</span><span class="n">data3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ObjectId(&#39;6182273d7b5a4aa3ee28a568&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="mongodb-server-with-docker">
+<h2><span class="section-number">2.2. </span>MongoDB Server (with docker)<a class="headerlink" href="#mongodb-server-with-docker" title="Link to this heading">#</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-itd<span class="w"> </span>--name<span class="w"> </span>mongodb<span class="w"> </span>-e<span class="w"> </span><span class="nv">MONGO_INITDB_ROOT_USERNAME</span><span class="o">=</span>root<span class="w"> </span>-e<span class="w"> </span><span class="nv">MONGO_INITDB_ROOT_PASSWORD</span><span class="o">=</span>password<span class="w"> </span>-p<span class="w"> </span><span class="m">27017</span>:27017<span class="w"> </span>mongo:4.4
+</pre></div>
+</div>
+</section>
+<section id="making-a-connection">
+<h2><span class="section-number">2.3. </span>Making a Connection<a class="headerlink" href="#making-a-connection" title="Link to this heading">#</a></h2>
+<section id="without-authentication">
+<h3><span class="section-number">2.3.1. </span>without authentication<a class="headerlink" href="#without-authentication" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pymongo</span> <span class="kn">import</span> <span class="n">MongoClient</span>
+<span class="n">uri</span> <span class="o">=</span> <span class="s1">&#39;mongodb://localhost:27017/&#39;</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">MongoClient</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="n">database_names</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="with-authentication">
+<h3><span class="section-number">2.3.2. </span>with authentication<a class="headerlink" href="#with-authentication" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pymongo</span> <span class="kn">import</span> <span class="n">MongoClient</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pymongo</span> <span class="kn">import</span> <span class="n">MongoClient</span>
+<span class="n">uri</span> <span class="o">=</span> <span class="s1">&#39;mongodb://root:password@localhost:27017/admin?authSource=admin&amp;authMechanism=SCRAM-SHA-1&#39;</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">MongoClient</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
+<span class="n">client</span><span class="o">.</span><span class="n">database_names</span><span class="p">()</span>
+<span class="p">[</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span> <span class="s1">&#39;config&#39;</span><span class="p">,</span> <span class="s1">&#39;local&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># MongoEngine - ORM</span>
+<span class="kn">from</span> <span class="nn">mongoengine</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">connect</span><span class="p">(</span><span class="s1">&#39;project1&#39;</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s2">&quot;mongodb://user:pass@mongodb.domain.com:27017/random_api?authSource=admin&amp;authMechanism=SCRAM-SHA-1&quot;</span><span class="p">)</span>
+<span class="n">MongoClient</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mongodb.domain.com:27017&#39;</span><span class="p">],</span> <span class="n">document_class</span><span class="o">=</span><span class="nb">dict</span><span class="p">,</span> <span class="n">tz_aware</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">connect</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">read_preference</span><span class="o">=</span><span class="n">Primary</span><span class="p">(),</span> <span class="n">authsource</span><span class="o">=</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span> <span class="n">authmechanism</span><span class="o">=</span><span class="s1">&#39;SCRAM-SHA-1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="listing-db-and-collections">
+<h3><span class="section-number">2.3.3. </span>listing db and collections<a class="headerlink" href="#listing-db-and-collections" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Listing Databases</span>
+<span class="n">client</span><span class="o">.</span><span class="n">database_names</span><span class="p">()</span> 
+
+<span class="c1"># Listing Collections</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">config</span>
+<span class="n">db</span><span class="o">.</span><span class="n">list_collection_names</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="action-collection">
+<h2><span class="section-number">2.4. </span>Action collection<a class="headerlink" href="#action-collection" title="Link to this heading">#</a></h2>
+<section id="write">
+<h3><span class="section-number">2.4.1. </span>Write<a class="headerlink" href="#write" title="Link to this heading">#</a></h3>
+<section id="one-document">
+<h4><span class="section-number">2.4.1.1. </span>One document<a class="headerlink" href="#one-document" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># khoi tao database = store_db, collection = collection</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">store_db</span>
+<span class="n">collection</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">transactions</span>
+<span class="n">doc_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;store_name&#39;</span><span class="p">:</span> <span class="s1">&#39;sportsmans&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;branch_name&#39;</span><span class="p">:</span> <span class="s1">&#39;tygervalley&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;account_id&#39;</span><span class="p">:</span> <span class="s1">&#39;sns_03821023&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;total_costs&#39;</span><span class="p">:</span> <span class="mf">109.20</span><span class="p">,</span>
+    <span class="s1">&#39;products_purchased&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;cricket bat&#39;</span><span class="p">,</span> <span class="s1">&#39;cricket ball&#39;</span><span class="p">,</span> <span class="s1">&#39;sports hat&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;purchase_method&#39;</span><span class="p">:</span>
+    <span class="s1">&#39;credit card&#39;</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">insert_one</span><span class="p">(</span><span class="n">doc_data</span><span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">inserted_id</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="many-document">
+<h4><span class="section-number">2.4.1.2. </span>many document<a class="headerlink" href="#many-document" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transaction_1</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;store_name&#39;</span><span class="p">:</span> <span class="s1">&#39;sportsmans&#39;</span><span class="p">,</span> <span class="s1">&#39;branch_name&#39;</span><span class="p">:</span> <span class="s1">&#39;tygervalley&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;account_id&#39;</span><span class="p">:</span> <span class="s1">&#39;sns_09121024&#39;</span><span class="p">,</span> <span class="s1">&#39;total_costs&#39;</span><span class="p">:</span> <span class="mf">129.84</span><span class="p">,</span>
+    <span class="s1">&#39;products_purchased&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;sportsdrink&#39;</span><span class="p">,</span> <span class="s1">&#39;sunglasses&#39;</span><span class="p">,</span> <span class="s1">&#39;sports illustrated&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;purchase_method&#39;</span><span class="p">:</span> <span class="s1">&#39;credit card&#39;</span>
+<span class="p">}</span>
+<span class="n">transaction_2</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;store_name&#39;</span><span class="p">:</span> <span class="s1">&#39;burger king&#39;</span><span class="p">,</span> <span class="s1">&#39;branch_name&#39;</span><span class="p">:</span>
+    <span class="s1">&#39;somerset west&#39;</span><span class="p">,</span> <span class="s1">&#39;account_id&#39;</span><span class="p">:</span> <span class="s1">&#39;bk_29151823&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;total_costs&#39;</span><span class="p">:</span> <span class="mf">89.99</span><span class="p">,</span> <span class="s1">&#39;products_purchased&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;cheese burger&#39;</span><span class="p">,</span> <span class="s1">&#39;pepsi&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;purchase_method&#39;</span><span class="p">:</span> <span class="s1">&#39;cash&#39;</span>
+<span class="p">}</span>
+<span class="n">transaction_3</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;store_name&#39;</span><span class="p">:</span> <span class="s1">&#39;game&#39;</span><span class="p">,</span> <span class="s1">&#39;branch_name&#39;</span><span class="p">:</span> <span class="s1">&#39;bellvile&#39;</span><span class="p">,</span> <span class="s1">&#39;account_id&#39;</span><span class="p">:</span> <span class="s1">&#39;gm_49121229&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;total_costs&#39;</span><span class="p">:</span> <span class="mf">499.99</span><span class="p">,</span> <span class="s1">&#39;products_purchased&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ps4 remote&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;purchase_method&#39;</span><span class="p">:</span> <span class="s1">&#39;cash&#39;</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">insert_many</span><span class="p">([</span><span class="n">transaction_1</span><span class="p">,</span> <span class="n">transaction_2</span><span class="p">,</span> <span class="n">transaction_3</span><span class="p">])</span>
+<span class="n">response</span><span class="o">.</span><span class="n">inserted_ids</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="write-with-class">
+<h4><span class="section-number">2.4.1.3. </span>write with class<a class="headerlink" href="#write-with-class" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># MongoEngine - ORM</span>
+<span class="kn">from</span> <span class="nn">mongoengine</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">connect</span><span class="p">(</span><span class="s1">&#39;project1&#39;</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s2">&quot;mongodb://user:pass@mongodb.domain.com:27017/random_api?authSource=admin&amp;authMechanism=SCRAM-SHA-1&quot;</span><span class="p">)</span>
+<span class="n">MongoClient</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mongodb.domain.com:27017&#39;</span><span class="p">],</span> <span class="n">document_class</span><span class="o">=</span><span class="nb">dict</span><span class="p">,</span> <span class="n">tz_aware</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">connect</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">read_preference</span><span class="o">=</span><span class="n">Primary</span><span class="p">(),</span> <span class="n">authsource</span><span class="o">=</span><span class="s1">&#39;admin&#39;</span><span class="p">,</span> <span class="n">authmechanism</span><span class="o">=</span><span class="s1">&#39;SCRAM-SHA-1&#39;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">Transaction</span><span class="p">(</span><span class="n">Document</span><span class="p">):</span>
+    <span class="n">store_name</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+    <span class="n">branch_name</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+    <span class="n">is_update</span> <span class="o">=</span> <span class="n">BooleanField</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># import doc</span>
+<span class="n">doc_1</span> <span class="o">=</span> <span class="n">Transaction</span><span class="p">(</span><span class="n">store_name</span><span class="o">=</span><span class="s1">&#39;Josh&#39;</span><span class="p">,</span> <span class="n">branch_name</span><span class="o">=</span><span class="s1">&#39;Cape Town&#39;</span><span class="p">,</span> <span class="n">is_update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">doc_1</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+<span class="c1"># get info </span>
+<span class="n">doc_1</span><span class="o">.</span><span class="n">id</span>
+<span class="n">doc_1</span><span class="o">.</span><span class="n">store_name</span>
+
+<span class="c1"># update field</span>
+<span class="n">doc_1</span><span class="o">.</span><span class="n">store_name</span> <span class="o">=</span> <span class="s1">&#39;Johannesburg&#39;</span>
+<span class="n">doc_1</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="update">
+<h3><span class="section-number">2.4.2. </span>Update<a class="headerlink" href="#update" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transactions</span><span class="o">.</span><span class="n">update</span><span class="p">(</span> <span class="p">{</span><span class="s1">&#39;account_id&#39;</span><span class="p">:</span> <span class="s1">&#39;sns_03821023&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;$set&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;purchase_method&#39;</span><span class="p">:</span> <span class="s1">&#39;account&#39;</span><span class="p">}})</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="find-document">
+<h3><span class="section-number">2.4.3. </span>Find document<a class="headerlink" href="#find-document" title="Link to this heading">#</a></h3>
+<section id="find-1-and-many">
+<h4><span class="section-number">2.4.3.1. </span>find 1 and many<a class="headerlink" href="#find-1-and-many" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># find one transactions.find_one(query,fields)</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">find_one</span><span class="p">({</span><span class="s1">&#39;account_id&#39;</span><span class="p">:</span> <span class="s1">&#39;gm_49121229&#39;</span><span class="p">})</span>
+
+<span class="c1"># find many transactions.find(query,fields)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s1">&#39;purchase_method&#39;</span><span class="p">:</span> <span class="s1">&#39;cash&#39;</span><span class="p">})</span>
+<span class="p">[</span><span class="n">doc</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">response</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get specific fields</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s1">&#39;purchase_method&#39;</span><span class="p">:</span> <span class="s1">&#39;cash&#39;</span><span class="p">})</span>
+<span class="p">[</span><span class="n">doc</span><span class="p">[</span><span class="s1">&#39;account_id&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">response</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="fields-selector">
+<h4><span class="section-number">2.4.3.2. </span>fields selector<a class="headerlink" href="#fields-selector" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#fields selector</span>
+<span class="n">fields</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;purchase_method&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;branch_name&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span> <span class="c1"># chỉ lấy fields: purchase_method + branch_name</span>
+<span class="n">fields</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;products_purchased&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s1">&#39;branch_name&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">}</span> <span class="c1"># lấy tất cả các field trừ fields: products_purchased + branch_name</span>
+<span class="c1"># không thể vừa 0 vừa 1, tru _id</span>
+<span class="n">fields</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;user_id&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;_id&#39;</span><span class="p">:</span> <span class="mi">0</span> <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="limit-skip">
+<h4><span class="section-number">2.4.3.3. </span>limit &amp; skip<a class="headerlink" href="#limit-skip" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">()</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">()</span><span class="o">.</span><span class="n">skip</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="filters">
+<h4><span class="section-number">2.4.3.4. </span>Filters<a class="headerlink" href="#filters" title="Link to this heading">#</a></h4>
+<section id="comparison">
+<h5><span class="section-number">2.4.3.4.1. </span>Comparison<a class="headerlink" href="#comparison" title="Link to this heading">#</a></h5>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;$lt&#39;</span> <span class="o">=</span> <span class="s2">&quot;Less Than&quot;</span>
+<span class="s1">&#39;$lte&#39;</span> <span class="o">=</span> <span class="s1">&#39;Less Than Equals&#39;</span>
+<span class="s1">&#39;$gt&#39;</span> <span class="o">=</span> <span class="s1">&#39;Greater Than&#39;</span>
+<span class="s1">&#39;$gte&#39;</span> <span class="o">=</span> <span class="s1">&#39;Greater Than Equals&#39;</span>
+<span class="s1">&#39;$eq&#39;</span> <span class="o">=</span> <span class="s1">&#39;Equal&#39;</span>
+<span class="s1">&#39;$ne&#39;</span> <span class="o">=</span> <span class="s1">&#39;Not Equals&#39;</span>
+<span class="s1">&#39;$in&#39;</span> <span class="o">=</span> <span class="s1">&#39;in array&#39;</span>
+<span class="s1">&#39;$nin&#39;</span><span class="o">=</span> <span class="s1">&#39;not in array&#39;</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s1">&#39;total_costs&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;$gt&#39;</span><span class="p">:</span> <span class="mi">120</span><span class="p">}})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;$in&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">]}})</span> <span class="c1"># trường status có giá trị in [&#39;A&#39;,&#39;D&#39;]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="logical">
+<h5><span class="section-number">2.4.3.4.2. </span>Logical<a class="headerlink" href="#logical" title="Link to this heading">#</a></h5>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">$and</span></code> = ‘match the conditions of both clauses’ –&gt; thoả mãn all các conditions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$not</span></code> = ‘do not match the query expression’ –&gt; đảo ngược 1 operator hoặc ko có field đó, đi kèm với 1 hàm chứ ko độc lập.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$nor</span></code> = ‘fail to match both clauses’–&gt; đảo ngược mệnh đề query expression (phải đi kèm với 1 mệnh đề khác chứ ko đứng thành hàm độc lập), với mỗi field sẽ lấy điều kiện ngược lại hoặc field ko tồn tại (nếu muốn lấy điều kiện phải tồn tịa field thì thêm $exists: false)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">$or</span></code> = ‘match the conditions of either clause’ –&gt; thoả mãn 1 trong các conditions</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SELECT * FROM collection WHERE status = &quot;A&quot; AND qty &lt; 30</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;qty&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;$lt&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">}})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># $not: return docs có đảo ngược operator hoặc ko có trường đó trong docs</span>
+<span class="c1"># SELECT * FROM collection WHERE status = &quot;A&quot; AND (qty &gt;= 30 or ko có trường qty)</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> 
+                 <span class="s2">&quot;qty&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;$not&#39;</span> <span class="p">:{</span><span class="s2">&quot;$lt&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">}}})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SELECT * FROM collection WHERE status = &quot;A&quot; AND ( qty &lt; 30 OR item LIKE &quot;p%&quot;)</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
+    <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;$or&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;qty&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;$lt&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">}},</span> <span class="p">{</span><span class="s2">&quot;item&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;$regex&quot;</span><span class="p">:</span> <span class="s2">&quot;^p&quot;</span><span class="p">}}]}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># or/and</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">({</span>
+    <span class="s1">&#39;total_costs&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;$gt&#39;</span><span class="p">:</span> <span class="mi">120</span><span class="p">},</span> 
+    <span class="s1">&#39;$or&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s1">&#39;branch_name&#39;</span><span class="p">:</span> <span class="s1">&#39;tygervalley&#39;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;account_id&#39;</span><span class="p">:</span> <span class="s1">&#39;sns_03821023&#39;</span><span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># or</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">(</span> <span class="p">{</span> <span class="s1">&#39;price&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;$not&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;$gt&#39;</span><span class="p">:</span> <span class="mf">1.99</span> <span class="p">}</span> <span class="p">}</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nor </span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This query will select all documents in the collection where:</span>
+
+<span class="sd">- the price field value does not equal 1.99 and</span>
+<span class="sd">- the qty field value is not less than 20 and</span>
+<span class="sd">- the sale field value is not equal to true</span>
+<span class="sd">- including those documents that do not contain these field(s).</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">(</span> <span class="p">{</span> <span class="s1">&#39;$nor&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="p">{</span> <span class="s1">&#39;price&#39;</span><span class="p">:</span> <span class="mf">1.99</span> <span class="p">},</span> <span class="p">{</span> <span class="s1">&#39;qty&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;$lt&#39;</span><span class="p">:</span> <span class="mi">20</span> <span class="p">}</span> <span class="p">},</span> <span class="p">{</span> <span class="s1">&#39;sale&#39;</span><span class="p">:</span> <span class="kc">True</span> <span class="p">}</span> <span class="p">]</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nor with must contain field</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">(</span> <span class="p">{</span> <span class="s1">&#39;$nor&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="p">{</span> <span class="s1">&#39;price&#39;</span><span class="p">:</span> <span class="mf">1.99</span> <span class="p">},</span> <span class="p">{</span> <span class="s1">&#39;price&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;$exists&#39;</span><span class="p">:</span> <span class="kc">False</span> <span class="p">}</span> <span class="p">},</span> <span class="c1"># price is contained and not equal 1.99  </span>
+                             <span class="p">{</span> <span class="s1">&#39;sale&#39;</span><span class="p">:</span> <span class="kc">True</span> <span class="p">},</span> <span class="p">{</span> <span class="s1">&#39;sale&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;$exists&#39;</span><span class="p">:</span> <span class="kc">False</span> <span class="p">}</span> <span class="p">}</span> <span class="p">]</span> <span class="p">}</span> <span class="p">)</span> <span class="c1"># sale is contained and not equal True</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exists-type">
+<h5><span class="section-number">2.4.3.4.3. </span>exists &amp; type<a class="headerlink" href="#exists-type" title="Link to this heading">#</a></h5>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;$exists&#39;</span> <span class="o">=</span> <span class="s1">&#39;Matches documents that have the specified field.&#39;</span> <span class="o">--&gt;</span> <span class="n">điều</span> <span class="n">kiện</span> <span class="n">document</span> <span class="n">có</span> <span class="n">chứa</span> <span class="n">field</span> <span class="n">này</span> <span class="n">hay</span> <span class="n">không</span><span class="p">,</span> <span class="n">nếu</span> <span class="kc">True</span> <span class="n">thì</span> <span class="n">bao</span> <span class="n">gồm</span> <span class="n">cả</span> <span class="n">field</span> <span class="o">=</span> <span class="n">null</span><span class="o">.</span>
+<span class="s1">&#39;$type&#39;</span> <span class="o">=</span> <span class="s1">&#39;Selects documents if a field is of the specified type&#39;</span> <span class="o">--&gt;</span> <span class="nb">filter</span> <span class="n">document</span> <span class="n">với</span> <span class="n">điều</span> <span class="n">kiện</span> <span class="nb">type</span> <span class="n">của</span> <span class="n">field</span> <span class="p">(</span> <span class="n">có</span> <span class="n">thể</span> <span class="n">ở</span> <span class="n">dạng</span> <span class="n">số</span> <span class="n">hoặc</span> <span class="n">alias</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://www.mongodb.com/docs/manual/reference/operator/query/type/">Check type in mongo</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># exists and array</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">(</span> <span class="p">{</span>
+    <span class="s1">&#39;qty&#39;</span><span class="p">:</span> <span class="p">{</span> 
+        <span class="s1">&#39;$exists&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> 
+        <span class="s1">&#39;$nin&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span> <span class="p">]</span> 
+    <span class="p">}</span> 
+<span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">(</span> <span class="p">{</span> <span class="s1">&#39;qty&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;$type&#39;</span><span class="p">:</span> <span class="s2">&quot;decimal&quot;</span> <span class="p">}</span> <span class="p">}</span> <span class="p">)</span> <span class="c1"># ở dạng alias</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">(</span> <span class="p">{</span> <span class="s1">&#39;qty&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;$type&#39;</span><span class="p">:</span> <span class="mi">19</span> <span class="p">}</span> <span class="p">}</span> <span class="p">)</span> <span class="c1"># ở dạng số</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">(</span> <span class="p">{</span> <span class="s1">&#39;qty&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;$type&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;long&#39;</span><span class="p">,</span><span class="s1">&#39;decimal&#39;</span><span class="p">]</span> <span class="p">}</span> <span class="p">}</span> <span class="p">)</span> <span class="c1"># nằm trong list</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># is number ( Integer + decimal + double + long) ( check field có phải là number hay ko ?)</span>
+<span class="n">db</span><span class="o">.</span><span class="n">sensors</span><span class="o">.</span><span class="n">aggregate</span><span class="p">([{</span>
+  <span class="s1">&#39;$addFields&#39;</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;isNumber&quot;</span> <span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;$isNumber&#39;</span> <span class="p">:</span> <span class="s2">&quot;$reading&quot;</span> <span class="p">},</span>
+    <span class="s2">&quot;hasType&quot;</span> <span class="p">:</span> <span class="p">{</span><span class="s1">&#39;$type&#39;</span> <span class="p">:</span> <span class="s2">&quot;$reading&quot;</span><span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="array">
+<h5><span class="section-number">2.4.3.4.4. </span>array<a class="headerlink" href="#array" title="Link to this heading">#</a></h5>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;$all&#39;</span> <span class="o">=</span> <span class="s2">&quot;filter array chứa 1 array con hoặc 1 element&quot;</span>
+<span class="s1">&#39;$elemMatch&#39;</span> <span class="o">=</span> <span class="s1">&#39;filter array trong đó có ít nhất 1 element thoả mãn expression&#39;</span>
+<span class="s1">&#39;$size&#39;</span> <span class="o">=</span> <span class="s1">&#39;matches array với số element trong array đó&#39;</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># phần tử thứ 2 của dim_cm lớn hơn 25</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;dim_cm.1&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;$gt&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">}})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># all : field chứa 2 phần tử &#39;ssl&#39; và &#39;security&#39;</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">(</span> <span class="p">{</span> <span class="s1">&#39;field&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;$all&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="p">[</span> <span class="s2">&quot;ssl&quot;</span><span class="p">,</span> <span class="s2">&quot;security&quot;</span> <span class="p">]</span> <span class="p">]</span> <span class="p">}</span> <span class="p">}</span> <span class="p">)</span>
+<span class="c1"># hoặc</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">(</span> <span class="p">{</span> <span class="s1">&#39;field&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="s2">&quot;ssl&quot;</span><span class="p">,</span> <span class="s2">&quot;security&quot;</span> <span class="p">]</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># elemMatch</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>   <span class="p">{</span> <span class="s1">&#39;field&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;$elemMatch&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;$gte&#39;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span> <span class="s1">&#39;$lt&#39;</span><span class="p">:</span> <span class="mi">85</span> <span class="p">}</span> <span class="p">}</span> <span class="p">})</span> <span class="c1"># có ít nhất 1 phần tử trong array của field &gt;= 80 và &lt; 85</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># size</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">(</span> <span class="p">{</span> <span class="s1">&#39;field&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;$size&#39;</span><span class="p">:</span> <span class="mi">2</span> <span class="p">}</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="filter-null">
+<h5><span class="section-number">2.4.3.4.5. </span>Filter Null<a class="headerlink" href="#filter-null" title="Link to this heading">#</a></h5>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># return docs có &#39;item&#39; là null hoặc ko chứa trường &#39;item&#39;</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;item&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">})</span> 
+
+<span class="c1"># return docs có &#39;item&#39; là null</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;item&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;$type&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}})</span> 
+<span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;item&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;$type&quot;</span><span class="p">:</span> <span class="s1">&#39;null&#39;</span><span class="p">}})</span>
+
+<span class="c1"># return docs ko có trường item</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;item&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;$exists&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}})</span>
+
+<span class="c1"># return all documents with both a key called &quot;item&quot; and a non-null value</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;item&quot;</span><span class="p">:{</span><span class="s1">&#39;$ne&#39;</span><span class="p">:</span><span class="s1">&#39;null&#39;</span><span class="p">}})</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="datetime">
+<h5><span class="section-number">2.4.3.4.6. </span>datetime<a class="headerlink" href="#datetime" title="Link to this heading">#</a></h5>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2009</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;date_field&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;$lt&quot;</span><span class="p">:</span> <span class="n">d</span><span class="p">}})</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="regex">
+<h5><span class="section-number">2.4.3.4.7. </span>regex<a class="headerlink" href="#regex" title="Link to this heading">#</a></h5>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SELECT * FROM collection WHERE user_id like &quot;%bc%&quot;</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">(</span> <span class="p">{</span> <span class="s1">&#39;user_id&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;$regex&#39;</span><span class="p">:</span> <span class="s1">&#39;/bc/&#39;</span> <span class="p">}</span> <span class="p">}</span> <span class="p">)</span>
+
+<span class="c1"># SELECT * FROM collection WHERE user_id like &quot;bc%&quot; --&gt; startswith bc</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">(</span> <span class="p">{</span> <span class="s1">&#39;user_id&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="s1">&#39;$regex&#39;</span><span class="p">:</span> <span class="s1">&#39;/^bc/&#39;</span> <span class="p">}</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sorting-documents">
+<h4><span class="section-number">2.4.3.5. </span>Sorting Documents<a class="headerlink" href="#sorting-documents" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pymongo</span> <span class="kn">import</span> <span class="n">MongoClient</span><span class="p">,</span> <span class="n">DESCENDING</span><span class="p">,</span> <span class="n">ASCENDING</span>
+
+<span class="c1"># asc</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">()</span><span class="o">.</span><span class="n">sort</span><span class="p">({</span><span class="s1">&#39;total_costs&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
+
+<span class="c1"># desc</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">()</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s1">&#39;total_costs&#39;</span><span class="p">,</span> <span class="n">DESCENDING</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">find</span><span class="p">()</span><span class="o">.</span><span class="n">sort</span><span class="p">({</span><span class="s1">&#39;total_costs&#39;</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="aggregations-function">
+<h4><span class="section-number">2.4.3.6. </span>Aggregations - function<a class="headerlink" href="#aggregations-function" title="Link to this heading">#</a></h4>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- Cho phép áp dụng các function vào data để return ra document sau khi đã tính toán ( pipeline code)
+- Each stage performs an operation on the input documents. For example, a stage can filter documents, group documents, and calculate values.
+- The documents that are output from a stage are passed to the next stage.
+- An aggregation pipeline can return results for groups of documents. For example, return the total, average, maximum, and minimum values.
+</pre></div>
+</div>
+<section id="simple">
+<h5><span class="section-number">2.4.3.6.1. </span>Simple<a class="headerlink" href="#simple" title="Link to this heading">#</a></h5>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">agr</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s1">&#39;$group&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;_id&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s1">&#39;all&#39;</span><span class="p">:</span> <span class="p">{</span> 
+                <span class="s1">&#39;$sum&#39;</span><span class="p">:</span> <span class="s1">&#39;$total_costs&#39;</span> 
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">agr</span><span class="p">)</span> <span class="c1"># tính sum field total_cost</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># $match to filter before group aggregate</span>
+<span class="n">agr</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span> 
+    <span class="s1">&#39;$match&#39;</span><span class="p">:</span> <span class="p">{</span> 
+        <span class="s1">&#39;$or&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s1">&#39;store_name&#39;</span><span class="p">:</span> <span class="s1">&#39;sportsmans&#39;</span> <span class="p">},</span>
+            <span class="p">{</span> <span class="s1">&#39;store_name&#39;</span><span class="p">:</span> <span class="s1">&#39;game&#39;</span> <span class="p">}</span>
+        <span class="p">]</span> 
+    <span class="p">}</span>
+    <span class="p">},</span> 
+    <span class="p">{</span>
+        <span class="s1">&#39;$group&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;_id&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s1">&#39;sum2stores&#39;</span><span class="p">:</span> <span class="p">{</span> 
+                <span class="s1">&#39;$sum&#39;</span><span class="p">:</span> <span class="s1">&#39;$total_costs&#39;</span>
+            <span class="p">}</span> 
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">agr</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="groupby">
+<h5><span class="section-number">2.4.3.6.2. </span>groupby<a class="headerlink" href="#groupby" title="Link to this heading">#</a></h5>
+</section>
+<section id="join">
+<h5><span class="section-number">2.4.3.6.3. </span>join<a class="headerlink" href="#join" title="Link to this heading">#</a></h5>
+</section>
+</section>
+</section>
+<section id="create-index">
+<h3><span class="section-number">2.4.4. </span>Create index<a class="headerlink" href="#create-index" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pymongo</span> <span class="kn">import</span> <span class="n">TEXT</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">create_index</span><span class="p">([(</span><span class="s2">&quot;store_name&quot;</span><span class="p">,</span> <span class="n">TEXT</span><span class="p">)],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;store_index&#39;</span><span class="p">,</span> <span class="n">default_language</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="delete-doc">
+<h3><span class="section-number">2.4.5. </span>Delete doc<a class="headerlink" href="#delete-doc" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># delete selection</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">remove</span><span class="p">({</span><span class="s1">&#39;account_id&#39;</span><span class="p">:</span><span class="s1">&#39;sns_03821029&#39;</span><span class="p">})</span>
+
+<span class="c1"># delete all</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="delete-collection">
+<h3><span class="section-number">2.4.6. </span>Delete collection<a class="headerlink" href="#delete-collection" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">collection</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="join-merge">
+<h3><span class="section-number">2.4.7. </span>Join &amp; merge<a class="headerlink" href="#join-merge" title="Link to this heading">#</a></h3>
+</section>
+<section id="database-command">
+<h3><span class="section-number">2.4.8. </span>Database command<a class="headerlink" href="#database-command" title="Link to this heading">#</a></h3>
+<section id="count">
+<h4><span class="section-number">2.4.8.1. </span>Count<a class="headerlink" href="#count" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># count: tra ve giá trị count theo metadata ( xấp xỉ đúng) - ko có trên pymongo</span>
+<span class="c1"># collection.count()</span>
+<span class="c1"># collection.find({&#39;purchase_method&#39;: &#39;cash&#39;}).count()</span>
+
+<span class="c1"># countDocument : trả về count chính xác</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">count_documents</span><span class="p">({</span><span class="s1">&#39;purchase_method&#39;</span><span class="p">:</span> <span class="s1">&#39;cash&#39;</span><span class="p">},</span> <span class="n">options</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">option:</span>
+<span class="sd">- limit: The maximum number of documents to count.</span>
+<span class="sd">- skip : The number of documents to skip before counting.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="distinct-values">
+<h4><span class="section-number">2.4.8.2. </span>Distinct values<a class="headerlink" href="#distinct-values" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">runCommand</span> <span class="p">(</span> <span class="p">{</span> 
+    <span class="n">distinct</span><span class="p">:</span> <span class="s2">&quot;inventory&quot;</span><span class="p">,</span> <span class="c1"># collection which to query</span>
+    <span class="n">key</span><span class="p">:</span> <span class="s2">&quot;dept&quot;</span><span class="p">,</span> <span class="c1"># field which to return distinct values</span>
+    <span class="n">query</span><span class="p">:</span> <span class="p">{}</span> <span class="c1"># query expression</span>
+<span class="p">}</span> <span class="p">)</span>
+<span class="c1"># hoặc</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">distinct</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./contents\1_programming_and_frameworks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1_Python.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Python</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="3_SQL.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>SQL</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic">2.1. Basic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mongodb-server-with-docker">2.2. MongoDB Server (with docker)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-a-connection">2.3. Making a Connection</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#without-authentication">2.3.1. without authentication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#with-authentication">2.3.2. with authentication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#listing-db-and-collections">2.3.3. listing db and collections</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#action-collection">2.4. Action collection</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#write">2.4.1. Write</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#one-document">2.4.1.1. One document</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#many-document">2.4.1.2. many document</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#write-with-class">2.4.1.3. write with class</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#update">2.4.2. Update</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#find-document">2.4.3. Find document</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#find-1-and-many">2.4.3.1. find 1 and many</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#fields-selector">2.4.3.2. fields selector</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#limit-skip">2.4.3.3. limit &amp; skip</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#filters">2.4.3.4. Filters</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison">2.4.3.4.1. Comparison</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#logical">2.4.3.4.2. Logical</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#exists-type">2.4.3.4.3. exists &amp; type</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#array">2.4.3.4.4. array</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-null">2.4.3.4.5. Filter Null</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#datetime">2.4.3.4.6. datetime</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#regex">2.4.3.4.7. regex</a></li>
+</ul>
+</li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sorting-documents">2.4.3.5. Sorting Documents</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregations-function">2.4.3.6. Aggregations - function</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#simple">2.4.3.6.1. Simple</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#groupby">2.4.3.6.2. groupby</a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#join">2.4.3.6.3. join</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-index">2.4.4. Create index</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#delete-doc">2.4.5. Delete doc</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#delete-collection">2.4.6. Delete collection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#join-merge">2.4.7. Join &amp; merge</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#database-command">2.4.8. Database command</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#count">2.4.8.1. Count</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#distinct-values">2.4.8.2. Distinct values</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Khổng Tiến Đạt
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
