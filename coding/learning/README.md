@@ -91,8 +91,8 @@ project-root/
     *Các loại contents*
     - `file`: đường dẫn đến 1 file đại điện cho `chapter`, `section`, hoặc `sub-section`
     - `url`: đường dẫn đến 1 website
-      - `title`: text đại diện cho `url` thay vì hiện full hyperlink
     - `glob`: đường dẫn thể hiện ở dạng multi local file, thứ tự khi insert vào book được order theo tên
+    - `title`: text đại diện sẽ show ở side-bar
 3. **Build và check**
 
     ```bash
