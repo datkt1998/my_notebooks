@@ -3,6 +3,7 @@
 
 title: Machine Learning book
 author: Khổng Tiến Đạt
+copyright: "2024"  # Copyright year to be placed in the footer
 logo: _jupyterbook_config/logo.png
 
 # Force re-execution of notebooks on each build.
