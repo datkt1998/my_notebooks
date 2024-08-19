@@ -12,7 +12,7 @@ parts:
   chapters:
 
   - file: contents/1_data_processing/1_explore_data_analysis/_index
-    title: 'Explore Data Analysis'
+    title: Explore Data Analysis
     sections:
     - file: contents/1_data_processing/1_explore_data_analysis/1_data_analysis_process
       title: Data Analyst Process
@@ -30,7 +30,7 @@ parts:
       title: ANOVA
 
   - file: contents/1_data_processing/2_feature_engineering/_index
-    title: 'Feature Engineering'
+    title: Feature Engineering
     sections:
     - file: contents/1_data_processing/2_feature_engineering/01_customize_transform_function
       title: Customize Transformer
@@ -54,7 +54,7 @@ parts:
       title: Feature Selection
 
   - file: contents/1_data_processing/3_imbalance_data_handling/_index
-    title: 'Imbalance Data Handling'
+    title: Imbalance Data Handling
     sections:
     - file: contents/1_data_processing/3_imbalance_data_handling/01_data_level_approaches
       title: Data-Level Approaches
@@ -64,7 +64,7 @@ parts:
       title: Ensemble Approaches
 
   - file: contents/1_data_processing/4_feature_selection_and_decomposition/_index
-    title: 'Imbalance Data Handling'
+    title: Imbalance Data Handling
     sections:
     - file: contents/1_data_processing/4_feature_selection_and_decomposition/01_filter_methods
       title: Filter Methods
@@ -78,7 +78,7 @@ parts:
       title: Feature Decomposition
 
   - file: contents/1_data_processing/5_evaluation_metrics/_index
-    title: 'Evaluation Metrics'
+    title: Evaluation Metrics
     sections:
     - file: contents/1_data_processing/5_evaluation_metrics/01_list_metrics_and_customize_methods
       title: List Metrics & Customize Metrics
@@ -90,11 +90,11 @@ parts:
       title: Clustering Metrics
     - file: contents/1_data_processing/5_evaluation_metrics/05_pairwise_metrics
       title: Pairwise Metrics
-    # - file: contents/1_data_processing/5_evaluation_metrics/06_recommendation_metrics
-    #   title: Recommendation Metrics
+    - file: contents/1_data_processing/5_evaluation_metrics/06_recommendation_system_metrics
+      title: Recommendation Metrics
 
   - file: contents/1_data_processing/6_model_monitoring/_index
-    title: 'Model Monitoring'
+    title: Model Monitoring
     sections:
     - file: contents/1_data_processing/6_model_monitoring/01_overview
       title: Overview
@@ -110,29 +110,71 @@ parts:
   chapters:
 
   - file: contents/2_algorithms/machine_learning/_index
-    title: 'Machine Learning'
+    title: Machine Learning
     sections:
-    - file: contents/2_algorithms/machine_learning/1_supervised_learning
+    - file: contents/2_algorithms/machine_learning/1_supervised_learning.ipynb
       title: Supervised Learning
-    - file: contents/2_algorithms/machine_learning/2_unsupervised_learning
+    - file: contents/2_algorithms/machine_learning/2_unsupervised_learning.ipynb
       title: Unsupervised Learning
+
+  - file: contents/2_algorithms/deep_learning/_index
+    title: Deep Learning
+    sections:
+    - file: contents/2_algorithms/deep_learning/1_fundamental/_index
+      title: Fundamental
+      sections:
+        - file: contents/2_algorithms/deep_learning/1_fundamental/1_fundamental_overview.ipynb
+          title: Deep Learing Overview
+        - file: contents/2_algorithms/deep_learning/1_fundamental/2_process_data_augmentation.ipynb
+          title: Data Augmentation
+        - file: contents/2_algorithms/deep_learning/1_fundamental/3_transfer_learning.ipynb
+          title: Transfer Learning
+        - file: contents/2_algorithms/deep_learning/1_fundamental/4_multi_modal.ipynb
+          title: Multi-Modal
+
+    - file: contents/2_algorithms/deep_learning/2_computer_vision/_index
+      title: Computer Vision
+      sections:
+        - file: contents/2_algorithms/deep_learning/2_computer_vision/1_computer_vision_cnn.ipynb
+          title: CV Overview & CNN
+
+    - file: contents/2_algorithms/deep_learning/3_natural_language_processing/_index
+      title: NLP
+      sections:
+        - file: contents/2_algorithms/deep_learning/3_natural_language_processing/1_nlp_rnn.ipynb
+          title: NLP Overview & RNN
+        - file: contents/2_algorithms/deep_learning/3_natural_language_processing/2_transformers.ipynb
+          title: Transformers
+
+    - file: contents/2_algorithms/deep_learning/4_reinforcement_learning/_index
+      title: Reinforcement Learning
+
+    - file: contents/2_algorithms/deep_learning/5_unsupervised_learning/_index
+      title: Unsupervised Learning
+
+  - file: contents/2_algorithms/recommendation_system/_index
+    title: Recommendation System
+    sections:
+    - file: contents/2_algorithms/recommendation_system/1_evaluation_metrics.ipynb
+      title: Evaluation Metrics
+
 
 - caption: PROGRAMMING & FRAMEWORKS
   maxdepth: 4
   numbered: true
   chapters:
     - file: contents/3_programming_and_frameworks/1_Python.ipynb
-      title: 'Python'
+      title: Python
     - file: contents/3_programming_and_frameworks/2_NoSQL.ipynb
-      title: 'NoSQL'
+      title: NoSQL
     - file: contents/3_programming_and_frameworks/3_SQL.ipynb
-      title: 'SQL'
+      title: SQL
     - file: contents/3_programming_and_frameworks/4_Git.ipynb
-      title: 'Git'
+      title: Git
     - file: contents/3_programming_and_frameworks/5_Docker.ipynb
-      title: 'Docker'
+      title: Docker
     - file: contents/3_programming_and_frameworks/6_PySpark.ipynb
-      title: 'PySpark'
+      title: PySpark
 
 
 - caption: TOPICS & GUIDES
@@ -140,15 +182,15 @@ parts:
   numbered: true
   chapters:
     - file: contents/4_topics_and_guides/1_mathematics/_index.md
-      title: 'Mathematics'
+      title: Mathematics
       sections:
         - file: contents/4_topics_and_guides/1_mathematics/1_Linear_algebra.ipynb
-          title: 'Linear Algebra'
+          title: Linear Algebra
         - file: contents/4_topics_and_guides/1_mathematics/2_Calculus_and_optimization.ipynb
-          title: 'Calculus and Optimization'
+          title: Calculus and Optimization
         - file: contents/4_topics_and_guides/1_mathematics/3_Distribution_and_statistic.ipynb
-          title: 'Distribution and Statistic' 
+          title: Distribution and Statistic 
         - file: contents/4_topics_and_guides/1_mathematics/4_Information_theory.ipynb
-          title: 'Information Theory'
+          title: Information Theory
         - file: contents/4_topics_and_guides/1_mathematics/5_Graph_theory.ipynb
-          title: 'Graph Theory'
+          title: Graph Theory
