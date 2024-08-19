@@ -6,37 +6,191 @@ root: _jupyterbook_config/intro
 
 parts:
 
+- caption: DATA PROCESSING
+  maxdepth: 4
+  numbered: true
+  chapters:
+
+  - file: contents/1_data_processing/1_explore_data_analysis/_index
+    title: Explore Data Analysis
+    sections:
+    - file: contents/1_data_processing/1_explore_data_analysis/1_data_analysis_process
+      title: Data Analyst Process
+    - file: contents/1_data_processing/1_explore_data_analysis/2_read_datasets
+      title: Read Datasets
+    - file: contents/1_data_processing/1_explore_data_analysis/3_explore_data
+      title: Explore Data
+    - file: contents/1_data_processing/1_explore_data_analysis/4_description_statistic
+      title: Description Statistic
+    - file: contents/1_data_processing/1_explore_data_analysis/5_inferential_statistic
+      title: Inferential Statistic
+    - file: contents/1_data_processing/1_explore_data_analysis/6_hypothesis_testing
+      title: Hypothesis Testing
+    - file: contents/1_data_processing/1_explore_data_analysis/7_anova
+      title: ANOVA
+
+  - file: contents/1_data_processing/2_feature_engineering/_index
+    title: Feature Engineering
+    sections:
+    - file: contents/1_data_processing/2_feature_engineering/01_customize_transform_function
+      title: Customize Transformer
+    - file: contents/1_data_processing/2_feature_engineering/02_feature_extraction
+      title: Feature Extraction
+    - file: contents/1_data_processing/2_feature_engineering/03_variable_overview
+      title: Variable Overview
+    - file: contents/1_data_processing/2_feature_engineering/04_missing_imputation
+      title: Missing Imputation
+    - file: contents/1_data_processing/2_feature_engineering/05_categorical_encoding
+      title: Categorical Encoding
+    - file: contents/1_data_processing/2_feature_engineering/06_feature_transformation
+      title: Feature Transformation
+    - file: contents/1_data_processing/2_feature_engineering/07_discretisation
+      title: Discretisation
+    - file: contents/1_data_processing/2_feature_engineering/08_outliers_handling
+      title: Outliers Handling
+    - file: contents/1_data_processing/2_feature_engineering/09_feature_scaling
+      title: Feature Scaling
+    - file: contents/1_data_processing/2_feature_engineering/10_feature_selection
+      title: Feature Selection
+
+  - file: contents/1_data_processing/3_imbalance_data_handling/_index
+    title: Imbalance Data Handling
+    sections:
+    - file: contents/1_data_processing/3_imbalance_data_handling/01_data_level_approaches
+      title: Data-Level Approaches
+    - file: contents/1_data_processing/3_imbalance_data_handling/02_cost_sensitive_approaches
+      title: Cost Sensitive Approaches
+    - file: contents/1_data_processing/3_imbalance_data_handling/03_ensemble_approaches
+      title: Ensemble Approaches
+
+  - file: contents/1_data_processing/4_feature_selection_and_decomposition/_index
+    title: Imbalance Data Handling
+    sections:
+    - file: contents/1_data_processing/4_feature_selection_and_decomposition/01_filter_methods
+      title: Filter Methods
+    - file: contents/1_data_processing/4_feature_selection_and_decomposition/02_wrapper_methods
+      title: Wrapper Methods
+    - file: contents/1_data_processing/4_feature_selection_and_decomposition/03_embedded_methods
+      title: Embedded Methods
+    - file: contents/1_data_processing/4_feature_selection_and_decomposition/04_hybrid_methods
+      title: Hybrid Methods
+    - file: contents/1_data_processing/4_feature_selection_and_decomposition/05_feature_decomposition
+      title: Feature Decomposition
+
+  - file: contents/1_data_processing/5_evaluation_metrics/_index
+    title: Evaluation Metrics
+    sections:
+    - file: contents/1_data_processing/5_evaluation_metrics/01_list_metrics_and_customize_methods
+      title: List Metrics & Customize Metrics
+    - file: contents/1_data_processing/5_evaluation_metrics/02_classification_metrics
+      title: Classification Metrics
+    - file: contents/1_data_processing/5_evaluation_metrics/03_regression_metrics
+      title: Regression Metrics
+    - file: contents/1_data_processing/5_evaluation_metrics/04_clustering_metrics
+      title: Clustering Metrics
+    - file: contents/1_data_processing/5_evaluation_metrics/05_pairwise_metrics
+      title: Pairwise Metrics
+    - file: contents/1_data_processing/5_evaluation_metrics/06_recommendation_system_metrics
+      title: Recommendation Metrics
+
+  - file: contents/1_data_processing/6_model_monitoring/_index
+    title: Model Monitoring
+    sections:
+    - file: contents/1_data_processing/6_model_monitoring/01_overview
+      title: Overview
+    - file: contents/1_data_processing/6_model_monitoring/02_function_level_monitoring
+      title: Functional level monitoring
+    - file: contents/1_data_processing/6_model_monitoring/03_operation_level_monitoring
+      title: Operation level monitoring
+
+
+- caption: ML/DL ALGORITHMS
+  maxdepth: 4
+  numbered: true
+  chapters:
+
+  - file: contents/2_algorithms/machine_learning/_index
+    title: Machine Learning
+    sections:
+    - file: contents/2_algorithms/machine_learning/1_supervised_learning.ipynb
+      title: Supervised Learning
+    - file: contents/2_algorithms/machine_learning/2_unsupervised_learning.ipynb
+      title: Unsupervised Learning
+
+  - file: contents/2_algorithms/deep_learning/_index
+    title: Deep Learning
+    sections:
+    - file: contents/2_algorithms/deep_learning/1_fundamental/_index
+      title: Fundamental
+      sections:
+        - file: contents/2_algorithms/deep_learning/1_fundamental/1_fundamental_overview.ipynb
+          title: Deep Learing Overview
+        - file: contents/2_algorithms/deep_learning/1_fundamental/2_process_data_augmentation.ipynb
+          title: Data Augmentation
+        - file: contents/2_algorithms/deep_learning/1_fundamental/3_transfer_learning.ipynb
+          title: Transfer Learning
+        - file: contents/2_algorithms/deep_learning/1_fundamental/4_multi_modal.ipynb
+          title: Multi-Modal
+
+    - file: contents/2_algorithms/deep_learning/2_computer_vision/_index
+      title: Computer Vision
+      sections:
+        - file: contents/2_algorithms/deep_learning/2_computer_vision/1_computer_vision_cnn.ipynb
+          title: CV Overview & CNN
+
+    - file: contents/2_algorithms/deep_learning/3_natural_language_processing/_index
+      title: NLP
+      sections:
+        - file: contents/2_algorithms/deep_learning/3_natural_language_processing/1_nlp_rnn.ipynb
+          title: NLP Overview & RNN
+        - file: contents/2_algorithms/deep_learning/3_natural_language_processing/2_transformers.ipynb
+          title: Transformers
+
+    - file: contents/2_algorithms/deep_learning/4_reinforcement_learning/_index
+      title: Reinforcement Learning
+
+    - file: contents/2_algorithms/deep_learning/5_unsupervised_learning/_index
+      title: Unsupervised Learning
+
+  - file: contents/2_algorithms/recommendation_system/_index
+    title: Recommendation System
+    sections:
+    - file: contents/2_algorithms/recommendation_system/1_evaluation_metrics.ipynb
+      title: Evaluation Metrics
+
+
 - caption: PROGRAMMING & FRAMEWORKS
   maxdepth: 4
   numbered: true
   chapters:
-    - file: contents/1_programming_and_frameworks/1_Python.ipynb
-      title: 'Python'
-    - file: contents/1_programming_and_frameworks/2_NoSQL.ipynb
-      title: 'NoSQL'
-    - file: contents/1_programming_and_frameworks/3_SQL.ipynb
-      title: 'SQL'
-    - file: contents/1_programming_and_frameworks/4_Git.ipynb
-      title: 'Git'
-    - file: contents/1_programming_and_frameworks/5_Docker.ipynb
-      title: 'Docker'
-    - file: contents/1_programming_and_frameworks/6_PySpark.ipynb
-      title: 'PySpark'
+    - file: contents/3_programming_and_frameworks/1_Python.ipynb
+      title: Python
+    - file: contents/3_programming_and_frameworks/2_NoSQL.ipynb
+      title: NoSQL
+    - file: contents/3_programming_and_frameworks/3_SQL.ipynb
+      title: SQL
+    - file: contents/3_programming_and_frameworks/4_Git.ipynb
+      title: Git
+    - file: contents/3_programming_and_frameworks/5_Docker.ipynb
+      title: Docker
+    - file: contents/3_programming_and_frameworks/6_PySpark.ipynb
+      title: PySpark
+
 
 - caption: TOPICS & GUIDES
   maxdepth: 4
   numbered: true
   chapters:
-    - file: contents/4_topics_and_guides/1_mathematics/index.md
-      title: 'Mathematics'
+    - file: contents/4_topics_and_guides/1_mathematics/_index.md
+      title: Mathematics
       sections:
         - file: contents/4_topics_and_guides/1_mathematics/1_Linear_algebra.ipynb
-          title: 'Linear Algebra'
+          title: Linear Algebra
         - file: contents/4_topics_and_guides/1_mathematics/2_Calculus_and_optimization.ipynb
-          title: 'Calculus and Optimization'
+          title: Calculus and Optimization
         - file: contents/4_topics_and_guides/1_mathematics/3_Distribution_and_statistic.ipynb
-          title: 'Distribution and Statistic' 
+          title: Distribution and Statistic 
         - file: contents/4_topics_and_guides/1_mathematics/4_Information_theory.ipynb
-          title: 'Information Theory'
+          title: Information Theory
         - file: contents/4_topics_and_guides/1_mathematics/5_Graph_theory.ipynb
-          title: 'Graph Theory'
+          title: Graph Theory

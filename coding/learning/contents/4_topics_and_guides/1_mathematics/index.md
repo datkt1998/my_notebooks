@@ -1,4 +1,0 @@
-# Mathematics
-
-```{tableofcontents}
-```   
