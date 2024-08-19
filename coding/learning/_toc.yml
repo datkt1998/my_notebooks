@@ -173,6 +173,7 @@ parts:
       title: Git
     - file: contents/3_programming_and_frameworks/5_Docker.ipynb
       title: Docker
+    - file: contents/3_programming_and_frameworks/_index.ipynb
     - file: contents/3_programming_and_frameworks/6_PySpark.ipynb
       title: PySpark
 
