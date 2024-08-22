@@ -14,3 +14,12 @@ Có 2 hướng tiếp cận để sử dụng được notebook:
 **Khi nào nên sử dụng**:
 - **Colab Enterprise**: Khi cần chia sẻ và cộng tác dễ dàng, không muốn quản lý hạ tầng.
 - **Vertex AI Workbench**: Khi cần tùy chỉnh cao và tích hợp sâu với các dịch vụ dữ liệu của Google Cloud.
+
+## 1.1 Colab Enterprise
+([doc](https://cloud.google.com/vertex-ai/docs/colab/create-console-quickstart))
+
+- **Runtime**: a compute resource to run code in notebook
+- **Runtime template**: configure the template to optimize a runtime's performance, cost, and other characteristics based on demand and problem.
+	> Read [**Machine type & disk type**](https://cloud.google.com/compute/docs/machine-resource) to select resources suitable for the purpose
+
+
