@@ -132,8 +132,20 @@ https://cloud.google.com/vertex-ai/docs/workbench/instances/introduction#limitat
 [**View, share, and import an executed notebook file**](https://cloud.google.com/vertex-ai/docs/workbench/instances/schedule-notebook-run-quickstart#view_share_and_import_an_executed_notebook_file)
 
 ### 1.2.3 Connect to data
-1. [Cloud Storage buckets](https://cloud.google.com/vertex-ai/docs/workbench/instances/cloud-storage)
-2. [BigQuery Table](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery)
+
+#### 1.2.3.1 [BigQuery Table](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery)
+
+##### 1.2.3.1.1 [Browse BigQuery resources](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery#browse_resources)
+ In ![BigQuery](https://cloud.google.com/static/bigquery/images/bigquery_icon.png) **BigQuery in Notebooks**. The **BigQuery** pane lists available projects and datasets
+ <img src = "https://cloud.google.com/static/bigquery/images/international_top_terms.png">
+##### 1.2.3.1.2 [Query by Bigquery Magic Command](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery#query_data_by_using_the_bigquery_magic_command)
+
+##### 1.2.3.1.3 [Query by Bigquery Client Library](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery#query_data_by_using_the_client_library_directly)
+
+##### 1.2.3.1.4 [Query by BigQuery Integration](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery#query_data_by_using_the_integration_in)
+#### 1.2.3.2 [Cloud Storage buckets](https://cloud.google.com/vertex-ai/docs/workbench/instances/cloud-storage)
+
+
 
 ### 1.2.4 Explore and visualize data
 
