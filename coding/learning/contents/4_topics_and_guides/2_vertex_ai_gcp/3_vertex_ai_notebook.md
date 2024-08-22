@@ -138,6 +138,7 @@ https://cloud.google.com/vertex-ai/docs/workbench/instances/introduction#limitat
 ##### 1.2.3.1.1 [Browse BigQuery resources](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery#browse_resources)
  In ![BigQuery](https://cloud.google.com/static/bigquery/images/bigquery_icon.png) **BigQuery in Notebooks**. The **BigQuery** pane lists available projects and datasets
  <img src = "https://cloud.google.com/static/bigquery/images/international_top_terms.png">
+ 
 ##### 1.2.3.1.2 [Query by Bigquery Magic Command](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery#query_data_by_using_the_bigquery_magic_command)
 
 ##### 1.2.3.1.3 [Query by Bigquery Client Library](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery#query_data_by_using_the_client_library_directly)
