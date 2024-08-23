@@ -1,10 +1,10 @@
-# 1 Overview
+# Overview
 
 [overview](https://cloud.google.com/vertex-ai/docs)
 
-## 1.1 Introduction
+## Introduction
 
-### 1.1.1 ML workflow
+### ML workflow
 
 1. **Data preparation** 
 	- *EDA*
@@ -41,14 +41,14 @@
 	- *Explain model*: [Vertex Explainable AI](https://cloud.google.com/vertex-ai/docs/explainable-ai/overview)
 	- *Monitoring*: [Vertex AI Model Monitoring](https://cloud.google.com/vertex-ai/docs/model-monitoring/overview) (*training-serving skew and prediction drift and sends you alerts when the incoming prediction data skews too far from the training baseline*)
 
-### 1.1.2 Training and deployment option
+### Training and deployment option
 
 - [AutoML](https://cloud.google.com/vertex-ai/docs/beginner/beginners-guide) lets you train tabular, image, text, or video data without writing code or preparing data splits.
 - [Custom training](https://cloud.google.com/vertex-ai/docs/training/overview) gives you complete control over the training process, including using your preferred ML framework, writing your own training code, and choosing hyperparameter tuning options.
 - [Model Garden](https://cloud.google.com/vertex-ai/generative-ai/docs/model-garden/explore-models) lets you discover, test, customize, and deploy Vertex AI and select open-source (OSS) models and assets.
 - [Generative AI](https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/overview) gives you access to Google's large generative AI models for multiple modalities (text, code, images, speech). You can tune Google's LLMs to meet your needs, and then deploy them for use in your AI-powered applications.
 
-### 1.1.3 Vertex-ai interaction ways
+### Vertex-ai interaction ways
 
 - [Google Console](https://console.cloud.google.com/vertex-ai?project=ext-pinetree-dw) (graphical user interface)
 - [Google Cloud command-line interface (CLI)](https://cloud.google.com/sdk/gcloud) ([`gcloud ai`](https://cloud.google.com/sdk/gcloud/reference/ai) command)
@@ -56,7 +56,7 @@
 - [Vertex AI SDK for Python](https://cloud.google.com/vertex-ai/docs/python-sdk/use-vertex-ai-python-sdk) (Python)
 - [Vertex AI API REST](https://cloud.google.com/vertex-ai/docs/reference/rest) (API)
 
-## 1.2 Setup environment
+## Setup environment
 
 1. Create project and enable billing
 2. Enable Vertex AI API
@@ -73,7 +73,7 @@ gcloud components install beta
 6. Add role ([read doc](https://cloud.google.com/vertex-ai/docs/start/cloud-environment#ask_admin))
 7. Install [Vertex AI SDK for Python](https://cloud.google.com/vertex-ai/docs/start/install-sdk)
 
-## 1.3 Training methods
+## Training methods
 
 [Choosing a training method](https://cloud.google.com/vertex-ai/docs/start/training-methods)
 
@@ -88,7 +88,7 @@ gcloud components install beta
 | **Control aspects of the training environment**                    | - Limited. <br>- Specify the number of node hours to train for + allow early stopping of training (for `tabular` + `image`)                                                                                                                                                                                                                                                                                                                  | No.                                                                                                                                                                                                                          | Yes.<br>- Compute Engine machine type<br>- Disk size<br>- ML framework <br>- Number of nodes.                            |
 | **Limits on data size**                                            | Yes<br>- [Preparing image training data](https://cloud.google.com/vertex-ai/docs/training-overview#image_data)<br>- [Preparing tabular training data](https://cloud.google.com/vertex-ai/docs/training-overview#tabular_data)<br>- [Preparing text training data](https://cloud.google.com/vertex-ai/docs/training-overview#text_data)<br>- [Preparing video training](https://cloud.google.com/vertex-ai/docs/training-overview#video_data) | Yes (base on [Quotas](https://cloud.google.com/bigquery-ml/quotas))                                                                                                                                                          | - For unmanaged datasets: No<br>- For managed datasets: same **AutoML**                                                  |
 
-## 1.4 Notebook tutorials
+## Notebook tutorials
 
 [List of totebook tutorials](https://cloud.google.com/vertex-ai/docs/tutorials/jupyter-notebooks#vertex-ai-workbench)
 
