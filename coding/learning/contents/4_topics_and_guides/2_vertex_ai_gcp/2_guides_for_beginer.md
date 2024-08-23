@@ -1,1 +1,1 @@
-# 1 Guides for beginers
+# Guides for beginers
