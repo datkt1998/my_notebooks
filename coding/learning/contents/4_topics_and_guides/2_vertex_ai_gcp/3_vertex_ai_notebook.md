@@ -98,11 +98,11 @@ Có 2 hướng tiếp cận để sử dụng được notebook:
 
 **gcloud CLI config**:
 - Create instance
-```cmd
+```shell
 gcloud workbench instances create INSTANCE_NAME --metadata=idle-timeout-seconds=86400
 ```
 - Update instance
-```cmd
+```shell
 gcloud workbench instances update INSTANCE_NAME --metadata=idle-timeout-seconds=86400
 ```
 
@@ -188,9 +188,11 @@ LIMIT @limit
 ```
 
 Get a summary of data
-``` python
+
+```python
 %bigquery_stats bigquery-public-data.google_trends.top_terms
 ```
+
 After running for some time, an image appears with various statistics on each of the 7 variables in the `top_terms` table. The following image shows part of some example output:
 
 ![International top terms overview of statistics.](https://cloud.google.com/static/bigquery/images/jupyter-overview-of-statistics.png)
@@ -314,7 +316,7 @@ To mount and then access a Cloud Storage bucket, do the following:
 #### 1.2.5.1 [Add a new conda environment](https://cloud.google.com/vertex-ai/docs/workbench/instances/add-environment#add_a_conda_environment)
 
 If to want using `pip`
-```cmd
+```shell
 conda install pip
 pip install <PACKAGE>
 pip install -r requirements.txt
@@ -325,7 +327,7 @@ pip install -r requirements.txt
 Vertex AI Workbench instances come with pre-installed frameworks such as PyTorch and TensorFlow. If you need a different version, you can modify the libraries by using `pip` in the relevant conda environment.
 
 For example, if you want to upgrade PyTorch:
-```cmd
+```shell
 # Check the name of the conda environment for PyTorch
 conda env list
 
@@ -347,7 +349,7 @@ pip install --upgrade torch
 
 Some conda packages add default kernels to your environment when the packages are installed. For example, when you install R, conda might also add a `python3` kernel. This can cause a duplication of kernels in your environment. To avoid duplicated kernels, delete the default kernel before you create a new kernel with the same name.
 
-```cmd
+```shell
 rm -rf /opt/conda/envs/CONDA_ENVIRONMENT_NAME/share/jupyter/kernels/python3
 ```
 ### 1.2.6 [Monitor](https://cloud.google.com/vertex-ai/docs/workbench/instances/monitor-health)
@@ -383,20 +385,20 @@ rm -rf /opt/conda/envs/CONDA_ENVIRONMENT_NAME/share/jupyter/kernels/python3
 **Step in Terminal**
 1. Open `Terminal`
 2. Create the Python environment called `py311` using `conda create` command.
-```cmd
+```shell
 conda create -n py311 python=3.11 --y
 ```
 3. Once created activate it as follows:
-```cmd
+```shell
 conda activate py311
 ```
 4. Install the IPython kernel (`ipykernel`), that allows users to interactively run Python code and display the output within a notebook
-```cmd
+```shell
 conda install ipykernel
 ```
 
 Install `IPython`
-```cmd
+```shell
 ipython kernel install --name "py311" --user
 ```
 
@@ -427,7 +429,7 @@ conda install ipykernel --yes
 ipython kernel install --name "$ENV_NAME" --user
 ```
 2. Execute bash file
-```cmd
+```shell
 # give it execute permissions
 chmod +x create_conda_env.sh
 

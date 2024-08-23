@@ -178,7 +178,7 @@ parts:
     - file: contents/3_programming_and_frameworks/python_frameworks/_index
       title: Python Frameworks
       sections:
-      - file: contents/3_programming_and_frameworks/1_PySpark.ipynb
+      - file: contents/3_programming_and_frameworks/python_frameworks/1_PySpark.ipynb
         title: PySpark
 
 
@@ -204,8 +204,8 @@ parts:
       sections:
       - file: contents/4_topics_and_guides/2_vertex_ai_gcp/1_overview
         title: Overview
-      - file: contents/4_topics_and_guides/2_vertex_ai_gcp/2_guides_for_beginer
-        title: Guides for beginner
+      # - file: contents/4_topics_and_guides/2_vertex_ai_gcp/2_guides_for_beginer
+      #   title: Guides for beginner
       - file: contents/4_topics_and_guides/2_vertex_ai_gcp/3_vertex_ai_notebook
         title: Vertex AI Notebook
       # - file: contents/4_topics_and_guides/2_vertex_ai_gcp/4_model_XXXXXXXXXXXX
