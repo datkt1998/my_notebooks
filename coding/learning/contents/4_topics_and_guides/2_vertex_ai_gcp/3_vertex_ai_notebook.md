@@ -140,7 +140,8 @@ https://cloud.google.com/vertex-ai/docs/workbench/instances/introduction#limitat
  <img src = "https://cloud.google.com/static/bigquery/images/international_top_terms.png">
  
 ##### 1.2.3.1.2 [Query by Bigquery Magic Command](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery#query_data_by_using_the_bigquery_magic_command)
-
+https://github.com/googledatalab/notebooks/blob/master/tutorials/BigQuery/BigQuery%20Magic%20Commands%20and%20DML.ipynb
+https://niango777.medium.com/bigquery-query-magic-f2825aff03e1
 ##### 1.2.3.1.3 [Query by Bigquery Client Library](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery#query_data_by_using_the_client_library_directly)
 
 ##### 1.2.3.1.4 [Query by BigQuery Integration](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery#query_data_by_using_the_integration_in)
