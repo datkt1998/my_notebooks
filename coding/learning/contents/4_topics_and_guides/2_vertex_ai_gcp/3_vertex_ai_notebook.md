@@ -80,16 +80,7 @@ Có 2 hướng tiếp cận để sử dụng được notebook:
 
 #### 1.2.1.1 [Create an instance](https://cloud.google.com/vertex-ai/docs/workbench/instances/create#create)
 
-#### 1.2.1.2 [Add a new conda environment](https://cloud.google.com/vertex-ai/docs/workbench/instances/add-environment#add_a_conda_environment)
-
-If to want using `pip`
-```cmd
-conda install pip
-pip install <PACKAGE>
-pip install -r requirements.txt
-```
-
-#### 1.2.1.3 Instance shutdown
+#### 1.2.1.2 Instance shutdown
 
 **Shutdown event:**
 - Manual click to `shutdown`
@@ -115,8 +106,12 @@ gcloud workbench instances create INSTANCE_NAME --metadata=idle-timeout-seconds=
 gcloud workbench instances update INSTANCE_NAME --metadata=idle-timeout-seconds=86400
 ```
 
-#### 1.2.1.4 Limitation
-https://cloud.google.com/vertex-ai/docs/workbench/instances/introduction#limitations
+#### 1.2.1.3 [Change the machine type and configure GPUs](https://cloud.google.com/vertex-ai/docs/workbench/instances/change-machine-type#change_the_machine_type_and_configure_gpus)
+
+#### 1.2.1.4 [Migrate your data to a new Vertex AI Workbench instance](https://cloud.google.com/vertex-ai/docs/workbench/instances/migrate#migrate-data)
+
+#### 1.2.1.5 [Remote SSH](https://cloud.google.com/vertex-ai/docs/workbench/instances/ssh-access)
+#### 1.2.1.6 [Limitation](https://cloud.google.com/vertex-ai/docs/workbench/instances/introduction#limitations)
 
 ### 1.2.2 Schedule run noteboook
 
@@ -140,25 +135,226 @@ https://cloud.google.com/vertex-ai/docs/workbench/instances/introduction#limitat
  <img src = "https://cloud.google.com/static/bigquery/images/international_top_terms.png">
  
 ##### 1.2.3.1.2 [Query by Bigquery Magic Command](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery#query_data_by_using_the_bigquery_magic_command)
-https://github.com/googledatalab/notebooks/blob/master/tutorials/BigQuery/BigQuery%20Magic%20Commands%20and%20DML.ipynb
-https://niango777.medium.com/bigquery-query-magic-f2825aff03e1
+
+To use these magics, you must first register them. Run the `%load_ext` magic in a Jupyter notebook cell.
+```python
+%load_ext google.cloud.bigquery
+```
+
+The `%%bigquery` magic runs a SQL query and returns the results as a pandas `DataFrame`
+```python
+%%bigquery  
+SELECT name, SUM(number) as count  
+FROM `bigquery-public-data.usa_names.usa_1910_current`  
+GROUP BY name  
+ORDER BY count DESC  
+LIMIT 10
+```
+
+**Assign the query results to a variable**
+```python
+%%bigquery df
+SELECT name, SUM(number) as count  
+FROM `bigquery-public-data.usa_names.usa_1910_current`  
+GROUP BY name  
+ORDER BY count DESC  
+LIMIT 10
+
+df
+```
+
+**Explicitly specify a project**
+```python
+project_id = 'your-project-id'
+
+%%bigquery --project $project_id  
+SELECT name, SUM(number) as count  
+FROM `bigquery-public-data.usa_names.usa_1910_current`  
+GROUP BY name  
+ORDER BY count DESC  
+LIMIT 10
+```
+
+**Run a parameterized query**
+```python
+params = {"limit": 10}
+
+%%bigquery --params $params  
+SELECT name, SUM(number) as count  
+FROM `bigquery-public-data.usa_names.usa_1910_current`  
+GROUP BY name  
+ORDER BY count DESC  
+LIMIT @limit
+```
+
+Get a summary of data
+``` python
+%bigquery_stats bigquery-public-data.google_trends.top_terms
+```
+After running for some time, an image appears with various statistics on each of the 7 variables in the `top_terms` table. The following image shows part of some example output:
+
+![International top terms overview of statistics.](https://cloud.google.com/static/bigquery/images/jupyter-overview-of-statistics.png)
 ##### 1.2.3.1.3 [Query by Bigquery Client Library](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery#query_data_by_using_the_client_library_directly)
 
-##### 1.2.3.1.4 [Query by BigQuery Integration](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery#query_data_by_using_the_integration_in)
+```python
+from google.cloud import bigquery
+
+class BigqueryConnector:
+    def __init__(self, project_id):
+        self.project_id = project_id
+        self.client = bigquery.Client(project_id)
+
+    def read_query(
+        self, query: str, chunk_size: int | None = None
+    ) -> Union[Iterator[pd.DataFrame], pd.DataFrame]:
+        """
+        Executes a BigQuery query and returns an iterator of pandas DataFrames if chunk_size is provided,
+        otherwise returns a single pandas DataFrame.
+        """
+        query_job = self.client.query(query)
+        result = query_job.result(page_size=chunk_size)
+        return (
+            result.to_dataframe_iterable()
+            if chunk_size
+            else result.to_dataframe()
+        )
+
+    def read_table(self, table_id):
+        table = self.read_query(f"SELECT * FROM `{table_id}`")
+        return table
+
+    def write_bq(self, dataframe, table_id, if_exists="append", schema=None):
+        write_mode = (
+            "WRITE_TRUNCATE" if if_exists == "replace" else "WRITE_APPEND"
+        )
+        schema = (
+            [
+                bigquery.SchemaField(
+                    name,
+                    type_.upper(),
+                    "NULLABLE" if mode is None else mode.upper(),
+                )
+                for name, type_, mode in schema
+            ]
+            if schema is not None
+            else []
+        )
+        job_config = bigquery.LoadJobConfig(
+            schema=schema,
+            write_disposition=write_mode,
+        )
+        job = self.client.load_table_from_dataframe(
+            dataframe, table_id, job_config=job_config
+        )
+        job.result()
+        
+    # write a function to update value in bigquery
+    def update_bq(self, table_id, update_value, conditions={}):
+        for k in update_value.keys():
+            if isinstance(update_value[k], str):
+                update_value[k] = f"'{update_value[k]}'"
+        for k in conditions.keys():
+            if isinstance(conditions[k], str):
+                conditions[k] = f"'{conditions[k]}'"
+        set_stasement = ", ".join(
+            [f"{k} = {v}" for k, v in update_value.items()]
+        )
+        conditions = "".join(
+            [f" and {k} = {v}" for k, v in conditions.items()]
+        )
+        sql = f"""
+        UPDATE `{table_id}`
+        SET
+        {set_stasement}
+        WHERE
+        1 = 1 {conditions}
+        """
+        # return sql
+        job = self.client.query(sql)
+        job.result()
+
+    def create_table(
+        self, table_id, fields, partition_by=None, cluster_by=None
+    ):
+        schema = [
+            bigquery.SchemaField(
+                i["name"],
+                i["type"].upper(),
+                mode=(i["mode"] if "mode" in i else "NULLABLE"),
+            )
+            for i in fields
+        ]
+        table = bigquery.Table(table_id, schema=schema)
+        if partition_by:
+            partitioning = bigquery.TimePartitioning(
+                type_=bigquery.TimePartitioningType.DAY,
+                field=partition_by,
+            )
+            table.time_partitioning = partitioning
+        if cluster_by:
+            table.clustering_fields = cluster_by
+        self.client.create_table(table, exists_ok=True)
+        print(f"Created table '{table_id}' successfully.")
+```
+
 #### 1.2.3.2 [Cloud Storage buckets](https://cloud.google.com/vertex-ai/docs/workbench/instances/cloud-storage)
 
+To mount and then access a Cloud Storage bucket, do the following:
+1. In JupyterLab, make sure the folder **File Browser** tab is selected.
+2. In the left sidebar, click the ![](https://cloud.google.com/static/vertex-ai/docs/workbench/images/icon-mount-shared-storage.png) **Mount shared storage** button. If you don't see the button, drag the right side of the sidebar to expand the sidebar until you see the button.
+    
+    ![The Mount shared storage button in the top right corner of the left sidebar](https://cloud.google.com/static/vertex-ai/docs/workbench/instances/images/mount-shared-storage-button.png)
+3. In the **Bucket name** field, enter the Cloud Storage bucket name that you want to mount.
+4. Click **Mount**.
+5. Your Cloud Storage bucket appears as a folder in the **File browser** tab of the left sidebar. Double-click the folder to open it and browse the contents.
 
-
-### 1.2.4 Explore and visualize data
-
+### 1.2.4 [Github integration](https://cloud.google.com/vertex-ai/docs/workbench/instances/save-to-github)
 ### 1.2.5 Maintain
 
-### 1.2.6 Monitor
+#### 1.2.5.1 [Add a new conda environment](https://cloud.google.com/vertex-ai/docs/workbench/instances/add-environment#add_a_conda_environment)
+
+If to want using `pip`
+```cmd
+conda install pip
+pip install <PACKAGE>
+pip install -r requirements.txt
+```
+
+#### 1.2.5.2 Modify a conda kernel
+
+Vertex AI Workbench instances come with pre-installed frameworks such as PyTorch and TensorFlow. If you need a different version, you can modify the libraries by using `pip` in the relevant conda environment.
+
+For example, if you want to upgrade PyTorch:
+```cmd
+# Check the name of the conda environment for PyTorch
+conda env list
+
+# Activate the environment for PyTorch
+conda activate pytorch
+
+# Display the PyTorch version
+python -c "import torch; print(torch.__version__)"
+
+# Make sure to use pip from the conda environment for PyTorch
+# This should be `/opt/conda/envs/pytorch/bin/pip`
+which pip
+
+# Upgrade PyTorch
+pip install --upgrade torch
+```
+
+#### 1.2.5.3 Delete a conda kernel
+
+Some conda packages add default kernels to your environment when the packages are installed. For example, when you install R, conda might also add a `python3` kernel. This can cause a duplication of kernels in your environment. To avoid duplicated kernels, delete the default kernel before you create a new kernel with the same name.
+
+```cmd
+rm -rf /opt/conda/envs/CONDA_ENVIRONMENT_NAME/share/jupyter/kernels/python3
+```
+### 1.2.6 [Monitor](https://cloud.google.com/vertex-ai/docs/workbench/instances/monitor-health)
 
 ### 1.2.7 Control access
 
-### 1.2.8 Troubleshooting
-https://cloud.google.com/vertex-ai/docs/general/troubleshooting-workbench?component=any#instances
+### 1.2.8 [Troubleshooting](https://cloud.google.com/vertex-ai/docs/general/troubleshooting-workbench?component=any#instances)
 
 ### 1.2.9 Usage Tips
 
@@ -241,3 +437,5 @@ chmod +x create_conda_env.sh
 # If you work on a GPU with a preinstalled conda version you can update conda
 conda install cudatoolkit=CUDA_VERSON -y
 ```
+
+### 1.2.10 [Notebook example](https://cloud.google.com/vertex-ai/docs/workbench/notebooks#notebook-list)

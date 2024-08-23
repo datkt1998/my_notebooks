@@ -123,14 +123,14 @@ parts:
     - file: contents/2_algorithms/deep_learning/1_fundamental/_index
       title: Fundamental
       sections:
-        - file: contents/2_algorithms/deep_learning/1_fundamental/1_fundamental_overview.ipynb
-          title: Deep Learing Overview
-        - file: contents/2_algorithms/deep_learning/1_fundamental/2_process_data_augmentation.ipynb
-          title: Data Augmentation
-        - file: contents/2_algorithms/deep_learning/1_fundamental/3_transfer_learning.ipynb
-          title: Transfer Learning
-        - file: contents/2_algorithms/deep_learning/1_fundamental/4_multi_modal.ipynb
-          title: Multi-Modal
+      - file: contents/2_algorithms/deep_learning/1_fundamental/1_fundamental_overview.ipynb
+        title: Deep Learing Overview
+      - file: contents/2_algorithms/deep_learning/1_fundamental/2_process_data_augmentation.ipynb
+        title: Data Augmentation
+      - file: contents/2_algorithms/deep_learning/1_fundamental/3_transfer_learning.ipynb
+        title: Transfer Learning
+      - file: contents/2_algorithms/deep_learning/1_fundamental/4_multi_modal.ipynb
+        title: Multi-Modal
 
     - file: contents/2_algorithms/deep_learning/2_computer_vision/_index
       title: Computer Vision
@@ -141,10 +141,10 @@ parts:
     - file: contents/2_algorithms/deep_learning/3_natural_language_processing/_index
       title: NLP
       sections:
-        - file: contents/2_algorithms/deep_learning/3_natural_language_processing/1_nlp_rnn.ipynb
-          title: NLP Overview & RNN
-        - file: contents/2_algorithms/deep_learning/3_natural_language_processing/2_transformers.ipynb
-          title: Transformers
+      - file: contents/2_algorithms/deep_learning/3_natural_language_processing/1_nlp_rnn.ipynb
+        title: NLP Overview & RNN
+      - file: contents/2_algorithms/deep_learning/3_natural_language_processing/2_transformers.ipynb
+        title: Transformers
 
     - file: contents/2_algorithms/deep_learning/4_reinforcement_learning/_index
       title: Reinforcement Learning
@@ -157,6 +157,8 @@ parts:
     sections:
     - file: contents/2_algorithms/recommendation_system/1_evaluation_metrics.ipynb
       title: Evaluation Metrics
+    # - file: contents/2_algorithms/recommendation_system/2_collaborative_filtering_als_spark.ipynb
+    #   title: Collaborative Filtering - ALS - PySpark
 
 
 - caption: PROGRAMMING & FRAMEWORKS
@@ -173,9 +175,11 @@ parts:
       title: Git
     - file: contents/3_programming_and_frameworks/5_Docker.ipynb
       title: Docker
-    - file: contents/3_programming_and_frameworks/_index.ipynb
-    - file: contents/3_programming_and_frameworks/6_PySpark.ipynb
-      title: PySpark
+    - file: contents/3_programming_and_frameworks/python_frameworks/_index
+      title: Python Frameworks
+      sections:
+      - file: contents/3_programming_and_frameworks/1_PySpark.ipynb
+        title: PySpark
 
 
 - caption: TOPICS & GUIDES
@@ -185,13 +189,27 @@ parts:
     - file: contents/4_topics_and_guides/1_mathematics/_index.md
       title: Mathematics
       sections:
-        - file: contents/4_topics_and_guides/1_mathematics/1_Linear_algebra.ipynb
-          title: Linear Algebra
-        - file: contents/4_topics_and_guides/1_mathematics/2_Calculus_and_optimization.ipynb
-          title: Calculus and Optimization
-        - file: contents/4_topics_and_guides/1_mathematics/3_Distribution_and_statistic.ipynb
-          title: Distribution and Statistic 
-        - file: contents/4_topics_and_guides/1_mathematics/4_Information_theory.ipynb
-          title: Information Theory
-        - file: contents/4_topics_and_guides/1_mathematics/5_Graph_theory.ipynb
-          title: Graph Theory
+      - file: contents/4_topics_and_guides/1_mathematics/1_Linear_algebra.ipynb
+        title: Linear Algebra
+      - file: contents/4_topics_and_guides/1_mathematics/2_Calculus_and_optimization.ipynb
+        title: Calculus and Optimization
+      - file: contents/4_topics_and_guides/1_mathematics/3_Distribution_and_statistic.ipynb
+        title: Distribution and Statistic 
+      - file: contents/4_topics_and_guides/1_mathematics/4_Information_theory.ipynb
+        title: Information Theory
+      - file: contents/4_topics_and_guides/1_mathematics/5_Graph_theory.ipynb
+        title: Graph Theory
+    - file: contents/4_topics_and_guides/2_vertex_ai_gcp/_index.md
+      title: Vertex AI (GCP)
+      sections:
+      - file: contents/4_topics_and_guides/2_vertex_ai_gcp/1_overview
+        title: Overview
+      - file: contents/4_topics_and_guides/2_vertex_ai_gcp/2_guides_for_beginer
+        title: Guides for beginner
+      - file: contents/4_topics_and_guides/2_vertex_ai_gcp/3_vertex_ai_notebook
+        title: Vertex AI Notebook
+      # - file: contents/4_topics_and_guides/2_vertex_ai_gcp/4_model_XXXXXXXXXXXX
+      #   title: XXXXXXXXXX
+      - file: contents/4_topics_and_guides/2_vertex_ai_gcp/practice/_index
+        title: Practice
+        # sections:
