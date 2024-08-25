@@ -1,4 +1,4 @@
-# Choose a notebook solution
+# 1 Choose a notebook solution
 
 Có 2 hướng tiếp cận để sử dụng được notebook:
 
@@ -33,7 +33,7 @@ Có 2 hướng tiếp cận để sử dụng được notebook:
 **Khi nào nên sử dụng**:
 - **Colab Enterprise**: Khi cần chia sẻ và cộng tác dễ dàng, không muốn quản lý hạ tầng.
 - **Vertex AI Workbench**: Khi cần tùy chỉnh cao và tích hợp sâu với các dịch vụ dữ liệu của Google Cloud.
-## Colab Enterprise
+## 1.1 Colab Enterprise
 ([doc](https://cloud.google.com/vertex-ai/docs/colab/create-console-quickstart))
 
 **Key Features:**
@@ -53,7 +53,7 @@ Có 2 hướng tiếp cận để sử dụng được notebook:
 - **Compute Engine**: the virtual machine that runs the notebook
 - **Storage**: data + source code
 - **Networking**: Communication between notebook and other services
-## Vertex AI Workbench
+## 1.2 Vertex AI Workbench
 
 **Key Features:**
 - 👨🏻‍💻 **Access to the VM:** Unlike Colab Enterprise, you get full access to the virtual machine itself, allowing for in-depth configuration tailored to your specific needs. You can integrate more easily with your GCP environment based on IAM.
@@ -76,11 +76,11 @@ Có 2 hướng tiếp cận để sử dụng được notebook:
 	- Cost of **Persistent storage** base on the the actual amount of provisioned disk space. Therefore, it's still a good idea to choose a size that's appropriate for needs.
 	- The data should be stored in cloud storage (like buckets), you're charged based on the **amount of data you actually store** in the bucket. This is called "used storage" and is a more flexible way to pay for storage.
 
-### Setup Instances
+### 1.2.1 Setup Instances
 
-#### [Create an instance](https://cloud.google.com/vertex-ai/docs/workbench/instances/create#create)
+#### 1.2.1.1 [Create an instance](https://cloud.google.com/vertex-ai/docs/workbench/instances/create#create)
 
-#### Instance shutdown
+#### 1.2.1.2 Instance shutdown
 
 **Shutdown event:**
 - Manual click to `shutdown`
@@ -106,14 +106,14 @@ gcloud workbench instances create INSTANCE_NAME --metadata=idle-timeout-seconds=
 gcloud workbench instances update INSTANCE_NAME --metadata=idle-timeout-seconds=86400
 ```
 
-#### [Change the machine type and configure GPUs](https://cloud.google.com/vertex-ai/docs/workbench/instances/change-machine-type#change_the_machine_type_and_configure_gpus)
+#### 1.2.1.3 [Change the machine type and configure GPUs](https://cloud.google.com/vertex-ai/docs/workbench/instances/change-machine-type#change_the_machine_type_and_configure_gpus)
 
-#### [Migrate your data to a new Vertex AI Workbench instance](https://cloud.google.com/vertex-ai/docs/workbench/instances/migrate#migrate-data)
+#### 1.2.1.4 [Migrate your data to a new Vertex AI Workbench instance](https://cloud.google.com/vertex-ai/docs/workbench/instances/migrate#migrate-data)
 
-#### [Remote SSH](https://cloud.google.com/vertex-ai/docs/workbench/instances/ssh-access)
-#### [Limitation](https://cloud.google.com/vertex-ai/docs/workbench/instances/introduction#limitations)
+#### 1.2.1.5 [Remote SSH](https://cloud.google.com/vertex-ai/docs/workbench/instances/ssh-access)
+#### 1.2.1.6 [Limitation](https://cloud.google.com/vertex-ai/docs/workbench/instances/introduction#limitations)
 
-### Schedule run noteboook
+### 1.2.2 Schedule run noteboook
 
 **Set scheduler**
 1. Next to your instance's name, click **Open JupyterLab
@@ -126,15 +126,15 @@ gcloud workbench instances update INSTANCE_NAME --metadata=idle-timeout-seconds=
 
 [**View, share, and import an executed notebook file**](https://cloud.google.com/vertex-ai/docs/workbench/instances/schedule-notebook-run-quickstart#view_share_and_import_an_executed_notebook_file)
 
-### Connect to data
+### 1.2.3 Connect to data
 
-#### [BigQuery Table](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery)
+#### 1.2.3.1 [BigQuery Table](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery)
 
-##### [Browse BigQuery resources](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery#browse_resources)
+##### 1.2.3.1.1 [Browse BigQuery resources](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery#browse_resources)
  In ![BigQuery](https://cloud.google.com/static/bigquery/images/bigquery_icon.png) **BigQuery in Notebooks**. The **BigQuery** pane lists available projects and datasets
  <img src = "https://cloud.google.com/static/bigquery/images/international_top_terms.png">
  
-##### [Query by Bigquery Magic Command](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery#query_data_by_using_the_bigquery_magic_command)
+##### 1.2.3.1.2 [Query by Bigquery Magic Command](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery#query_data_by_using_the_bigquery_magic_command)
 
 To use these magics, you must first register them. Run the `%load_ext` magic in a Jupyter notebook cell.
 ```python
@@ -196,7 +196,7 @@ Get a summary of data
 After running for some time, an image appears with various statistics on each of the 7 variables in the `top_terms` table. The following image shows part of some example output:
 
 ![International top terms overview of statistics.](https://cloud.google.com/static/bigquery/images/jupyter-overview-of-statistics.png)
-##### [Query by Bigquery Client Library](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery#query_data_by_using_the_client_library_directly)
+##### 1.2.3.1.3 [Query by Bigquery Client Library](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery#query_data_by_using_the_client_library_directly)
 
 ```python
 from google.cloud import bigquery
@@ -299,7 +299,7 @@ class BigqueryConnector:
         print(f"Created table '{table_id}' successfully.")
 ```
 
-#### [Cloud Storage buckets](https://cloud.google.com/vertex-ai/docs/workbench/instances/cloud-storage)
+#### 1.2.3.2 [Cloud Storage buckets](https://cloud.google.com/vertex-ai/docs/workbench/instances/cloud-storage)
 
 To mount and then access a Cloud Storage bucket, do the following:
 1. In JupyterLab, make sure the folder **File Browser** tab is selected.
@@ -310,10 +310,10 @@ To mount and then access a Cloud Storage bucket, do the following:
 4. Click **Mount**.
 5. Your Cloud Storage bucket appears as a folder in the **File browser** tab of the left sidebar. Double-click the folder to open it and browse the contents.
 
-### [Github integration](https://cloud.google.com/vertex-ai/docs/workbench/instances/save-to-github)
-### Maintain
+### 1.2.4 [Github integration](https://cloud.google.com/vertex-ai/docs/workbench/instances/save-to-github)
+### 1.2.5 Maintain
 
-#### [Add a new conda environment](https://cloud.google.com/vertex-ai/docs/workbench/instances/add-environment#add_a_conda_environment)
+#### 1.2.5.1 [Add a new conda environment](https://cloud.google.com/vertex-ai/docs/workbench/instances/add-environment#add_a_conda_environment)
 
 If to want using `pip`
 ```shell
@@ -322,7 +322,7 @@ pip install <PACKAGE>
 pip install -r requirements.txt
 ```
 
-#### Modify a conda kernel
+#### 1.2.5.2 Modify a conda kernel
 
 Vertex AI Workbench instances come with pre-installed frameworks such as PyTorch and TensorFlow. If you need a different version, you can modify the libraries by using `pip` in the relevant conda environment.
 
@@ -345,22 +345,22 @@ which pip
 pip install --upgrade torch
 ```
 
-#### Delete a conda kernel
+#### 1.2.5.3 Delete a conda kernel
 
 Some conda packages add default kernels to your environment when the packages are installed. For example, when you install R, conda might also add a `python3` kernel. This can cause a duplication of kernels in your environment. To avoid duplicated kernels, delete the default kernel before you create a new kernel with the same name.
 
 ```shell
 rm -rf /opt/conda/envs/CONDA_ENVIRONMENT_NAME/share/jupyter/kernels/python3
 ```
-### [Monitor](https://cloud.google.com/vertex-ai/docs/workbench/instances/monitor-health)
+### 1.2.6 [Monitor](https://cloud.google.com/vertex-ai/docs/workbench/instances/monitor-health)
 
-### Control access
+### 1.2.7 Control access
 
-### [Troubleshooting](https://cloud.google.com/vertex-ai/docs/general/troubleshooting-workbench?component=any#instances)
+### 1.2.8 [Troubleshooting](https://cloud.google.com/vertex-ai/docs/general/troubleshooting-workbench?component=any#instances)
 
-### Usage Tips
+### 1.2.9 Usage Tips
 
-#### Idle Shutdown 😴
+#### 1.2.9.1 Idle Shutdown 😴
 
 <img src = "https://cdn-images-1.readmedium.com/v2/resize:fit:800/1*CfhsxHPu0hiFhPpJwEFX1A.png">
 
@@ -369,7 +369,7 @@ rm -rf /opt/conda/envs/CONDA_ENVIRONMENT_NAME/share/jupyter/kernels/python3
 2. **Make the Most of Resources**: Cloud providers have a limited number of resources to go around. If your notebook is just sitting there doing nothing, it’s using up space that could be used by others. Auto-shutdown helps free up those resources for everyone to use, making the cloud system work better for everyone.
 3. **Eco-Friendly:** Less idle notebooks mean less energy is being used. This is good for the environment because it helps reduce the energy needed to run data centers, which in turn lowers the carbon footprint.
 
-#### Add tags/label 🏷️
+#### 1.2.9.2 Add tags/label 🏷️
 
 **Purpose**: Label instance or service in Google Cloud, help to organize resources better
 1. **Control Access**: Tags allow you to set specific access controls and permissions based on them.
@@ -378,7 +378,7 @@ rm -rf /opt/conda/envs/CONDA_ENVIRONMENT_NAME/share/jupyter/kernels/python3
 4. **Manage Operations**: Tags make it easier for tools that work with Google Cloud to organize resources. This is especially useful for keeping track of what’s happening, reporting, and watching over resources.
 5. **Find Things Quickly**: In the Google Cloud Console or using the `gcloud` tool, tags help you spot things fast.
 
-#### Update the Python version
+#### 1.2.9.3 Update the Python version
 
 **Purpose**: change to a different Python version
 
@@ -440,4 +440,4 @@ chmod +x create_conda_env.sh
 conda install cudatoolkit=CUDA_VERSON -y
 ```
 
-### [Notebook example](https://cloud.google.com/vertex-ai/docs/workbench/notebooks#notebook-list)
+### 1.2.10 [Notebook example](https://cloud.google.com/vertex-ai/docs/workbench/notebooks#notebook-list)
