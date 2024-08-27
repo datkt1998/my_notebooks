@@ -142,6 +142,7 @@ To use these magics, you must first register them. Run the `%load_ext` magic i
 ```
 
 The `%%bigquery` magic runs a SQL query and returns the results as a pandas `DataFrame`
+
 ```python
 %%bigquery  
 SELECT name, SUM(number) as count  
@@ -152,6 +153,7 @@ LIMIT 10
 ```
 
 **Assign the query results to a variable**
+
 ```python
 %%bigquery df
 SELECT name, SUM(number) as count  
@@ -164,6 +166,7 @@ df
 ```
 
 **Explicitly specify a project**
+
 ```python
 project_id = 'your-project-id'
 
@@ -176,6 +179,7 @@ LIMIT 10
 ```
 
 **Run a parameterized query**
+
 ```python
 params = {"limit": 10}
 

@@ -154,8 +154,8 @@ parts:
 
   - file: contents/2_algorithms/recommendation_system/_index
     title: Recommendation System
-    sections:
-    # - file: contents/2_algorithms/recommendation_system/2_collaborative_filtering_als_spark.ipynb
+    # sections:
+    # - file: contents/2_algorithms/recommendation_system/1_collaborative_filtering_als_spark.ipynb
     #   title: Collaborative Filtering - ALS - PySpark
 
 
