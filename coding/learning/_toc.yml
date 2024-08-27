@@ -154,10 +154,8 @@ parts:
 
   - file: contents/2_algorithms/recommendation_system/_index
     title: Recommendation System
-    sections:
-    - file: contents/2_algorithms/recommendation_system/1_evaluation_metrics.ipynb
-      title: Evaluation Metrics
-    # - file: contents/2_algorithms/recommendation_system/2_collaborative_filtering_als_spark.ipynb
+    # sections:
+    # - file: contents/2_algorithms/recommendation_system/1_collaborative_filtering_als_spark.ipynb
     #   title: Collaborative Filtering - ALS - PySpark
 
 
@@ -213,3 +211,24 @@ parts:
       - file: contents/4_topics_and_guides/2_vertex_ai_gcp/practice/_index
         title: Practice
         # sections:
+
+- caption: MY FUNCTIONS
+  maxdepth: 4
+  numbered: true
+  chapters:
+    - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/mfunctions/cleaning
+      title: Cleaning
+    - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/mfunctions/preprocessing
+      title: Preprocessing
+    - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/mfunctions/models
+      title: Models
+    - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/mfunctions/evaluation
+      title: Evaluation
+    - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/mfunctions/monitoring
+      title: Monitoring
+    - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/mfunctions/connection
+      title: Connection
+    - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/mfunctions/deployment
+      title: Deployment
+    - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/mfunctions/utils
+      title: Utils
