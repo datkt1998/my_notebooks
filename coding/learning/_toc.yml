@@ -90,8 +90,20 @@ parts:
       title: Clustering Metrics
     - file: contents/1_data_processing/5_evaluation_metrics/05_pairwise_metrics
       title: Pairwise Metrics
-    - file: contents/1_data_processing/5_evaluation_metrics/06_recommendation_system_metrics
-      title: Recommendation Metrics
+    - file: contents/1_data_processing/5_evaluation_metrics/recommendation_system_metrics/_index
+      title: Recommendation System Metrics
+      sections:
+      - file: contents/1_data_processing/5_evaluation_metrics/recommendation_system_metrics/01_overview
+        title: Overview
+      - file: contents/1_data_processing/5_evaluation_metrics/recommendation_system_metrics/02_similarity_metrics
+        title: Similarity Metrics
+      - file: contents/1_data_processing/5_evaluation_metrics/recommendation_system_metrics/03_candidate_generation_metrics
+        title: Candidate Generation Metrics
+      - file: contents/1_data_processing/5_evaluation_metrics/recommendation_system_metrics/04_rating_metrics
+        title: Rating Metrics
+      - file: contents/1_data_processing/5_evaluation_metrics/recommendation_system_metrics/05_ranking_metrics
+        title: Ranking Metrics
+      
 
   - file: contents/1_data_processing/6_model_monitoring/_index
     title: Model Monitoring
