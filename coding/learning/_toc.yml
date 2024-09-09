@@ -224,6 +224,9 @@ parts:
         title: Practice
         # sections:
 
+    - file: contents/4_topics_and_guides/3_python_environment/1_python_environment.ipynb
+      title: Python Environment
+
 - caption: MY FUNCTIONS
   maxdepth: 4
   numbered: true
