@@ -116,6 +116,39 @@ The primary goal of the recommendation system is to enhance the investment exper
 # 2. Timeline
 
 [Product_Recommendation_Plan.xlsx](https://hftvietnam.sharepoint.com/:x:/s/da/EW5NW6zOj_tJgmC0wq7fHAMB-lqcxi7Pn5Z0UWw77Mgn7w?e=49nkct&nav=MTVfezgxMjU0ODlDLUE5OUItNDI1Ny04QUE2LTVEODNFQ0NBQjBEQn0)
+
+# Thiết kế hệ thống
+
+
+**Danhh sách model**
+1. Model phân loại trạng thái khách hàng #M1
+	- Khách hàng `inactive`
+	- Khách hàng `active`
+	- Khách hàng mới `new`
+2. Model phân tích đặc điểm khách hàng #M2
+	- Mức độ biến động danh mục
+	- Thời gian nắm giữ
+	- Đa dạng hoá danh mục
+	- Mức độ phổ biến danh mục
+	- Tỷ lệ sử dụng đòn bẩy
+3. Model phân tích sản phẩm #M3
+	- Có phải là sản phẩm mới ? (Stock mới list sàn, chứng quyền mới list, bond mới phát hành, ETF mới, hợp đồng phái sinh. )
+	- Mức độ phổ biến - được giao dịch nhiều : top những mã được giao dịch nhiều, thanh khoản lớn, được đầu tư nhiều,...
+	- ...
+4. Model gom nhóm sản phẩm #M4
+5. Model gom nhóm khách hàng #M5
+6. Model đề xuất sản phẩm phổ biến #M6
+7. Model đề xuất sản phẩm mới #M7
+8. Model đề xuất sản phẩm tương tự với danh mục hiện tại #M8
+9. Model đề xuất theo dữ liệu trạng thái (wide & deep learning) #M9
+10. Model đề xuất theo chuỗi hành vi (SASRec) #M10
+12. Model hybrid recommend (kết hợp nhiều loại model) #M11
+	- Sử dụng #M1 để phân loại 
+
+**Yêu cầu monitoring**
+
+
+
 # 3. Appendix
 
 ## 3.1. Recommendation Algorithms Research
