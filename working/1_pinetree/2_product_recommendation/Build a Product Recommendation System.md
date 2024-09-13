@@ -120,7 +120,7 @@ The primary goal of the recommendation system is to enhance the investment exper
 # Thiết kế hệ thống
 
 
-**Danhh sách model**
+## **Danhh sách model**
 1. Model phân loại trạng thái khách hàng #M1
 	- Khách hàng `inactive`
 	- Khách hàng `active`
@@ -145,7 +145,49 @@ The primary goal of the recommendation system is to enhance the investment exper
 12. Model hybrid recommend (kết hợp nhiều loại model) #M11
 	- Sử dụng #M1 để phân loại 
 
-**Yêu cầu monitoring**
+## **Yêu cầu monitoring**
+
+### Trạng thái model hiện tại
+- Thông tin về model
+	- Status:
+		- Running (green) : The engine is running and uses the newest data
+		- Suspended (green) : The engine is suspended because it wasn’t used in the last 14 days
+		- Limited (orange) : The engine is running but is not trained on the latest data. In the case of the Advanced model, one of the underlying engines isn’t working properly or isn’t trained on the latest data
+		- Pending (yellow) : Engine is waiting to be trained. The saved engine should be available within 24h
+		- Failed (red) : The engine failed to be created or is unavailable (technical problem)
+		- Inactive (gray) : Engine was disabled or deleted
+		- Unknown (gray) : We were unable to detect the state of the engine
+		- Draft (blank) : The engine was not saved yet
+	- Ngày deploy cuối cùng
+	- Model version
+- Danh sách các model sử dụng hiện tại + luồng đi pipeline + tỷ trọng model / cách combine cho từng case của KH
+- Performance của model ( Sau khi train vs Hiện tại (dựa trên feedback của KH) )
+	- 
+	- 
+### Trạng thái dữ liệu
+- Trạng thái khách hàng và items:
+	- Số lượng khách hàng theo từng loại: active , inactive, KH mới
+	- Số lượng item: stock, bond, cw, etf, derivative, và đếm số lượng item mới theo từng loại
+- Trạng thái data pipeline: Thống kê các nguồn data đang active và inactive
+- Data/feature drift
+
+### Trạng thái recommendation items
+- Customer Flow per Model: Số lượng khách hàng đi qua mỗi luồng mô hình cụ thể
+- CTR (Click-Through Rate - Tỷ lệ nhấp chuột): Tỷ lệ số lần khách hàng nhấp vào một sản phẩm được gợi ý trên tổng số lần hiển thị gợi ý.
+- Conversion Rate (Tỷ lệ chuyển đổi): Tỷ lệ KH thực hiện giao dịch items/read news các item trong recommendation list
+- Tổng số lượng recommendation items:
+	- Số lượng items được lặp lại
+	- Số lượng recommendation items mới
+- Danh mục item phổ biến hiện tại
+- Danh mục item mới hiện tại
+### Vận hành hệ thống
+- log run daily
+	- Count số lượng fail pipeline
+	- Trạng thái thành công pipeline:
+		- Thời điểm bắt đầu, thời gian hoàn thành
+		- 
+
+
 
 
 
