@@ -183,7 +183,7 @@ parts:
       title: SQL
     - file: contents/3_programming_and_frameworks/4_Git.ipynb
       title: Git
-    - file: contents/3_programming_and_frameworks/5_Docker.ipynb
+    - file: contents/3_programming_and_frameworks/5_Docker
       title: Docker
     - file: contents/3_programming_and_frameworks/python_frameworks/_index
       title: Python Frameworks
