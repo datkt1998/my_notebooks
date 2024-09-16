@@ -46,7 +46,7 @@ Nếu bạn là developer thì chắc hẳn bạn đã quen với công cụ git
 Ngoài ra còn có Docker Hub cho phép quản lý các image với những câu lệnh giống như Github như push, pull... để bạn có thể quản lý dễ dàng image của mình.
 
 **7. Docker Registry**
-Nơi lưu trữ Docker image. Docker Hub là một registry công khai mà bất cứ ai cũng có thể sử dụng và Docker được cấu hình để tìm kiếm image trên Docker Hub theo mặc định. Bạn thậm chí có thể chạy registry riêng của mình. Có hai loại registry là public hoặc private registry.
+Nơi lưu trữ **Docker image**. Docker Hub là một registry công khai mà bất cứ ai cũng có thể sử dụng và Docker được cấu hình để tìm kiếm image trên Docker Hub theo mặc định. Bạn thậm chí có thể chạy registry riêng của mình. Có hai loại registry là public hoặc private registry.
 
 **8. Docker Compose**
 
@@ -171,10 +171,10 @@ docker run --name con_exam01 datkt98/exam01
 
 ***Ví dụ 2: Thay đổi port từ container sang local***
 
-Trên app container ta cần sử dụng port 5000, và ta muốn ánh xạ sang 1 port khác là 5555 trên host
+Trên app container ta cần sử dụng port `8888`, và ta muốn ánh xạ sang 1 port khác là `9000` trên host
 
 ```bash
-docker run --name con_exam02 -p 5555:5000 datkt98/exam02
+docker run --name con_exam02 -p 9000:8888 datkt98/exam02
 ```
 
 Trên host, lúc này ta truy cập http://172.17.0.2:5555
