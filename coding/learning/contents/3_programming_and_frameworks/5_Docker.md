@@ -58,6 +58,13 @@ Sử dụng cũng khá đơn giản chỉ với ba bước:
 - Run `docker-compose up` để start và run app.
 ## Các câu lệnh cơ bản
 
+### Docker authen
+
+`docker login`
+
+### Khởi tạo docker theo template
+
+`docker init`
 ### Search thông tin
 
 `docker search <keyword>`: search thông tin các image theo keyword có trên **docker hub**
@@ -115,7 +122,7 @@ docker images
     datkt98/exam01   latest    1b3ec0e42e26   21 minutes ago   887MB
     python           3         74707af2d4ec   2 days ago       871MB
 
-### Tạo container từ image
+### Tạo container từ image by command
 `docker run`: Lệnh này dùng để tạo 1 container với images của bạn, ví dụ để tạo 1 container với image ubuntu đã tải về trước đó, bạn dùng lệnh
 ```bash
 `docker run -it ubuntu`
@@ -184,6 +191,8 @@ Trên host, lúc này ta truy cập http://172.17.0.2:5555
 ```bash
 docker run --rm -it --entrypoint bash myimage01
 ```
+
+### Tạo container từ image by docker-compose
 
 ### Liệt kê các container đang chạy
 
@@ -305,227 +314,133 @@ touch Dockerfile
 
 *Dockerfile* là một file dạng text không có phần đuôi mở rộng, chứa các đặc tả về một trường thực thi phần mềm, cấu trúc cho Docker Image. Từ những câu lệnh đó, Docker sẽ build ra Docker image (thường có dung lượng nhỏ từ vài MB đến lớn vài GB). 
 
-_Dockerfile_ chứa tập hợp các lệnh để docker có thể đọc hiểu và thực hiện để đóng gói thành một image theo yêu cầu người dùng
-
-__Cú pháp của một Dockerfile__
-```
-INSTRUCTION arguments
-```
-
-trong đó:
-- __INSTRUCTION__ là tên các chỉ thị có trong Dockerfile, mỗi chỉ thị thực hiện một nhiệm vụ nhất định, được Docker quy định. Khi khai báo các chỉ thị này phải được viết bằng chữ IN HOA.
-- `aguments` là phần nội dung của các chỉ thị, quyết định chỉ thị sẽ làm gì.
-
-Ví dụ:
-
-```
-FROM alpine:3.4
-
-RUN apk update && \
-    apk add curl && \
-    apk add git && \
-    apk add vim
-
-```
+_Dockerfile_ chứa tập hợp các lệnh để docker có thể đọc hiểu và **thực hiện theo thứ tự** để đóng gói thành một image theo yêu cầu người dùng
 
 **[Các chỉ thị trong Dockerfile](https://docs.docker.com/engine/reference/builder/)**
-- **FROM**: Là base image để chúng ta tiến hành build một image mới. Command này phải được đặt trên cùng của Dockerfile
-- **MAINTAINER**: Command này là tùy chọn, có thể có hoặc không. Nó chưa thông tin của người tiến hành xây dựng lên images.
-- **RUN**: Sử dụng khi muốn thực thi một command trong quá trình build image
-- **COPY**: Copy một file từ host machine tới docker image. Có thể sử dụng URL cho tệp tin cần copy, khi đó docker sẽ tiến hành tải tệp tin đó đến thư mục đích.
-- **ENV**: Định nghĩa các biến môi trường
-- **CMD**: Sử dụng khi muốn thực thi (execute) một command trong quá trình build một container mới từ docker image
-- **ENTRYPOINT**: Định nghĩa những command mặc định, cái mà sẽ được chạy khi container running.
-- **WORKDIR**: Định nghĩa directory cho **CMD**
-- **USER**: Đặt user hoặc UID cho container được tạo bởi image
-- **VOLUME**: Cho phép truy cập / liên kết thư mục giữa các container và máy chủ (host machine)
-### `FROM`
 
-Là base image để chúng ta tiến hành build một image mới. Command này phải được đặt trên cùng của Dockerfile
+| Thứ tự | Lệnh            | Mô tả bằng tiếng Việt                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Cú pháp                        | Ví dụ                                                                                                                                                                                                       |
+| ------ | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1      | **FROM**        | Tạo một giai đoạn build mới từ một image cơ sở. Là base image để chúng ta tiến hành build một image mới. Command này phải được đặt trên cùng của Dockerfile                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `FROM <image>`                 | `FROM ubuntu:20.04`                                                                                                                                                                                         |
+| 2      | **ARG**         | Sử dụng biến trong quá trình build.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | `ARG <variable_name>`          | `ARG VERSION=1.0` <br>`ARG APP_NAME=datkt` <br><br>`RUN echo "Building $APP_NAME version $APP_VERSION"`                                                                                                     |
+| 3      | **LABEL**       | Thêm metadata cho image.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | `LABEL <key> =<value>`         | `LABEL maintainer="admin@example.com"`                                                                                                                                                                      |
+| 3      | **MAINTAINER**  | Chỉ định tác giả của image.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `MAINTAINER <name>`            | `MAINTAINER John Doe`                                                                                                                                                                                       |
+| 4      | **ENV**         | Đặt các biến môi trường.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | `ENV <key> =<value>`           | `ENV NODE_ENV=production`                                                                                                                                                                                   |
+| 5      | **WORKDIR**     | Thay đổi thư mục làm việc mặc định trong container. Về sau, tất cả các câu lệnh sẽ chạy từ thư mục này. Phải set `WORKDIR` trước khi thực hiện các command liên quan đến đường dẫn.                                                                                                                                                                                                                                                                                                                                                                                                                                 | `WORKDIR <path>`               | `WORKDIR /usr/src/app`                                                                                                                                                                                      |
+| 6      | **COPY**        | Sao chép tệp và thư mục. Chỉ thị `COPY` cũng giống với `ADD` là copy file, thư mục từ `<src>` và thêm chúng vào `<dest>` của container. Khác với `ADD`, nó không hỗ trợ thêm các file remote file URLs từ các nguồn trên mạng.                                                                                                                                                                                                                                                                                                                                                                                      | `COPY <source> <destination>`  | `COPY ./app /usr/src/app/`                                                                                                                                                                                  |
+| 6      | **ADD**         | Thêm tệp và thư mục từ nguồn cục bộ hoặc từ xa.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | `ADD <source> <destination>`   | `ADD ./file.txt /app/`                                                                                                                                                                                      |
+| 7      | **RUN**         | Thực thi các lệnh **trong quá trình build** và kết quả của các lệnh này được lưu trữ trong layer của image. <br><br>Khi khởi chạy container thì `CMD` chạy còn `RUN` không chạy.<br><br>**Ứng dụng**: Thường dùng để cài đặt phần mềm, cập nhật hệ điều hành, thiết lập môi trường hoặc bất kỳ lệnh nào cần thiết để chuẩn bị cho container.                                                                                                                                                                                                                                                                        | `RUN <command>`                | `RUN apt-get update && apt-get install -y git`<br><br>Ở đây, lệnh `RUN` sẽ cài đặt gói `git` vào image trong quá trình build. Khi quá trình build hoàn tất, gói đã được cài đặt sẽ tồn tại sẵn trong image. |
+| 8      | **EXPOSE**      | Chỉ ra các cổng mà ứng dụng lắng nghe. Chỉ thị `EXPOSE` cho phép container mở publish port được chỉ định sau khi run từ image. Sau đó, ta có thể truy cập thông qua `<Container_id>:<port>`                                                                                                                                                                                                                                                                                                                                                                                                                         | `EXPOSE <port>`                | `EXPOSE 8080`                                                                                                                                                                                               |
+| 9      | **ENTRYPOINT**  | Chỉ định chương trình thực thi mặc định của container.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | `ENTRYPOINT ["executable"]`    | `ENTRYPOINT ["python"]`                                                                                                                                                                                     |
+| 9      | **CMD**         | Chỉ định lệnh mặc định khi container chạy. <br><br>**Mục đích**: Chỉ định lệnh sẽ **chạy** khi container **khởi động** (runtime), tức là khi bạn chạy container từ image đã build. Kết quả không ảnh hưởng đến image, chỉ thực thi tại runtime<br><br>**Thời điểm thực thi**: `CMD` được thực thi khi container bắt đầu chạy, và chỉ có **một lệnh `CMD`** có thể tồn tại trong một Dockerfile (lệnh cuối cùng sẽ ghi đè các lệnh `CMD` trước đó). Khi khởi chạy container thì `CMD` chạy còn `RUN` không chạy<br><br>**Ứng dụng**: Dùng để chỉ định lệnh mặc định khi container chạy, như việc khởi động ứng dụng. | `CMD ["executable", "param1"]` | `CMD ["python", "app.py"]`                                                                                                                                                                                  |
+| 10     | **HEALTHCHECK** | Kiểm tra tình trạng của container khi khởi động.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | `HEALTHCHECK <options>`        | `HEALTHCHECK CMD curl --fail http://localhost:8080`                                                                                                                                                         |
+| 11     | **SHELL**       | Đặt shell mặc định của image.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | `SHELL ["executable", "flag"]` | `SHELL ["/bin/bash", "-c"]`                                                                                                                                                                                 |
+| 12     | **USER**        | Thiết lập người dùng và nhóm ID.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | `USER <user>`                  | `USER root`                                                                                                                                                                                                 |
+| 13     | **VOLUME**      | Tạo các mount điểm volume.  Cho phép truy cập / liên kết thư mục giữa các container và máy chủ (host machine). Tạo 1 volume bên ngoài từ host hoặc 1 container khác mà container có thể giao tiếp được.                                                                                                                                                                                                                                                                                                                                                                                                             | `VOLUME ["/data"]`             | `VOLUME /var/lib/mysql`                                                                                                                                                                                     |
+| 14     | **STOPSIGNAL**  | Chỉ định tín hiệu hệ thống để thoát container.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | `STOPSIGNAL <signal>`          | `STOPSIGNAL SIGTERM`                                                                                                                                                                                        |
+| 15     | **ONBUILD**     | Chỉ định các lệnh sẽ được thực thi khi image được sử dụng.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | `ONBUILD <instruction>`        | `ONBUILD RUN apt-get update`                                                                                                                                                                                |
 
-Chỉ định rằng image nào sẽ được dùng làm image cơ sở để quá trình build image thực thiện các câu lệnh tiếp theo. Các image base này sẽ được tải về từ Public Repository hoặc Private Repository riêng của mỗi người tùy theo setup.
 
-Chỉ thị `FROM` là bắt buộc và phải được để lên phía trên cùng của Dockerfile.
+## Docker compose
 
-__Cú pháp__
-```
-FROM <image> [AS <name>]
-FROM <image>[:<tag>] [AS <name>]
-FROM <image>[@<digest>] [AS <name>]
-```
 
-__Ví dụ__
+**Docker Compose** xây dựng template cho việc run docker image thành container, trong đó có thể run multi-container từ 1 image cùng lúc.
 
-```FROM ubuntu```
-hoặc ```FROM ubuntu:latest```
+**Docker Compose** giúp đơn giản hóa việc quản lý và triển khai các ứng dụng phức tạp với nhiều container. Bằng cách sử dụng tệp cấu hình `docker-compose.yml`, bạn có thể định nghĩa rõ ràng các dịch vụ, mạng, và volumes cần thiết cho ứng dụng của mình, giúp cho việc triển khai và quản lý trở nên dễ dàng hơn rất nhiều.
 
-###  `LABEL`
+**VÍ DỤ** triển khai một hệ thống mô hình AI tóm tắt văn bản với **Docker Compose**, chúng ta sẽ cần xây dựng một giải pháp bao gồm các thành phần chính sau:
 
-được dùng để thêm các thông tin `meta` vào Docker Image khi chúng được build. Chúng tồn tại dưới dạng các cặp `key` - `value`, được lưu trữ dưới dạng chuỗi. Có thể chỉ định nhiều label cho một Docker Image, và tất nhiên mỗi cặp `key` - `value` phải là duy nhất. Nếu cùng một key mà được khai báo nhiều giá trị (`value`) thì giá trị được khai báo gần đây nhất sẽ ghi đè lên giá trị trước đó.
+1. **Ứng dụng Streamlit**: Để tạo giao diện người dùng tương tác cho người dùng nhập văn bản và xem bản tóm tắt.
 
-__Cú pháp__
-```
-LABEL <key>=<value> <key>=<value> <key>=<value> ... <key>=<value>
-```
+3. **Mô hình AI**: Dịch vụ chạy mô hình tóm tắt văn bản.
+4. **Cơ sở dữ liệu**: Để lưu trữ các bản tóm tắt và văn bản gốc.
 
-__Ví dụ__
+### Cấu trúc Tổng Quan
 
-```
-LABEL com.example.some-label="lorem"
-LABEL version="2.0" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-```
+- **Streamlit App (app.py)**: Chạy ứng dụng giao diện người dùng.
 
-Để xem thông tin meta của một Docker Image, ta sử dụng dòng lệnh:
-`docker inspect <image id>`
+*Streamlit App (app.py)*
+```python
+import streamlit as st
+import requests
+import psycopg2
 
-###  `RUN`
+# Connect to database
+conn = psycopg2.connect("dbname=summarizer user=user password=password host=db")
+cursor = conn.cursor()
 
-dùng để chạy một lệnh nào đó trong quá trình build image và thường là các câu lệnh Linux. Tùy vào image gốc được khai báo trong phần `FROM` thì sẽ có các câu lệnh tương ứng. Ví dụ, để chạy câu lệnh update đối với __Ubuntu__ sẽ là `RUN apt-get update -y` còn đối với __CentOS__ thì sẽ là `Run yum update -y`. Kết quả của câu lệnh sẽ được commit lại, kết quả commit đó sẽ được sử dụng trong bước tiếp theo của Dockerfile.
+# Streamlit UI
+st.title("Text Summarization App")
 
-__Cú pháp__
-```
-RUN <command>
-RUN ["executable", "param1", "param2"]
-```
+text = st.text_area("Enter text here:")
 
-__Ví dụ__
+if st.button("Summarize"):
+    if text:
+        # Call model API
+        response = requests.post("http://model:5000/summarize", json={"text": text})
+        summary = response.json().get('summary', '')
 
-```
-RUN /bin/bash -c 'source $HOME/.bashrc; echo $HOME'
-```
-```
-RUN ["/bin/bash", "-c", "echo hello"]
-```
-```
-RUN apt-get update; \
-    apt-get install curl -y
-```
+        # Display summary
+        st.write("Summary:")
+        st.write(summary)
 
-### `ADD`
-
-Chỉ thị `ADD` sẽ thực hiện sao chép các tập, thư mục từ máy đang build hoặc remote file URLs từ `src` và thêm chúng vào filesystem của image `dest`.
-
-__Cú pháp__
-```
-ADD [--chown=<user>:<group>] <src>... <dest>
-ADD [--chown=<user>:<group>] ["<src>",... "<dest>"]
-```
-Trong đó:
-
-- `src` có thể khai báo nhiều file, thư mục, ...
-- `dest` phải là đường dẫn tuyệt đối hoặc có quan hệ chỉ thị đối với WORKDIR.
-
-__Ví dụ__
-
-```
-ADD hom* /mydir/
-ADD hom?.txt /mydir/
-ADD test.txt relativeDir/
+        # Save to database
+        cursor.execute("INSERT INTO summaries (original_text, summary) VALUES (%s, %s)", (text, summary))
+        conn.commit()
+        st.write("Summary saved to database.")
+    else:
+        st.write("Please enter some text.")
 ```
 
+- **Summary Model (model_server.py)**: Chạy mô hình tóm tắt văn bản, có thể là một API hoặc một dịch vụ mà Streamlit có thể gọi.
 
-###  `COPY`
+*Model Server (model_server.py)*
+```python
+from flask import Flask, request, jsonify
+from your_model_library import load_model, summarize_text
 
-Chỉ thị `COPY` cũng giống với `ADD` là copy file, thư mục từ `<src>` và thêm chúng vào `<dest>` của container. Khác với `ADD`, nó không hỗ trợ thêm các file remote file URLs từ các nguồn trên mạng.
+app = Flask(__name__)
+model = load_model('/models/summarization_model')
 
-__Cú pháp__
-```
-COPY [--chown=<user>:<group>] <src>... <dest>
-COPY [--chown=<user>:<group>] ["<src>",... "<dest>"]
-```
+@app.route('/summarize', methods=['POST'])
+def summarize():
+    data = request.json
+    text = data.get('text', '')
+    summary = summarize_text(model, text)
+    return jsonify({'summary': summary})
 
-__Ví dụ__
-
-```
-COPY hom* /mydir/
-COPY hom?.txt /mydir/
-COPY . .
-```
-
-
-###  `ENV`
-
-Chỉ thị `ENV` dùng để khai báo các biến môi trường. Các biến này được khai báo dưới dạng `key` - `value` bằng các chuỗi. Giá trị của các biến này sẽ có hiện hữu cho các chỉ thị tiếp theo của __Dockerfile__.
-
-__Cú pháp__
-```
-ENV <key>=<value> ...
-```
-__Ví dụ__
-
-```
-ENV DOMAIN="viblo.asia"
-ENV PORT=80
-ENV USERNAME="namdh" PASSWORD="secret"
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
 ```
 
-Ngoài ra cũng có thể thay đổi giá trị của biến môi trường bằng câu lệnh khởi động container:
-`docker run --env <key>=<value>`
+- **Database**: Lưu trữ dữ liệu văn bản và bản tóm tắt.
+### Cấu trúc tệp `docker-compose.yml`
 
+```yaml
+version: '3.8' 
 
-###  `CMD`
+services: 
+	streamlit: 
+		image: streamlit/streamlit:latest 
+		ports: 
+			- "8501:8501" 
+		volumes: 
+			- ./streamlit_app:/app 
+		working_dir: /app 
+		command: streamlit run app.py 
+		depends_on: 
+			- model 
+			- db 
+		environment: 
+			- MODEL_API_URL=http://model:5000 
+			- DATABASE_URL=postgresql://user:password@db:5432/summarizer 
 
-Chỉ thị `CMD` định nghĩa các câu lệnh sẽ được chạy sau khi container được khởi động từ image đã build. Có thể khai báo được nhiều nhưng chỉ có duy nhất `CMD` cuối cùng được chạy.
-
-__Cú pháp__
+model: 
+image: yourmodelimage:latest ports: - "5000:5000" environment: - MODEL_PATH=/models/summarization_model volumes: - ./model:/models command: python model_server.py expose: - "5000" db: image: postgres:latest environment: POSTGRES_USER: user POSTGRES_PASSWORD: password POSTGRES_DB: summarizer volumes: - db_data:/var/lib/postgresql/data volumes: db_data:
 ```
-CMD ["executable","param1","param2"]
-CMD ["param1","param2"]
-CMD command param1 param2
-```
-__Ví dụ__
+### Cách Hoạt Động
 
-```
-CMD ["python", "main.py"]
-```
-
-
-###  `EXPOSE`
-
-Chỉ thị `EXPOSE` cho phép container mở publish port chỉ định sau khi run từ image.
-
-__Cú pháp__
-```
-EXPOSE <port> [<port>/<protocol>...]
-```
-__Ví dụ__
-
-```
-EXPOSE 8080
-```
-
-
-###  `VOLUME`
-
-Tạo 1 volume bên ngoài từ host hoặc 1 container khác mà container có thể giao tiếp được.
-
-__Ví dụ__
-
-```
-VOLUME ["/data"]
-```
-
-
-###  `WORKDIR`
-
-sets the working directory for any `RUN`, `CMD`, `ENTRYPOINT`, `COPY` and `ADD` __instructions__ that follow it in the Dockerfile. If the `WORKDIR` doesn’t exist, it will be created even if it’s not used in any subsequent Dockerfile instruction. Set `WORKDIR` trước khi thực hiện các __instructions__ trên.
-
-__Cú pháp__
-```
-WORKDIR /path/to/workdir
-```
-
-__Ví dụ__
-
-```
-WORKDIR /Users/khongdat/Library/CloudStorage/GoogleDrive-k55.1613310017@ftu.edu.vn/My Drive/GitCode/My_learning/6. Docker
-RUN pwd
-```
-
-## Các bước build image
-
-Trước khi tiến hành các bước sau, hãy đảm bảo rằng trên máy của bạn đã được cài đặt [Docker](https://docs.docker.com/engine/installation/).
-
-### Tạo Dockerfile
-
-
+1. **Ứng dụng Streamlit** cung cấp giao diện người dùng để nhập văn bản và hiển thị bản tóm tắt.
+2. Khi người dùng nhấn nút "Summarize", ứng dụng Streamlit gửi yêu cầu đến dịch vụ mô hình (model service) qua API.
+3. **Dịch vụ mô hình** nhận yêu cầu, xử lý văn bản bằng mô hình tóm tắt và trả kết quả về cho ứng dụng Streamlit.
+4. **Ứng dụng Streamlit** lưu bản tóm tắt và văn bản gốc vào cơ sở dữ liệu PostgreSQL để lưu trữ.
+5. **Cơ sở dữ liệu** lưu trữ tất cả các bản tóm tắt và văn bản gốc.
