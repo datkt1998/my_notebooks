@@ -63,11 +63,16 @@ project_name/
 │   └── kubernetes/          # File để triển khai trên Kubernetes (nếu sử dụng)
 │       ├── deployment.yaml  # Cấu hình triển khai trên Kubernetes
 │       └── service.yaml     # Cấu hình dịch vụ trên Kubernetes
+│ 
+├── apps/                    # Giao diện tương tác
+│   └── app.py               # Ứng dụng chính sử dụng Streamlit hoặc gì đó để tương tác người dùng
+│
 │
 ├── .gitignore               # File gitignore để bỏ qua các file không cần commit
 ├── environment.yml          # Môi trường Anaconda/Conda (nếu dùng)
 ├── requirements.txt         # Thư viện cần thiết cho dự án
 ├── README.md                # Thông tin dự án
+├── main.py                  # Script chạy chính của model
 └── setup.py                 # Cài đặt dự án thành package Python (nếu cần)
 
 ```
@@ -79,91 +84,92 @@ import os
 
 # Định nghĩa cấu trúc thư mục và tệp
 structure = {
-    'docs': {
-        'references': None,
-        'materials': None,
-        'reports': None,
-    },
-    'config': {
-        'config.yaml': None,
-    },
-    'data': {
-        'external': None,
-        'raw': None,
-        'interim': None,
-        'processed': None,
-        'features': None,
-    },
-    'notebooks': None,
-    'src': {
-        '__init__.py': None,
-        'data': {
-            'loader.py': None,
-        },
-        'features': {
-            'features.py': None,
-        },
-        'models': {
-            'model.py': None,
-            'train.py': None,
-            'evaluate.py': None,
-        },
-        'visualization': {
-            'visualization.py': None,
-        },
-        'utils': {
-            'utils.py': None,
-        },
-    },
-    'tests': {
-        'test_model.py': None,
-    },
-    'output': None,
-    'logs': None,
-    'scripts': {
-        'run_training.py': None,
-    },
-    'models': None,
-    'deployments': {
-        'Dockerfile': None,
-        'docker-compose.yml': None,
-        'gcp_deployment.yaml': None,
-        'cloud': {
-            'vertex_ai.py': None,
-            'cloudbuild.yaml': None,
-        },
-        'kubernetes': {
-            'deployment.yaml': None,
-            'service.yaml': None,
-        },
-    },
-    '.gitignore': None,
-    'environment.yml': None,
-    'requirements.txt': None,
-    'README.md': None,
-    'setup.py': None,
-}
+    "docs": {
+        "references": {},
+        "materials": {},
+        "reports": {},
+    },
+    "config": {
+        "config.yaml": None,
+    },
+    "data": {
+        "external": {},
+        "raw": {},
+        "interim": {},
+        "processed": {},
+        "features": {},
+    },
+    "notebooks": {},
+    "src": {
+        "__init__.py": None,
+        "data": {
+            "loader.py": None,
+        },
+        "features": {
+            "features.py": None,
+        },
+        "models": {
+            "model.py": None,
+            "train.py": None,
+            "evaluate.py": None,
+        },
+        "visualization": {
+            "visualization.py": None,
+        },
+        "utils": {
+            "utils.py": None,
+        },
+    },
+    "tests": {
+        "test_model.py": None,
+    },
+    "output": {},
+    "logs": {},
+    "scripts": {
+        "run_training.py": None,
+    },
+    "models": {},
+    "deployments": {
+        "Dockerfile": None,
+        "docker-compose.yml": None,
+        "gcp_deployment.yaml": None,
+        "cloud": {
+            "vertex_ai.py": None,
+            "cloudbuild.yaml": None,
+        },
+        "kubernetes": {
+            "deployment.yaml": None,
+            "service.yaml": None,
+        },
+    },
+	"apps": {
+        "app.py": None,
+    },
+    ".gitignore": None,
+    "environment.yml": None,
+    "requirements.txt": None,
+    "README.md": None,
+    "setup.py": None,
+    "main.py": None,
+} 
 
 # Hàm tạo cấu trúc thư mục và tệp
 def create_structure(base_path, structure):
-    for name, content in structure.items():
-        path = os.path.join(base_path, name)
-        if content is None:
-            # Nếu content là None, tạo file
-            if '.' in name:
-                open(path, 'w').close()  # Tạo file trống
-            else:
-                os.makedirs(path, exist_ok=True)  # Tạo thư mục
-        else:
-            # Nếu content không phải là None, tạo thư mục và đệ quy
-            os.makedirs(path, exist_ok=True)
-            create_structure(path, content)
+    for name, content in structure.items():
+        path = os.path.join(base_path, name)
+        if content is None:
+			if not os.path.exists(path):
+				open(path, "w").close()  # Tạo file trống
+        else:
+            # Nếu content không phải là None, tạo thư mục và đệ quy
+            if not os.path.exists(path):
+                os.makedirs(path, exist_ok=True)
+            create_structure(path, content)
 
 # Thư mục gốc của dự án
-base_project_path = '.'
+base_project_path = "."
 
 # Tạo cấu trúc thư mục và tệp
 create_structure(base_project_path, structure)
-
-print(f"Structure for project created successfully!")
+print("Structure for project created successfully!")
 ```
