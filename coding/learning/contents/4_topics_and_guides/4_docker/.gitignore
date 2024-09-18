@@ -1,1 +1,8 @@
-projects
+# Ignore tất cả mọi thứ trong folder
+*
+
+# Nhưng không ignore thư mục, vì nếu ignore thư mục thì Git sẽ không nhìn thấy file README.md
+!*/
+
+# Không ignore các file README.md trong các folder và subfolder
+!README.md
