@@ -310,6 +310,9 @@ cd viblo
 
 # tại file Dockerfile
 touch Dockerfile
+
+# open Dockerfile in VSCode
+code Dockerfile
 ```
 
 *Dockerfile* là một file dạng text không có phần đuôi mở rộng, chứa các đặc tả về một trường thực thi phần mềm, cấu trúc cho Docker Image. Từ những câu lệnh đó, Docker sẽ build ra Docker image (thường có dung lượng nhỏ từ vài MB đến lớn vài GB). 
@@ -343,14 +346,24 @@ _Dockerfile_ chứa tập hợp các lệnh để docker có thể đọc hiể
 ## Docker compose
 
 
-**Docker Compose** xây dựng template cho việc run docker image thành container, trong đó có thể run multi-container từ 1 image cùng lúc.
+**Docker Compose** xây dựng template cho việc run docker image thành container, trong đó có thể run multi-container từ nhiều image cùng lúc. 
+
+
 
 **Docker Compose** giúp đơn giản hóa việc quản lý và triển khai các ứng dụng phức tạp với nhiều container. Bằng cách sử dụng tệp cấu hình `docker-compose.yml`, bạn có thể định nghĩa rõ ràng các dịch vụ, mạng, và volumes cần thiết cho ứng dụng của mình, giúp cho việc triển khai và quản lý trở nên dễ dàng hơn rất nhiều.
 
-**Use case of Docker compose**
+**Trường hợp NÊN dùng docker-compose**
 - **Docker Compose** thường được sử dụng để khởi động nhiều container trên **local environment** hoặc trên các môi trường tự quản lý (on-premises).
 - Nó cho phép định nghĩa cấu trúc của các dịch vụ trong tệp `docker-compose.yml`, bao gồm các container chạy từ Docker image (ở đây là từ Artifact Registry), và các yếu tố liên quan như mạng, volume, biến môi trường…
 - Nếu bạn chỉ muốn **test** hoặc **chạy container trên máy cục bộ**, bạn có thể sử dụng Docker Compose để pull image từ Artifact Registry và khởi động container.
+
+**Mỗi service nên được khởi tạo từ một image riêng**, phù hợp với mục đích của từng service trong ứng dụng. Việc này giúp tối ưu hóa hiệu suất, dễ dàng quản lý, cập nhật và mở rộng các thành phần của ứng dụng.
+- **Phân chia vai trò rõ ràng**: Mỗi service trong `docker-compose` đại diện cho một phần chức năng độc lập của ứng dụng (ví dụ: service web, service database, service cache,...). Vì vậy, mỗi service nên sử dụng một image khác nhau, được tối ưu hóa cho từng vai trò riêng biệt (VD: web service sử dụng image `nginx`, database service sử dụng image `mysql`).
+- **Dễ dàng bảo trì và cập nhật**: Nếu mỗi service sử dụng một image riêng, bạn có thể dễ dàng cập nhật từng image độc lập mà không ảnh hưởng tới các service khác. Điều này giúp giảm thiểu rủi ro khi cập nhật hoặc triển khai ứng dụng.
+- **Tối ưu hóa hiệu suất**: Mỗi image thường được tối ưu hóa cho một mục đích cụ thể. Ví dụ, image của database sẽ được cấu hình để tối ưu hóa cho việc xử lý dữ liệu, trong khi image của web server sẽ được tối ưu hóa cho việc xử lý HTTP request.
+- **Tăng khả năng tái sử dụng**: Sử dụng nhiều image khác nhau sẽ giúp bạn có thể tái sử dụng các image này trong các dự án khác, thay vì phải tạo mới từ đầu.
+
+**Trường hợp KHÔNG NÊN dùng docker-compose**
 
 Tuy nhiên, **Docker Compose không phải là công cụ phù hợp để quản lý các container trong môi trường cloud như Google Cloud**, trừ khi bạn đang triển khai trên một máy chủ đơn lẻ hoặc sử dụng **Google Compute Engine** và tự quản lý các dịch vụ của mình. Khi triển khai trong môi trường đám mây, bạn sẽ cần các công cụ mạnh mẽ hơn để quản lý container, đặc biệt là về tính năng scale, bảo mật, và tích hợp với các dịch vụ khác. --->  Sử dụng **Terraform**
 
@@ -424,34 +437,141 @@ if __name__ == '__main__':
 ```
 
 - **Database**: Lưu trữ dữ liệu văn bản và bản tóm tắt.
-### Cấu trúc tệp `docker-compose.yml`
 
-```yaml
-version: '3.8' 
-
-services: 
-	streamlit: 
-		image: streamlit/streamlit:latest 
-		ports: 
-			- "8501:8501" 
-		volumes: 
-			- ./streamlit_app:/app 
-		working_dir: /app 
-		command: streamlit run app.py 
-		depends_on: 
-			- model 
-			- db 
-		environment: 
-			- MODEL_API_URL=http://model:5000 
-			- DATABASE_URL=postgresql://user:password@db:5432/summarizer 
-
-model: 
-image: yourmodelimage:latest ports: - "5000:5000" environment: - MODEL_PATH=/models/summarization_model volumes: - ./model:/models command: python model_server.py expose: - "5000" db: image: postgres:latest environment: POSTGRES_USER: user POSTGRES_PASSWORD: password POSTGRES_DB: summarizer volumes: - db_data:/var/lib/postgresql/data volumes: db_data:
-```
-### Cách Hoạt Động
-
+**CÁCH HOẠT ĐỘNG**
 1. **Ứng dụng Streamlit** cung cấp giao diện người dùng để nhập văn bản và hiển thị bản tóm tắt.
 2. Khi người dùng nhấn nút "Summarize", ứng dụng Streamlit gửi yêu cầu đến dịch vụ mô hình (model service) qua API.
 3. **Dịch vụ mô hình** nhận yêu cầu, xử lý văn bản bằng mô hình tóm tắt và trả kết quả về cho ứng dụng Streamlit.
 4. **Ứng dụng Streamlit** lưu bản tóm tắt và văn bản gốc vào cơ sở dữ liệu PostgreSQL để lưu trữ.
 5. **Cơ sở dữ liệu** lưu trữ tất cả các bản tóm tắt và văn bản gốc.
+### Cấu trúc tệp `docker-compose.yml`
+
+Tệp `docker-compose.yml` sẽ định nghĩa ba dịch vụ: `streamlit`, `model`, và `db`.
+
+```yaml
+version: '3.8' # Phiên bản của Docker Compose
+
+services: # Các dịch vụ (service) được định nghĩa ở đây
+	streamlit: # Tên của service
+		image: streamlit/streamlit:latest # docker image của service
+		ports: 
+			- "8501:8501" 
+		volumes: 
+			- ./streamlit_app:/app 
+		working_dir: /app # Thư mục làm việc bên trong container
+		command: streamlit run app.py # Lệnh chạy trong container
+		depends_on: # Service này phụ thuộc vào những service khác, đảm bảo các service khác được khởi động trước
+			- model 
+			- db 
+		environment: # Các biến môi trường
+			- MODEL_API_URL=http://model:5000 
+			- DATABASE_URL=postgresql://user:password@db:5432/summarizer 
+	
+	model: 
+		image: yourmodelimage:latest 
+		container_name: ai_model_container # Tên container (không bắt buộc)
+		build: # sử dụng khi image là base image và cần build tiếp thông qua dockerfile
+			context: . # Thư mục chứa Dockerfile 
+			dockerfile: Dockerfile # Tên Dockerfile nếu không phải mặc định
+		ports: # Mapping cổng host : container
+			- "5000:5000" 
+		environment: 
+			- MODEL_PATH=/models/summarization_model 
+		volumes: # Kết nối giữa thư mục trong container và hệ thống file host
+			- ./model:/models 
+		command: python model_server.py 
+		expose: 
+			- "5000"
+
+	db: 
+		image: postgres:latest 
+		environment: 
+			POSTGRES_USER: user 
+			POSTGRES_PASSWORD: password 
+			POSTGRES_DB: summarizer 
+		volumes: 
+			- db_data:/var/lib/postgresql/data
+
+volumes: # Khai báo các volume nếu cần
+	db_data:
+	
+```
+ 
+ 1. **Streamlit Service**
+
+- **Image**: Sử dụng image của Streamlit. Bạn cần tạo một Dockerfile cho Streamlit hoặc sử dụng một image đã có sẵn.
+- **Ports**: Ánh xạ cổng 8501 của container đến cổng 8501 của máy chủ để bạn có thể truy cập ứng dụng Streamlit qua `http://localhost:8501`.
+- **Volumes**: Liên kết thư mục chứa mã nguồn Streamlit (`./streamlit_app`) với thư mục `/app` trong container.
+- **Working Directory**: Đặt thư mục làm việc trong container thành `/app`.
+- **Command**: Chạy ứng dụng Streamlit từ tệp `app.py`.
+- **Depends On**: Đảm bảo dịch vụ `model` và `db` đã được khởi động trước khi Streamlit chạy.
+- **Environment**:
+    - `MODEL_API_URL`: URL của dịch vụ mô hình, dùng để Streamlit gọi API mô hình.
+    - `DATABASE_URL`: URL kết nối đến cơ sở dữ liệu PostgreSQL.
+
+2. **Model Service**
+
+- **Image**: Sử dụng image cho mô hình AI của bạn (`yourmodelimage:latest`). Bạn cần xây dựng image này từ Dockerfile mà bạn tạo cho dịch vụ mô hình.
+- **Ports**: Ánh xạ cổng 5000 của container đến cổng 5000 của máy chủ để mô hình có thể nhận các yêu cầu API.
+- **Volumes**: Liên kết thư mục chứa mã nguồn mô hình (`./model`) với thư mục `/models` trong container.
+- **Command**: Chạy mô hình từ tệp `model_server.py`. Bạn có thể sử dụng Flask hoặc FastAPI để triển khai mô hình.
+- **Expose**: Mở cổng 5000 cho các dịch vụ nội bộ trong mạng Docker.
+
+3. **Database Service**
+
+- **Image**: Sử dụng image của PostgreSQL.
+- **Environment**: Thiết lập các biến môi trường cần thiết để cấu hình cơ sở dữ liệu.
+    - `POSTGRES_USER`: Tên người dùng.
+    - `POSTGRES_PASSWORD`: Mật khẩu.
+    - `POSTGRES_DB`: Tên cơ sở dữ liệu.
+- **Volumes**: Lưu trữ dữ liệu cơ sở dữ liệu trong volume `db_data` để bảo vệ dữ liệu khỏi bị mất khi container dừng hoặc bị xóa.
+### Các lệnh Docker Compose thường dùng
+
+1. **Khởi động các dịch vụ**
+```bash
+docker-compose up
+```
+Hoặc để chạy dưới chế độ nền:
+```bash
+docker-compose up -d
+```
+
+Khi bạn sử dụng lệnh `docker-compose up` mà **không có tùy chọn `-d`**, Docker sẽ hiển thị logs của tất cả các container trực tiếp trên terminal, và terminal sẽ bị "khóa" cho đến khi bạn dừng ứng dụng bằng cách nhấn `Ctrl+C`.
+
+Các container sẽ được khởi động trong chế độ nền, nghĩa là:
+
+- Bạn không thấy logs xuất hiện trực tiếp trong terminal.
+- Terminal sẽ trở lại trạng thái sẵn sàng cho bạn nhập các lệnh khác ngay lập tức.
+- Các container vẫn sẽ chạy phía sau (ở chế độ nền) cho đến khi bạn dừng chúng bằng lệnh `docker-compose down` hoặc một lệnh tương tự.
+
+Tóm lại, chạy dưới chế độ nền giúp bạn quản lý và khởi động nhiều container mà không cần giữ terminal mở liên tục, tiện lợi khi bạn muốn thực hiện các tác vụ khác mà không bị gián đoạn.
+
+2. **Dừng các dịch vụ**
+```bash
+docker-compose down
+```
+
+3. **Xem logs của các dịch vụ**
+```bash
+docker-compose logs
+```
+
+4. **Xem logs của một dịch vụ cụ thể**
+```bash
+docker-compose logs ai_summarizer
+```
+
+5. **Tái khởi động các container sau khi thay đổi cấu hình**
+```bash
+docker-compose restart
+```
+
+6. **Xây dựng lại hình ảnh nếu có thay đổi Dockerfile**
+```bash
+docker-compose build
+```
+
+7. **Xem trạng thái các dịch vụ đang chạy**
+```bash
+docker-compose ps
+```
