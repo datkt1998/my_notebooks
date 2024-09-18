@@ -48,4 +48,6 @@ conda activate venv
 
 # Cài đặt các thư viện cần thiết
 conda install transformers torch streamlit google-cloud-bigquery
+# or
+pip install -r requirements.txt
 ```
