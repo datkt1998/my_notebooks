@@ -1,12 +1,12 @@
-# Ignore tất cả mọi thứ trong thư mục
-*
+# # Ignore tất cả mọi thứ trong thư mục
+# *
 
-# Nhưng không ignore thư mục, để Git có thể nhìn thấy README.md
-!*/
+# # Nhưng không ignore thư mục, để Git có thể nhìn thấy README.md
+# !*/
 
-# Không ignore file README.md trong thư mục gốc
-!/README.md
+# # Không ignore file README.md trong thư mục gốc
+# !/README.md
 
-# Ignore tất cả các subfolder và file trong các subfolder từ level 1 trở đi
-**/*/*
+# # Ignore tất cả các subfolder và file trong các subfolder từ level 1 trở đi
+# **/*/*
 

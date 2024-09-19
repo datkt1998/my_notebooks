@@ -6,6 +6,8 @@ root: _jupyterbook_config/intro
 
 parts:
 
+# ------------------ DATA PROCESSING ------------------
+
 - caption: DATA PROCESSING
   maxdepth: 4
   numbered: true
@@ -115,6 +117,7 @@ parts:
     - file: contents/1_data_processing/6_model_monitoring/03_operation_level_monitoring
       title: Operation level monitoring
 
+# ----------------------- ALGORITHMS -----------------------
 
 - caption: ML/DL ALGORITHMS
   maxdepth: 4
@@ -166,10 +169,11 @@ parts:
 
   - file: contents/2_algorithms/recommendation_system/_index
     title: Recommendation System
-    # sections:
-    # - file: contents/2_algorithms/recommendation_system/1_collaborative_filtering_als_spark.ipynb
-    #   title: Collaborative Filtering - ALS - PySpark
+    sections: 
+    - file: contents/2_algorithms/recommendation_system/RecSys_MF_BQML/RecSys_MF_BQML.ipynb
+      title: BigQuery ML and Vertex AI Pipelines using Matrix Factorization
 
+# --------------- PROGRAMMING & FRAMEWORKS --------------
 
 - caption: PROGRAMMING & FRAMEWORKS
   maxdepth: 4
@@ -191,6 +195,7 @@ parts:
       - file: contents/3_programming_and_frameworks/python_frameworks/1_PySpark.ipynb
         title: PySpark
 
+# -------------- TOPICS & GUIDES --------------
 
 - caption: TOPICS & GUIDES
   maxdepth: 4
@@ -231,6 +236,15 @@ parts:
 
     - file: contents/4_topics_and_guides/3_python_environment/1_python_environment.ipynb
       title: Python Environment
+
+    - file: contents/4_topics_and_guides/4_docker/_index
+      title: Docker
+      sections:
+      - file: contents/4_topics_and_guides/4_docker/1_docker_overview
+        title: Docker Overview
+
+
+# ------------------ MY FUNCTIONS ------------------
 
 - caption: MY FUNCTIONS
   maxdepth: 4
