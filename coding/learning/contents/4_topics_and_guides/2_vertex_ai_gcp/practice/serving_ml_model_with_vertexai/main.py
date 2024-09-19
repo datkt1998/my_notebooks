@@ -1,80 +1,91 @@
-import uvicorn
-
-import tensorflow as tf
 import os
-import numpy as np
-from enum import Enum
 from typing import List, Optional
+
+import numpy as np
+import torch
+import uvicorn
+from fastapi import FastAPI, Request
 from pydantic import BaseModel
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
-from fastapi import Request, FastAPI, Response
-from fastapi.responses import JSONResponse
-from transformers import DistilBertTokenizerFast
-from transformers import TFDistilBertForSequenceClassification
+# # Load tokenizer và model
+checkpoint = "mr4/phobert-base-vi-sentiment-analysis"
+tokenizer = AutoTokenizer.from_pretrained(
+    checkpoint, clean_up_tokenization_spaces=True
+)
+model = AutoModelForSequenceClassification.from_pretrained(checkpoint)
 
-tokenizer = DistilBertTokenizerFast.from_pretrained("distilbert-base-uncased")
-model = TFDistilBertForSequenceClassification.from_pretrained("../sentiment")
+# Initialize FastAPI app
+app = FastAPI(title="Sentiment Analysis API")
 
-app = FastAPI(title="Sentiment Analysis")
+# Define health and prediction routes based on environment variables or defaults
+AIP_HEALTH_ROUTE = os.environ.get("AIP_HEALTH_ROUTE", "/health")
+AIP_PREDICT_ROUTE = os.environ.get("AIP_PREDICT_ROUTE", "/predict")
 
-AIP_HEALTH_ROUTE = os.environ.get('AIP_HEALTH_ROUTE', '/health')
-AIP_PREDICT_ROUTE = os.environ.get('AIP_PREDICT_ROUTE', '/predict')
 
+# Pydantic models for prediction results
 class Prediction(BaseModel):
-  sentiment: str
-  confidence: Optional[float]
+    sentiment: str
+    confidence: Optional[float]
+
 
 class Predictions(BaseModel):
     predictions: List[Prediction]
 
-# instad of creating a class we could have also loaded this information
-# from the model configuration. Better if you introduce new labels over time
-class Sentiment(Enum):
-  NEGATIVE = 0
-  POSITIVE = 1
 
-
+# Health check route
 @app.get(AIP_HEALTH_ROUTE, status_code=200)
 async def health():
-    return {'health': 'ok'}
+    return {"health": "ok"}
 
-@app.post(AIP_PREDICT_ROUTE,
-          response_model=Predictions,
-          response_model_exclude_unset=True)
+
+# Prediction route to handle batch requests
+@app.post(
+    AIP_PREDICT_ROUTE,
+    response_model=Predictions,
+    response_model_exclude_unset=True,
+)
 async def predict(request: Request):
+    # Extract the JSON body from the request
     body = await request.json()
-    print(body)
 
-    instances = body["instances"]
-    print(instances)
-    print(type(instances))
-    instances = [x['text'] for x in instances]
-    print(instances)
+    # Extract the instances (texts) from the request
+    instances = [x["text"] for x in body["instances"]]
 
-    tf_batch = tokenizer(instances, max_length=128, padding=True,
-                            truncation=True, return_tensors='tf')
+    # Tokenize văn bản cho mô hình
+    tf_batch = tokenizer(
+        instances,
+        # max_length=128,
+        padding=True,
+        truncation=True,
+        return_tensors="pt",  # Chuyển thành tensor Pytorch
+    )
 
-    print(tf_batch)
+    # Lấy kết quả dự đoán từ mô hình
+    with torch.no_grad():
+        tf_outputs = model(**tf_batch)
 
-    tf_outputs = model(tf_batch)
+    # Áp dụng hàm softmax để lấy xác suất (điểm tự tin)
+    softmax = torch.nn.functional.softmax(tf_outputs.logits, dim=-1).numpy()
 
-    print(tf_outputs)
+    # Tìm chỉ số của xác suất cao nhất (dự đoán cảm xúc)
+    indices = np.argmax(softmax, axis=-1)
 
-    tf_predictions = tf.nn.softmax(tf_outputs[0], axis=-1)
-    print(tf_predictions)
+    # Lấy giá trị confidence cao nhất cho mỗi dự đoán
+    confidences = np.max(softmax, axis=-1)
 
-    indices = np.argmax(tf_predictions, axis=-1)
-    confidences = np.max(tf_predictions, axis=-1)
-
+    # Prepare the output
     outputs = []
-
     for index, confidence in zip(indices, confidences):
-      sentiment = Sentiment(index).name
-      print(index)
-      print(confidence)
-      outputs.append(Prediction(sentiment=sentiment, confidence=confidence))
+        sentiment = model.config.id2label[index]
+        outputs.append(
+            Prediction(sentiment=sentiment, confidence=float(confidence))
+        )
 
+    # Return the predictions
     return Predictions(predictions=outputs)
 
+
+# Main function to run the FastAPI app
 if __name__ == "__main__":
-  app.run(debug=True, host="0.0.0.0",port=8080)
+    uvicorn.run(app, host="0.0.0.0", port=8080)
