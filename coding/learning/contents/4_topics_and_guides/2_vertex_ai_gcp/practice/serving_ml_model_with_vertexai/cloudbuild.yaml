@@ -1,15 +1,17 @@
 steps:
 # Download the model to embed it into the image
-- name: 'gcr.io/cloud-builders/gsutil'
-  args: ['cp','-r', 'gs://dev-joyas-recommendation/models/sentiment', '.']
-  id: 'download-model'
+# - name: 'gcr.io/cloud-builders/gsutil'
+#   args: ['cp', '-r', 'gs://dev-joyas-recommendation/models/sentiment', '.']
+#   id: 'download-model'
+
 # Build the container image
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/joyas-vietnam/sentiment-fast-api', '.']
-  waitFor: ['download-model']
-# Push the container image to Container Registry
+  args: ['build', '-t', 'asia-southeast1-docker.pkg.dev/joyas-vietnam/dev-aiml-model/sentiment-fast-api', '.']
+  # waitFor: ['download-model']
+
+# Push the container image to Artifact Registry
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/joyas-vietnam/sentiment-fast-api']
+  args: ['push', 'asia-southeast1-docker.pkg.dev/joyas-vietnam/dev-aiml-model/sentiment-fast-api']
 
 images:
-- gcr.io/joyas-vietnam/sentiment-fast-api
+- asia-southeast1-docker.pkg.dev/joyas-vietnam/dev-aiml-model/sentiment-fast-api

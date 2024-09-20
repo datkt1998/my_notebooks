@@ -1,19 +1,18 @@
 import os
 from typing import List, Optional
 
-import numpy as np
-import torch
-import uvicorn
+import uvicorn  # noqa: F401
 from fastapi import FastAPI, Request
 from pydantic import BaseModel
-from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
+# import torch  # noqa: F401
+# import numpy as np  # noqa: F401
 # # Load tokenizer và model
-checkpoint = "mr4/phobert-base-vi-sentiment-analysis"
-tokenizer = AutoTokenizer.from_pretrained(
-    checkpoint, clean_up_tokenization_spaces=True
-)
-model = AutoModelForSequenceClassification.from_pretrained(checkpoint)
+# storage_path = "models/"
+# tokenizer = AutoTokenizer.from_pretrained(storage_path + "tokenizer/")
+# model = AutoModelForSequenceClassification.from_pretrained(
+#     storage_path + "model/"
+# )
 
 # Initialize FastAPI app
 app = FastAPI(title="Sentiment Analysis API")
@@ -31,6 +30,51 @@ class Prediction(BaseModel):
 
 class Predictions(BaseModel):
     predictions: List[Prediction]
+
+
+def get_prediction(instances):
+    res = []
+    for text in instances:
+        if len(text) > 30:
+            res.append(Prediction(sentiment="Tích cực", confidence=0.99))
+
+        elif len(text) > 10:
+            res.append(Prediction(sentiment="Tiêu cực", confidence=0.9))
+        else:
+            res.append(Prediction(sentiment="Trung lập", confidence=0.8))
+    return Predictions(predictions=res)
+
+
+# def get_prediction_confidence(instances):
+#     tf_batch = tokenizer(
+#         instances,
+#         # max_length=128,
+#         padding=True,
+#         truncation=True,
+#         return_tensors="pt",  # Chuyển thành tensor Pytorch
+#     )
+
+#     # Lấy kết quả dự đoán từ mô hình
+#     with torch.no_grad():
+#         tf_outputs = model(**tf_batch)
+
+#     # Áp dụng hàm softmax để lấy xác suất (điểm tự tin)
+#     softmax = torch.nn.functional.softmax(tf_outputs.logits, dim=-1).numpy()
+
+#     # Tìm chỉ số của xác suất cao nhất (dự đoán cảm xúc)
+#     indices = np.argmax(softmax, axis=-1)
+
+#     # Lấy giá trị confidence cao nhất cho mỗi dự đoán
+#     confidences = np.max(softmax, axis=-1)
+
+#     # Prepare the output
+#     outputs = []
+#     for index, confidence in zip(indices, confidences):
+#         sentiment = model.config.id2label[index]
+#         outputs.append(
+#             Prediction(sentiment=sentiment, confidence=float(confidence))
+#         )
+#     return Predictions(predictions=outputs)
 
 
 # Health check route
@@ -52,40 +96,13 @@ async def predict(request: Request):
     # Extract the instances (texts) from the request
     instances = [x["text"] for x in body["instances"]]
 
-    # Tokenize văn bản cho mô hình
-    tf_batch = tokenizer(
-        instances,
-        # max_length=128,
-        padding=True,
-        truncation=True,
-        return_tensors="pt",  # Chuyển thành tensor Pytorch
-    )
-
-    # Lấy kết quả dự đoán từ mô hình
-    with torch.no_grad():
-        tf_outputs = model(**tf_batch)
-
-    # Áp dụng hàm softmax để lấy xác suất (điểm tự tin)
-    softmax = torch.nn.functional.softmax(tf_outputs.logits, dim=-1).numpy()
-
-    # Tìm chỉ số của xác suất cao nhất (dự đoán cảm xúc)
-    indices = np.argmax(softmax, axis=-1)
-
-    # Lấy giá trị confidence cao nhất cho mỗi dự đoán
-    confidences = np.max(softmax, axis=-1)
-
-    # Prepare the output
-    outputs = []
-    for index, confidence in zip(indices, confidences):
-        sentiment = model.config.id2label[index]
-        outputs.append(
-            Prediction(sentiment=sentiment, confidence=float(confidence))
-        )
+    output = get_prediction(instances)
 
     # Return the predictions
-    return Predictions(predictions=outputs)
+    return output
 
 
 # Main function to run the FastAPI app
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8080)
+    # "filename:fastapi_app" = "main:app"
+    uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=True)
