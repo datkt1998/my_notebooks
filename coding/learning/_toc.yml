@@ -192,7 +192,7 @@ parts:
     - file: contents/3_programming_and_frameworks/python_frameworks/_index
       title: Python Frameworks
       sections:
-      - file: contents/3_programming_and_frameworks/python_frameworks/1_PySpark.ipynb
+      - file: contents/3_programming_and_frameworks/python_frameworks/pyspark/PySpark.ipynb
         title: PySpark
 
 # -------------- TOPICS & GUIDES --------------
