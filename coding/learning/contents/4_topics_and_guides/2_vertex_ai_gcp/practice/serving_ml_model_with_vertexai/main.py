@@ -106,3 +106,12 @@ async def predict(request: Request):
 if __name__ == "__main__":
     # "filename:fastapi_app" = "main:app"
     uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=True)
+    # body = {
+    #     "instances": [
+    #         {"text": "Test Trung lập"},
+    #         {"text": "test Tích cực, ket qua tra ve Tích cực"},
+    #         {"text": "Tiêu cực"},
+    #     ]
+    # }
+    # instances = [x["text"] for x in body["instances"]]
+    # print(get_prediction(instances))
