@@ -194,6 +194,12 @@ parts:
       sections:
       - file: contents/3_programming_and_frameworks/python_frameworks/pyspark/PySpark.ipynb
         title: PySpark
+      - file: contents/3_programming_and_frameworks/python_frameworks/pydantic/Pydantic.ipynb
+        title: Pydantic
+      - file: contents/3_programming_and_frameworks/python_frameworks/fastapi/FastAPI.ipynb
+        title: FastAPI
+      - file: contents/3_programming_and_frameworks/python_frameworks/streamlit/Streamlit.ipynb
+        title: Streamlit
 
 # -------------- TOPICS & GUIDES --------------
 
