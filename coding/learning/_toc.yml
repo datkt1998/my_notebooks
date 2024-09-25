@@ -245,9 +245,9 @@ parts:
 
     - file: contents/4_topics_and_guides/4_docker/_index
       title: Docker
-      sections:
-      - file: contents/4_topics_and_guides/4_docker/1_docker_overview
-        title: Docker Overview
+      # sections:
+      # - file: contents/4_topics_and_guides/4_docker/1_docker_overview
+      #   title: Docker Overview
 
 
 # ------------------ MY FUNCTIONS ------------------
