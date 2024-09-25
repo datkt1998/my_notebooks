@@ -575,3 +575,17 @@ docker-compose build
 ```bash
 docker-compose ps
 ```
+
+## Quy trình xây dựng model
+
+
+
+### Phát triển mô hình AI tóm tắt văn bản trên máy local
+
+#### Chuẩn bị môi trường phát triển
+
+- **Tạo môi trường Python**: Đảm bảo rằng bạn đang làm việc trong môi trường ảo Python để quản lý các package cần thiết một cách dễ dàng.
+```bash
+python3 -m venv venv 
+source venv/bin/activate
+```
