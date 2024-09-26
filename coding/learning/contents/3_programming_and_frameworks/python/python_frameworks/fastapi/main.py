@@ -158,6 +158,9 @@ class FilterParams(BaseModel):
     order_by: Literal["created_at", "updated_at"] = "created_at"
     tags: list[str] = []
 
+    # set config for not allow unknown field
+    model_config = {"extra": "forbid"}
+
 
 @app.get("/read_items_pydantic/")
 async def read_items_pydantic(filter_query: Annotated[FilterParams, Query()]):
