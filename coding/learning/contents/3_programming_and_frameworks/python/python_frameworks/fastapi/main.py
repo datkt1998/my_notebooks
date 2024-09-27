@@ -1,7 +1,7 @@
 from enum import Enum
 from typing import Annotated, Literal
 
-from fastapi import FastAPI, Query
+from fastapi import Body, FastAPI, Path, Query
 from pydantic import BaseModel, Field
 
 # create a FastAPI "instance"
@@ -169,3 +169,95 @@ async def read_items_pydantic(filter_query: Annotated[FilterParams, Query()]):
 
 # testcase: http://127.0.0.1:8000/items/?limit=10&tags=foo&tags=bar ---> Success
 # testcase: http://127.0.0.1:8000/items/?order_by=deleted_at ---> Error
+
+
+### Parameters Body | POST: use pydantic model (as request body) + path + query parameters
+class Item(BaseModel):
+    name: str
+    description: str | None = None
+    price: float
+    tax: float | None = None
+
+
+@app.post("/items_pydantic/{item_id}/")
+async def create_item_pydantic_model(
+    item_id: int, item: Item, q: str | None = None
+):
+    item_dict = item.model_dump()
+    if item.tax:
+        price_with_tax = item.price + item.tax
+        item_dict.update({"price_with_tax": price_with_tax})
+    result = {"item_id": item_id, **item_dict}
+    if q:
+        result.update({"q": q})
+    return result
+
+
+# testcase: http://127.0.0.1:8000/items_pydantic/1/?q=foo header:Content-Type=application/json name=dat description=dat price=15.0 tax=2.0
+
+### Parameters Path: define Path parameter with Annotated + Path
+
+
+@app.get("/read_items_path_annotated/{item_id}")
+async def read_items_path_annotated(
+    item_id: Annotated[int, Path(title="The ID of the item to get")],
+    q: Annotated[str | None, Query(alias="item-query")] = None,
+):
+    results = {"item_id": item_id}
+    if q:
+        results.update({"q": q})
+    return results
+
+
+# testcase: http://127.0.0.1:8000/items/foo?item-query=dat
+
+
+### Parameters Body | PUT: multiple body parameters
+class Item(BaseModel):
+    name: str
+    description: str | None = None
+    price: float
+    tax: float | None = None
+
+
+class User(BaseModel):
+    username: str
+    full_name: str | None = None
+
+
+@app.post("/items_multiple_body/{item_id}")
+async def update_items_multiple_body(item_id: int, item: Item, user: User):
+    results = {"item_id": item_id, "item": item, "user": user}
+    return results
+
+
+# testcase: http://127.0.0.1:8000/items/1/?q=foo header:Content-Type=application/json name=dat description=dat price=15.0 tax=2.0
+
+
+### Parameters Body | POST: emmbed body
+class Item(BaseModel):
+    name: str
+    description: str | None = None
+    price: float
+    tax: float | None = None
+
+
+class User(BaseModel):
+    username: str
+    full_name: str | None = None
+
+
+@app.put("/items_embed_body/{item_id}")
+async def update_items_embed_body(
+    item_id: int,
+    item: Annotated[Item, Body(embed=True)],
+    user: Annotated[User, Body(embed=True)],
+    importance: Annotated[int, Body(embed=True)],
+):
+    results = {
+        "item_id": item_id,
+        "item": item,
+        "user": user,
+        "importance": importance,
+    }
+    return results
