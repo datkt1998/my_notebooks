@@ -186,6 +186,8 @@ parts:
         title: Python Basics
       - file: contents/3_programming_and_frameworks/python/2_Concurrency_and_parallelism.ipynb
         title: Concurrency & Parallelism
+      - file: contents/3_programming_and_frameworks/python/3_python_environment.ipynb
+        title: Python Environment
       - file: contents/3_programming_and_frameworks/python/python_frameworks/_index
         title: Python Frameworks
         sections:
@@ -195,6 +197,11 @@ parts:
           title: Pydantic
         - file: contents/3_programming_and_frameworks/python/python_frameworks/fastapi/FastAPI.ipynb
           title: FastAPI
+          sections:
+          - file: contents/3_programming_and_frameworks/python/python_frameworks/fastapi/example_small_app/guide.ipynb
+            title: Small App Example
+          - file: contents/3_programming_and_frameworks/python/python_frameworks/fastapi/example_big_app/guide.ipynb
+            title: Big App Example
         - file: contents/3_programming_and_frameworks/python/python_frameworks/streamlit/Streamlit.ipynb
           title: Streamlit
     - file: contents/3_programming_and_frameworks/2_NoSQL.ipynb
@@ -203,7 +210,7 @@ parts:
       title: SQL
     - file: contents/3_programming_and_frameworks/4_Git.ipynb
       title: Git
-    - file: contents/3_programming_and_frameworks/5_Docker
+    - file: contents/3_programming_and_frameworks/docker/Docker_guide
       title: Docker
 
 
@@ -245,15 +252,6 @@ parts:
       - file: contents/4_topics_and_guides/2_vertex_ai_gcp/practice/_index
         title: Practice
         # sections:
-
-    - file: contents/4_topics_and_guides/3_python_environment/1_python_environment.ipynb
-      title: Python Environment
-
-    - file: contents/4_topics_and_guides/4_docker/_index
-      title: Docker
-      # sections:
-      # - file: contents/4_topics_and_guides/4_docker/1_docker_overview
-      #   title: Docker Overview
 
 
 # ------------------ MY FUNCTIONS ------------------

@@ -1,8 +1,14 @@
 from enum import Enum
 from typing import Annotated, Literal
 
-from fastapi import Body, FastAPI, Path, Query
+from fastapi import Body, FastAPI, Header, HTTPException, Path, Query
 from pydantic import BaseModel, Field
+
+fake_secret_token = "coneofsilence"
+fake_db = {
+    "foo": {"id": "foo", "title": "Foo", "description": "There goes my hero"},
+    "bar": {"id": "bar", "title": "Bar", "description": "The bartenders"},
+}
 
 # create a FastAPI "instance"
 app = FastAPI()
@@ -15,7 +21,7 @@ async def root():
 
 
 ### Parameters Path: parameter in path
-@app.get("/items/{item_id}")
+@app.get("/items_path1/{item_id}")
 async def read_item(item_id):
     return {"item_id": item_id}
 
@@ -24,7 +30,7 @@ async def read_item(item_id):
 
 
 ### Parameters Path: parameter validation
-@app.get("/items/{item_id}")
+@app.get("/items_path2/{item_id}")
 async def read_item_validation(item_id: Annotated[str, Field(max_length=5)]):
     return {"item_id": item_id}
 
@@ -128,13 +134,13 @@ async def read_required_items(q: Annotated[str, Query(min_length=3)] = ...):
 
 
 ### Parameters Query: Query parameter is list / multiple values
-@app.get("/items/")
+@app.get("/items_list/")
 async def read_items(q: Annotated[list[str] | None, Query()] = None):
     query_items = {"q": q}
     return query_items
 
 
-# testcase: http://127.0.0.1:8000/items/?q=foo&q=bar
+# testcase: http://127.0.0.1:8000/items_list/?q=foo&q=bar
 
 
 ### Parameters Query: use `alias` as an alias for `Query`
@@ -261,3 +267,34 @@ async def update_items_embed_body(
         "importance": importance,
     }
     return results
+
+
+class Item(BaseModel):
+    id: str
+    title: str
+    description: str | None = None
+
+
+@app.get("/items/{item_id}", response_model=Item)
+async def read_main(item_id: str, x_token: Annotated[str, Header()]):
+    if x_token != fake_secret_token:
+        raise HTTPException(status_code=400, detail="Invalid X-Token header")
+    if item_id not in fake_db:
+        raise HTTPException(status_code=404, detail="Item not found")
+    return fake_db[item_id]
+
+
+@app.post("/items/", response_model=Item)
+async def create_item(item: Item, x_token: Annotated[str, Header()]):
+    if x_token != fake_secret_token:
+        raise HTTPException(status_code=400, detail="Invalid X-Token header")
+    if item.id in fake_db:
+        raise HTTPException(status_code=409, detail="Item already exists")
+    fake_db[item.id] = item
+    return item
+
+
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run(app, host="127.0.0.1", port=8000, reload=True)
