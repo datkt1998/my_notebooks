@@ -195,6 +195,11 @@ parts:
           title: Pydantic
         - file: contents/3_programming_and_frameworks/python/python_frameworks/fastapi/FastAPI.ipynb
           title: FastAPI
+          sections:
+          - file: contents/3_programming_and_frameworks/python/python_frameworks/fastapi/example_small_app/readme.ipynb
+            title: Small App Example
+          - file: contents/3_programming_and_frameworks/python/python_frameworks/fastapi/example_big_app/readme.ipynb
+            title: Big App Example
         - file: contents/3_programming_and_frameworks/python/python_frameworks/streamlit/Streamlit.ipynb
           title: Streamlit
     - file: contents/3_programming_and_frameworks/2_NoSQL.ipynb
