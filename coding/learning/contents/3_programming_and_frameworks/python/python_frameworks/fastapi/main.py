@@ -292,3 +292,9 @@ async def create_item(item: Item, x_token: Annotated[str, Header()]):
         raise HTTPException(status_code=409, detail="Item already exists")
     fake_db[item.id] = item
     return item
+
+
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run(app, host="127.0.0.1", port=8000, reload=True)
