@@ -117,7 +117,7 @@ The primary goal of the recommendation system is to enhance the investment exper
 
 [Product_Recommendation_Plan.xlsx](https://hftvietnam.sharepoint.com/:x:/s/da/EW5NW6zOj_tJgmC0wq7fHAMB-lqcxi7Pn5Z0UWw77Mgn7w?e=49nkct&nav=MTVfezgxMjU0ODlDLUE5OUItNDI1Ny04QUE2LTVEODNFQ0NBQjBEQn0)
 
-# Thiết kế hệ thống
+# 3. Thiết kế hệ thống
 
 
 ## **Danhh sách model**
@@ -191,7 +191,7 @@ The primary goal of the recommendation system is to enhance the investment exper
 
 
 
-# 3. Appendix
+# 4. Appendix
 
 ## 3.1. Recommendation Algorithms Research
 
@@ -433,7 +433,7 @@ ALTER TABLE `project_id.dataset_id.user_product_recommendations` SET OPTIONS ( e
 ```
 
 
-# 4. Refs
+# 5. Refs
 1. https://www.itransition.com/machine-learning/recommendation-systems
 2. https://phamdinhkhanh.github.io/2019/11/04/Recommendation_Compound_Part1.html
 3. https://phamdinhkhanh.github.io/2019/12/26/Sorfmax_Recommendation_Neural_Network.html
