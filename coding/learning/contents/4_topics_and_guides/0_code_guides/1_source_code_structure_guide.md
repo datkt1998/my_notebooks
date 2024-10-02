@@ -66,9 +66,15 @@ project_name/
 │ 
 ├── apps/                    	# Giao diện tương tác
 │   ├── api/               	 	# API
-│   │   ├── api.py     		 	# Script api
+│   │   ├── __init__.py         # File init để biến src thành module
+│   │   ├── api.py     		 	# Main API
+│   │   ├── dependencies.py     # Dependency config
+│   │   ├── routers/            # API
+│   │   │   └── users.py     	# User endpoint
+│   │   └── internal/           # Internal config
+│   │       └── admin.py     	# Admin endpoint
 │   ├── streamlit/           	# Streamlit Web
-│   │   ├── streamlit_app.py 	# Streamlit interface
+│   │   └── streamlit_app.py 	# Streamlit interface
 │   └── app.py               	# Ứng dụng chính sử dụng Streamlit hoặc API đó để tương tác người dùng
 │
 │
@@ -81,105 +87,4 @@ project_name/
 
 ```
 
-CODE PYTHON để gen structure theo template trên
-
-```python
-import os
-
-# Định nghĩa cấu trúc thư mục và tệp
-structure = {
-    "docs": {
-        "references": {},
-        "materials": {},
-        "reports": {},
-    },
-    "config": {
-        "config.yaml": None,
-    },
-    "data": {
-        "external": {},
-        "raw": {},
-        "interim": {},
-        "processed": {},
-        "features": {},
-    },
-    "notebooks": {},
-    "src": {
-        "__init__.py": None,
-        "data": {
-            "loader.py": None,
-        },
-        "features": {
-            "features.py": None,
-        },
-        "models": {
-            "model.py": None,
-            "train.py": None,
-            "evaluate.py": None,
-        },
-        "visualization": {
-            "visualization.py": None,
-        },
-        "utils": {
-            "utils.py": None,
-        },
-    },
-    "tests": {
-        "test_model.py": None,
-    },
-    "output": {},
-    "logs": {},
-    "scripts": {
-        "run_training.py": None,
-    },
-    "models": {},
-    "deployments": {
-        "Dockerfile": None,
-        "docker-compose.yml": None,
-        "gcp_deployment.yaml": None,
-        "cloud": {
-            "vertex_ai.py": None,
-            "cloudbuild.yaml": None,
-        },
-        "kubernetes": {
-            "deployment.yaml": None,
-            "service.yaml": None,
-        },
-    },
-	"apps": {
-        "api": {
-            "api.py": None,
-        },
-        "streamlit": {
-            "streamlit_app.py": None,
-        },
-        "app.py": None,
-    },
-    ".gitignore": None,
-    "environment.yml": None,
-    "requirements.txt": None,
-    "README.md": None,
-    "setup.py": None,
-    "main.py": None,
-} 
-
-# Hàm tạo cấu trúc thư mục và tệp
-def create_structure(base_path, structure):
-    for name, content in structure.items():
-        path = os.path.join(base_path, name)
-        if content is None:
-			if not os.path.exists(path):
-				open(path, "w").close()  # Tạo file trống
-        else:
-            # Nếu content không phải là None, tạo thư mục và đệ quy
-            if not os.path.exists(path):
-                os.makedirs(path, exist_ok=True)
-            create_structure(path, content)
-
-# Thư mục gốc của dự án
-base_project_path = "."
-
-# Tạo cấu trúc thư mục và tệp
-create_structure(base_project_path, structure)
-print("Structure for project created successfully!")
-```
+CODE PYTHON để gen structure theo template trên : [Project Structure Gennerator](https://github.com/datkt1998/my_notebooks/tree/master/coding/functions/pyfunc/utils/project_structure_gen.py)

@@ -260,19 +260,19 @@ parts:
   maxdepth: 4
   numbered: true
   chapters:
-    - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/mfunctions/cleaning
+    - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/functions/pyfunc/cleaning
       title: Cleaning
-    - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/mfunctions/preprocessing
+    - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/functions/pyfunc/preprocessing
       title: Preprocessing
-    - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/mfunctions/models
+    - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/functions/pyfunc/models
       title: Models
-    - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/mfunctions/evaluation
+    - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/functions/pyfunc/evaluation
       title: Evaluation
-    - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/mfunctions/monitoring
+    - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/functions/pyfunc/monitoring
       title: Monitoring
-    - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/mfunctions/connection
+    - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/functions/pyfunc/connection
       title: Connection
-    - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/mfunctions/deployment
+    - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/functions/pyfunc/deployment
       title: Deployment
-    - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/mfunctions/utils
+    - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/functions/pyfunc/utils
       title: Utils
