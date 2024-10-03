@@ -251,7 +251,9 @@ parts:
       #   title: XXXXXXXXXX
       - file: contents/4_topics_and_guides/2_vertex_ai_gcp/practice/_index
         title: Practice
-        # sections:
+        sections:
+        - file: contents/4_topics_and_guides/2_vertex_ai_gcp/practice/serving_ml_model_gcp/guide.ipynb
+          title: Serving ML Model on GCP
 
 
 # ------------------ MY FUNCTIONS ------------------
