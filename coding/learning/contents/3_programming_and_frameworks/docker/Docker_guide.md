@@ -58,14 +58,23 @@ Sử dụng cũng khá đơn giản chỉ với ba bước:
 - Run `docker-compose up` để start và run app.
 ## Các câu lệnh cơ bản
 
-### Docker authen
+### Docker Initial
+
+#### Docker authen
 
 `docker login`
 
-### Khởi tạo docker theo template
+#### Initial template docker project
+
+Docker cung cấp câu lệnh đơn giản để khởi tạo docker project theo config
 
 `docker init`
-### Search thông tin
+
+### Image Command
+
+#### Search & Pull & Push image
+
+**Search Image**
 
 `docker search <keyword>`: search thông tin các image theo keyword có trên **docker hub**
 
@@ -88,14 +97,24 @@ docker search mysql
     rapidfort/mysql                 RapidFort optimized, hardened image for MySQL   14                        
 ```
 
-### Pull image từ Hub
+**Pull Image từ các Hub** : mặc định là `dockerhub`
 
 `docker pull`: Lệnh này dùng để tải các image trên docker hub về.
 
 ```bash
-docker pull python:3
+docker pull asia-southeast1-docker.pkg.dev/ext-pinetree-dw/dev-aiml-model/sentiment-fast-api
 ```
-### Build image từ docker file
+
+**Push Image lên các Hub** : mặc định là `dockerhub`
+
+`docker push`: 
+
+```bash
+docker push asia-southeast1-docker.pkg.dev/ext-pinetree-dw/dev-aiml-model/sentiment-fast-api
+```
+
+#### Build image
+
 `docker build`: Lệnh này dùng để build một image từ **Dockerfile** và **Context**. 
 
 **Context** ở đây là một tập file được xác đinh bởi đường dẫn hoặc url cụ thể. 
@@ -109,7 +128,7 @@ Ta có thể sử dụng thêm tham số `-t` để gắn nhãn cho image.
 docker build -t datkt98/exam02 .
 ```
 
-### List các images
+#### List images
 
 `docker images`: Lệnh này dùng để liệt kê các image có trên máy tính
 
@@ -121,8 +140,42 @@ docker images
     datkt98/exam02   latest    324475812f6b   4 seconds ago    887MB
     datkt98/exam01   latest    1b3ec0e42e26   21 minutes ago   887MB
     python           3         74707af2d4ec   2 days ago       871MB
+#### Xóa images
+`docker rmi <list_image_id>`: Lệnh này dùng để xóa một hoặc nhiều images.
 
-### Tạo container từ image by command
+```bash
+docker rmi -f b4d961f671a2
+```
+
+#### Lưu trữ image
+`docker save [OPTIONS] IMAGE [IMAGE...]`: save docker image to a tar archive
+
+```bash
+# using STDOUT
+docker save image_name01 > image_name01.tar 
+
+# using Write to a file, instead of STDOUT (want to specific output path)
+docker save -o image_name01.tar > image_name01 
+
+#gzip to smaller file
+docker save image_name01:latest | gzip > image_name01.tar.gz 
+```
+
+#### Load image từ file lưu trữ
+`docker load [OPTIONS]`: load docker image from a tar archive or STDIN
+
+```bash
+# using STDIN
+docker load < image_name01.tar.gz 
+
+# Read from tar archive file (want to specific input path), instead of STDIN
+docker load --input image_name01.tar 
+```
+
+### Container Command
+
+#### Run container
+
 `docker run`: Lệnh này dùng để tạo 1 container với images của bạn, ví dụ để tạo 1 container với image ubuntu đã tải về trước đó, bạn dùng lệnh
 ```bash
 `docker run -it ubuntu`
@@ -192,9 +245,10 @@ Trên host, lúc này ta truy cập http://172.17.0.2:5555
 docker run --rm -it --entrypoint bash myimage01
 ```
 
-### Tạo container từ image by docker-compose
+#### Run multiple-container (by docker-compose)
 
-### Liệt kê các container đang chạy
+Xem mục docker compose
+#### List running container
 
 `docker ps`: Lệnh này để liệt kê các container đang chạy
 
@@ -209,7 +263,7 @@ Khi sử dụng với các tham số
 docker ps -a
 ```
 
-### Stop 1 container đang chạy
+#### Stop container
 
 `docker stop <container_id>`: Lệnh này dùng để dừng 1 container đang chạy. Ví dụ như hình bên dưới bạn có container đang chạy với ID là 03a1db578cc3, bạn dùng lệnh `docker stop 03a1`
 
@@ -217,86 +271,56 @@ docker ps -a
 docker stop a6e267c
 ```
 
-### Start 1 container
+#### Start container
 
 `docker start <container_id>`: Để start lại container đã dừng trước đó, bạn dùng lệnh docker start, ví dụ bạn start lại container đã stop phía trên dùng lệnh
 
 ```bash
 docker start 03a1
 ```
-### Xóa containers
+#### Xóa containers
 
 `docker rm`: Lệnh này dùng để xóa 1 or nhiều container đã tạo trước đó, nếu container đang chạy, bạn cần thêm tham số `-f`
 
 ```bash
 docker rm -f 9978bf498c50
 ```
-### Xóa images
-`docker rmi <list_image_id>`: Lệnh này dùng để xóa một hoặc nhiều images.
 
-```bash
-docker rmi -f b4d961f671a2
-```
-
-### Execute 1 lệnh trong container
+#### Execute command
 `docker exec`: Lệnh này dùng để chạy 1 lệnh trong container, ví dụ bên dưới là liệt kê các tệp tin, thư mục trong folder root của container
 
 ```bash
 docker exec 03a1 ls -la /root
 ```
 
-### Hiện thị log trong container
+#### View Log
 `docker logs`: Lệnh này được sử dụng để hiển thị logs của một container, ta cần phải chỉ rõ container để hiển thị logs thông qua tên của nó. Ngoài cũng có thể sử dụng thêm một số flag như `--follow` để giữ việc theo dõi logs.
 
 ```bash
 docker logs --follow <your_name_container>
 ```
 
-### Liệt kê các volumn mà container sử dụng
+#### List used volumns
 `docker volume ls`: Lệnh này dùng để liệt kê ra các volumn mà các container sử dụng, volume là một cơ chế dùng để lưu trữ dữ liệu sinh ra và sử dụng bởi Docker.
 
 ```bash
 docker volume ls
 ```
 
-### Liệt kê các network
+#### List network
 `docker network ls`: liệt kê tất cả các network có sẵn
 
 ```bash
 docker network ls
 ```
 
-### Liên kết network giữa các container
+#### Liên kết network giữa các container
 `docker network`: tạo connect vào một network mới. Nó giúp container giao tiếp được với một container khác qua tên thay vì mở cổng IP để giao tiếp trên host.
 
 ```bash
 docker network
 ```
 
-### Lưu trữ image
-`docker save [OPTIONS] IMAGE [IMAGE...]`: save docker image to a tar archive
-
-```bash
-# using STDOUT
-docker save image_name01 > image_name01.tar 
-
-# using Write to a file, instead of STDOUT (want to specific output path)
-docker save -o image_name01.tar > image_name01 
-
-#gzip to smaller file
-docker save image_name01:latest | gzip > image_name01.tar.gz 
-```
-
-### Load image từ file lưu trữ
-`docker load [OPTIONS]`: load docker image from a tar archive or STDIN
-
-```bash
-# using STDIN
-docker load < image_name01.tar.gz 
-
-# Read from tar archive file (want to specific input path), instead of STDIN
-docker load --input image_name01.tar 
-```
 
 ## Dockerfile
 
@@ -525,7 +549,7 @@ volumes: # Khai báo các volume nếu cần
     - `POSTGRES_PASSWORD`: Mật khẩu.
     - `POSTGRES_DB`: Tên cơ sở dữ liệu.
 - **Volumes**: Lưu trữ dữ liệu cơ sở dữ liệu trong volume `db_data` để bảo vệ dữ liệu khỏi bị mất khi container dừng hoặc bị xóa.
-### Các lệnh Docker Compose thường dùng
+### Docker Compose command
 
 1. **Khởi động các dịch vụ**
 ```bash
@@ -574,18 +598,4 @@ docker-compose build
 7. **Xem trạng thái các dịch vụ đang chạy**
 ```bash
 docker-compose ps
-```
-
-## Quy trình xây dựng model
-
-
-
-### Phát triển mô hình AI tóm tắt văn bản trên máy local
-
-#### Chuẩn bị môi trường phát triển
-
-- **Tạo môi trường Python**: Đảm bảo rằng bạn đang làm việc trong môi trường ảo Python để quản lý các package cần thiết một cách dễ dàng.
-```bash
-python3 -m venv venv 
-source venv/bin/activate
 ```
