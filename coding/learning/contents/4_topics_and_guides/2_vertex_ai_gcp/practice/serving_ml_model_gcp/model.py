@@ -1,4 +1,3 @@
-import pickle
 import random
 
 from sklearn.base import BaseEstimator, TransformerMixin
@@ -25,9 +24,3 @@ class SimpleSentimentModel(BaseEstimator, TransformerMixin):
             return "positive", random.randrange(70, 90, step=1) / 100
         else:
             return "neutral", random.randrange(70, 95, step=1) / 100
-
-
-if __name__ == "__main__":
-    model = SimpleSentimentModel()
-    with open("models/model.pkl", "wb") as f:
-        pickle.dump(model, f)

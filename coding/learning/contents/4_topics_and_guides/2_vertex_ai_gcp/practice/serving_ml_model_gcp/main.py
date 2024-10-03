@@ -1,15 +1,22 @@
-import pickle
+import os
 from typing import List, Optional
 
-import uvicorn  # noqa: F401
-from fastapi import FastAPI, Request
-from model_training import SimpleSentimentModel  # noqa: F401
+import joblib
+import uvicorn
+from fastapi import FastAPI, HTTPException, Request
+from model import SimpleSentimentModel  # noqa: F401
 from pydantic import BaseModel
 
 # Initialize FastAPI app
 app = FastAPI(title="Sentiment Analysis API")
-with open("models/model.pkl", "rb") as f:
-    model = pickle.load(f)
+
+# Load the model with a safe file path
+model_path = os.path.join("models", "model.pkl")
+if not os.path.exists(model_path):
+    raise FileNotFoundError(f"Model file not found at {model_path}")
+
+# Load the model, making sure SimpleSentimentModel is already imported
+model = joblib.load(model_path)
 
 
 # Pydantic models for prediction results
@@ -22,6 +29,7 @@ class Predictions(BaseModel):
     predictions: List[Prediction]
 
 
+# Function to process batch predictions
 def get_prediction(instances):
     res = []
     for text in instances:
@@ -46,14 +54,22 @@ async def predict(request: Request):
     # Extract the JSON body from the request
     body = await request.json()
 
+    # Validate the request body
+    if "instances" not in body or not isinstance(body["instances"], list):
+        raise HTTPException(
+            status_code=400,
+            detail="Invalid input format. 'instances' should be a list of texts.",
+        )
+
     # Extract the instances (texts) from the request
     instances = [x["text"] for x in body["instances"]]
 
+    # Get predictions
     output = get_prediction(instances)
+
     # Return the predictions
     return output
 
-
 # Main function to run the FastAPI app
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8080, reload=True)
+    uvicorn.run("main:app", host="127.0.0.1", port=8080)

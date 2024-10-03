@@ -58,14 +58,21 @@ Sử dụng cũng khá đơn giản chỉ với ba bước:
 - Run `docker-compose up` để start và run app.
 ## Các câu lệnh cơ bản
 
-### Docker authen
+### Docker Initial
+
+#### Docker authen
 
 `docker login`
 
-### Khởi tạo docker theo template
+#### Initial template docker project
+
+Docker cung cấp câu lệnh đơn giản để khởi tạo docker project theo config
 
 `docker init`
-### Search thông tin
+
+### Image Command
+
+#### Search & Pull docker image
 
 `docker search <keyword>`: search thông tin các image theo keyword có trên **docker hub**
 
@@ -88,14 +95,16 @@ docker search mysql
     rapidfort/mysql                 RapidFort optimized, hardened image for MySQL   14                        
 ```
 
-### Pull image từ Hub
+**Pull image từ Hub**
 
 `docker pull`: Lệnh này dùng để tải các image trên docker hub về.
 
 ```bash
 docker pull python:3
 ```
-### Build image từ docker file
+
+#### Build image
+
 `docker build`: Lệnh này dùng để build một image từ **Dockerfile** và **Context**. 
 
 **Context** ở đây là một tập file được xác đinh bởi đường dẫn hoặc url cụ thể. 
@@ -109,7 +118,7 @@ Ta có thể sử dụng thêm tham số `-t` để gắn nhãn cho image.
 docker build -t datkt98/exam02 .
 ```
 
-### List các images
+#### List images
 
 `docker images`: Lệnh này dùng để liệt kê các image có trên máy tính
 
@@ -122,7 +131,10 @@ docker images
     datkt98/exam01   latest    1b3ec0e42e26   21 minutes ago   887MB
     python           3         74707af2d4ec   2 days ago       871MB
 
-### Tạo container từ image by command
+### Container Command
+
+#### Run container
+
 `docker run`: Lệnh này dùng để tạo 1 container với images của bạn, ví dụ để tạo 1 container với image ubuntu đã tải về trước đó, bạn dùng lệnh
 ```bash
 `docker run -it ubuntu`
@@ -192,9 +204,9 @@ Trên host, lúc này ta truy cập http://172.17.0.2:5555
 docker run --rm -it --entrypoint bash myimage01
 ```
 
-### Tạo container từ image by docker-compose
+#### Run multiple container (by docker-compose)
 
-### Liệt kê các container đang chạy
+#### List running container
 
 `docker ps`: Lệnh này để liệt kê các container đang chạy
 
