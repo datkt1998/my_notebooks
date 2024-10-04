@@ -120,7 +120,7 @@ The primary goal of the recommendation system is to enhance the investment exper
 # 3. Thiết kế hệ thống
 
 
-## **Danhh sách model**
+## **Danh sách model**
 - Model phân loại trạng thái khách hàng #M1
 	- Khách hàng `inactive`
 	- Khách hàng `active`
@@ -149,6 +149,208 @@ The primary goal of the recommendation system is to enhance the investment exper
 - **Explainability (Giải thích gợi ý)**: Để tăng độ tin cậy và sự minh bạch, tích hợp thêm các công cụ giúp giải thích rõ ràng tại sao một sản phẩm được đề xuất. Các mô hình như SHAP hoặc LIME có thể hữu ích trong việc này.
     
 - **Dynamic Context-aware Recommendation**: Hệ thống gợi ý nên có khả năng cập nhật theo thời gian thực dựa trên các sự kiện ngắn hạn hoặc biến động thị trường. Ví dụ: Nếu có tin tức đột xuất về một cổ phiếu, các khuyến nghị liên quan đến cổ phiếu đó sẽ được ưu tiên.
+
+### Model phân loại trạng thái khách hàng (#M1)
+
+Phân loại khách hàng thành các nhóm:
+- Khách hàng `inactive`
+- Khách hàng `active`
+- Khách hàng mới `new`
+- Khác hàng sắp rời bỏ `re-activated`
+- Khách hàng sắp rời bỏ `churn`
+
+### Model phân tích đặc điểm khách hàng (#M2)
+- Mức độ biến động danh mục
+- Thời gian nắm giữ
+- Đa dạng hoá danh mục
+- Mức độ phổ biến danh mục
+- Tỷ lệ sử dụng đòn bẩy
+- Chỉ số tài chính cá nhân:
+	- Khả năng chấp nhận rủi ro (risk tolerance)
+	- Giá trị danh mục (portfolio value) 
+	- Dòng tiền (cash flow).
+
+**Sử dụng kỹ thuật phân tích thời gian nắm giữ nâng cao**: Sử dụng survival analysis hoặc time-to-event modeling để dự đoán thời gian khách hàng nắm giữ các loại tài sản.
+**Tích hợp học sâu**: Dùng mô hình deep learning hoặc autoencoder để tìm các biểu hiện tiềm ẩn (latent features) về đặc điểm tài chính của khách hàng.
+
+### Model phân tích sản phẩm (#M3)
+
+Đặc điểm phân tích:
+- Có phải là sản phẩm mới ? (Stock mới list sàn, chứng quyền mới list, bond mới phát hành, ETF mới, hợp đồng phái sinh. )
+- Mức độ phổ biến - được giao dịch nhiều : top những mã được giao dịch nhiều, thanh khoản lớn, được đầu tư nhiều,...
+- ...
+
+- **Sử dụng kỹ thuật embedding**: Tạo ra embedding cho sản phẩm để có thể đo độ tương đồng giữa các sản phẩm dựa trên tính năng hoặc hành vi giao dịch. Mô hình này có thể học từ các yếu tố như loại tài sản, biến động giá, thanh khoản.
+- **Tích hợp các chỉ số ngoại biên**: Như tin tức, sentiment analysis từ dữ liệu ngoài (báo cáo tài chính, tin tức thị trường, mạng xã hội) để phân tích mức độ phổ biến thực sự của sản phẩm.
+- **Phân tích chu kỳ thị trường**: Đưa vào các yếu tố như chu kỳ ngành nghề, hoặc xu hướng kinh tế vĩ mô để dự đoán sản phẩm nào có thể nổi bật trong giai đoạn sắp tới.
+
+### Model chấm điểm khách hàng với sector 
+
+- **Kết hợp sector preference với các chỉ số khác**: Sử dụng kỹ thuật collaborative filtering để dự đoán các ngành mà khách hàng có thể quan tâm dựa trên sự tương đồng với các khách hàng khác.
+- **Phân tích cảm xúc với từng sector**: Áp dụng NLP vào các bản tin hoặc báo cáo liên quan đến các ngành nghề để xem xét cảm xúc thị trường.
+
+### Model gom nhóm sản phẩm (#M4)
+
+- **Sử dụng k-means hoặc hierarchical clustering cho các loại sản phẩm**: Phân loại sản phẩm dựa trên đặc điểm và hiệu suất. Có thể dùng embedding của sản phẩm để đo khoảng cách.
+- **Tích hợp thêm thông tin về xu hướng thị trường**: Gom nhóm sản phẩm không chỉ dựa trên đặc tính mà còn dựa vào việc chúng phù hợp với xu hướng thị trường hiện tại như thế nào.
+
+### Model gom nhóm khách hàng (#M5)
+
+- **Sử dụng phân cụm đa chiều (multidimensional clustering)**: Gom nhóm khách hàng dựa trên nhiều yếu tố như hành vi giao dịch, khả năng chịu rủi ro, thời gian giao dịch và tài sản sở hữu.
+- **Áp dụng clustering động**: Sử dụng mô hình clustering theo thời gian (time-dependent clustering) để theo dõi sự thay đổi trong hành vi khách hàng và cập nhật mô hình phân cụm.
+
+### Model đề xuất sản phẩm phổ biến (#M6)
+
+- **Sử dụng collaborative filtering nâng cao**: Kết hợp thêm với các kỹ thuật implicit feedback từ hành vi giao dịch, như hành động xem, tìm kiếm nhưng không mua.
+- **Sử dụng reinforcement learning**: Để liên tục cập nhật danh sách sản phẩm dựa trên phản hồi của khách hàng sau mỗi gợi ý.
+
+### Model đề xuất sản phẩm mới (#M7)
+
+
+- **Dự đoán sự quan tâm sản phẩm mới**: Sử dụng mô hình time series để dự đoán sản phẩm nào sẽ có sự gia tăng quan tâm trong tương lai. Áp dụng các mô hình ARIMA, Prophet hoặc LSTM.
+- **Phân tích thị trường cho sản phẩm mới**: Tích hợp thông tin từ bên ngoài như tin tức, đánh giá của các chuyên gia để dự đoán xu hướng của sản phẩm mới.
+
+### Model đề xuất sản phẩm tương tự với danh mục hiện tại (#M8)
+
+
+- **Tạo vector embedding danh mục đầu tư**: Sử dụng phương pháp matrix factorization hoặc neural collaborative filtering để biểu diễn danh mục đầu tư dưới dạng vector, và tìm các sản phẩm tương đồng trong không gian này.
+- **Kết hợp với kỹ thuật diversification**: Không chỉ đề xuất sản phẩm tương tự mà còn đề xuất sản phẩm giúp đa dạng hóa rủi ro cho danh mục của khách hàng.
+
+### 10. Model đề xuất theo dữ liệu trạng thái (#M9)
+
+
+- **Deep Learning với embedding cho từng khách hàng và sản phẩm**: Sử dụng mạng deep neural network để học các biểu diễn tiềm ẩn từ dữ liệu trạng thái của khách hàng.
+- **Contextual Bandit**: Kết hợp thêm reinforcement learning để tối ưu hóa việc lựa chọn sản phẩm theo thời gian dựa trên trạng thái và phản hồi của khách hàng.
+
+### 11. Model đề xuất theo chuỗi hành vi (SASRec) (#M10)
+
+
+- **Sử dụng Transformer-based model**: SASRec là một mô hình mạnh, tuy nhiên có thể cải thiện bằng cách áp dụng Transformer với attention mechanism tốt hơn để phân tích chuỗi hành vi dài.
+- **Áp dụng thêm layer về temporal patterns**: Thêm các layers để phát hiện xu hướng ngắn hạn và dài hạn trong hành vi của khách hàng.
+
+### 12. Model hybrid recommend (#M11)
+
+
+- **Kết hợp nhiều chiến lược**: Thay vì chỉ sử dụng #M1 để phân loại, có thể kết hợp nhiều mô hình như #M5 (phân nhóm khách hàng) và #M2 (đặc điểm cá nhân hóa) để tạo ra các gợi ý có độ chính xác cao hơn.
+- **Meta-learning**: Áp dụng meta-learning để tự động học cách kết hợp nhiều mô hình recommendation sao cho hiệu quả nhất, tùy thuộc vào từng khách hàng và trạng thái thị trường.
+- **Ensemble models**: Xây dựng các mô hình ensemble (bagging, boosting) để tổng hợp kết quả từ nhiều mô hình khác nhau, giúp tăng độ chính xác và tính đa dạng của gợi ý.
+
+### **1. Quy trình kết hợp các mô hình:**
+
+#### **Bước 1: Phân loại khách hàng (M1)**
+
+- **Input**: Dữ liệu hồ sơ khách hàng (demographic data), trạng thái tài khoản (account status), hành vi sử dụng app.
+- **Output**: Phân loại khách hàng thành `inactive`, `active`, `new`, `reactivated`, `churn`.
+- **Tác động**: Dữ liệu từ model này sẽ giúp chọn chiến lược gợi ý phù hợp cho từng loại khách hàng. Ví dụ:
+    - Khách hàng `inactive` có thể nhận các gợi ý tập trung vào sản phẩm mới, sản phẩm phổ biến.
+    - Khách hàng `active` sẽ nhận được gợi ý đa dạng hơn như các sản phẩm tương tự hoặc tùy chỉnh sâu hơn.
+
+#### **Bước 2: Phân tích đặc điểm khách hàng (M2)**
+
+- **Input**: Dữ liệu giao dịch, danh mục đầu tư, thông tin tài chính cá nhân.
+- **Output**: Các chỉ số như độ biến động danh mục, mức độ đa dạng hóa, thời gian nắm giữ, tỷ lệ đòn bẩy.
+- **Tác động**: Cung cấp thông tin chi tiết về khách hàng giúp tinh chỉnh các gợi ý. Ví dụ:
+    - Khách hàng có tỷ lệ sử dụng đòn bẩy cao sẽ nhận được gợi ý về các sản phẩm có tính đòn bẩy hoặc sản phẩm bảo vệ rủi ro (hedging).
+
+#### **Bước 3: Phân tích sản phẩm (M3)**
+
+- **Input**: Dữ liệu sản phẩm (cổ phiếu, trái phiếu, ETF, chứng quyền,...), biến động giá, thanh khoản, mức độ phổ biến.
+- **Output**: Phân loại sản phẩm (mới, phổ biến, thanh khoản cao,...).
+- **Tác động**: Kết hợp với M2 để tìm ra sản phẩm phù hợp với đặc điểm khách hàng. Ví dụ:
+    - Khách hàng ưa thích sản phẩm phổ biến sẽ nhận được các gợi ý từ danh sách sản phẩm hot, thanh khoản cao.
+
+#### **Bước 4: Gom nhóm khách hàng và sản phẩm (M4, M5)**
+
+- **Input**: Dữ liệu lịch sử giao dịch của khách hàng, danh mục đầu tư, và phân tích sản phẩm.
+- **Output**: Gom nhóm khách hàng có hành vi giao dịch tương đồng và gom nhóm sản phẩm dựa trên đặc điểm.
+- **Tác động**: Kết hợp các nhóm khách hàng với nhóm sản phẩm phù hợp. Ví dụ:
+    - Khách hàng trong một nhóm cụ thể sẽ được gợi ý sản phẩm mà các khách hàng trong cùng nhóm đã đầu tư.
+
+#### **Bước 5: Đề xuất sản phẩm phổ biến và mới (M6, M7)**
+
+- **Input**: Kết quả từ M1, M2 và M3.
+- **Output**: Gợi ý sản phẩm phổ biến và sản phẩm mới dựa trên hành vi và đặc điểm của khách hàng.
+- **Tác động**: Ví dụ, khách hàng mới có thể nhận gợi ý sản phẩm phổ biến để khởi đầu, trong khi khách hàng lâu năm có thể nhận gợi ý sản phẩm mới để khám phá.
+
+#### **Bước 6: Đề xuất sản phẩm tương tự với danh mục hiện tại (M8)**
+
+- **Input**: Danh mục đầu tư hiện tại của khách hàng, embedding của sản phẩm.
+- **Output**: Gợi ý các sản phẩm tương tự dựa trên danh mục hiện tại của khách hàng.
+- **Tác động**: Khuyến nghị các sản phẩm có tính chất tương tự để giúp khách hàng tiếp tục đầu tư trong các lĩnh vực họ quen thuộc.
+
+#### **Bước 7: Đề xuất theo dữ liệu trạng thái (M9) và chuỗi hành vi (M10)**
+
+- **Input**: Lịch sử tương tác của khách hàng trên ứng dụng, trạng thái tài khoản.
+- **Output**: Gợi ý dựa trên các hành vi sử dụng gần đây, ví dụ: các sản phẩm mà khách hàng đã tìm kiếm, xem nhưng chưa mua.
+- **Tác động**: Cập nhật gợi ý theo thời gian thực để tăng tính cá nhân hóa dựa trên hành vi.
+
+#### **Bước 8: Hybrid Recommendation (M11)**
+
+- **Input**: Tất cả các output từ M1 đến M10.
+- **Output**: Tổng hợp kết quả từ các mô hình trên để đưa ra danh sách sản phẩm cuối cùng.
+- **Tác động**: Đưa ra các gợi ý cân bằng giữa sự phổ biến, sự tương đồng với danh mục hiện tại và các sản phẩm mới phù hợp với sở thích cá nhân.
+
+```plaintext
+                          ┌─────────────────────┐
+                          │ Khách hàng & dữ liệu│
+                          └─────────────────────┘
+                                   │
+                                   ▼
+                      ┌────────────────────────────┐
+                      │ Model phân loại khách hàng │ (#M1)
+                      └────────────────────────────┘
+                                   │
+                                   ▼
+        ┌──────────────────────────────┬──────────────────────────────┐
+        ▼                              ▼                              ▼
+ ┌────────────────┐            ┌────────────────┐             ┌───────────────────┐
+ │ Phân tích đặc  │            │ Phân tích sản  │             │ Gom nhóm khách    │
+ │ điểm khách hàng│ (#M2)      │ phẩm (#M3)     │             │ hàng và sản phẩm  │ (#M5)
+ └────────────────┘            └────────────────┘             └───────────────────┘
+        │                              │                              │
+        ▼                              ▼                              ▼
+ ┌──────────────────────────┐   ┌────────────────────┐     ┌────────────────────────┐
+ │ Phân tích tương đồng và  │   │ Đề xuất sản phẩm    │     │ Đề xuất sản phẩm       │
+ │ gợi ý theo danh mục hiện │   │ phổ biến & sản phẩm │     │ tương tự (#M8)         │
+ │ tại (#M8)                │   │ mới (#M6, #M7)      │     └────────────────────────┘
+ └──────────────────────────┘   └────────────────────┘
+         │                              │
+         ▼                              ▼
+  ┌────────────────────────────┐    ┌────────────────────────────┐
+  │ Gợi ý theo chuỗi hành vi   │    │ Gợi ý theo dữ liệu trạng    │
+  │ (#M10 - SASRec)            │    │ thái (#M9)                  │
+  └────────────────────────────┘    └────────────────────────────┘
+                   │                               │
+                   ▼                               ▼
+        ┌───────────────────────────────────────────────────────┐
+        │              Model hybrid recommendation (#M11)        │
+        └───────────────────────────────────────────────────────┘
+                                   │
+                                   ▼
+                          ┌───────────────────────┐
+                          │  Danh sách gợi ý cuối │
+                          │     cho khách hàng    │
+                          └───────────────────────┘
+
+```
+### **Giải thích chi tiết về flowchart:**
+
+1. **Input từ dữ liệu khách hàng**: Dữ liệu về hành vi, danh mục đầu tư, trạng thái tài khoản của khách hàng sẽ được đưa vào model **phân loại khách hàng (M1)** để xác định khách hàng thuộc nhóm nào.
+    
+2. **Phân tích đặc điểm khách hàng (M2)** và **phân tích sản phẩm (M3)** sẽ được áp dụng để hiểu sâu hơn về khách hàng và các sản phẩm tiềm năng.
+    
+3. **Gom nhóm khách hàng và sản phẩm (M5)** sẽ được sử dụng để nhóm các khách hàng có đặc điểm tương tự và cung cấp gợi ý theo nhóm.
+    
+4. **Đề xuất sản phẩm phổ biến (M6)** và **mới (M7)** sẽ đưa ra các sản phẩm phù hợp với từng khách hàng dựa trên xu hướng và sở thích.
+    
+5. **Gợi ý sản phẩm tương tự (M8)** sẽ tạo ra gợi ý dựa trên danh mục hiện tại của khách hàng.
+    
+6. **Mô hình theo chuỗi hành vi (M10)** và **trạng thái tài khoản (M9)** sẽ giúp gợi ý sản phẩm theo hành vi và ngữ cảnh sử dụng app gần đây.
+    
+7. **Cuối cùng, mô hình Hybrid (M11)** sẽ kết hợp tất cả các output từ các mô hình trên để đưa ra danh sách gợi ý cuối cùng, mang tính toàn diện và cá nhân hóa nhất cho khách hàng.
+
+
+
 ## **Yêu cầu monitoring**
 
 ### Trạng thái model hiện tại
