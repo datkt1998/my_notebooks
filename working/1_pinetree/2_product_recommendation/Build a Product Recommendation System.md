@@ -135,7 +135,7 @@ The primary goal of the recommendation system is to enhance the investment exper
 	- Có phải là sản phẩm mới ? (Stock mới list sàn, chứng quyền mới list, bond mới phát hành, ETF mới, hợp đồng phái sinh. )
 	- Mức độ phổ biến - được giao dịch nhiều : top những mã được giao dịch nhiều, thanh khoản lớn, được đầu tư nhiều,...
 	- ...
-- Model chấm điểm khách hàng với sector
+- Model chấm điểm khách hàng với sector #
 - Model gom nhóm sản phẩm #M4
 - Model gom nhóm khách hàng #M5
 - Model đề xuất sản phẩm phổ biến #M6
