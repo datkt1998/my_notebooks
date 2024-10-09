@@ -1,12 +1,12 @@
-# 1. Requirements
+# Requirements
 
-## 1.1. Introduction
+## Introduction
 
 A product recommendation system in the stock investment domain is designed to help customers discover new investment opportunities that align with their preferences and investment strategies. This system aims to provide personalized recommendations for stocks, bonds, and derivative futures based on advanced machine learning algorithms and customer data analysis.
 
 The primary goal of the recommendation system is to enhance the investment experience by offering tailored suggestions that match each customer's risk tolerance, trading strategy, investment history, and preferences. This helps customers make informed decisions and optimize their investment portfolios.
 
-## 1.2. Functional Requirements
+## Functional Requirements
 
 1. **User Authentication and Authorization**
     - Secure user login and role-based access control.
@@ -67,7 +67,7 @@ The primary goal of the recommendation system is to enhance the investment exper
     - Generate reports and analytics on system performance and user engagement.
     -  A/B Testing: Comparing different recommendation strategies to optimize performance.
 
-## 1.3. Non-Functional Requirements
+## Non-Functional Requirements
 
 1. **Scalability**
     - The system must handle increasing numbers of users and data volume efficiently.
@@ -84,274 +84,72 @@ The primary goal of the recommendation system is to enhance the investment exper
 7. **Compliance**
     - Adhere to relevant financial regulations and data protection laws.
 
-## 1.4. GCP Service Requirements
+## Business model requirements
 
-1. **Data Storage and Management**
-    - **BigQuery:** For managing and querying large datasets efficiently.
-    - ~~**GCS:** storage file~~
-2. **Data Processing**
-    - **Cloud Dataflow:** For real-time and batch data processing.
-    - **Cloud Dataprep:** For data cleaning and transformation.
-3. **Machine Learning**
-    - **Vertex AI:** For training, deploying, and managing machine learning models.
-    - ~~**BigQuery ML:** For running machine learning models directly on BigQuery data.~~
-4. **Compute**
-    - **Compute Engine:** For scalable virtual machines to run applications and algorithms.
-    - **Kubernetes Engine:** For containerized application deployment and orchestration.
-5. **Storage and Databases**
-    - **Cloud SQL / Firestore:** For relational and NoSQL database management.
-    - **Cloud Spanner:** For horizontally scalable, strongly consistent relational database.
-6. **APIs and Microservices**
-    - **Cloud Functions:** For serverless functions to handle real-time data processing and trigger workflows.
-    - **Cloud Endpoints:** For managing and deploying APIs securely.
-7. **Security**
-    - **Cloud IAM:** For managing access control and permissions.
-    - **VPC Service Controls:** For defining security perimeters around GCP resources.
-8. **Monitoring and Logging**
-    - **Stackdriver Monitoring and Logging:** For performance monitoring, logging, and alerts.
-    - **Cloud Trace and Cloud Debugger:** For tracing and debugging applications.
-9. **Networking**
-    - **Cloud CDN:** For content delivery to ensure fast load times.
-    - **Cloud Load Balancing:** For distributing incoming traffic across multiple instances.
-# 2. Timeline
+### Cross-selling
 
-[Product_Recommendation_Plan.xlsx](https://hftvietnam.sharepoint.com/:x:/s/da/EW5NW6zOj_tJgmC0wq7fHAMB-lqcxi7Pn5Z0UWw77Mgn7w?e=49nkct&nav=MTVfezgxMjU0ODlDLUE5OUItNDI1Ny04QUE2LTVEODNFQ0NBQjBEQn0)
+**Feature Description**: Recommend bonds, stocks, and portfolios to customers within the customer’s asset page or after they place an order.
+**Functionalities**:
+- Display recommendations based on the type of security purchased and the stock symbol
+- Utilize phrases like "Investors like you often buy…" or "Investors who bought this stock also bought…"
+- Integrate recommendations within the order confirmation page and follow-up emails.
 
-# 3. Thiết kế hệ thống
+| **Features**                                                                                            | **Where**                                             | **When**                                                             | **Type of display** | **Text**                                                                                                                                                                                                                 | **Notes**                                                                                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- | -------------------------------------------------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Suggest to optimize money with PineB when customer want to withdraw money                               | "Withdraw money" Screen                               | When Customers want to withdraw money                                | Pop up + email      | Instead of withdrawing your money from our securities account, you can choose to optimize your idle money with our PineB product, to earn a maximum … % per annum.  <br>Click on the link below to explore your options. | Email is considered to send later (send at the end of the day when customers have idle cash on account.)                                                                                      |
+| Suggest to buy Pinefolio if customers buy a stock included in such portfolio.                           | Order Screen                                          | After a successful order is placed for a stock included in Pinefolio | Pop up + email      | Our …. Pinefolio, which outperforms VNIndex by …. percent, includes stock ……  <br>Click on the link below to explore …. Pinefolio and other investment portfolios from Pinetree.                                         | If stock X is included in both Pinefolio A and B, given that A performs better than B, A will be recommended  <br>  <br>Email is considered to send later (send when the order is completed.) |
+| Suggest to register for Margin after buying a marginable stock (but not using margin)                   | Order Screen                                          | After a successful order is placed for a marginable stock            | Pop up              | … % of our customers who invest in stock ….use margin to maximize return on such stock.  <br>Please explore our margin program here                                                                                      |                                                                                                                                                                                               |
+| Suggest to register for Derivatives after registerring for Margin successfully or buy a -CW successully | CW Order Screen or Margin Account Registration Screen | After successful registration of Margin account                      | Pop up + email      | … % of our customers who use margin also trade derivatives to maximize their return.  <br>Please explore our derivatives program here                                                                                    | Email is considered to send later (send at the end of the day customers successfully register for a Derivative)                                                                               |
+### Upselling
 
+**Feature Description**:  Recommend similar stocks to customers after they buy a different stock.
+**Functionalities**:
+- Identify stocks that similar to the one purchased.
+- Suggest stocks that fit within the customer’s investment portfolio or confirmation screen after they place an order.
+- Utilize phrases like "Investors like you often buy…" or "Investors who bought this stock also bought…"
+- Highlight these recommendations on the purchase confirmation screen and within the app’s main feed
 
-## **Danh sách model**
-- Model phân loại trạng thái khách hàng #M1
-	- Khách hàng `inactive`
-	- Khách hàng `active`
-	- Khách hàng mới `new`
-- Model phân tích đặc điểm khách hàng #M2
-	- Mức độ biến động danh mục
-	- Thời gian nắm giữ
-	- Đa dạng hoá danh mục
-	- Mức độ phổ biến danh mục
-	- Tỷ lệ sử dụng đòn bẩy
-- Model phân tích sản phẩm #M3
-	- Có phải là sản phẩm mới ? (Stock mới list sàn, chứng quyền mới list, bond mới phát hành, ETF mới, hợp đồng phái sinh. )
-	- Mức độ phổ biến - được giao dịch nhiều : top những mã được giao dịch nhiều, thanh khoản lớn, được đầu tư nhiều,...
-	- ...
-- Model chấm điểm khách hàng với sector #
-- Model gom nhóm sản phẩm #M4
-- Model gom nhóm khách hàng #M5
-- Model đề xuất sản phẩm phổ biến #M6
-- Model đề xuất sản phẩm mới #M7
-- Model đề xuất sản phẩm tương tự với danh mục hiện tại #M8
-- Model đề xuất theo dữ liệu trạng thái (wide & deep learning) #M9
-- Model đề xuất theo chuỗi hành vi (SASRec) #M10
-- Model hybrid recommend (kết hợp nhiều loại model) #M11
-	- Sử dụng #M1 để phân loại 
+| **Features**                                          | **Where**    | **When**                                                                                                                                                                                    | **Type of display** | **Text**                                                                                                                          | **Priority** | **Notes**                                                                                                                                                                                                            |
+| ----------------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Recommend similar stocks based on performance         | Order screen | After an order is placed successfully  <br>Or after an order fails because of the lack of buying power  <br>(In the second case, recommmend stock that match the buying power of Customers) | Pop up              | Order Success!  <br>Investors who bought this stock also bought… because they have similar performance in the last 5 trading days | 1st          | If the stock price decrease in the last 5 trading days  <br>-> recommend based on investment patterns  <br>-> If there is no suitable investment patterns (ex, 1st time trading stocks), recommend based on industry |
+| Recommend similar stocks based on industry            | Order screen | After an order is placed successfully  <br>Or after an order fails because of the lack of buying power  <br>(In the second case, recommmend stock that match the buying power of Customers) | Pop up              | Order Success!  <br>Investors who bought this stock also bought… because they are all in the …. industry                          | 3rd          | If the stock price decrease in the last 5 trading days  <br>-> recommend based on investment patterns  <br>-> If there is no suitable investment patterns (ex, 1st time trading stocks), recommend based on industry |
+| Recommend similar stocks based on investment patterns | Order screen | After an order is placed successfully  <br>Or after an order fails because of the lack of buying power  <br>(In the second case, recommmend stock that match the buying power of Customers) | Pop up              | Order Success!  <br>Investors who bought this stock also bought…                                                                  | 2nd          | If the stock price decrease in the last 5 trading days  <br>-> recommend based on investment patterns  <br>-> If there is no suitable investment patterns (ex, 1st time trading stocks), recommend based on industry |
+### Related Securities Recommendations
 
-- **Explainability (Giải thích gợi ý)**: Để tăng độ tin cậy và sự minh bạch, tích hợp thêm các công cụ giúp giải thích rõ ràng tại sao một sản phẩm được đề xuất. Các mô hình như SHAP hoặc LIME có thể hữu ích trong việc này.
-    
-- **Dynamic Context-aware Recommendation**: Hệ thống gợi ý nên có khả năng cập nhật theo thời gian thực dựa trên các sự kiện ngắn hạn hoặc biến động thị trường. Ví dụ: Nếu có tin tức đột xuất về một cổ phiếu, các khuyến nghị liên quan đến cổ phiếu đó sẽ được ưu tiên.
+**Feature Description**: Show related stocks or securities that customers might be interested in when they view the details of another stock.
+**Functionalities**:
+- Analyze and display stocks with similar profiles, industry, or market performance.
+- Include a “Related Stocks” section on the stock detail page.
+- Provide information on why these stocks are related (e.g., same industry, high performance, similar investment patterns).
 
-### Model phân loại trạng thái khách hàng (#M1)
+| **Features**                                          | **Where**           | **When**                                  | **Type of display**                                             | **Text**                                                                                                      | **Priority** | **Notes**                                                                                                                                                                                                            |
+|:----------------------------------------------------- | ------------------- | ----------------------------------------- | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Recommend similar stocks based on performance         | Stock Detail Screen | When Customers view the detail of a stock | Scrolling text, keep on the top even when customers scroll down | Investors who bought this stock also bought… because they have similar performance in the last 5 trading days | 1st          | If the stock price decrease in the last 5 trading days  <br>-> recommend based on investment patterns  <br>-> If there is no suitable investment patterns (ex, 1st time trading stocks), recommend based on industry |
+| Recommend similar stocks based on industry            | Stock Detail Screen | When Customers view the detail of a stock | Scrolling text, keep on the top even when customers scroll down | Investors who bought this stock also bought… because they are all in the …. industry                          | 3rd          | If the stock price decrease in the last 5 trading days  <br>-> recommend based on investment patterns  <br>-> If there is no suitable investment patterns (ex, 1st time trading stocks), recommend based on industry |
+| Recommend similar stocks based on investment patterns | Stock Detail Screen | When Customers view the detail of a stock | Scrolling text, keep on the top even when customers scroll down | % Investors (*) who bought this stock also bought…                                                            | 2nd          | If the stock price decrease in the last 5 trading days  <br>-> recommend based on investment patterns  <br>-> If there is no suitable investment patterns (ex, 1st time trading stocks), recommend based on industry |
+### Personalized News Recommendations
 
-Phân loại khách hàng thành các nhóm:
-- Khách hàng `inactive`
-- Khách hàng `active`
-- Khách hàng mới `new`
-- Khác hàng sắp rời bỏ `re-activated`
-- Khách hàng sắp rời bỏ `churn`
-
-### Model phân tích đặc điểm khách hàng (#M2)
-- Mức độ biến động danh mục
-- Thời gian nắm giữ
-- Đa dạng hoá danh mục
-- Mức độ phổ biến danh mục
-- Tỷ lệ sử dụng đòn bẩy
-- Chỉ số tài chính cá nhân:
-	- Khả năng chấp nhận rủi ro (risk tolerance)
-	- Giá trị danh mục (portfolio value) 
-	- Dòng tiền (cash flow).
-
-**Sử dụng kỹ thuật phân tích thời gian nắm giữ nâng cao**: Sử dụng survival analysis hoặc time-to-event modeling để dự đoán thời gian khách hàng nắm giữ các loại tài sản.
-**Tích hợp học sâu**: Dùng mô hình deep learning hoặc autoencoder để tìm các biểu hiện tiềm ẩn (latent features) về đặc điểm tài chính của khách hàng.
-
-### Model phân tích sản phẩm (#M3)
-
-Đặc điểm phân tích:
-- Có phải là sản phẩm mới ? (Stock mới list sàn, chứng quyền mới list, bond mới phát hành, ETF mới, hợp đồng phái sinh. )
-- Mức độ phổ biến - được giao dịch nhiều : top những mã được giao dịch nhiều, thanh khoản lớn, được đầu tư nhiều,...
-- ...
-
-- **Sử dụng kỹ thuật embedding**: Tạo ra embedding cho sản phẩm để có thể đo độ tương đồng giữa các sản phẩm dựa trên tính năng hoặc hành vi giao dịch. Mô hình này có thể học từ các yếu tố như loại tài sản, biến động giá, thanh khoản.
-- **Tích hợp các chỉ số ngoại biên**: Như tin tức, sentiment analysis từ dữ liệu ngoài (báo cáo tài chính, tin tức thị trường, mạng xã hội) để phân tích mức độ phổ biến thực sự của sản phẩm.
-- **Phân tích chu kỳ thị trường**: Đưa vào các yếu tố như chu kỳ ngành nghề, hoặc xu hướng kinh tế vĩ mô để dự đoán sản phẩm nào có thể nổi bật trong giai đoạn sắp tới.
-
-### Model chấm điểm khách hàng với sector 
-
-- **Kết hợp sector preference với các chỉ số khác**: Sử dụng kỹ thuật collaborative filtering để dự đoán các ngành mà khách hàng có thể quan tâm dựa trên sự tương đồng với các khách hàng khác.
-- **Phân tích cảm xúc với từng sector**: Áp dụng NLP vào các bản tin hoặc báo cáo liên quan đến các ngành nghề để xem xét cảm xúc thị trường.
-
-### Model gom nhóm sản phẩm (#M4)
-
-- **Sử dụng k-means hoặc hierarchical clustering cho các loại sản phẩm**: Phân loại sản phẩm dựa trên đặc điểm và hiệu suất. Có thể dùng embedding của sản phẩm để đo khoảng cách.
-- **Tích hợp thêm thông tin về xu hướng thị trường**: Gom nhóm sản phẩm không chỉ dựa trên đặc tính mà còn dựa vào việc chúng phù hợp với xu hướng thị trường hiện tại như thế nào.
-
-### Model gom nhóm khách hàng (#M5)
-
-- **Sử dụng phân cụm đa chiều (multidimensional clustering)**: Gom nhóm khách hàng dựa trên nhiều yếu tố như hành vi giao dịch, khả năng chịu rủi ro, thời gian giao dịch và tài sản sở hữu.
-- **Áp dụng clustering động**: Sử dụng mô hình clustering theo thời gian (time-dependent clustering) để theo dõi sự thay đổi trong hành vi khách hàng và cập nhật mô hình phân cụm.
-
-### Model đề xuất sản phẩm phổ biến (#M6)
-
-- **Sử dụng collaborative filtering nâng cao**: Kết hợp thêm với các kỹ thuật implicit feedback từ hành vi giao dịch, như hành động xem, tìm kiếm nhưng không mua.
-- **Sử dụng reinforcement learning**: Để liên tục cập nhật danh sách sản phẩm dựa trên phản hồi của khách hàng sau mỗi gợi ý.
-
-### Model đề xuất sản phẩm mới (#M7)
+**Feature Description**: Recommend news articles related to stocks, bonds, companies, and industries of interest to the customer.
+**Functionalities**:
+- Analyze customer’s past transactions, search history, watchlist, and portfolio to determine interests.
+- Display relevant news articles on the app’s homepage and news section.
+- Allow customers to provide feedback (like, dislike) to improve future recommendations.
 
 
-- **Dự đoán sự quan tâm sản phẩm mới**: Sử dụng mô hình time series để dự đoán sản phẩm nào sẽ có sự gia tăng quan tâm trong tương lai. Áp dụng các mô hình ARIMA, Prophet hoặc LSTM.
-- **Phân tích thị trường cho sản phẩm mới**: Tích hợp thông tin từ bên ngoài như tin tức, đánh giá của các chuyên gia để dự đoán xu hướng của sản phẩm mới.
+| **Features**                                                                           | **Where**          | **When**                      | **Type of display**                                                 | **Text**                                                                                                                               | **Notes**                                                           |
+| -------------------------------------------------------------------------------------- | ------------------ | ----------------------------- | ------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Suggest news on customers's interest based on search history and watchlist             | Price Board + News | When logging into price board | - Scrolling text on Price Board  <br>Or  <br>- Sending notification | - Scrolling text: News summary content  <br>- Notification: News summary content                                                       | Max 5 news, News listed based on which interest Customers the most) |
+| Allow customers to provide feedback (like, dislike) to improve future recommendations. | Price Board        | Whenever Customers want       | Button Like/Dislike under each news                                 | “Thank you for your detailed feedback. We truly appreciate the time you took to share your thoughts and the insights you’ve provided.” | Appear after the feedback is received                               |
+# Model design and workflows
 
-### Model đề xuất sản phẩm tương tự với danh mục hiện tại (#M8)
+## Model design
 
+![model_design](Model-design.drawio.svg)
 
-- **Tạo vector embedding danh mục đầu tư**: Sử dụng phương pháp matrix factorization hoặc neural collaborative filtering để biểu diễn danh mục đầu tư dưới dạng vector, và tìm các sản phẩm tương đồng trong không gian này.
-- **Kết hợp với kỹ thuật diversification**: Không chỉ đề xuất sản phẩm tương tự mà còn đề xuất sản phẩm giúp đa dạng hóa rủi ro cho danh mục của khách hàng.
-
-### 10. Model đề xuất theo dữ liệu trạng thái (#M9)
-
-
-- **Deep Learning với embedding cho từng khách hàng và sản phẩm**: Sử dụng mạng deep neural network để học các biểu diễn tiềm ẩn từ dữ liệu trạng thái của khách hàng.
-- **Contextual Bandit**: Kết hợp thêm reinforcement learning để tối ưu hóa việc lựa chọn sản phẩm theo thời gian dựa trên trạng thái và phản hồi của khách hàng.
-
-### 11. Model đề xuất theo chuỗi hành vi (SASRec) (#M10)
+## Workflows
 
 
-- **Sử dụng Transformer-based model**: SASRec là một mô hình mạnh, tuy nhiên có thể cải thiện bằng cách áp dụng Transformer với attention mechanism tốt hơn để phân tích chuỗi hành vi dài.
-- **Áp dụng thêm layer về temporal patterns**: Thêm các layers để phát hiện xu hướng ngắn hạn và dài hạn trong hành vi của khách hàng.
-
-### 12. Model hybrid recommend (#M11)
-
-
-- **Kết hợp nhiều chiến lược**: Thay vì chỉ sử dụng #M1 để phân loại, có thể kết hợp nhiều mô hình như #M5 (phân nhóm khách hàng) và #M2 (đặc điểm cá nhân hóa) để tạo ra các gợi ý có độ chính xác cao hơn.
-- **Meta-learning**: Áp dụng meta-learning để tự động học cách kết hợp nhiều mô hình recommendation sao cho hiệu quả nhất, tùy thuộc vào từng khách hàng và trạng thái thị trường.
-- **Ensemble models**: Xây dựng các mô hình ensemble (bagging, boosting) để tổng hợp kết quả từ nhiều mô hình khác nhau, giúp tăng độ chính xác và tính đa dạng của gợi ý.
-
-### **1. Quy trình kết hợp các mô hình:**
-
-#### **Bước 1: Phân loại khách hàng (M1)**
-
-- **Input**: Dữ liệu hồ sơ khách hàng (demographic data), trạng thái tài khoản (account status), hành vi sử dụng app.
-- **Output**: Phân loại khách hàng thành `inactive`, `active`, `new`, `reactivated`, `churn`.
-- **Tác động**: Dữ liệu từ model này sẽ giúp chọn chiến lược gợi ý phù hợp cho từng loại khách hàng. Ví dụ:
-    - Khách hàng `inactive` có thể nhận các gợi ý tập trung vào sản phẩm mới, sản phẩm phổ biến.
-    - Khách hàng `active` sẽ nhận được gợi ý đa dạng hơn như các sản phẩm tương tự hoặc tùy chỉnh sâu hơn.
-
-#### **Bước 2: Phân tích đặc điểm khách hàng (M2)**
-
-- **Input**: Dữ liệu giao dịch, danh mục đầu tư, thông tin tài chính cá nhân.
-- **Output**: Các chỉ số như độ biến động danh mục, mức độ đa dạng hóa, thời gian nắm giữ, tỷ lệ đòn bẩy.
-- **Tác động**: Cung cấp thông tin chi tiết về khách hàng giúp tinh chỉnh các gợi ý. Ví dụ:
-    - Khách hàng có tỷ lệ sử dụng đòn bẩy cao sẽ nhận được gợi ý về các sản phẩm có tính đòn bẩy hoặc sản phẩm bảo vệ rủi ro (hedging).
-
-#### **Bước 3: Phân tích sản phẩm (M3)**
-
-- **Input**: Dữ liệu sản phẩm (cổ phiếu, trái phiếu, ETF, chứng quyền,...), biến động giá, thanh khoản, mức độ phổ biến.
-- **Output**: Phân loại sản phẩm (mới, phổ biến, thanh khoản cao,...).
-- **Tác động**: Kết hợp với M2 để tìm ra sản phẩm phù hợp với đặc điểm khách hàng. Ví dụ:
-    - Khách hàng ưa thích sản phẩm phổ biến sẽ nhận được các gợi ý từ danh sách sản phẩm hot, thanh khoản cao.
-
-#### **Bước 4: Gom nhóm khách hàng và sản phẩm (M4, M5)**
-
-- **Input**: Dữ liệu lịch sử giao dịch của khách hàng, danh mục đầu tư, và phân tích sản phẩm.
-- **Output**: Gom nhóm khách hàng có hành vi giao dịch tương đồng và gom nhóm sản phẩm dựa trên đặc điểm.
-- **Tác động**: Kết hợp các nhóm khách hàng với nhóm sản phẩm phù hợp. Ví dụ:
-    - Khách hàng trong một nhóm cụ thể sẽ được gợi ý sản phẩm mà các khách hàng trong cùng nhóm đã đầu tư.
-
-#### **Bước 5: Đề xuất sản phẩm phổ biến và mới (M6, M7)**
-
-- **Input**: Kết quả từ M1, M2 và M3.
-- **Output**: Gợi ý sản phẩm phổ biến và sản phẩm mới dựa trên hành vi và đặc điểm của khách hàng.
-- **Tác động**: Ví dụ, khách hàng mới có thể nhận gợi ý sản phẩm phổ biến để khởi đầu, trong khi khách hàng lâu năm có thể nhận gợi ý sản phẩm mới để khám phá.
-
-#### **Bước 6: Đề xuất sản phẩm tương tự với danh mục hiện tại (M8)**
-
-- **Input**: Danh mục đầu tư hiện tại của khách hàng, embedding của sản phẩm.
-- **Output**: Gợi ý các sản phẩm tương tự dựa trên danh mục hiện tại của khách hàng.
-- **Tác động**: Khuyến nghị các sản phẩm có tính chất tương tự để giúp khách hàng tiếp tục đầu tư trong các lĩnh vực họ quen thuộc.
-
-#### **Bước 7: Đề xuất theo dữ liệu trạng thái (M9) và chuỗi hành vi (M10)**
-
-- **Input**: Lịch sử tương tác của khách hàng trên ứng dụng, trạng thái tài khoản.
-- **Output**: Gợi ý dựa trên các hành vi sử dụng gần đây, ví dụ: các sản phẩm mà khách hàng đã tìm kiếm, xem nhưng chưa mua.
-- **Tác động**: Cập nhật gợi ý theo thời gian thực để tăng tính cá nhân hóa dựa trên hành vi.
-
-#### **Bước 8: Hybrid Recommendation (M11)**
-
-- **Input**: Tất cả các output từ M1 đến M10.
-- **Output**: Tổng hợp kết quả từ các mô hình trên để đưa ra danh sách sản phẩm cuối cùng.
-- **Tác động**: Đưa ra các gợi ý cân bằng giữa sự phổ biến, sự tương đồng với danh mục hiện tại và các sản phẩm mới phù hợp với sở thích cá nhân.
-
-```plaintext
-                          ┌─────────────────────┐
-                          │ Khách hàng & dữ liệu│
-                          └─────────────────────┘
-                                   │
-                                   ▼
-                      ┌────────────────────────────┐
-                      │ Model phân loại khách hàng │ (#M1)
-                      └────────────────────────────┘
-                                   │
-                                   ▼
-        ┌──────────────────────────────┬──────────────────────────────┐
-        ▼                              ▼                              ▼
- ┌────────────────┐            ┌────────────────┐             ┌───────────────────┐
- │ Phân tích đặc  │            │ Phân tích sản  │             │ Gom nhóm khách    │
- │ điểm khách hàng│ (#M2)      │ phẩm (#M3)     │             │ hàng và sản phẩm  │ (#M5)
- └────────────────┘            └────────────────┘             └───────────────────┘
-        │                              │                              │
-        ▼                              ▼                              ▼
- ┌──────────────────────────┐   ┌────────────────────┐     ┌────────────────────────┐
- │ Phân tích tương đồng và  │   │ Đề xuất sản phẩm    │     │ Đề xuất sản phẩm       │
- │ gợi ý theo danh mục hiện │   │ phổ biến & sản phẩm │     │ tương tự (#M8)         │
- │ tại (#M8)                │   │ mới (#M6, #M7)      │     └────────────────────────┘
- └──────────────────────────┘   └────────────────────┘
-         │                              │
-         ▼                              ▼
-  ┌────────────────────────────┐    ┌────────────────────────────┐
-  │ Gợi ý theo chuỗi hành vi   │    │ Gợi ý theo dữ liệu trạng    │
-  │ (#M10 - SASRec)            │    │ thái (#M9)                  │
-  └────────────────────────────┘    └────────────────────────────┘
-                   │                               │
-                   ▼                               ▼
-        ┌───────────────────────────────────────────────────────┐
-        │              Model hybrid recommendation (#M11)        │
-        └───────────────────────────────────────────────────────┘
-                                   │
-                                   ▼
-                          ┌───────────────────────┐
-                          │  Danh sách gợi ý cuối │
-                          │     cho khách hàng    │
-                          └───────────────────────┘
-
-```
-### **Giải thích chi tiết về flowchart:**
-
-1. **Input từ dữ liệu khách hàng**: Dữ liệu về hành vi, danh mục đầu tư, trạng thái tài khoản của khách hàng sẽ được đưa vào model **phân loại khách hàng (M1)** để xác định khách hàng thuộc nhóm nào.
-    
-2. **Phân tích đặc điểm khách hàng (M2)** và **phân tích sản phẩm (M3)** sẽ được áp dụng để hiểu sâu hơn về khách hàng và các sản phẩm tiềm năng.
-    
-3. **Gom nhóm khách hàng và sản phẩm (M5)** sẽ được sử dụng để nhóm các khách hàng có đặc điểm tương tự và cung cấp gợi ý theo nhóm.
-    
-4. **Đề xuất sản phẩm phổ biến (M6)** và **mới (M7)** sẽ đưa ra các sản phẩm phù hợp với từng khách hàng dựa trên xu hướng và sở thích.
-    
-5. **Gợi ý sản phẩm tương tự (M8)** sẽ tạo ra gợi ý dựa trên danh mục hiện tại của khách hàng.
-    
-6. **Mô hình theo chuỗi hành vi (M10)** và **trạng thái tài khoản (M9)** sẽ giúp gợi ý sản phẩm theo hành vi và ngữ cảnh sử dụng app gần đây.
-    
-7. **Cuối cùng, mô hình Hybrid (M11)** sẽ kết hợp tất cả các output từ các mô hình trên để đưa ra danh sách gợi ý cuối cùng, mang tính toàn diện và cá nhân hóa nhất cho khách hàng.
-
-
-
-## **Yêu cầu monitoring**
+## Monitoring
 
 ### Trạng thái model hiện tại
 - Thông tin về model
@@ -392,18 +190,13 @@ Phân loại khách hàng thành các nhóm:
 	- Trạng thái thành công pipeline:
 		- Thời điểm bắt đầu, thời gian hoàn thành
 		- 
+# Appendix
 
+## Recommendation Algorithms Research
 
+### Algorithms research
 
-
-
-# 4. Appendix
-
-## 3.1. Recommendation Algorithms Research
-
-### 3.1.1. Algorithms research
-
-#### 3.1.1.1. Content-based Filtering
+#### Content-based Filtering
 
 Về phương pháp của content-based filtering đã được trình bày rất chi tiết tại [Bài 23: Content-based Recommendation Systems](https://machinelearningcoban.com/2017/05/17/contentbasedrecommendersys/). Tôi sẽ giới thiệu khái quát nhất về thuật toán này.
 
@@ -431,7 +224,7 @@ $$𝐿𝑖(𝑋𝑖;𝑦𝑖)=12𝑠𝑖||𝑋𝑖¯𝑤𝑖¯−𝑦𝑖||22$$
 $$𝐿𝑖(𝑋𝑖;𝑦𝑖)=12𝑠𝑖||𝑋𝑖¯𝑤𝑖¯−𝑦𝑖||22+𝜆2𝑠𝑖||𝑤𝑖¯||22$$
 
 Ưu điểm của phương pháp này là việc phân loại hoặc dự báo rating của các user sẽ độc lập nhau. Điểm rating của một khách hàng A lên sản phẩm P sẽ không bị phụ thuộc bởi những user khác mà chỉ phụ thuộc vào các đặc điểm liên quan đến sản phẩm P. Do đó chất lượng dự báo sẽ được tăng lên khi dữ liệu được thu thập về sản phẩm là những trường có quan trọng ảnh hưởng đến sở thích của khách hàng.
-### 3.1.2. ML Algorithms comparation
+### ML Algorithms comparation
 
 | Algorithms     | Collaborative filtering                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Content-based filtering                                                                                                                                                                                                                                                                                                                                                                                                                                                               | Hybrid Recommender                                                                                                          |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
@@ -440,7 +233,7 @@ $$𝐿𝑖(𝑋𝑖;𝑦𝑖)=12𝑠𝑖||𝑋𝑖¯𝑤𝑖¯−𝑦𝑖||22+�
 | Prods          | **Extremely accurate** and provide effective suggestions, especially when relying on context-aware filtering.<br><br>**Predict customers' interest** in a product they didn't know existed by observing what caught the attention of similar users.<br><br>**No need to understanding the nature of each item**, which eliminates the need for detailed product descriptions.                                                                                                                                                                                                                                                                                                                                                                                                                                                         | Handle the new items with no interaction yet<br><br>Apply for recommendation use for searching by text/ characteristic                                                                                                                                                                                                                                                                                                                                                                | Enhance recommendation systems' performance.                                                                                |
 | Cons           | **Cold start problem:** providing valuable suggestions to new users with no purchase history can be challenging considering the only available parameters (gender, age, etc.).<br><br>**Scalability:** using this algorithm to search for purchase patterns among a growing number of customers and products requires significant computational power.<br><br>**Rich-get-richer effect:** algorithms generally recommend products with many excellent reviews, increasing their popularity at the expense of new items.<br><br>**Data sparsity:** in cases with a large product catalog, each item may not have a sufficient number of user reviews to analyze, reducing the recommendations' accuracy.<br><br>**Shilling attacks:** new products are vulnerable to rating manipulations (such as negative reviews from competitors). | The tagging procedure implies a massive workload, especially on large platforms or marketplaces.<br><br>The cold start issue of collaborative filtering is still there, although less critical than in collaborative filtering, as the historical data associated with new customers is very limited.<br><br>Algorithms can be rather conservative, recommending categories of products and content already purchased by a user and avoiding new, potentially interesting categories. | Merging both mechanisms into a single system requires more complex architectures and superior computing power.              |
 
-### 3.1.3. Advanced feature (planned for development)
+### Advanced feature (planned for development)
 - Session-Based Recommendation : hệ thống recommendation chứa yếu tố time session
 - Thuật toán LSTM dự đoán sản phẩm có khả năng mua tiếp theo của khách hàng dựa vào lịch sử mua sắm.
 - Sử dụng các thuật toán NLP (Natural language processing - Xử lý ngôn ngữ tự nhiên) để phân tích các thông tin như phần tên sản phẩm, mô tả sản phẩm, comment khách hàng về sản phẩm để tìm ra sản phẩm tương đồng.
@@ -450,10 +243,10 @@ $$𝐿𝑖(𝑋𝑖;𝑦𝑖)=12𝑠𝑖||𝑋𝑖¯𝑤𝑖¯−𝑦𝑖||22+�
 - Sử dụng [LDA](https://phamdinhkhanh.github.io/2019/09/08/LDATopicModel.html) để clustering các nhóm sản phẩm có chung đặc điểm và có thể thay thế được cho nhau.
 - Thuật toán association để tìm các sản phẩm hoặc nhóm khách hàng có mối liên hệ trong hành vi mua sắm thông qua một chỉ số là levarage.
 
-## 3.2. Data collection
+## Data collection
 
-### 3.2.1. Customer data
-#### 3.2.1.1. Customer Demographics
+### Customer data
+#### Customer Demographics
 - Customer ID
 - Age
 - Gender
@@ -462,19 +255,19 @@ $$𝐿𝑖(𝑋𝑖;𝑦𝑖)=12𝑠𝑖||𝑋𝑖¯𝑤𝑖¯−𝑦𝑖||22+�
 - Occupation
 - Segmentation
 - Balance Status
-#### 3.2.1.2. Behavioral Data
+#### Behavioral Data
 - Purchase history (stocks bought, quantities, and dates)
 - Browsing history (stocks viewed, search terms used)
 - Interaction history (clicks, likes, comments, shares)
 - Trading patterns (frequency, volume, type of trades, orders history)
 - App usage patterns (login, screen)
-#### 3.2.1.3. Financial Data
+#### Financial Data
 - Portfolio holdings
 - Account balance
 - Transaction history
 - Risk tolerance
-### 3.2.2. Product information
-#### 3.2.2.1. Stock
+### Product information
+#### Stock
 - **Stock Attributes:**
 	- Stock ID
 	- Stock name
@@ -502,7 +295,7 @@ $$𝐿𝑖(𝑋𝑖;𝑦𝑖)=12𝑠𝑖||𝑋𝑖¯𝑤𝑖¯−𝑦𝑖||22+�
 - **Transaction data:**
 	- Historical stock transaction in Pinetree
 	- Return of stock in each customer
-#### 3.2.2.2. Bond
+#### Bond
 - **Identification**:
 	- Bond ID (unique identifier)
 	- Issuer (the entity issuing the bond)
@@ -540,7 +333,7 @@ $$𝐿𝑖(𝑋𝑖;𝑦𝑖)=12𝑠𝑖||𝑋𝑖¯𝑤𝑖¯−𝑦𝑖||22+�
 	- Transaction volume
 	- Buyer and seller IDs (if available)
 	- Popularity
-#### 3.2.2.3. Derivative
+#### Derivative
 - **Identification**:
 	- Contract ID (unique identifier)
 	- Index name
@@ -575,21 +368,21 @@ $$𝐿𝑖(𝑋𝑖;𝑦𝑖)=12𝑠𝑖||𝑋𝑖¯𝑤𝑖¯−𝑦𝑖||22+�
 	- Transaction volume
 	- Buyer and seller IDs (if available)
 	- Popularity
-### 3.2.3. Market data
-#### 3.2.3.1. Market Indicators
+### Market data
+#### Market Indicators
 - Stock market indices (e.g., VN30, VNINDEX)
 - Interest rates
 - Inflation rates
 - Economic indicators (e.g., GDP, unemployment rates)
-#### 3.2.3.2. Market Trends
+#### Market Trends
 - Sector performance trends
 - Industry performance trends
 - Global market conditions
 - Regulatory changes
 
-## 3.3. Schema Design
+## Schema Design
 
-### 3.3.1. Table schema
+### Table schema
 
 **User-Product Recommendations**: the recommended products for each user.
 ```sql
@@ -629,7 +422,7 @@ CREATE TABLE `project_id.dataset_id.user_metadata` (
 )
 ```
 
-### 3.3.2. Data Storage Strategy
+### Data Storage Strategy
 - Denormalization: denormalize the data by embedding frequently accessed metadata within the recommendation table.
 - Partitioning by `timestamp`
 - Clustering by `user_id`
@@ -639,9 +432,13 @@ ALTER TABLE `project_id.dataset_id.user_product_recommendations` SET OPTIONS ( e
 ```
 
 
-# 5. Refs
+# Refs
 1. https://www.itransition.com/machine-learning/recommendation-systems
 2. https://phamdinhkhanh.github.io/2019/11/04/Recommendation_Compound_Part1.html
 3. https://phamdinhkhanh.github.io/2019/12/26/Sorfmax_Recommendation_Neural_Network.html
 4. https://phamdinhkhanh.github.io/2020/02/11/NARSyscom2015.html
 5. https://neptune.ai/blog/recommender-systems-lessons-from-building-and-deployment
+
+# # Timeline
+
+[Product_Recommendation_Plan.xlsx](https://hftvietnam.sharepoint.com/:x:/s/da/EW5NW6zOj_tJgmC0wq7fHAMB-lqcxi7Pn5Z0UWw77Mgn7w?e=49nkct&nav=MTVfezgxMjU0ODlDLUE5OUItNDI1Ny04QUE2LTVEODNFQ0NBQjBEQn0)
