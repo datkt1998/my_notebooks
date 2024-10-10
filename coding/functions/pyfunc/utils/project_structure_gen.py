@@ -8,6 +8,7 @@ structure = {
         "reports": {},
     },
     "config": {
+        ".env.local": None,
         ".env.dev": None,
         ".env.prod": None,
         "config.py": None,

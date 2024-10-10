@@ -15,6 +15,7 @@ project_name/
 │   └── reports/             	    # Báo cáo, kết quả phân tích (PDF, HTML, etc.)
 │
 ├── config/                   	# Cấu hình dự án (hyperparameters, settings, etc.)
+│   ├── .env.local            	    # Config cho môi trường local
 │   ├── .env.dev            	    # Config cho môi trường dev
 │   ├── .env.prod                   # Config cho môi trường prod
 │   ├── config.py                   # Config chung

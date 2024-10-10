@@ -254,6 +254,14 @@ parts:
         sections:
         - file: contents/4_topics_and_guides/2_vertex_ai_gcp/practice/serving_ml_model_gcp/guide.ipynb
           title: Serving ML Model on GCP
+        # - file: contents/4_topics_and_guides/2_vertex_ai_gcp/practice/train_ml_model_gcp/guide.ipynb
+        #   title: Training Model on GCP
+        # - file: contents/4_topics_and_guides/2_vertex_ai_gcp/practice/cicd_vertexai_machine/guide.ipynb
+        #   title: CI/CD on Vertex AI Machine
+        # - file: contents/4_topics_and_guides/2_vertex_ai_gcp/practice/function_calling_genai/guide.ipynb
+        #   title: Setup Function Calling GenAI
+        # - file: contents/4_topics_and_guides/2_vertex_ai_gcp/practice/MLOps_e2e_system_gcp/guide.ipynb
+        #   title: MLOps End-to-End System on GCP
 
 
 # ------------------ MY FUNCTIONS ------------------
