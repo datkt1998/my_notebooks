@@ -50,3 +50,76 @@ Về cơ bản, **Dev container** tạo ra 1 bản sao về môi trường phát
 | ***Quy trình làm việc***                     | 1. Xây dựng Docker image một lần.<br>2. Chia sẻ hoặc triển khai Docker image để chạy ứng dụng.<br>3. Nếu cần phát triển thêm, lập trình viên chỉnh sửa code cục bộ và rebuild lại Docker image nếu cần thay đổi môi trường.<br>4. Người dùng chỉ cần chạy container từ Docker image mà không cần quan tâm đến cấu hình môi trường chi tiết.                                                                                                                                                                                                                                               | 1. Dev Container chứa cả môi trường phát triển và công cụ (IDE tích hợp) được cấu hình sẵn.<br>2. Lập trình viên không cần build lại Docker image thủ công mỗi khi chỉnh sửa code, mà có thể phát triển trực tiếp bên trong container.<br>3. Môi trường phát triển được đồng bộ hóa giữa tất cả các lập trình viên, không yêu cầu thiết lập phức tạp trên mỗi máy.                                                                                                                                                                      |
 | ***Khả năng tái tạo môi trường phát triển*** | Môi trường chỉ tái tạo được ở mức **chạy ứng dụng**, nhưng không bao gồm đầy đủ môi trường phát triển. Để tái tạo môi trường phát triển (cài đặt các công cụ như debugger, linter, v.v.), người dùng phải làm thêm các bước cấu hình thủ công.                                                                                                                                                                                                                                                                                                                                            | Môi trường phát triển được tái tạo hoàn toàn. Khi lập trình viên khác clone dự án và mở bằng Visual Studio Code, mọi thứ (bao gồm các công cụ phát triển) sẽ được tự động cài đặt và sẵn sàng sử dụng.                                                                                                                                                                                                                                                                                                                                  |
 | ***Sự linh hoạt và mở rộng***                | - Docker image cố định hơn và thường không thay đổi thường xuyên trong quá trình phát triển. Khi bạn tạo ra Docker image, mục tiêu là ổn định hóa môi trường **runtime**.<br><br>- Môi trường có thể hơi hạn chế nếu bạn cần thêm các công cụ phát triển mới hoặc cần thử nghiệm các tính năng mới.                                                                                                                                                                                                                                                                                       | - Dev Container linh hoạt hơn trong phát triển. Bạn có thể dễ dàng thay đổi hoặc mở rộng môi trường phát triển bằng cách thêm các công cụ vào `devcontainer.json` hoặc Dockerfile mà không làm ảnh hưởng đến quá trình phát triển hiện tại.<br><br>- Nếu bạn cần thêm công cụ phát triển mới, chỉ cần thêm vào file cấu hình và mọi người trong nhóm đều có thể cập nhật ngay lập tức.                                                                                                                                                  |
+
+## Thiết lập DevContainer
+
+Trong thư mục `.devcontainer` gồm 2 file `Dockerfile` và `devcontainer.json`
+
+### `Dockerfile`
+- `Dockerfile`: Dockerfile là file hướng dẫn cho Docker để xây dựng container. Nó chứa các lệnh để thiết lập môi trường hệ điều hành, cài đặt các thư viện và công cụ cần thiết để chạy ứng dụng.
+```Dockerfile
+# 1. Base image
+FROM python:3.10-slim
+
+# 2. Thiết lập người dùng, thư mục làm việc
+RUN useradd -ms /bin/bash devuser
+WORKDIR /workspace
+
+# 3. Cài đặt các phụ thuộc hệ thống
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpq-dev \
+    curl \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# 4. Cài đặt các thư viện Python từ requirements.txt
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 5. Copy mã nguồn vào container
+COPY . .
+
+# 6. Expose port (nếu cần)
+EXPOSE 8000
+
+# 7. Command khởi chạy container (tùy chọn)
+CMD ["python", "app.py"]
+```
+
+### `devcontainer.json`
+ `devcontainer.json`: là file cấu hình dành riêng cho Visual Studio Code. Nó chỉ định cách Visual Studio Code sẽ khởi tạo và kết nối với Dev Container, và có thể định nghĩa các cài đặt khác như extensions, biến môi trường, và các lệnh sau khi container được tạo.
+```json
+{
+
+    "name": "Python Dev Container", // Tên của Dev Container, được hiển thị trong Visual Studio Code
+    "dockerFile": "Dockerfile", // Chỉ định tên file Dockerfile để xây dựng container. Ở đây là Dockerfile nằm trong cùng thư mục với devcontainer.json.
+    "context": "..", //Chỉ định context mà Docker sẽ sử dụng khi build container. Context thường là thư mục gốc của project. ".." có nghĩa là Docker sẽ sử dụng thư mục cha của .devcontainer/ làm context.
+    "settings": { //Các thiết lập dành cho Visual Studio Code khi kết nối với container. 
+        "terminal.integrated.shell.linux": "/bin/bash" // Thiết lập shell mặc định là /bin/bash.
+    },
+    "extensions": [ // Danh sách các extension của VS Code được tự động cài đặt trong container.
+        "ms-python.python", // Hỗ trợ phát triển Python.
+        "esbenp.prettier-vscode" // Hỗ trợ định dạng code bằng Prettier.
+    ],
+    "postCreateCommand": "pip install -r requirements.txt", // Lệnh này được thực thi sau khi container đã được tạo xong.
+    "runArgs": [   // Các tham số bổ sung khi chạy container. 
+        "--cap-add=SYS_PTRACE", // Cho phép thêm quyền truy cập hệ thống.
+        "--security-opt",
+        "seccomp=unconfined" // Tắt seccomp để cho phép gỡ lỗi trong container (hữu ích cho gỡ lỗi với GDB).
+    ],
+    "remoteUser": "devuser",  // Chỉ định người dùng sẽ được sử dụng bên trong container. Trong ví dụ này, người dùng là devuser (được tạo trong Dockerfile).
+    "containerEnv": { // Các biến môi trường được cài đặt trong container.
+        "PYTHONUNBUFFERED": "1" // đảm bảo rằng output của Python sẽ không bị buffer hóa, giúp dễ dàng theo dõi log trong thời gian thực.
+    },
+    "portsAttributes": { // Cấu hình thuộc tính cho các cổng được mở trong container.
+        "8000": { //  Ở đây, cổng 8000 sẽ tự động chuyển tiếp (forward) ra ngoài, và người dùng sẽ được thông báo khi điều này xảy ra.
+            "label": "App",
+            "onAutoForward": "notify"
+        }
+    },
+    "mounts": [  // Cấu hình các mount points giữa máy host và container. 
+        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" // Ở đây, Docker socket của máy host (/var/run/docker.sock) được mount vào container, giúp container có thể chạy Docker bên trong nó (Docker-in-Docker).
+    ]
+}
+```
