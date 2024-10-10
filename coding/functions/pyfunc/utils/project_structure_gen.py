@@ -8,7 +8,10 @@ structure = {
         "reports": {},
     },
     "config": {
-        "config.yaml": None,
+        ".env.dev": None,
+        ".env.prod": None,
+        "config.py": None,
+        "params.yaml": None,
     },
     "data": {
         "external": {},
@@ -83,7 +86,7 @@ structure = {
 
 
 # Hàm tạo cấu trúc thư mục và tệp
-def create_structure(structure, base_path=None):
+def create_structure(structure, base_path=None, print_structure=False):
     if base_path is None:
         base_path = input("Nhập đường dẫn thư mục project: ")
     assert os.path.exists(base_path), "Project folder not Found"
@@ -97,8 +100,9 @@ def create_structure(structure, base_path=None):
             if not os.path.exists(path):
                 os.makedirs(path, exist_ok=True)
             create_structure(content, path)
-    print("Structure for project created successfully!")
+    if print_structure:
+        print("Structure for project created successfully!")
 
 
 if __name__ == "__main__":
-    create_structure(structure)
+    create_structure(structure, print_structure=True)
