@@ -1,6 +1,7 @@
 # Cấu trúc source code
 
 **Khi tổ chức cấu trúc thư mục:**
+
 - *Tách biệt mã nguồn và dữ liệu*: Đảm bảo dữ liệu, mã nguồn và các file kết quả luôn được tổ chức trong các thư mục riêng biệt.
 - *Sử dụng notebooks cho khám phá*: Đặt các file notebook vào một thư mục riêng để tránh xung đột với mã nguồn chính.
 - *Quản lý các bước xử lý dữ liệu*: Đặt các file xử lý dữ liệu vào thư mục riêng, tránh lẫn lộn với các phần khác như training mô hình.

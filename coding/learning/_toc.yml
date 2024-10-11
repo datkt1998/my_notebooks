@@ -204,6 +204,8 @@ parts:
             title: Big App Example
         - file: contents/3_programming_and_frameworks/python/python_frameworks/streamlit/Streamlit.ipynb
           title: Streamlit
+        - file: contents/3_programming_and_frameworks/python/python_frameworks/pytest/Pytest.ipynb
+          title: Pytest
     - file: contents/3_programming_and_frameworks/2_NoSQL.ipynb
       title: NoSQL
     - file: contents/3_programming_and_frameworks/3_SQL.ipynb

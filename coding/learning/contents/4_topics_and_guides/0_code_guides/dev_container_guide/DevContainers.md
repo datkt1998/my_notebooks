@@ -53,9 +53,25 @@ Về cơ bản, **Dev container** tạo ra 1 bản sao về môi trường phát
 
 ## Thiết lập DevContainer
 
-Trong thư mục `.devcontainer` gồm 2 file `Dockerfile` và `devcontainer.json`
+### Pre-requisites
 
-### `Dockerfile`
+Install:
+- Docker, then enable **WSL using Ubuntu**
+- VSCode + Remote Development extension
+- Git
+
+### Tạo Project folder
+
+- Open WSL terminal (Ubuntu) and navigate to new project folder
+![[navigate_project.webp]]
+- Create the initial dev container config, _before_ I start writing my application code.
+	- Command **Add Dev Container Configuration Files**: 
+	![[add_dev_con.webp]]
+	- Select **Python 3**, then choose whichever version you want to develop on. This will create a _.devcontainer_ folder with a _devcontainer.json_ file inside.
+### Thiết lập tạo mới DevContainier
+
+Trong thư mục `.devcontainer` gồm 2 file `Dockerfile` và `devcontainer.json`
+#### `Dockerfile`
 - `Dockerfile`: Dockerfile là file hướng dẫn cho Docker để xây dựng container. Nó chứa các lệnh để thiết lập môi trường hệ điều hành, cài đặt các thư viện và công cụ cần thiết để chạy ứng dụng.
 ```Dockerfile
 # 1. Base image
@@ -84,42 +100,223 @@ COPY . .
 EXPOSE 8000
 
 # 7. Command khởi chạy container (tùy chọn)
-CMD ["python", "app.py"]
+# CMD ["python", "app.py"]
 ```
 
-### `devcontainer.json`
+#### `devcontainer.json`
  `devcontainer.json`: là file cấu hình dành riêng cho Visual Studio Code. Nó chỉ định cách Visual Studio Code sẽ khởi tạo và kết nối với Dev Container, và có thể định nghĩa các cài đặt khác như extensions, biến môi trường, và các lệnh sau khi container được tạo.
 ```json
 {
+    // Tên của Dev Container, được hiển thị trong Visual Studio Code
+    "name": "Python Dev Container",
+    
+    // Image is Standard Image or Custom Image
+    // More info: https://containers.dev/guide/dockerfile  
+    // "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bullseye"      
 
-    "name": "Python Dev Container", // Tên của Dev Container, được hiển thị trong Visual Studio Code
-    "dockerFile": "Dockerfile", // Chỉ định tên file Dockerfile để xây dựng container. Ở đây là Dockerfile nằm trong cùng thư mục với devcontainer.json.
-    "context": "..", //Chỉ định context mà Docker sẽ sử dụng khi build container. Context thường là thư mục gốc của project. ".." có nghĩa là Docker sẽ sử dụng thư mục cha của .devcontainer/ làm context.
-    "settings": { //Các thiết lập dành cho Visual Studio Code khi kết nối với container. 
-        "terminal.integrated.shell.linux": "/bin/bash" // Thiết lập shell mặc định là /bin/bash.
-    },
-    "extensions": [ // Danh sách các extension của VS Code được tự động cài đặt trong container.
-        "ms-python.python", // Hỗ trợ phát triển Python.
-        "esbenp.prettier-vscode" // Hỗ trợ định dạng code bằng Prettier.
-    ],
-    "postCreateCommand": "pip install -r requirements.txt", // Lệnh này được thực thi sau khi container đã được tạo xong.
-    "runArgs": [   // Các tham số bổ sung khi chạy container. 
-        "--cap-add=SYS_PTRACE", // Cho phép thêm quyền truy cập hệ thống.
-        "--security-opt",
-        "seccomp=unconfined" // Tắt seccomp để cho phép gỡ lỗi trong container (hữu ích cho gỡ lỗi với GDB).
-    ],
-    "remoteUser": "devuser",  // Chỉ định người dùng sẽ được sử dụng bên trong container. Trong ví dụ này, người dùng là devuser (được tạo trong Dockerfile).
-    "containerEnv": { // Các biến môi trường được cài đặt trong container.
-        "PYTHONUNBUFFERED": "1" // đảm bảo rằng output của Python sẽ không bị buffer hóa, giúp dễ dàng theo dõi log trong thời gian thực.
-    },
-    "portsAttributes": { // Cấu hình thuộc tính cho các cổng được mở trong container.
-        "8000": { //  Ở đây, cổng 8000 sẽ tự động chuyển tiếp (forward) ra ngoài, và người dùng sẽ được thông báo khi điều này xảy ra.
-            "label": "App",
-            "onAutoForward": "notify"
-        }
-    },
-    "mounts": [  // Cấu hình các mount points giữa máy host và container. 
-        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" // Ở đây, Docker socket của máy host (/var/run/docker.sock) được mount vào container, giúp container có thể chạy Docker bên trong nó (Docker-in-Docker).
-    ]
+    // Chỉ định tên file Dockerfile để xây dựng container.
+    "dockerFile": "Dockerfile",
+    "context": "..",
+
+    // các tham số khi chạy docker run thành image
+    "runArgs": [
+        "-p", "8080:80"
+        // ,"--memory", "2g"
+        // ,"--cpus", "2"
+    ],
+
+    // Thêm Features bổ sung cho dev container: https://containers.dev/features.
+    // "features": {},                                                    
+
+    // Cài đặt port của containe
+    // Chỉ định các port được mở từ container ra local "host:port"
+    "forwardPorts": [3000, "db:9999"],  
+      
+    // Cấu hình thuộc tính cho các cổng được mở trong container.                                          
+    "portsAttributes": { "8000": { "label": "App", "onAutoForward": "notify" }},
+    
+    // Chạy các lệnh được lưu trong file .devcontainer/post-create.sh sau khi container được tạo xong
+    "postCreateCommand": "bash .devcontainer/post-create.sh",
+    // "postCreateCommand": "pip3 install --user -r requirements.txt",  
+  
+    // Thiết lập các biến môi trường
+    "containerEnv": {
+        "PYTHONUNBUFFERED": "1", // đảm bảo rằng output của Python sẽ không bị buffer hóa, giúp dễ dàng theo dõi log trong thời gian thực.
+        "ENV": "dev"
+    },
+
+    // định nghĩa user chạy trong container, should be non-root if using Dockerfile
+    "remoteUser": "devuser",
+
+    // Configure tool-specific properties.  
+    "customizations": {
+        "settings": {
+            "workbench.iconTheme":"vscode-icons",
+            "workbench.colorCustomizations":{
+               "editorError.background":"#ff4a3d5d",
+               "notebook.cellBorderColor":"#a14b1836",
+               "editor.lineHighlightBackground":"#4c5d7941",
+               "editor.lineHighlightBorder":"#2c2c5a00",
+               "editor.selectionBackground":"#997018",
+               "editor.selectionHighlightBackground":"#0b34706e",
+               "editor.wordHighlightBackground":"#0b34706e",
+               "editorError.foreground":"#00000000"
+            },
+            "notebook.lineNumbers":"on",
+            "security.workspace.trust.untrustedFiles":"open",
+            "editor.suggestSelection":"first",
+            "editor.fontFamily":"Hack Nerd, Fira Code, Roboto Mono, monospace",
+            "editor.fontLigatures":true,
+            "vsintellicode.modify.editor.suggestSelection":"automaticallyOverrodeDefaultValue",
+            "git.enableSmartCommit":true,
+            "git.decorations.enabled":false,
+            "workbench.editorAssociations":{
+               "*.xlsx":"default"
+            },
+            "gitlens.advanced.messages":{
+               "suppressGitMissingWarning":true
+            },
+            "terminal.integrated.shell.linux":"/bin/bash",
+            "editor.fontSize":13,
+            "explorer.confirmDelete":false,
+            "editor.unicodeHighlight.includeStrings":false,
+            "indentRainbow.ignoreErrorLanguages":[
+               "markdown",
+               "haskell"
+            ],
+            "terminal.integrated.defaultProfile.osx":"zsh",
+            "vsicons.dontShowNewVersionMessage":true,
+            "indentRainbow.colors":[
+               "rgba(255,255,64,0.03)",
+               "rgba(127,255,127,0.03)",
+               "rgba(255,127,255,0.03)",
+               "rgba(79,236,236,0.03)"
+            ],
+            "jupyter.interactiveWindow.cellMarker.decorateCells":"allCells",
+            "system-info.processorUsageType":"PROCESS",
+            "[json]":{
+               "editor.defaultFormatter":"esbenp.prettier-vscode"
+            },
+            "[sql]":{
+               "editor.defaultFormatter":"inferrinizzard.prettier-sql-vscode"
+            },
+            "[yaml]":{
+               "editor.defaultFormatter":"esbenp.prettier-vscode"
+            },
+            "ruff.lineLength":79,
+            "cSpell.language":"en,vi",
+            "workbench.startupEditor":"none",
+            "editor.tabCompletion":"on",
+            "emmet.triggerExpansionOnTab":true,
+            "editor.useTabStops":false,
+            "editor.stickyTabStops":true,
+            "editor.acceptSuggestionOnEnter":"smart",
+            "jupyter.widgetScriptSources":[
+               "jsdelivr.com",
+               "unpkg.com"
+            ],
+            "gitlens.launchpad.indicator.enabled":false,
+            "vsintellicode.java.completionsEnabled":false,
+            "files.autoSave":"onFocusChange",
+            "python.analysis.logLevel":"Warning",
+            "indentRainbow.indicatorStyle":"light",
+            "indentRainbow.lightIndicatorStyleLineWidth":2,
+            "indentRainbow.tabmixColor":"rgba(128,32,96,1)",
+            "ruff.nativeServer":"on",
+            "editor.defaultFormatter":"charliermarsh.ruff",
+            "notebook.defaultFormatter":"charliermarsh.ruff",
+            "[python]":{
+               "editor.formatOnSave":true,
+               "editor.codeActionsOnSave":{
+                  "source.fixAll":"explicit",
+                  "source.organizeImports":"explicit"
+               },
+               "editor.defaultFormatter":"charliermarsh.ruff"
+            },
+            "notebook.formatOnSave.enabled":true,
+            "workbench.colorTheme":"One Dark Pro Italic Vivid",
+            "interactiveWindow.executeWithShiftEnter":true,
+            "git.openRepositoryInParentFolders":"always",
+            "redhat.telemetry.enabled":true,
+            "hediet.vscode-drawio.theme":"atlas"
+         },
+    "extensions": [
+        "akamud.vscode-theme-onedark",
+        // "alefragnani.bookmarks",
+        "charliermarsh.ruff",
+        "codeium.codeium",
+        // "cweijan.dbclient-jdbc",
+        // "cweijan.vscode-database-client2",  
+        "donjayamanne.python-environment-manager",
+        "donjayamanne.python-extension-pack",
+        "eamodio.gitlens",
+        "esbenp.prettier-vscode",
+        "hediet.vscode-drawio",
+        "inferrinizzard.prettier-sql-vscode",    
+        "jsjlewis96.one-dark-pro-italic-vivid",
+        "kevinrose.vsc-python-indent",
+        // "masshuu12.system-info",
+        "mechatroner.rainbow-csv",
+        "ms-azuretools.vscode-docker",
+        "ms-python.black-formatter",
+        "ms-python.debugpy",
+        "ms-python.isort",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.datawrangler",
+        "ms-toolsai.jupyter",
+        "ms-toolsai.jupyter-keymap",
+        "ms-toolsai.jupyter-renderers",
+        // "ms-toolsai.vscode-jupyter-cell-tags",
+        // "ms-toolsai.vscode-jupyter-slideshow",
+        // "ms-vscode-remote.remote-containers",
+        // "ms-vscode-remote.remote-ssh",
+        // "ms-vscode-remote.remote-ssh-edit",
+        // "ms-vscode-remote.remote-wsl",
+        // "ms-vscode-remote.vscode-remote-extensionpack",
+        // "ms-vscode.remote-explorer",
+        // "ms-vscode.remote-server",
+        // "mtxr.sqltools",
+        // "mtxr.sqltools-driver-sqlite",
+        "gruntfuggly.todo-tree",
+        "pkief.material-icon-theme",
+        "postman.postman-for-vscode",
+        "redhat.vscode-yaml",
+        "visualstudioexptteam.intellicode-api-usage-examples",
+        "visualstudioexptteam.vscodeintellicode",
+        "vscode-icons-team.vscode-icons",
+        "yzhang.markdown-all-in-one"
+        ]
+    },  
+    
+    // Mount thư mục từ host vào container
+    "mounts": [
+        "source=path_on_host,target=path_in_container,type=bind" ,
+        "source=/path/to/local/config.json,target=/workspace/config.json,type=bind"
+    ]
 }
 ```
+
+- `name`: Tên của DevContainer
+- `image`: nếu sử dụng từ 1 standard image mà không cần cài đặt gì thêm (không dùng custom image build từ Dockerfile), bỏ tham số này nếu sử dụng Dockerfile
+- `dockerFile`: path của `Dockerfile` để build ra custom image cho devcontainer. `Dockerfile` thường nằm trong cùng thư mục với `devcontainer.json`.
+- `context`: context mà Docker sẽ sử dụng khi build container. Context thường là thư mục gốc của project. ".." có nghĩa là Docker sẽ sử dụng thư mục cha của `.devcontainer/` làm context.
+- `features`: Bổ sung các feature cho dev container
+- `forwardPorts`: Chỉ định các port mà muốn forword từ container ra local theo định dạng `host:port` hoặc `port number`. Điều này cho phép bạn truy cập các service chạy bên trong container từ local machine.
+- `portsAttributes`: Cấu hình thuộc tính cho các cổng được mở trong container và mặc định sẽ được forward ra ngoài và người dùng sẽ được thông báo khi điều này xảy ra.
+- `postCreateCommand`: Lệnh này được thực thi sau khi container đã được tạo xong.
+- `containerEnv`: set các cặp name-value pairs được chỉ định làm environment variables, Có thể sử dụng các biến được định nghĩa trước.
+- `mounts`: Cấu hình các mount points giữa máy host và container.
+	- `source`: Đường dẫn trên máy chủ cục bộ (host) mà bạn muốn mount vào container.
+	- `target`: Đường dẫn trong container mà bạn muốn gắn (mount) thư mục hoặc tệp.
+	- `type`: Kiểu mount, thường sử dụng giá trị `"bind"` cho việc mount tệp hoặc thư mục từ host vào container. `"volume"` cũng có thể được sử dụng khi tạo volume Docker.
+- `remoteUser`: Chỉ định người dùng sẽ được sử dụng bên trong container, nếu sử dụng Dockerfile thì thường chỉ định non-root user.
+- `runArgs`: Thêm các tham số khi run image, tương đương với các tham số khi chạy `docker run`
+- `customizations`: Cài đặt VSCode settings và các extensions (Có thể sử dụng setting sync nếu đăng nhập lại VSCode account để đồng bộ hoá các cài đặt, tuy nhiên thường DevContainer sẽ là chia sẻ cho 1 người khác nên việc sync setting thông qua account thì không khả thi)
+	- `settings`: Các settings cho VSCode khi kết nối với container.
+	- `extensions`: Danh sách các extension của VS Code được tự động cài đặt trong container. Tips: Chạy lệnh `code --list-extensions` trong local VSCode 
+
+### Build container
+
+Make sure you have Docker Desktop running and press **Shift+Ctrl+P** and select **Reopen in Container**
+
