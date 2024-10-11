@@ -225,6 +225,8 @@ parts:
       sections:
       - file: contents/4_topics_and_guides/0_code_guides/1_source_code_structure_guide
         title: Source Code Structure
+      - file: contents/4_topics_and_guides/0_code_guides/dev_container_guide/DevContainers.md
+        title: Dev Containers
     - file: contents/4_topics_and_guides/1_mathematics/_index.md
       title: Mathematics
       sections:
