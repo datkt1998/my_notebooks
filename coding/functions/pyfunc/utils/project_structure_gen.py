@@ -18,7 +18,7 @@ structure = {
     "notebooks": {},
     "src": {
         "__init__.py": None,
-        "data": {
+        "processing": {
             "loader.py": None,
         },
         "features": {

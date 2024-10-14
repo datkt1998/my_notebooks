@@ -33,7 +33,7 @@ project_name/
 │   │   ├── .env.prod                   # Config cho môi trường prod
 │   │   ├── config.py                   # Config chung
 │   │   └── params.yaml                  # Tham số
-│   ├── data/                       # Xử lý dữ liệu
+│   ├── processing/                       # Xử lý dữ liệu
 │   │   └── loader.py                   # Hàm tải dữ liệu
 │   ├── features/                   # Xử lý đặc trưng dữ liệu
 │   │   └── features.py                 # Trích xuất và xử lý đặc trưng
