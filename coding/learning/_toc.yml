@@ -204,6 +204,8 @@ parts:
             title: Big App Example
         - file: contents/3_programming_and_frameworks/python/python_frameworks/streamlit/Streamlit.ipynb
           title: Streamlit
+        - file: contents/3_programming_and_frameworks/python/python_frameworks/pytest/Pytest.ipynb
+          title: Pytest
     - file: contents/3_programming_and_frameworks/2_NoSQL.ipynb
       title: NoSQL
     - file: contents/3_programming_and_frameworks/3_SQL.ipynb
@@ -225,6 +227,8 @@ parts:
       sections:
       - file: contents/4_topics_and_guides/0_code_guides/1_source_code_structure_guide
         title: Source Code Structure
+      - file: contents/4_topics_and_guides/0_code_guides/dev_container_guide/DevContainers.md
+        title: Dev Containers
     - file: contents/4_topics_and_guides/1_mathematics/_index.md
       title: Mathematics
       sections:
@@ -254,6 +258,14 @@ parts:
         sections:
         - file: contents/4_topics_and_guides/2_vertex_ai_gcp/practice/serving_ml_model_gcp/guide.ipynb
           title: Serving ML Model on GCP
+        # - file: contents/4_topics_and_guides/2_vertex_ai_gcp/practice/train_ml_model_gcp/guide.ipynb
+        #   title: Training Model on GCP
+        # - file: contents/4_topics_and_guides/2_vertex_ai_gcp/practice/cicd_vertexai_machine/guide.ipynb
+        #   title: CI/CD on Vertex AI Machine
+        # - file: contents/4_topics_and_guides/2_vertex_ai_gcp/practice/function_calling_genai/guide.ipynb
+        #   title: Setup Function Calling GenAI
+        # - file: contents/4_topics_and_guides/2_vertex_ai_gcp/practice/MLOps_e2e_system_gcp/guide.ipynb
+        #   title: MLOps End-to-End System on GCP
 
 
 # ------------------ MY FUNCTIONS ------------------

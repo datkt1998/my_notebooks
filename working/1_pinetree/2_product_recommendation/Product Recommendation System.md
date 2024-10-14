@@ -186,7 +186,7 @@ The primary goal of the recommendation system is to enhance the investment exper
     - **#M05: News Recommendation to Item**: Đề xuất các tin tức liên quan đến sản phẩm tài chính mà người dùng đã hoặc đang quan tâm.
 ## Workflows
 
-
+![model_wf](ML-system-architecture.drawio.svg)
 ## Monitoring
 
 ### Trạng thái model hiện tại
