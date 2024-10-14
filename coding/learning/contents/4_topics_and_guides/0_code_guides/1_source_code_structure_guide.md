@@ -10,85 +10,81 @@
 
 project_name/
 │
-├── docs/                    	# Tài liệu mô hình/dự án và tài liệu tham khảo, links, v.v.
-│   └── references/          	    # Tài liệu tham khảo, links, v.v.
-│   └── materials/           	    # Tài liệu mô hình/dự án
-│   └── reports/             	    # Báo cáo, kết quả phân tích (PDF, HTML, etc.)
+├── docs/                       # Tài liệu mô hình/dự án và tài liệu tham khảo, links, v.v.
+│   └── references/                 # Tài liệu tham khảo, links, v.v.
+│   └── materials/                  # Tài liệu mô hình/dự án
+│   └── reports/                    # Báo cáo, kết quả phân tích (PDF, HTML, etc.)
 │
-├── config/                   	# Cấu hình dự án (hyperparameters, settings, etc.)
-│   ├── .env.local            	    # Config cho môi trường local
-│   ├── .env.dev            	    # Config cho môi trường dev
-│   ├── .env.prod                   # Config cho môi trường prod
-│   ├── config.py                   # Config chung
-│   └── params.yaml           	    # Tham số
+├── data/                       # Dữ liệu thô và dữ liệu đã xử lý
+│   ├── external/                   # Dữ liệu từ nguồn bên ngoài (không có update khi chạy production)
+│   ├── raw/                        # Dữ liệu gốc (dữ liệu input khi model chạy production)
+│   ├── interim/                    # Dữ liệu trung gian trong quá trình xử lý
+│   ├── processed/                  # Dữ liệu đã được xử lý
+│   ├── features/                   # (optional) Dữ liệu features được được tạo ra (chỉ lưu trong quá trình dev model)
+│   └── output/                     # Kết quả dự đoán và các file output khác   
 │
-├── data/                    	# Dữ liệu thô và dữ liệu đã xử lý
-│   ├── external/            	    # Dữ liệu từ nguồn bên ngoài (không có update khi chạy production)
-│   ├── raw/                 	    # Dữ liệu gốc (dữ liệu input khi model chạy production)
-│   ├── interim/             	    # Dữ liệu trung gian trong quá trình xử lý
-│   ├── processed/           	    # Dữ liệu đã được xử lý
-│   └── features/            	    # (optional) Dữ liệu features được được tạo ra (chỉ lưu trong quá trình dev model, không export ra file khi run model in production)
+├── notebooks/                  # Các file notebook Jupyter
 │
-├── notebooks/               	# Các file notebook Jupyter
-│
-├── src/                     	# Mã nguồn chính của dự án
-│   ├── __init__.py          	    # File init để biến src thành module
-│   ├── data/                	    # Xử lý dữ liệu
-│   │   └── loader.py        	        # Hàm tải dữ liệu
-│   ├── features/            	    # Xử lý đặc trưng dữ liệu
-│   │   └── features.py      	        # Trích xuất và xử lý đặc trưng
-│   ├── models/              	    # Mô hình machine learning/AI
-│   │   ├── model.py         	        # Định nghĩa mô hình
-│   │   ├── train.py         	        # Training mô hình
-│   │   └── evaluate.py      	        # Đánh giá mô hình
-│   ├── visualization/       	    # Các hàm trực quan hóa dữ liệu
+├── src/                        # Mã nguồn chính của dự án
+│   ├── __init__.py                 # File init để biến src thành module
+│   ├── config/                      # Cấu hình dự án (hyperparameters, settings, etc.)
+│   │   ├── .env.local                   # Config cho môi trường local
+│   │   ├── .env.dev                   # Config cho môi trường dev
+│   │   ├── .env.prod                   # Config cho môi trường prod
+│   │   ├── config.py                   # Config chung
+│   │   └── params.yaml                  # Tham số
+│   ├── data/                       # Xử lý dữ liệu
+│   │   └── loader.py                   # Hàm tải dữ liệu
+│   ├── features/                   # Xử lý đặc trưng dữ liệu
+│   │   └── features.py                 # Trích xuất và xử lý đặc trưng
+│   ├── models/                     # Mô hình machine learning/AI
+│   │   ├── model.py                    # Định nghĩa mô hình
+│   │   ├── train.py                    # Training mô hình
+│   │   └── evaluate.py                 # Đánh giá mô hình
+│   ├── visualization/              # Các hàm trực quan hóa dữ liệu
 │   │   └── visualization.py 
-│   └── utils/               	    # Các hàm tiện ích, helpers
+│   ├── apps/                       # Giao diện tương tác
+│   │   ├── api/                          # API
+│   │   │   ├── __init__.py                 # File init để biến src thành module
+│   │   │   ├── api.py                      # Main API
+│   │   │   ├── dependencies.py             # Dependency config
+│   │   │   ├── routers/                    # API
+│   │   │   │   └── users.py                    # User endpoint
+│   │   │   └── internal/                   # Internal config
+│   │   │       └── admin.py                    # Admin endpoint
+│   │   ├── streamlit/                  # Streamlit Web
+│   │   │   └── streamlit_app.py            # Streamlit interface
+│   │   └── app.py                      # Ứng dụng chính sử dụng Streamlit hoặc API đó để tương tác người dùng
+│   └── utils/                      # Các hàm tiện ích, helpers
 │       └── utils.py
 │
-├── tests/                   	# Các bài test để kiểm tra module
+├── tests/                      # Các bài test để kiểm tra module
 │   └── test_model.py
 │
-├── output/                  	# Kết quả dự đoán và các file output khác
+├── logs/                       # File log (trong quá trình training)
 │
-├── logs/                    	# File log (trong quá trình training)
+├── scripts/                    # Các script để chạy training, inference
+│   └── run_training.py             # Script chạy mô hình
 │
-├── scripts/                 	# Các script để chạy training, inference
-│   └── run_training.py      	    # Script chạy mô hình
-│
-├── models/                  	# Mô hình đã được lưu lại
+├── models/                     # Mô hình đã được lưu lại
 │ 
-├── deployments/             	# Tài liệu triển khai (Docker, GCP, etc.)
-│   ├── Dockerfile            	    # Dockerfile để container hóa ứng dụng
-│   ├── docker-compose.yml   	    # File docker-compose (nếu sử dụng nhiều container)
-│   ├── gcp_deployment.yaml  	    # Cấu hình cho việc deploy lên GCP Vertex AI
-│   ├── cloud/               	    # Scripts liên quan đến cloud deployment
-│   │   ├── vertex_ai.py     	        # Script triển khai lên Vertex AI
-│   │   └── cloudbuild.yaml  	        # Cấu hình Cloud Build trên GCP
-│   └── kubernetes/          	    # File để triển khai trên Kubernetes (nếu sử dụng)
-│       ├── deployment.yaml  	        # Cấu hình triển khai trên Kubernetes
-│       └── service.yaml     	        # Cấu hình dịch vụ trên Kubernetes
-│ 
-├── apps/                    	# Giao diện tương tác
-│   ├── api/               	 	    # API
-│   │   ├── __init__.py                 # File init để biến src thành module
-│   │   ├── api.py     		 	        # Main API
-│   │   ├── dependencies.py             # Dependency config
-│   │   ├── routers/                    # API
-│   │   │   └── users.py     	            # User endpoint
-│   │   └── internal/                   # Internal config
-│   │       └── admin.py     	            # Admin endpoint
-│   ├── streamlit/           	    # Streamlit Web
-│   │   └── streamlit_app.py 	        # Streamlit interface
-│   └── app.py               	    # Ứng dụng chính sử dụng Streamlit hoặc API đó để tương tác người dùng
+├── deployments/                # Tài liệu triển khai (Docker, GCP, etc.)
+│   ├── Dockerfile                   # Dockerfile để container hóa ứng dụng
+│   ├── docker-compose.yml          # File docker-compose (nếu sử dụng nhiều container)
+│   ├── gcp_deployment.yaml         # Cấu hình cho việc deploy lên GCP Vertex AI
+│   ├── cloud/                      # Scripts liên quan đến cloud deployment
+│   │   ├── vertex_ai.py                # Script triển khai lên Vertex AI
+│   │   └── cloudbuild.yaml             # Cấu hình Cloud Build trên GCP
+│   └── kubernetes/                 # File để triển khai trên Kubernetes (nếu sử dụng)
+│       ├── deployment.yaml             # Cấu hình triển khai trên Kubernetes
+│       └── service.yaml                # Cấu hình dịch vụ trên Kubernetes
 │
-│
-├── .gitignore               	# File gitignore để bỏ qua các file không cần commit
-├── environment.yml          	# Môi trường Anaconda/Conda (nếu dùng)
-├── requirements.txt         	# Thư viện cần thiết cho dự án
-├── README.md                	# Thông tin dự án
-├── main.py                  	# Script chạy chính của model
-└── setup.py                 	# Cài đặt dự án thành package Python (nếu cần)
+├── .gitignore                  # File gitignore để bỏ qua các file không cần commit
+├── environment.yml             # Môi trường Anaconda/Conda (nếu dùng)
+├── requirements.txt            # Thư viện cần thiết cho dự án
+├── README.md                   # Thông tin dự án
+├── main.py                     # Script chạy chính của model
+└── setup.py                    # Cài đặt dự án thành package Python (nếu cần)
 
 ```
 
@@ -267,7 +263,7 @@ cython_debug/
 data/
 ```
 
-### `.gitignore` sample
+### `.gcloudignore` sample
 
 ```plain text
 .gcloudignore
@@ -312,4 +308,3 @@ tests/
 # dataset
 data/
 ```
-
