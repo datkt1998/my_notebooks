@@ -267,6 +267,9 @@ example[".env.prod"] = """
 # Environment runtime
 ENV=prod
 """
+example['requirements.txt'] = """
+pip-chill
+"""
 
 
 # Hàm tạo cấu trúc thư mục và tệp
