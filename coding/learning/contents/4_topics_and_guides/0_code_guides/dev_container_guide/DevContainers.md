@@ -1,4 +1,4 @@
-
+# Setup Dev container
 **Dev container** là một môi trường phát triển được đóng gói bên trong một **container** để cung cấp sự nhất quán và dễ dàng quản lý trong quá trình phát triển phần mềm. Container, thường dựa trên công nghệ như Docker, giúp tạo ra các môi trường phát triển độc lập và có thể tái tạo được, giúp giảm thiểu các vấn đề về cấu hình môi trường khi chuyển đổi giữa các máy hoặc giữa các thành viên trong nhóm.
 
 Về cơ bản, **Dev container** tạo ra 1 bản sao về môi trường phát triển dự án (khác với đóng gói ứng dụng run trong môi trường production), bao gồm:
@@ -9,7 +9,7 @@ Về cơ bản, **Dev container** tạo ra 1 bản sao về môi trường phát
 Điều này đảm bảo tất cả mọi thứ đều giống nhau trên các máy khác nhau và các hệ điều hành khác nhau.
 
 **Ví dụ**: Nếu một dự án yêu cầu Python 3.10 và một số công cụ phụ trợ như PostgreSQL và Redis để phát triển, việc cài đặt từng thành phần này theo cách thủ công và quản lý sự tương thích giữa chúng có thể phức tạp, nhưng với Dev Container, bạn có thể cấu hình tất cả trong một file `Dockerfile` hoặc `devcontainer.json`.
-### Một số đặc điểm của **Dev Container**:
+## Đặc điểm **Dev Container**
 
 1. **Môi trường phát triển cô lập**: Dev container cho phép bạn chạy môi trường phát triển trong một container độc lập với hệ điều hành của máy chủ. Điều này có nghĩa là bạn có thể sử dụng các phiên bản cụ thể của phần mềm, thư viện và công cụ mà không làm ảnh hưởng đến hệ điều hành chính.
 
@@ -38,7 +38,7 @@ Về cơ bản, **Dev container** tạo ra 1 bản sao về môi trường phát
 2. Khi một thành viên mới tham gia dự án, họ chỉ cần khởi động container trên máy của họ thông qua Docker, và mọi công cụ, thư viện sẽ được thiết lập tự động theo cấu hình đã định sẵn.
 3. Mọi người trong nhóm sẽ làm việc trên cùng một môi trường phát triển, giảm thiểu rủi ro về việc "máy của tôi chạy được mà máy bạn thì không".
 
-## Khác biệt của DevContainer vs AppContainer
+### Khác biệt của DevContainer vs AppContainer
 
 
 | **TIêu chí**                                 | **AppContainer**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | **DevContainer**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
