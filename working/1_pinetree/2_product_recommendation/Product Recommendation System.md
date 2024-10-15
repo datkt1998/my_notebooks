@@ -147,43 +147,42 @@ The primary goal of the recommendation system is to enhance the investment exper
 ![model_design](Model-design.drawio.svg)
 
 ### **User Data**
-- **#U01: Customer Status Classification**: Phân loại trạng thái khách hàng thành các nhóm. Thông tin này giúp xác định các loại recommendation phù hợp cho từng nhóm khách hàng.:
+- **U01: Customer Status Classification**: Phân loại trạng thái khách hàng thành các nhóm. Thông tin này giúp xác định các loại recommendation phù hợp cho từng nhóm khách hàng.:
     - Churn (rời bỏ), Inactive (không hoạt động), New (mới).
     - Active (hoạt động)
     - Reactive (tái kích hoạt). 
-- **#U02: User Labeling Analysis**: Phân tích dữ liệu nhãn của người dùng, dựa trên hành vi sử dụng hoặc các thông tin có sẵn để cung cấp các yếu tố đầu vào cho các bước xử lý tiếp theo.
-- **#U03: User-Item Rating**: Người dùng được đánh giá mức độ tương tác hoặc quan tâm đến các sản phẩm tài chính (Item) để hiểu rõ sự ưa thích của họ đối với từng loại sản phẩm.
-- **#U04: User-Security Type Rating**: Xếp hạng mức độ quan tâm của người dùng đối với từng loại sản phẩm chứng khoán cụ thể như cổ phiếu, trái phiếu, hoặc các loại hình đầu tư khác.
-- **#U05: User Similarity Scoring**: Tính toán điểm tương đồng giữa người dùng với nhau dựa trên các tiêu chí như lịch sử giao dịch, sở thích đầu tư nhằm gợi ý các sản phẩm mà những người dùng tương tự đã quan tâm.
+- **U02: User Labeling Analysis**: Phân tích dữ liệu nhãn của người dùng, dựa trên hành vi sử dụng hoặc các thông tin có sẵn để cung cấp các yếu tố đầu vào cho các bước xử lý tiếp theo.
+- **U03: Feedback Analysis**: Phân tích các phản hồi của user với các recommendation.
+- **U04: User-Item Rating**: Người dùng được đánh giá mức độ tương tác hoặc quan tâm đến các sản phẩm tài chính (Item) để hiểu rõ sự ưa thích của họ đối với từng loại sản phẩm.
+- **U05: User Similarity Scoring**: Tính toán điểm tương đồng giữa người dùng với nhau dựa trên các tiêu chí như lịch sử giao dịch, sở thích đầu tư nhằm gợi ý các sản phẩm mà những người dùng tương tự đã quan tâm.
+- **U06: User-Type Rating**: Xếp hạng mức độ quan tâm của người dùng đối với từng loại sản phẩm chứng khoán cụ thể như cổ phiếu, trái phiếu, hoặc các loại hình đầu tư khác.
 ### **Item Data**
-- **#I01: Item Labeling Analysis**: Phân tích nhãn cho các sản phẩm tài chính dựa trên các yếu tố như khối lượng giao dịch, tính phổ biến, và loại ngành nghề (sector).
-- **#I02: Portfolio Detection by Characteristics**: Xác định 1 danh mục đại diện cho một yếu tố nào đó:
+- **I01: Item Labeling Analysis**: Phân tích nhãn cho các sản phẩm tài chính dựa trên các yếu tố như khối lượng giao dịch, tính phổ biến, và loại ngành nghề (sector).
+- **I02: Portfolio Segmentation**: Xác định 1 danh mục đại diện cho một yếu tố nào đó:
     - High performance (hiệu suất cao)
     - Popular (phổ biến)
     - Sector-specific (theo ngành)
     - New Items (sản phẩm mới)
-- **#I03: Item Similarity Scoring**: Tính điểm tương đồng giữa các sản phẩm tài chính dựa trên các yếu tố như hiệu suất, loại hình đầu tư và các yếu tố khác.
+- **I03: Item Similarity Scoring**: Tính điểm tương đồng giữa các sản phẩm tài chính dựa trên các yếu tố như hiệu suất, loại hình đầu tư và các yếu tố khác.
 ### **News Data**
-- **#N01: News Labeling Analysis**: Phân tích và gắn nhãn cho các bài báo, tin tức dựa trên các tiêu chí như ngành nghề, cảm xúc, chủ đề, và các nhãn liên quan đến mã chứng khoán (symbol tags).
-- **#N02: News Similarity Scoring**: Tính điểm tương đồng giữa các tin tức, giúp gợi ý các bài viết có nội dung tương tự cho người dùng.
-- **#N03: Related News to Items**: Liên kết tin tức phù hợp với các sản phẩm tài chính, từ đó cung cấp tin tức có liên quan đến từng loại chứng khoán cụ thể mà người dùng đang quan tâm.
+- **N01: News Labeling Analysis**: Phân tích và gắn nhãn cho các bài báo, tin tức dựa trên các tiêu chí như ngành nghề, cảm xúc, chủ đề, và các nhãn liên quan đến mã chứng khoán (symbol tags).
+- **N02: Related News to Items**: Liên kết tin tức phù hợp với các sản phẩm tài chính, từ đó cung cấp tin tức có liên quan đến từng loại chứng khoán cụ thể mà người dùng đang quan tâm.
 ### **Hệ thống recommendation**
 - **Base-models:**
-    - **#R01:** **Popularity Portfolio Recommendation (In-active + New)**: Gợi ý các danh mục đầu tư phổ biến.
-    - **#R02: High Performance Portfolio Recommendation** **(In-active + New)**: Gợi ý các danh mục có hiệu suất cao.
-    - **#R03: Similar User Recommendation (Active + Re-active)**: Gợi ý các sản phẩm mà những người dùng có điểm tương đồng với người dùng hiện tại đã quan tâm.
-    - **#R04: Preference Sector Recommendation (Active + Re-active)**: Đề xuất sản phẩm thuộc cùng ngành với những sản phẩm mà người dùng đã đầu tư hoặc quan tâm.
-    - **#R05: New Items Recommendation (Active + Re-active)**: Gợi ý các sản phẩm mới.
-    - **#R06: Similar Items Recommendation (Active + Re-active)**: Đề xuất các sản phẩm tương tự dựa trên các yếu tố như loại sản phẩm, hiệu suất đầu tư.
-    - **#R07: User Profile Info. Rec. (Wide & Deep Learning) (Active)**: Sử dụng mô hình học sâu để phân tích thông tin chi tiết hồ sơ người dùng, từ đó đưa ra các gợi ý cá nhân hóa.
-    - **#R08: Recent Behavior Rec. (SASRec) (Active)**: Dựa vào các hành vi gần đây để gợi ý các item có khả năng người dùng đang quan tâm.
+    - **B01: High Performance Portfolio Recommendation**: Gợi ý các danh mục đầu tư phổ biến.
+    - **B02: Popularity Portfolio Recommendation**: Gợi ý các danh mục có hiệu suất cao.
+    - **B03: Similar User Recommendation**: Gợi ý các sản phẩm mà những người dùng có điểm tương đồng với người dùng hiện tại đã quan tâm.
+    - **B04: Preference Sector Recommendation**: Đề xuất sản phẩm thuộc cùng ngành với những sản phẩm mà người dùng đã đầu tư hoặc quan tâm.
+    - **B05: New Items Recommendation**: Gợi ý các sản phẩm mới.
+    - **B06: Similar Items Recommendation**: Đề xuất các sản phẩm tương tự dựa trên các yếu tố như loại sản phẩm, hiệu suất đầu tư.
+    - **B07: User Profile Info. Rec. (Wide & Deep Learning)**: Sử dụng mô hình học sâu để phân tích thông tin chi tiết hồ sơ người dùng, từ đó đưa ra các gợi ý cá nhân hóa.
+    - **B08: Recent Behavior Rec. (SASRec)**: Dựa vào các hành vi gần đây để gợi ý các item có khả năng người dùng đang quan tâm.
 
 - **Meta-models:**
-    - **#M01: Up-sell Recommendation**: Đề xuất các sản phẩm cùng loại.
-    - **#M02: Cross-sell Recommendation**: Đề xuất các sản phẩm khác loại (cross-sell) dựa trên mức độ phù hợp với các loại hình đầu tư mà người dùng có thể quan tâm.
-    - **#M03: Related Securities Recommendation**: Đề xuất các sản phẩm chứng khoán có liên quan đến item cụ thể.
-    - **#M04: News Recommendation to User**: Gợi ý các bài báo phù hợp với sở thích và hành vi của người dùng. Tin tức phải gần với thời gian thực để đảm bảo tính cập nhật.
-    - **#M05: News Recommendation to Item**: Đề xuất các tin tức liên quan đến sản phẩm tài chính mà người dùng đã hoặc đang quan tâm.
+    - **M01: Up-sell Recommendation**: Đề xuất các sản phẩm cùng loại.
+    - **M02: Cross-sell Recommendation**: Đề xuất các sản phẩm khác loại (cross-sell) dựa trên mức độ phù hợp với các loại hình đầu tư mà người dùng có thể quan tâm.
+    - **M03: Related Securities Recommendation**: Đề xuất các sản phẩm chứng khoán có liên quan đến item cụ thể.
+    - **M04: News Recommendation to Item**: Đề xuất các tin tức liên quan đến sản phẩm tài chính mà người dùng đã hoặc đang quan tâm.
 ## Workflows
 
 ![model_wf](ML-system-architecture.drawio.svg)
