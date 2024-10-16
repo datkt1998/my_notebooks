@@ -16,6 +16,13 @@ structure = {
         "output": {},
     },
     "notebooks": {},
+    "config": {
+            ".env.local": None,
+            ".env.dev": None,
+            ".env.prod": None,
+            "config.py": None,
+            "params.yaml": None,
+        },
     "src": {
         "__init__.py": None,
         "processing": {
@@ -34,13 +41,6 @@ structure = {
         },
         "utils": {
             "utils.py": None,
-        },
-        "config": {
-            ".env.local": None,
-            ".env.dev": None,
-            ".env.prod": None,
-            "config.py": None,
-            "params.yaml": None,
         },
         "apps": {
             "api": {

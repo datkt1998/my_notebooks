@@ -25,14 +25,15 @@ project_name/
 │
 ├── notebooks/                  # Các file notebook Jupyter
 │
+├── config/                      # Cấu hình dự án (hyperparameters, settings, etc.)
+│   ├── .env.local                   # Config cho môi trường local
+│   ├── .env.dev                   # Config cho môi trường dev
+│   ├── .env.prod                   # Config cho môi trường prod
+│   ├── config.py                   # Config chung
+│   └── params.yaml                  # Tham số
+│
 ├── src/                        # Mã nguồn chính của dự án
 │   ├── __init__.py                 # File init để biến src thành module
-│   ├── config/                      # Cấu hình dự án (hyperparameters, settings, etc.)
-│   │   ├── .env.local                   # Config cho môi trường local
-│   │   ├── .env.dev                   # Config cho môi trường dev
-│   │   ├── .env.prod                   # Config cho môi trường prod
-│   │   ├── config.py                   # Config chung
-│   │   └── params.yaml                  # Tham số
 │   ├── processing/                       # Xử lý dữ liệu
 │   │   └── loader.py                   # Hàm tải dữ liệu
 │   ├── features/                   # Xử lý đặc trưng dữ liệu
