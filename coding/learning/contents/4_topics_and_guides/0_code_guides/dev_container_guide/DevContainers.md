@@ -255,6 +255,7 @@ EXPOSE 8000
         "inferrinizzard.prettier-sql-vscode",    
         "jsjlewis96.one-dark-pro-italic-vivid",
         "kevinrose.vsc-python-indent",
+        "ima-miz-vscode.pip-package-manager",
         // "masshuu12.system-info",
         "mechatroner.rainbow-csv",
         "ms-azuretools.vscode-docker",

@@ -16,9 +16,16 @@ structure = {
         "output": {},
     },
     "notebooks": {},
+    "config": {
+            ".env.local": None,
+            ".env.dev": None,
+            ".env.prod": None,
+            "config.py": None,
+            "params.yaml": None,
+        },
     "src": {
         "__init__.py": None,
-        "data": {
+        "processing": {
             "loader.py": None,
         },
         "features": {
@@ -34,13 +41,6 @@ structure = {
         },
         "utils": {
             "utils.py": None,
-        },
-        "config": {
-            ".env.local": None,
-            ".env.dev": None,
-            ".env.prod": None,
-            "config.py": None,
-            "params.yaml": None,
         },
         "apps": {
             "api": {
@@ -247,7 +247,9 @@ cython_debug/
 #  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
-#.idea/
+.idea/
+.DS_Store
+**/.DS_Store
 
 .vscode/
 
@@ -266,6 +268,9 @@ ENV=dev
 example[".env.prod"] = """
 # Environment runtime
 ENV=prod
+"""
+example['requirements.txt'] = """
+pip-chill
 """
 
 

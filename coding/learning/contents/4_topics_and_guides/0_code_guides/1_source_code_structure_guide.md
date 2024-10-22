@@ -25,15 +25,16 @@ project_name/
 │
 ├── notebooks/                  # Các file notebook Jupyter
 │
+├── config/                      # Cấu hình dự án (hyperparameters, settings, etc.)
+│   ├── .env.local                   # Config cho môi trường local
+│   ├── .env.dev                   # Config cho môi trường dev
+│   ├── .env.prod                   # Config cho môi trường prod
+│   ├── config.py                   # Config chung
+│   └── params.yaml                  # Tham số
+│
 ├── src/                        # Mã nguồn chính của dự án
 │   ├── __init__.py                 # File init để biến src thành module
-│   ├── config/                      # Cấu hình dự án (hyperparameters, settings, etc.)
-│   │   ├── .env.local                   # Config cho môi trường local
-│   │   ├── .env.dev                   # Config cho môi trường dev
-│   │   ├── .env.prod                   # Config cho môi trường prod
-│   │   ├── config.py                   # Config chung
-│   │   └── params.yaml                  # Tham số
-│   ├── data/                       # Xử lý dữ liệu
+│   ├── processing/                       # Xử lý dữ liệu
 │   │   └── loader.py                   # Hàm tải dữ liệu
 │   ├── features/                   # Xử lý đặc trưng dữ liệu
 │   │   └── features.py                 # Trích xuất và xử lý đặc trưng
@@ -255,7 +256,9 @@ cython_debug/
 #  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
-#.idea/
+.idea/
+.DS_Store
+**/.DS_Store
 
 .vscode/
 
