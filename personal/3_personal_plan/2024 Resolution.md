@@ -22,8 +22,8 @@
 - Walk more, cycle every day
 ### 2.1.2. Eat a healthy diet: 
  - Drink a lot of water: 
-	 - 3.5L / day 
-	 - 5 whey bottle / day 
+	 - 3L / day 
+	 - 4-5 whey bottle / day 
 	 - 1 whey bottle / 3h
 	 - Timeline:
 		- Morning (7am-10am)
