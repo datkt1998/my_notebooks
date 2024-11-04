@@ -140,6 +140,7 @@ The primary goal of the recommendation system is to enhance the investment exper
 | -------------------------------------------------------------------------------------- | ------------------ | ----------------------------- | ------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | Suggest news on customers's interest based on search history and watchlist             | Price Board + News | When logging into price board | - Scrolling text on Price Board  <br>Or  <br>- Sending notification | - Scrolling text: News summary content  <br>- Notification: News summary content                                                       | Max 5 news, News listed based on which interest Customers the most) |
 | Allow customers to provide feedback (like, dislike) to improve future recommendations. | Price Board        | Whenever Customers want       | Button Like/Dislike under each news                                 | “Thank you for your detailed feedback. We truly appreciate the time you took to share your thoughts and the insights you’ve provided.” | Appear after the feedback is received                               |
+
 # Model design and workflows
 
 ## Model design
