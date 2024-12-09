@@ -191,6 +191,8 @@ parts:
       - file: contents/3_programming_and_frameworks/python/python_frameworks/_index
         title: Python Frameworks
         sections:
+        - file: contents/3_programming_and_frameworks/python/python_frameworks/polars/Polars.ipynb
+          title: Polars
         - file: contents/3_programming_and_frameworks/python/python_frameworks/pyspark/PySpark.ipynb
           title: PySpark
         - file: contents/3_programming_and_frameworks/python/python_frameworks/pydantic/Pydantic.ipynb
