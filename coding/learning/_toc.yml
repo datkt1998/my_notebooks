@@ -66,7 +66,7 @@ parts:
       title: Ensemble Approaches
 
   - file: contents/1_data_processing/4_feature_selection_and_decomposition/_index
-    title: Imbalance Data Handling
+    title: Feature Selection & Decomposition
     sections:
     - file: contents/1_data_processing/4_feature_selection_and_decomposition/01_filter_methods
       title: Filter Methods
