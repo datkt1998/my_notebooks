@@ -188,26 +188,26 @@ parts:
         title: Concurrency & Parallelism
       - file: contents/3_programming_and_frameworks/python/3_python_environment.ipynb
         title: Python Environment
-      - file: contents/3_programming_and_frameworks/python/python_frameworks/_index
-        title: Python Frameworks
+    - file: contents/3_programming_and_frameworks/python_frameworks/_index
+      title: Python Frameworks
+      sections:
+      - file: contents/3_programming_and_frameworks/python_frameworks/polars/Polars.ipynb
+        title: Polars
+      - file: contents/3_programming_and_frameworks/python_frameworks/pyspark/PySpark.ipynb
+        title: PySpark
+      - file: contents/3_programming_and_frameworks/python_frameworks/pydantic/Pydantic.ipynb
+        title: Pydantic
+      - file: contents/3_programming_and_frameworks/python_frameworks/fastapi/FastAPI.ipynb
+        title: FastAPI
         sections:
-        - file: contents/3_programming_and_frameworks/python/python_frameworks/polars/Polars.ipynb
-          title: Polars
-        - file: contents/3_programming_and_frameworks/python/python_frameworks/pyspark/PySpark.ipynb
-          title: PySpark
-        - file: contents/3_programming_and_frameworks/python/python_frameworks/pydantic/Pydantic.ipynb
-          title: Pydantic
-        - file: contents/3_programming_and_frameworks/python/python_frameworks/fastapi/FastAPI.ipynb
-          title: FastAPI
-          sections:
-          - file: contents/3_programming_and_frameworks/python/python_frameworks/fastapi/example_small_app/guide.ipynb
-            title: Small App Example
-          - file: contents/3_programming_and_frameworks/python/python_frameworks/fastapi/example_big_app/guide.ipynb
-            title: Big App Example
-        - file: contents/3_programming_and_frameworks/python/python_frameworks/streamlit/Streamlit.ipynb
-          title: Streamlit
-        - file: contents/3_programming_and_frameworks/python/python_frameworks/pytest/Pytest.ipynb
-          title: Pytest
+        - file: contents/3_programming_and_frameworks/python_frameworks/fastapi/example_small_app/guide.ipynb
+          title: Small App Example
+        - file: contents/3_programming_and_frameworks/python_frameworks/fastapi/example_big_app/guide.ipynb
+          title: Big App Example
+      - file: contents/3_programming_and_frameworks/python_frameworks/streamlit/Streamlit.ipynb
+        title: Streamlit
+      - file: contents/3_programming_and_frameworks/python_frameworks/pytest/Pytest.ipynb
+        title: Pytest
     - file: contents/3_programming_and_frameworks/2_NoSQL.ipynb
       title: NoSQL
     - file: contents/3_programming_and_frameworks/3_SQL.ipynb
@@ -268,6 +268,11 @@ parts:
         #   title: Setup Function Calling GenAI
         # - file: contents/4_topics_and_guides/2_vertex_ai_gcp/practice/MLOps_e2e_system_gcp/guide.ipynb
         #   title: MLOps End-to-End System on GCP
+    - file: contents/4_topics_and_guides/3_data_transformation_pipeline/_index.md
+      title: Data Transformation Pipeline
+      sections:
+      - file: contents/4_topics_and_guides/3_data_transformation_pipeline/dataform/dataform.ipynb
+        title: Dataform
 
 
 # ------------------ MY FUNCTIONS ------------------
