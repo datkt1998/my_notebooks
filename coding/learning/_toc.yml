@@ -269,7 +269,7 @@ parts:
         # - file: contents/4_topics_and_guides/2_vertex_ai_gcp/practice/MLOps_e2e_system_gcp/guide.ipynb
         #   title: MLOps End-to-End System on GCP
     - file: contents/4_topics_and_guides/3_data_transformation_pipeline/_index.md
-      title: Data Transformation Pipeline
+      title: Data Pipeline
       sections:
       - file: contents/4_topics_and_guides/3_data_transformation_pipeline/dataform/dataform.ipynb
         title: Dataform
