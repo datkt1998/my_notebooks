@@ -222,18 +222,18 @@ parts:
       - file: contents/programming_and_frameworks/frameworks/pytest/Pytest.ipynb
         title: Pytest
 
-    - file: contents/programming_and_frameworks/flatforms/_index
+    - file: contents/programming_and_frameworks/platforms/_index
       title: Platforms
       sections:
-      - file: contents/programming_and_frameworks/flatforms/gcp/gcp.md
+      - file: contents/programming_and_frameworks/platforms/gcp/gcp.md
         title: GCP
         sections:
-        - file: contents/programming_and_frameworks/flatforms/gcp/vertex_ai/vertex_ai.md
+        - file: contents/programming_and_frameworks/platforms/gcp/vertex_ai/vertex_ai.md
           title: Vertex AI
-        - file: contents/programming_and_frameworks/flatforms/gcp/dataform/dataform.ipynb
+        - file: contents/programming_and_frameworks/platforms/gcp/dataform/dataform.ipynb
           title: Dataform
 
-      - file: contents/programming_and_frameworks/flatforms/aws/aws.md
+      - file: contents/programming_and_frameworks/platforms/aws/aws.md
         title: AWS
 
 
