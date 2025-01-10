@@ -1,4 +1,100 @@
-# Choose a notebook solution
+# Vertex AI (Google Cloud Platform)
+
+## Overview
+
+[overview](https://cloud.google.com/vertex-ai/docs)
+
+### Introduction
+
+#### ML workflow
+
+1. **Data preparation** 
+	- *EDA*
+		- For small + medium dataset:  [Vertex AI Workbench](https://cloud.google.com/vertex-ai/docs/workbench/introduction)
+		- For large dataset: [Dataproc Serverless Spark](https://cloud.google.com/dataproc-serverless/docs/overview)
+	- *Storage*
+	- *Feature engineering*: [Vertex AI managed dataset](https://cloud.google.com/vertex-ai/docs/training/using-managed-datasets)
+	- *Labeling*
+1. **Model training**
+	- *Training*
+		- [AutoML](https://cloud.google.com/vertex-ai/docs/beginner/beginners-guide) : without writing code and preparing data splits (`tabular`, `image`, `text`, `video`)
+		- [Custom training](https://cloud.google.com/vertex-ai/docs/training/overview) : control over the training process (ML framework, own training code, hyperparameter tuning options)
+		- [Model garden](https://cloud.google.com/vertex-ai/docs/start/explore-models) : choose the pretrain model (open-source models) to test, customize, deploy.
+		- [Generative AI](https://cloud.google.com/vertex-ai/generative-ai/docs/learn/overview): Access to Google large gen AI models for multiple modalities (text, code, images, speech), then tunning and deploy
+	- *Tuning*
+		- Hyper-parameters:
+			- For simple custom-trained models: [Custom tuning jobs](https://cloud.google.com/vertex-ai/docs/training/using-hyperparameter-tuning)
+			- For complex ML models:  [Vertex AI Vizier](https://cloud.google.com/vertex-ai/docs/vizier/overview)
+		- Algorithms:
+			- Multi-algorithms training:  [Vertex AI Experiments](https://cloud.google.com/vertex-ai/docs/experiments/intro-vertex-ai-experiments)
+			- Tensorflow: [Vertex AI TensorBoard](https://cloud.google.com/vertex-ai/docs/experiments/tensorboard-introduction)
+		- Manage model versions
+			- Register the version of trained models:  [Vertex AI Model Registry](https://cloud.google.com/vertex-ai/docs/model-registry/introduction)
+	- *Evaluation* (list of [Model evaluation](https://cloud.google.com/vertex-ai/docs/evaluation/introduction))
+		- Evaluation in [Vertex AI Model Registry](https://cloud.google.com/vertex-ai/docs/model-registry/introduction)
+		- Evaluation in [Vertex AI Pipelines](https://cloud.google.com/vertex-ai/docs/pipelines/introduction)
+3. **Model serving and monitoring**
+	- *Serving*: deploy model to production and get predictions
+		- For Custom training models 
+			-  Real-time [online predictions](https://cloud.google.com/vertex-ai/docs/predictions/overview#online_predictions):  [prebuilt](https://cloud.google.com/vertex-ai/docs/predictions/pre-built-containers) or [custom](https://cloud.google.com/vertex-ai/docs/predictions/use-custom-container) containers
+			- [Batch predictions](https://cloud.google.com/vertex-ai/docs/predictions/overview#batch_predictions)
+		- [BigQuery ML](https://cloud.google.com/vertex-ai/docs/beginner/bqml)
+	- *Manage features*: [Vertex AI Feature Store](https://cloud.google.com/vertex-ai/docs/featurestore/overview) (for Tabular)
+	- *Explain model*: [Vertex Explainable AI](https://cloud.google.com/vertex-ai/docs/explainable-ai/overview)
+	- *Monitoring*: [Vertex AI Model Monitoring](https://cloud.google.com/vertex-ai/docs/model-monitoring/overview) (*training-serving skew and prediction drift and sends you alerts when the incoming prediction data skews too far from the training baseline*)
+
+#### Training and deployment option
+
+- [AutoML](https://cloud.google.com/vertex-ai/docs/beginner/beginners-guide) lets you train tabular, image, text, or video data without writing code or preparing data splits.
+- [Custom training](https://cloud.google.com/vertex-ai/docs/training/overview) gives you complete control over the training process, including using your preferred ML framework, writing your own training code, and choosing hyperparameter tuning options.
+- [Model Garden](https://cloud.google.com/vertex-ai/generative-ai/docs/model-garden/explore-models) lets you discover, test, customize, and deploy Vertex AI and select open-source (OSS) models and assets.
+- [Generative AI](https://cloud.google.com/vertex-ai/generative-ai/docs/multimodal/overview) gives you access to Google's large generative AI models for multiple modalities (text, code, images, speech). You can tune Google's LLMs to meet your needs, and then deploy them for use in your AI-powered applications.
+
+#### Vertex-ai interaction ways
+
+- [Google Console](https://console.cloud.google.com/vertex-ai?project=ext-pinetree-dw) (graphical user interface)
+- [Google Cloud command-line interface (CLI)](https://cloud.google.com/sdk/gcloud) ([`gcloud ai`](https://cloud.google.com/sdk/gcloud/reference/ai) command)
+- [Terraform support for Vertex AI](https://cloud.google.com/vertex-ai/docs/start/use-terraform-vertex-ai) (Terraform)
+- [Vertex AI SDK for Python](https://cloud.google.com/vertex-ai/docs/python-sdk/use-vertex-ai-python-sdk) (Python)
+- [Vertex AI API REST](https://cloud.google.com/vertex-ai/docs/reference/rest) (API)
+
+### Setup environment
+
+1. Create project and enable billing
+2. Enable Vertex AI API
+3. [Install](https://cloud.google.com/sdk/docs/install) the Google Cloud CLI.
+4. To [initialize](https://cloud.google.com/sdk/docs/initializing) the gcloud CLI, run the following command:
+``` bash
+gcloud init
+```
+5. Update and install `gcloud` components:
+``` bash
+gcloud components update  
+gcloud components install beta
+```
+6. Add role ([read doc](https://cloud.google.com/vertex-ai/docs/start/cloud-environment#ask_admin))
+7. Install [Vertex AI SDK for Python](https://cloud.google.com/vertex-ai/docs/start/install-sdk)
+
+### Training methods
+
+[Choosing a training method](https://cloud.google.com/vertex-ai/docs/start/training-methods)
+
+|                                                                    | **AutoML**                                                                                                                                                                                                                                                                                                                                                                                                                                   | **BigQuery ML**                                                                                                                                                                                                              | **Custom training**                                                                                                      |
+| ------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| **Characteristic**                                                 | - minimal technical effort<br>- quickly prototype models and explore new datasets                                                                                                                                                                                                                                                                                                                                                            | - train models using your BigQuery data directly in BigQuery using SQL commands<br>-use SQL to get batch predictions                                                                                                         | - create a training application optimized for your targeted outcome<br>- control over training application functionality |
+| **DS expertise**                                                   | No                                                                                                                                                                                                                                                                                                                                                                                                                                           | No                                                                                                                                                                                                                           | Yes                                                                                                                      |
+| **Programming ability**                                            | No                                                                                                                                                                                                                                                                                                                                                                                                                                           | SQL (build, evaluate model)                                                                                                                                                                                                  | Yes                                                                                                                      |
+| **Time to trained model**                                          | - Lower <br>- Less data preparation is required, and no development is needed.                                                                                                                                                                                                                                                                                                                                                               | - Lower <br>- Don't need build the infrastructure required for batch predictions or model training, as BigQuery ML leverages the BigQuery computational engine -->  increases speed to training, evaluation, and prediction. | - Higher<br>- More data preparation is required, and training application development is needed.                         |
+| **Limits on machine learning objectives**                          | Yes (only AutoML's predefined objectives)                                                                                                                                                                                                                                                                                                                                                                                                    | Yes                                                                                                                                                                                                                          | No                                                                                                                       |
+| **Manually optimize model performance with hyperparameter tuning** | No (automated hyperparameter tuning)                                                                                                                                                                                                                                                                                                                                                                                                         | Yes. BigQuery ML supports hyperparameter tuning when training ML models using [`CREATE MODEL` statements.](https://cloud.google.com/bigquery-ml/docs/reference/standard-sql/bigqueryml-hyperparameter-tuning)                | Yes                                                                                                                      |
+| **Control aspects of the training environment**                    | - Limited. <br>- Specify the number of node hours to train for + allow early stopping of training (for `tabular` + `image`)                                                                                                                                                                                                                                                                                                                  | No.                                                                                                                                                                                                                          | Yes.<br>- Compute Engine machine type<br>- Disk size<br>- ML framework <br>- Number of nodes.                            |
+| **Limits on data size**                                            | Yes<br>- [Preparing image training data](https://cloud.google.com/vertex-ai/docs/training-overview#image_data)<br>- [Preparing tabular training data](https://cloud.google.com/vertex-ai/docs/training-overview#tabular_data)<br>- [Preparing text training data](https://cloud.google.com/vertex-ai/docs/training-overview#text_data)<br>- [Preparing video training](https://cloud.google.com/vertex-ai/docs/training-overview#video_data) | Yes (base on [Quotas](https://cloud.google.com/bigquery-ml/quotas))                                                                                                                                                          | - For unmanaged datasets: No<br>- For managed datasets: same **AutoML**                                                  |
+
+### Notebook tutorials
+
+[List of totebook tutorials](https://cloud.google.com/vertex-ai/docs/tutorials/jupyter-notebooks#vertex-ai-workbench)
+
+## Vertex AI Notebook
 
 Có 2 hướng tiếp cận để sử dụng được notebook:
 
@@ -33,7 +129,7 @@ Có 2 hướng tiếp cận để sử dụng được notebook:
 **Khi nào nên sử dụng**:
 - **Colab Enterprise**: Khi cần chia sẻ và cộng tác dễ dàng, không muốn quản lý hạ tầng.
 - **Vertex AI Workbench**: Khi cần tùy chỉnh cao và tích hợp sâu với các dịch vụ dữ liệu của Google Cloud.
-## Colab Enterprise
+### Colab Enterprise
 ([doc](https://cloud.google.com/vertex-ai/docs/colab/create-console-quickstart))
 
 **Key Features:**
@@ -53,7 +149,7 @@ Có 2 hướng tiếp cận để sử dụng được notebook:
 - **Compute Engine**: the virtual machine that runs the notebook
 - **Storage**: data + source code
 - **Networking**: Communication between notebook and other services
-## Vertex AI Workbench
+### Vertex AI Workbench
 
 **Key Features:**
 - 👨🏻‍💻 **Access to the VM:** Unlike Colab Enterprise, you get full access to the virtual machine itself, allowing for in-depth configuration tailored to your specific needs. You can integrate more easily with your GCP environment based on IAM.
@@ -76,11 +172,11 @@ Có 2 hướng tiếp cận để sử dụng được notebook:
 	- Cost of **Persistent storage** base on the the actual amount of provisioned disk space. Therefore, it's still a good idea to choose a size that's appropriate for needs.
 	- The data should be stored in cloud storage (like buckets), you're charged based on the **amount of data you actually store** in the bucket. This is called "used storage" and is a more flexible way to pay for storage.
 
-### Setup Instances
+#### Setup Instances
 
-#### [Create an instance](https://cloud.google.com/vertex-ai/docs/workbench/instances/create#create)
+##### [Create an instance](https://cloud.google.com/vertex-ai/docs/workbench/instances/create#create)
 
-#### Instance shutdown
+##### Instance shutdown
 
 **Shutdown event:**
 - Manual click to `shutdown`
@@ -106,14 +202,14 @@ gcloud workbench instances create INSTANCE_NAME --metadata=idle-timeout-seconds=
 gcloud workbench instances update INSTANCE_NAME --metadata=idle-timeout-seconds=86400
 ```
 
-#### [Change the machine type and configure GPUs](https://cloud.google.com/vertex-ai/docs/workbench/instances/change-machine-type#change_the_machine_type_and_configure_gpus)
+##### [Change the machine type and configure GPUs](https://cloud.google.com/vertex-ai/docs/workbench/instances/change-machine-type#change_the_machine_type_and_configure_gpus)
 
-#### [Migrate your data to a new Vertex AI Workbench instance](https://cloud.google.com/vertex-ai/docs/workbench/instances/migrate#migrate-data)
+##### [Migrate your data to a new Vertex AI Workbench instance](https://cloud.google.com/vertex-ai/docs/workbench/instances/migrate#migrate-data)
 
-#### [Remote SSH](https://cloud.google.com/vertex-ai/docs/workbench/instances/ssh-access)
-#### [Limitation](https://cloud.google.com/vertex-ai/docs/workbench/instances/introduction#limitations)
+##### [Remote SSH](https://cloud.google.com/vertex-ai/docs/workbench/instances/ssh-access)
+##### [Limitation](https://cloud.google.com/vertex-ai/docs/workbench/instances/introduction#limitations)
 
-### Schedule run noteboook
+#### Schedule run noteboook
 
 **Set scheduler**
 1. Next to your instance's name, click **Open JupyterLab
@@ -126,15 +222,15 @@ gcloud workbench instances update INSTANCE_NAME --metadata=idle-timeout-seconds=
 
 [**View, share, and import an executed notebook file**](https://cloud.google.com/vertex-ai/docs/workbench/instances/schedule-notebook-run-quickstart#view_share_and_import_an_executed_notebook_file)
 
-### Connect to data
+#### Connect to data
 
-#### [BigQuery Table](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery)
+##### [BigQuery Table](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery)
 
-##### [Browse BigQuery resources](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery#browse_resources)
+###### [Browse BigQuery resources](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery#browse_resources)
  In ![BigQuery](https://cloud.google.com/static/bigquery/images/bigquery_icon.png) **BigQuery in Notebooks**. The **BigQuery** pane lists available projects and datasets
  <img src = "https://cloud.google.com/static/bigquery/images/international_top_terms.png">
  
-##### [Query by Bigquery Magic Command](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery#query_data_by_using_the_bigquery_magic_command)
+###### [Query by Bigquery Magic Command](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery#query_data_by_using_the_bigquery_magic_command)
 
 To use these magics, you must first register them. Run the `%load_ext` magic in a Jupyter notebook cell.
 ```python
@@ -200,7 +296,7 @@ Get a summary of data
 After running for some time, an image appears with various statistics on each of the 7 variables in the `top_terms` table. The following image shows part of some example output:
 
 ![International top terms overview of statistics.](https://cloud.google.com/static/bigquery/images/jupyter-overview-of-statistics.png)
-##### [Query by Bigquery Client Library](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery#query_data_by_using_the_client_library_directly)
+###### [Query by Bigquery Client Library](https://cloud.google.com/vertex-ai/docs/workbench/instances/bigquery#query_data_by_using_the_client_library_directly)
 
 ```python
 from google.cloud import bigquery
@@ -303,7 +399,7 @@ class BigqueryConnector:
         print(f"Created table '{table_id}' successfully.")
 ```
 
-#### [Cloud Storage buckets](https://cloud.google.com/vertex-ai/docs/workbench/instances/cloud-storage)
+##### [Cloud Storage buckets](https://cloud.google.com/vertex-ai/docs/workbench/instances/cloud-storage)
 
 To mount and then access a Cloud Storage bucket, do the following:
 1. In JupyterLab, make sure the folder **File Browser** tab is selected.
@@ -314,10 +410,10 @@ To mount and then access a Cloud Storage bucket, do the following:
 4. Click **Mount**.
 5. Your Cloud Storage bucket appears as a folder in the **File browser** tab of the left sidebar. Double-click the folder to open it and browse the contents.
 
-### [Github integration](https://cloud.google.com/vertex-ai/docs/workbench/instances/save-to-github)
-### Maintain
+#### [Github integration](https://cloud.google.com/vertex-ai/docs/workbench/instances/save-to-github)
+#### Maintain
 
-#### [Add a new conda environment](https://cloud.google.com/vertex-ai/docs/workbench/instances/add-environment#add_a_conda_environment)
+##### [Add a new conda environment](https://cloud.google.com/vertex-ai/docs/workbench/instances/add-environment#add_a_conda_environment)
 
 If to want using `pip`
 ```shell
@@ -326,7 +422,7 @@ pip install <PACKAGE>
 pip install -r requirements.txt
 ```
 
-#### Modify a conda kernel
+##### Modify a conda kernel
 
 Vertex AI Workbench instances come with pre-installed frameworks such as PyTorch and TensorFlow. If you need a different version, you can modify the libraries by using `pip` in the relevant conda environment.
 
@@ -349,22 +445,22 @@ which pip
 pip install --upgrade torch
 ```
 
-#### Delete a conda kernel
+##### Delete a conda kernel
 
 Some conda packages add default kernels to your environment when the packages are installed. For example, when you install R, conda might also add a `python3` kernel. This can cause a duplication of kernels in your environment. To avoid duplicated kernels, delete the default kernel before you create a new kernel with the same name.
 
 ```shell
 rm -rf /opt/conda/envs/CONDA_ENVIRONMENT_NAME/share/jupyter/kernels/python3
 ```
-### [Monitor](https://cloud.google.com/vertex-ai/docs/workbench/instances/monitor-health)
+#### [Monitor](https://cloud.google.com/vertex-ai/docs/workbench/instances/monitor-health)
 
-### Control access
+#### Control access
 
-### [Troubleshooting](https://cloud.google.com/vertex-ai/docs/general/troubleshooting-workbench?component=any#instances)
+#### [Troubleshooting](https://cloud.google.com/vertex-ai/docs/general/troubleshooting-workbench?component=any#instances)
 
-### Usage Tips
+#### Usage Tips
 
-#### Idle Shutdown 😴
+##### Idle Shutdown 😴
 
 <img src = "https://cdn-images-1.readmedium.com/v2/resize:fit:800/1*CfhsxHPu0hiFhPpJwEFX1A.png">
 
@@ -373,7 +469,7 @@ rm -rf /opt/conda/envs/CONDA_ENVIRONMENT_NAME/share/jupyter/kernels/python3
 2. **Make the Most of Resources**: Cloud providers have a limited number of resources to go around. If your notebook is just sitting there doing nothing, it’s using up space that could be used by others. Auto-shutdown helps free up those resources for everyone to use, making the cloud system work better for everyone.
 3. **Eco-Friendly:** Less idle notebooks mean less energy is being used. This is good for the environment because it helps reduce the energy needed to run data centers, which in turn lowers the carbon footprint.
 
-#### Add tags/label 🏷️
+##### Add tags/label 🏷️
 
 **Purpose**: Label instance or service in Google Cloud, help to organize resources better
 1. **Control Access**: Tags allow you to set specific access controls and permissions based on them.
@@ -382,7 +478,7 @@ rm -rf /opt/conda/envs/CONDA_ENVIRONMENT_NAME/share/jupyter/kernels/python3
 4. **Manage Operations**: Tags make it easier for tools that work with Google Cloud to organize resources. This is especially useful for keeping track of what’s happening, reporting, and watching over resources.
 5. **Find Things Quickly**: In the Google Cloud Console or using the `gcloud` tool, tags help you spot things fast.
 
-#### Update the Python version
+##### Update the Python version
 
 **Purpose**: change to a different Python version
 
@@ -444,4 +540,21 @@ chmod +x create_conda_env.sh
 conda install cudatoolkit=CUDA_VERSON -y
 ```
 
-### [Notebook example](https://cloud.google.com/vertex-ai/docs/workbench/notebooks#notebook-list)
+#### [Notebook example](https://cloud.google.com/vertex-ai/docs/workbench/notebooks#notebook-list)
+
+## Model workflow development
+
+| **BigQuery Type** | **JSON Type** | **Example value**                  |
+| ----------------- | ------------- | ---------------------------------- |
+| String            | String        | "abc"                              |
+| Integer           | Integer       | 1                                  |
+| Float             | Float         | 1.2                                |
+| Numeric           | Float         | 4925.000000000                     |
+| Boolean           | Boolean       | true                               |
+| TimeStamp         | String        | "2019-01-01 23:59:59.999999+00:00" |
+| Date              | String        | "2018-12-31"                       |
+| Time              | String        | "23:59:59.999999"                  |
+| DateTime          | String        | "2019-01-01T00:00:00"              |
+| Record            | Object        | { "A": 1,"B": 2}                   |
+| Repeated Type     | Array[Type]   | [1, 2]                             |
+| Nested Record     | Object        | {"A": {"a": 0}, "B": 1}            |

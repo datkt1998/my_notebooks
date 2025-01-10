@@ -1,1 +1,0 @@
-# Vertex AI (Google Cloud Platform)
