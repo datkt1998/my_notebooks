@@ -1,6 +1,6 @@
 {
   "offset": 7,
-  "onset": "2020-03-30",
+  "onset": "",
   "duration": {
     "day": 28,
     "week": 12,
@@ -211,7 +211,7 @@
   "popoutAlwaysOnTop": false,
   "showListCallouts": true,
   "showTimeList": true,
-  "setBaseDateAsHome": true,
+  "setBaseDateAsHome": false,
   "checkUnresolvedLinksAtStartup": false,
   "wrapLine": true,
   "bootDelayTime": 300

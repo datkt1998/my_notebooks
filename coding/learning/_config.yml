@@ -3,19 +3,25 @@
 
 title: Machine Learning book
 author: Khổng Tiến Đạt
-copyright: "2024"  # Copyright year to be placed in the footer
+copyright: "2025"  # Copyright year to be placed in the footer
 logo: _jupyterbook_config/logo.png
+exclude_patterns: [_build, Thumbs.db, ".venv", .DS_Store, ".vscode", "**.ipynb_checkpoints", "__pycache__"]
+only_build_toc_files: true
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
   execute_notebooks: 'off'
-  # allow_errors: false
+  allow_errors: false
+  stderr_output: 'remove-warn'
+  exclude_patterns: [_build, Thumbs.db, ".venv", .DS_Store, ".vscode", "**.ipynb_checkpoints", "__pycache__"]
 
 # Define the name of the latex output file for PDF builds
 latex:
+  latex_engine: xelatex
   latex_documents:
     targetname: book.tex
+  
 
 # Add a bibtex file so that we can create citations
 # bibtex_bibfiles:
@@ -37,11 +43,7 @@ html:
   use_repository_button: true
   home_page_in_navbar: true
   use_multitoc_numbering: false
-
-# Patterns to skip when building the book. Can be glob-style (e.g. "*skip.ipynb")
-exclude_patterns            : ['_build', 'Thumbs.db', '.DS_Store', "**.ipynb_checkpoints"]
-# Auto-exclude files not in the toc
-only_build_toc_files        : true
+  
 # Launch button settings
 launch_buttons:
   notebook_interface  : "jupyterlab"

@@ -5,280 +5,275 @@ format: jb-book
 root: _jupyterbook_config/intro
 
 parts:
+# ----------------------- FUNCDAMENTAL -----------------------
 
-# ------------------ DATA PROCESSING ------------------
-
-- caption: DATA PROCESSING
+- caption: DS FUNDAMENTAL
   maxdepth: 4
   numbered: true
   chapters:
 
-  - file: contents/1_data_processing/1_explore_data_analysis/_index
-    title: Explore Data Analysis
+  - file: contents/ds_fundamental/mathematics/_index.md
+    title: Mathematics
     sections:
-    - file: contents/1_data_processing/1_explore_data_analysis/1_data_analysis_process
-      title: Data Analyst Process
-    - file: contents/1_data_processing/1_explore_data_analysis/2_read_datasets
-      title: Read Datasets
-    - file: contents/1_data_processing/1_explore_data_analysis/3_explore_data
-      title: Explore Data
-    - file: contents/1_data_processing/1_explore_data_analysis/4_description_statistic
-      title: Description Statistic
-    - file: contents/1_data_processing/1_explore_data_analysis/5_inferential_statistic
-      title: Inferential Statistic
-    - file: contents/1_data_processing/1_explore_data_analysis/6_hypothesis_testing
-      title: Hypothesis Testing
-    - file: contents/1_data_processing/1_explore_data_analysis/7_anova
-      title: ANOVA
+    - file: contents/ds_fundamental/mathematics/1_Linear_algebra.ipynb
+      title: Linear Algebra
+    - file: contents/ds_fundamental/mathematics/2_Calculus_and_optimization.ipynb
+      title: Calculus and Optimization
+    - file: contents/ds_fundamental/mathematics/3_Distribution_and_statistic.ipynb
+      title: Distribution and Statistic 
+    - file: contents/ds_fundamental/mathematics/4_Information_theory.ipynb
+      title: Information Theory
+    - file: contents/ds_fundamental/mathematics/5_Graph_theory.ipynb
+      title: Graph Theory
 
-  - file: contents/1_data_processing/2_feature_engineering/_index
-    title: Feature Engineering
+  - file: contents/ds_fundamental/data_processing/_index
+    title: Data Processing
     sections:
-    - file: contents/1_data_processing/2_feature_engineering/01_customize_transform_function
-      title: Customize Transformer
-    - file: contents/1_data_processing/2_feature_engineering/02_feature_extraction
-      title: Feature Extraction
-    - file: contents/1_data_processing/2_feature_engineering/03_variable_overview
-      title: Variable Overview
-    - file: contents/1_data_processing/2_feature_engineering/04_missing_imputation
-      title: Missing Imputation
-    - file: contents/1_data_processing/2_feature_engineering/05_categorical_encoding
-      title: Categorical Encoding
-    - file: contents/1_data_processing/2_feature_engineering/06_feature_transformation
-      title: Feature Transformation
-    - file: contents/1_data_processing/2_feature_engineering/07_discretisation
-      title: Discretisation
-    - file: contents/1_data_processing/2_feature_engineering/08_outliers_handling
-      title: Outliers Handling
-    - file: contents/1_data_processing/2_feature_engineering/09_feature_scaling
-      title: Feature Scaling
-    - file: contents/1_data_processing/2_feature_engineering/10_feature_selection
-      title: Feature Selection
-
-  - file: contents/1_data_processing/3_imbalance_data_handling/_index
-    title: Imbalance Data Handling
-    sections:
-    - file: contents/1_data_processing/3_imbalance_data_handling/01_data_level_approaches
-      title: Data-Level Approaches
-    - file: contents/1_data_processing/3_imbalance_data_handling/02_cost_sensitive_approaches
-      title: Cost Sensitive Approaches
-    - file: contents/1_data_processing/3_imbalance_data_handling/03_ensemble_approaches
-      title: Ensemble Approaches
-
-  - file: contents/1_data_processing/4_feature_selection_and_decomposition/_index
-    title: Feature Selection & Decomposition
-    sections:
-    - file: contents/1_data_processing/4_feature_selection_and_decomposition/01_filter_methods
-      title: Filter Methods
-    - file: contents/1_data_processing/4_feature_selection_and_decomposition/02_wrapper_methods
-      title: Wrapper Methods
-    - file: contents/1_data_processing/4_feature_selection_and_decomposition/03_embedded_methods
-      title: Embedded Methods
-    - file: contents/1_data_processing/4_feature_selection_and_decomposition/04_hybrid_methods
-      title: Hybrid Methods
-    - file: contents/1_data_processing/4_feature_selection_and_decomposition/05_feature_decomposition
-      title: Feature Decomposition
-
-  - file: contents/1_data_processing/5_evaluation_metrics/_index
-    title: Evaluation Metrics
-    sections:
-    - file: contents/1_data_processing/5_evaluation_metrics/01_list_metrics_and_customize_methods
-      title: List Metrics & Customize Metrics
-    - file: contents/1_data_processing/5_evaluation_metrics/02_classification_metrics
-      title: Classification Metrics
-    - file: contents/1_data_processing/5_evaluation_metrics/03_regression_metrics
-      title: Regression Metrics
-    - file: contents/1_data_processing/5_evaluation_metrics/04_clustering_metrics
-      title: Clustering Metrics
-    - file: contents/1_data_processing/5_evaluation_metrics/05_pairwise_metrics
-      title: Pairwise Metrics
-    - file: contents/1_data_processing/5_evaluation_metrics/recommendation_system_metrics/_index
-      title: Recommendation System Metrics
+    - file: contents/ds_fundamental/data_processing/1_explore_data_analysis/_index
+      title: Explore Data Analysis
       sections:
-      - file: contents/1_data_processing/5_evaluation_metrics/recommendation_system_metrics/01_overview
+      - file: contents/ds_fundamental/data_processing/1_explore_data_analysis/1_data_analysis_process
+        title: Data Analyst Process
+      - file: contents/ds_fundamental/data_processing/1_explore_data_analysis/2_read_datasets
+        title: Read Datasets
+      - file: contents/ds_fundamental/data_processing/1_explore_data_analysis/3_explore_data
+        title: Explore Data
+      - file: contents/ds_fundamental/data_processing/1_explore_data_analysis/4_description_statistic
+        title: Description Statistic
+      - file: contents/ds_fundamental/data_processing/1_explore_data_analysis/5_inferential_statistic
+        title: Inferential Statistic
+      - file: contents/ds_fundamental/data_processing/1_explore_data_analysis/6_hypothesis_testing
+        title: Hypothesis Testing
+      - file: contents/ds_fundamental/data_processing/1_explore_data_analysis/7_anova
+        title: ANOVA
+    - file: contents/ds_fundamental/data_processing/2_feature_engineering/_index
+      title: Feature Engineering
+      sections:
+      - file: contents/ds_fundamental/data_processing/2_feature_engineering/01_customize_transform_function
+        title: Customize Transformer
+      - file: contents/ds_fundamental/data_processing/2_feature_engineering/02_feature_extraction
+        title: Feature Extraction
+      - file: contents/ds_fundamental/data_processing/2_feature_engineering/03_variable_overview
+        title: Variable Overview
+      - file: contents/ds_fundamental/data_processing/2_feature_engineering/04_missing_imputation
+        title: Missing Imputation
+      - file: contents/ds_fundamental/data_processing/2_feature_engineering/05_categorical_encoding
+        title: Categorical Encoding
+      - file: contents/ds_fundamental/data_processing/2_feature_engineering/06_feature_transformation
+        title: Feature Transformation
+      - file: contents/ds_fundamental/data_processing/2_feature_engineering/07_discretisation
+        title: Discretisation
+      - file: contents/ds_fundamental/data_processing/2_feature_engineering/08_outliers_handling
+        title: Outliers Handling
+      - file: contents/ds_fundamental/data_processing/2_feature_engineering/09_feature_scaling
+        title: Feature Scaling
+      - file: contents/ds_fundamental/data_processing/2_feature_engineering/10_feature_selection
+        title: Feature Selection
+    - file: contents/ds_fundamental/data_processing/3_imbalance_data_handling/_index
+      title: Imbalance Data Handling
+      sections:
+      - file: contents/ds_fundamental/data_processing/3_imbalance_data_handling/01_data_level_approaches
+        title: Data-Level Approaches
+      - file: contents/ds_fundamental/data_processing/3_imbalance_data_handling/02_cost_sensitive_approaches
+        title: Cost Sensitive Approaches
+      - file: contents/ds_fundamental/data_processing/3_imbalance_data_handling/03_ensemble_approaches
+        title: Ensemble Approaches
+    - file: contents/ds_fundamental/data_processing/4_feature_selection_and_decomposition/_index
+      title: Feature Selection & Decomposition
+      sections:
+      - file: contents/ds_fundamental/data_processing/4_feature_selection_and_decomposition/01_filter_methods
+        title: Filter Methods
+      - file: contents/ds_fundamental/data_processing/4_feature_selection_and_decomposition/02_wrapper_methods
+        title: Wrapper Methods
+      - file: contents/ds_fundamental/data_processing/4_feature_selection_and_decomposition/03_embedded_methods
+        title: Embedded Methods
+      - file: contents/ds_fundamental/data_processing/4_feature_selection_and_decomposition/04_hybrid_methods
+        title: Hybrid Methods
+      - file: contents/ds_fundamental/data_processing/4_feature_selection_and_decomposition/05_feature_decomposition
+        title: Feature Decomposition
+    - file: contents/ds_fundamental/data_processing/5_evaluation_metrics/_index
+      title: Evaluation Metrics
+      sections:
+      - file: contents/ds_fundamental/data_processing/5_evaluation_metrics/01_list_metrics_and_customize_methods
+        title: List Metrics & Customize Metrics
+      - file: contents/ds_fundamental/data_processing/5_evaluation_metrics/02_classification_metrics
+        title: Classification Metrics
+      - file: contents/ds_fundamental/data_processing/5_evaluation_metrics/03_regression_metrics
+        title: Regression Metrics
+      - file: contents/ds_fundamental/data_processing/5_evaluation_metrics/04_clustering_metrics
+        title: Clustering Metrics
+      - file: contents/ds_fundamental/data_processing/5_evaluation_metrics/05_pairwise_metrics
+        title: Pairwise Metrics
+      - file: contents/ds_fundamental/data_processing/5_evaluation_metrics/recommendation_system_metrics/_index
+        title: Recommendation Metrics
+        sections:
+        - file: contents/ds_fundamental/data_processing/5_evaluation_metrics/recommendation_system_metrics/01_overview
+          title: Overview
+        - file: contents/ds_fundamental/data_processing/5_evaluation_metrics/recommendation_system_metrics/02_similarity_metrics
+          title: Similarity Metrics
+        - file: contents/ds_fundamental/data_processing/5_evaluation_metrics/recommendation_system_metrics/03_candidate_generation_metrics
+          title: Candidate Generation Metrics
+        - file: contents/ds_fundamental/data_processing/5_evaluation_metrics/recommendation_system_metrics/04_rating_metrics
+          title: Rating Metrics
+        - file: contents/ds_fundamental/data_processing/5_evaluation_metrics/recommendation_system_metrics/05_ranking_metrics
+          title: Ranking Metrics
+    - file: contents/ds_fundamental/data_processing/6_model_monitoring/_index
+      title: Model Monitoring
+      sections:
+      - file: contents/ds_fundamental/data_processing/6_model_monitoring/01_overview
         title: Overview
-      - file: contents/1_data_processing/5_evaluation_metrics/recommendation_system_metrics/02_similarity_metrics
-        title: Similarity Metrics
-      - file: contents/1_data_processing/5_evaluation_metrics/recommendation_system_metrics/03_candidate_generation_metrics
-        title: Candidate Generation Metrics
-      - file: contents/1_data_processing/5_evaluation_metrics/recommendation_system_metrics/04_rating_metrics
-        title: Rating Metrics
-      - file: contents/1_data_processing/5_evaluation_metrics/recommendation_system_metrics/05_ranking_metrics
-        title: Ranking Metrics
-      
+      - file: contents/ds_fundamental/data_processing/6_model_monitoring/02_function_level_monitoring
+        title: Functional level monitoring
+      - file: contents/ds_fundamental/data_processing/6_model_monitoring/03_operation_level_monitoring
+        title: Operation level monitoring
 
-  - file: contents/1_data_processing/6_model_monitoring/_index
-    title: Model Monitoring
-    sections:
-    - file: contents/1_data_processing/6_model_monitoring/01_overview
-      title: Overview
-    - file: contents/1_data_processing/6_model_monitoring/02_function_level_monitoring
-      title: Functional level monitoring
-    - file: contents/1_data_processing/6_model_monitoring/03_operation_level_monitoring
-      title: Operation level monitoring
-
-# ----------------------- ALGORITHMS -----------------------
-
-- caption: ML/DL ALGORITHMS
-  maxdepth: 4
-  numbered: true
-  chapters:
-
-  - file: contents/2_algorithms/machine_learning/_index
+  - file: contents/ds_fundamental/machine_learning/_index
     title: Machine Learning
     sections:
-    - file: contents/2_algorithms/machine_learning/1_supervised_learning.ipynb
+    - file: contents/ds_fundamental/machine_learning/1_supervised_learning.ipynb
       title: Supervised Learning
-    - file: contents/2_algorithms/machine_learning/2_unsupervised_learning.ipynb
+    - file: contents/ds_fundamental/machine_learning/2_unsupervised_learning.ipynb
       title: Unsupervised Learning
 
-  - file: contents/2_algorithms/deep_learning/_index
+  - file: contents/ds_fundamental/deep_learning/_index
     title: Deep Learning
     sections:
-    - file: contents/2_algorithms/deep_learning/1_fundamental/_index
+    - file: contents/ds_fundamental/deep_learning/1_fundamental/_index
       title: Fundamental
       sections:
-      - file: contents/2_algorithms/deep_learning/1_fundamental/1_fundamental_overview.ipynb
+      - file: contents/ds_fundamental/deep_learning/1_fundamental/1_fundamental_overview.ipynb
         title: Deep Learing Overview
-      - file: contents/2_algorithms/deep_learning/1_fundamental/2_process_data_augmentation.ipynb
+      - file: contents/ds_fundamental/deep_learning/1_fundamental/2_process_data_augmentation.ipynb
         title: Data Augmentation
-      - file: contents/2_algorithms/deep_learning/1_fundamental/3_transfer_learning.ipynb
+      - file: contents/ds_fundamental/deep_learning/1_fundamental/3_transfer_learning.ipynb
         title: Transfer Learning
-      - file: contents/2_algorithms/deep_learning/1_fundamental/4_multi_modal.ipynb
+      - file: contents/ds_fundamental/deep_learning/1_fundamental/4_multi_modal.ipynb
         title: Multi-Modal
-
-    - file: contents/2_algorithms/deep_learning/2_computer_vision/_index
+    - file: contents/ds_fundamental/deep_learning/2_computer_vision/_index
       title: Computer Vision
       sections:
-        - file: contents/2_algorithms/deep_learning/2_computer_vision/1_computer_vision_cnn.ipynb
+        - file: contents/ds_fundamental/deep_learning/2_computer_vision/1_computer_vision_cnn.ipynb
           title: CV Overview & CNN
-
-    - file: contents/2_algorithms/deep_learning/3_natural_language_processing/_index
+    - file: contents/ds_fundamental/deep_learning/3_natural_language_processing/_index
       title: NLP
       sections:
-      - file: contents/2_algorithms/deep_learning/3_natural_language_processing/1_nlp_rnn.ipynb
+      - file: contents/ds_fundamental/deep_learning/3_natural_language_processing/1_nlp_rnn.ipynb
         title: NLP Overview & RNN
-      - file: contents/2_algorithms/deep_learning/3_natural_language_processing/2_transformers.ipynb
+      - file: contents/ds_fundamental/deep_learning/3_natural_language_processing/2_transformers.ipynb
         title: Transformers
 
-    - file: contents/2_algorithms/deep_learning/4_reinforcement_learning/_index
-      title: Reinforcement Learning
+    # - file: contents/ds_fundamental/deep_learning/4_reinforcement_learning/_index
+    #   title: Reinforcement Learning
 
-    - file: contents/2_algorithms/deep_learning/5_unsupervised_learning/_index
-      title: Unsupervised Learning
+    # - file: contents/ds_fundamental/deep_learning/5_unsupervised_learning/_index
+    #   title: Unsupervised Learning
 
-  - file: contents/2_algorithms/recommendation_system/_index
+  - file: contents/ds_fundamental/recommendation_system/_index
     title: Recommendation System
     sections: 
-    - file: contents/2_algorithms/recommendation_system/RecSys_MF_BQML/RecSys_MF_BQML.ipynb
-      title: BigQuery ML and Vertex AI Pipelines using Matrix Factorization
+    - file: contents/ds_fundamental/recommendation_system/collaborative_filtering_als_spark.ipynb
+      title: (CF) ALS - by PySpark
 
 # --------------- PROGRAMMING & FRAMEWORKS --------------
 
 - caption: PROGRAMMING & FRAMEWORKS
-  maxdepth: 4
+  maxdepth: 3
   numbered: true
   chapters:
-    - file: contents/3_programming_and_frameworks/python/_index
-      title: Python
+    - file: contents/programming_and_frameworks/programming/_index
+      title: Language Programming
       sections:
-      - file: contents/3_programming_and_frameworks/python/1_Python.ipynb
-        title: Python Basics
-      - file: contents/3_programming_and_frameworks/python/2_Concurrency_and_parallelism.ipynb
-        title: Concurrency & Parallelism
-      - file: contents/3_programming_and_frameworks/python/3_python_environment.ipynb
-        title: Python Environment
-    - file: contents/3_programming_and_frameworks/python_frameworks/_index
-      title: Python Frameworks
+      - file: contents/programming_and_frameworks/programming/python/_index
+        title: Python
+        sections:
+        - file: contents/programming_and_frameworks/programming/python/1_Python.ipynb
+          title: Python Basics
+        - file: contents/programming_and_frameworks/programming/python/2_Concurrency_and_parallelism.ipynb
+          title: Concurrency & Parallelism
+        - file: contents/programming_and_frameworks/programming/python/3_python_environment.ipynb
+          title: Python Environment
+      - file: contents/programming_and_frameworks/programming/2_NoSQL.ipynb
+        title: NoSQL
+      - file: contents/programming_and_frameworks/programming/3_SQL.ipynb
+        title: SQL
+      - file: contents/programming_and_frameworks/programming/4_Git.ipynb
+        title: Git
+      - file: contents/programming_and_frameworks/programming/docker/Docker_guide
+        title: Docker
+
+    - file: contents/programming_and_frameworks/frameworks/_index
+      title: Frameworks
       sections:
-      - file: contents/3_programming_and_frameworks/python_frameworks/polars/Polars.ipynb
+      - file: contents/programming_and_frameworks/frameworks/polars/Polars.ipynb
         title: Polars
-      - file: contents/3_programming_and_frameworks/python_frameworks/pyspark/PySpark.ipynb
+      - file: contents/programming_and_frameworks/frameworks/pyspark/PySpark.ipynb
         title: PySpark
-      - file: contents/3_programming_and_frameworks/python_frameworks/pydantic/Pydantic.ipynb
+      - file: contents/programming_and_frameworks/frameworks/pydantic/Pydantic.ipynb
         title: Pydantic
-      - file: contents/3_programming_and_frameworks/python_frameworks/fastapi/FastAPI.ipynb
+      - file: contents/programming_and_frameworks/frameworks/fastapi/FastAPI.ipynb
         title: FastAPI
         sections:
-        - file: contents/3_programming_and_frameworks/python_frameworks/fastapi/example_small_app/guide.ipynb
+        - file: contents/programming_and_frameworks/frameworks/fastapi/example_small_app/guide.ipynb
           title: Small App Example
-        - file: contents/3_programming_and_frameworks/python_frameworks/fastapi/example_big_app/guide.ipynb
+        - file: contents/programming_and_frameworks/frameworks/fastapi/example_big_app/guide.ipynb
           title: Big App Example
-      - file: contents/3_programming_and_frameworks/python_frameworks/streamlit/Streamlit.ipynb
+      - file: contents/programming_and_frameworks/frameworks/streamlit/Streamlit.ipynb
         title: Streamlit
-      - file: contents/3_programming_and_frameworks/python_frameworks/pytest/Pytest.ipynb
+      - file: contents/programming_and_frameworks/frameworks/pytest/Pytest.ipynb
         title: Pytest
-    - file: contents/3_programming_and_frameworks/2_NoSQL.ipynb
-      title: NoSQL
-    - file: contents/3_programming_and_frameworks/3_SQL.ipynb
-      title: SQL
-    - file: contents/3_programming_and_frameworks/4_Git.ipynb
-      title: Git
-    - file: contents/3_programming_and_frameworks/docker/Docker_guide
-      title: Docker
+
+    - file: contents/programming_and_frameworks/flatforms/_index
+      title: Platforms
+      sections:
+      - file: contents/programming_and_frameworks/flatforms/gcp/gcp.md
+        title: GCP
+        sections:
+        - file: contents/programming_and_frameworks/flatforms/gcp/vertex_ai/vertex_ai.md
+          title: Vertex AI
+        - file: contents/programming_and_frameworks/flatforms/gcp/dataform/dataform.ipynb
+          title: Dataform
+
+      - file: contents/programming_and_frameworks/flatforms/aws/aws.md
+        title: AWS
+
 
 
 # -------------- TOPICS & GUIDES --------------
 
 - caption: TOPICS & GUIDES
-  maxdepth: 4
+  maxdepth: 3
   numbered: true
-  chapters:
-    - file: contents/4_topics_and_guides/0_code_guides/_index.md
+  chapters: 
+    - file: contents/topics_and_guides/code_guides/_index.md
       title: Code Guides
       sections:
-      - file: contents/4_topics_and_guides/0_code_guides/1_source_code_structure_guide
-        title: Source Code Structure
-      - file: contents/4_topics_and_guides/0_code_guides/dev_container_guide/DevContainers.md
-        title: Dev Containers
-    - file: contents/4_topics_and_guides/1_mathematics/_index.md
-      title: Mathematics
-      sections:
-      - file: contents/4_topics_and_guides/1_mathematics/1_Linear_algebra.ipynb
-        title: Linear Algebra
-      - file: contents/4_topics_and_guides/1_mathematics/2_Calculus_and_optimization.ipynb
-        title: Calculus and Optimization
-      - file: contents/4_topics_and_guides/1_mathematics/3_Distribution_and_statistic.ipynb
-        title: Distribution and Statistic 
-      - file: contents/4_topics_and_guides/1_mathematics/4_Information_theory.ipynb
-        title: Information Theory
-      - file: contents/4_topics_and_guides/1_mathematics/5_Graph_theory.ipynb
-        title: Graph Theory
-    - file: contents/4_topics_and_guides/2_vertex_ai_gcp/_index.md
-      title: Vertex AI (GCP)
-      sections:
-      - file: contents/4_topics_and_guides/2_vertex_ai_gcp/1_overview
-        title: Overview
-      # - file: contents/4_topics_and_guides/2_vertex_ai_gcp/2_guides_for_beginer
-      #   title: Guides for beginner
-      - file: contents/4_topics_and_guides/2_vertex_ai_gcp/3_vertex_ai_notebook
-        title: Vertex AI Notebook
-      # - file: contents/4_topics_and_guides/2_vertex_ai_gcp/4_model_XXXXXXXXXXXX
-      #   title: XXXXXXXXXX
-      - file: contents/4_topics_and_guides/2_vertex_ai_gcp/practice/_index
-        title: Practice
-        sections:
-        - file: contents/4_topics_and_guides/2_vertex_ai_gcp/practice/serving_ml_model_gcp/guide.ipynb
-          title: Serving ML Model on GCP
-        # - file: contents/4_topics_and_guides/2_vertex_ai_gcp/practice/train_ml_model_gcp/guide.ipynb
-        #   title: Training Model on GCP
-        # - file: contents/4_topics_and_guides/2_vertex_ai_gcp/practice/cicd_vertexai_machine/guide.ipynb
-        #   title: CI/CD on Vertex AI Machine
-        # - file: contents/4_topics_and_guides/2_vertex_ai_gcp/practice/function_calling_genai/guide.ipynb
-        #   title: Setup Function Calling GenAI
-        # - file: contents/4_topics_and_guides/2_vertex_ai_gcp/practice/MLOps_e2e_system_gcp/guide.ipynb
-        #   title: MLOps End-to-End System on GCP
-    - file: contents/4_topics_and_guides/3_data_transformation_pipeline/_index.md
-      title: Data Transformation Pipeline
-      sections:
-      - file: contents/4_topics_and_guides/3_data_transformation_pipeline/dataform/dataform.ipynb
-        title: Dataform
+      - file: contents/topics_and_guides/code_guides/ml_project_structure/1_source_code_structure_guide
+        title: ML Project Structure
+      - file: contents/topics_and_guides/code_guides/vscode_dev_container/DevContainers.md
+        title: VSCode Dev Containers
 
+    - file: contents/topics_and_guides/data_pipeline/_index.md
+      title: Data Pipeline
+
+    - file: contents/topics_and_guides/ml_ops/_index.md
+      title: ML-Ops Engineering
+      sections:
+      - file: contents/topics_and_guides/ml_ops/mlops_e2e_system_gcp/guide.ipynb
+        title: Overview MLOps service on GCP
+      - file: contents/topics_and_guides/ml_ops/serving_ml_model_gcp/guide.ipynb
+        title: Serve model on GCP
+      - file: contents/topics_and_guides/ml_ops/train_ml_model_gcp/guide.ipynb
+        title: Train model on GCP
+      - file: contents/topics_and_guides/ml_ops/function_calling_genai/guide.ipynb
+        title: Function Calling (GenAI) on GCP 
+
+    - file: contents/topics_and_guides/aiml_projects/_index.md
+      title: AI/ML Projects
 
 # ------------------ MY FUNCTIONS ------------------
 
 - caption: MY FUNCTIONS
-  maxdepth: 4
+  maxdepth: 2
   numbered: true
   chapters:
     - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/functions/pyfunc/cleaning
