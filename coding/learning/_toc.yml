@@ -7,7 +7,7 @@ root: _jupyterbook_config/intro
 parts:
 # ----------------------- FUNCDAMENTAL -----------------------
 
-- caption: DS FUNDAMENTAL
+- caption: KNOWLEDGES
   maxdepth: 4
   numbered: true
   chapters:
@@ -176,7 +176,7 @@ parts:
 
 # --------------- PROGRAMMING & FRAMEWORKS --------------
 
-- caption: PROGRAMMING & FRAMEWORKS
+- caption: TOOLS
   maxdepth: 3
   numbered: true
   chapters:
@@ -240,7 +240,7 @@ parts:
 
 # -------------- TOPICS & GUIDES --------------
 
-- caption: TOPICS & GUIDES
+- caption: TOPICS
   maxdepth: 3
   numbered: true
   chapters: 
@@ -272,7 +272,7 @@ parts:
 
 # ------------------ MY FUNCTIONS ------------------
 
-- caption: MY FUNCTIONS
+- caption: FUNCTIONS
   maxdepth: 2
   numbered: true
   chapters:
