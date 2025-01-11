@@ -270,6 +270,8 @@ parts:
     - file: contents/topics_and_guides/aiml_projects/_index.md
       title: AI/ML Projects
 
+    
+
 # ------------------ MY FUNCTIONS ------------------
 
 - caption: FUNCTIONS
