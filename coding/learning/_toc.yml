@@ -235,6 +235,8 @@ parts:
 
       - file: contents/programming_and_frameworks/platforms/aws/aws.md
         title: AWS
+      - file: contents/programming_and_frameworks/platforms/dbt/dbt.md
+        title: DBT
 
 
 
