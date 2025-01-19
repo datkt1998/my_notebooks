@@ -43,6 +43,7 @@ html:
   use_repository_button: true
   home_page_in_navbar: true
   use_multitoc_numbering: false
+  favicon: _jupyterbook_config/favicon.ico
   
 # Launch button settings
 launch_buttons:

@@ -7,7 +7,7 @@ root: _jupyterbook_config/intro
 parts:
 # ----------------------- FUNCDAMENTAL -----------------------
 
-- caption: DS FUNDAMENTAL
+- caption: KNOWLEDGES
   maxdepth: 4
   numbered: true
   chapters:
@@ -176,7 +176,7 @@ parts:
 
 # --------------- PROGRAMMING & FRAMEWORKS --------------
 
-- caption: PROGRAMMING & FRAMEWORKS
+- caption: TOOLS
   maxdepth: 3
   numbered: true
   chapters:
@@ -235,12 +235,14 @@ parts:
 
       - file: contents/programming_and_frameworks/platforms/aws/aws.md
         title: AWS
+      - file: contents/programming_and_frameworks/platforms/dbt/dbt.md
+        title: DBT
 
 
 
 # -------------- TOPICS & GUIDES --------------
 
-- caption: TOPICS & GUIDES
+- caption: TOPICS
   maxdepth: 3
   numbered: true
   chapters: 
@@ -270,9 +272,11 @@ parts:
     - file: contents/topics_and_guides/aiml_projects/_index.md
       title: AI/ML Projects
 
+    
+
 # ------------------ MY FUNCTIONS ------------------
 
-- caption: MY FUNCTIONS
+- caption: FUNCTIONS
   maxdepth: 2
   numbered: true
   chapters:
