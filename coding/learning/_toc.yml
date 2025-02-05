@@ -221,17 +221,17 @@ parts:
 
     - file: contents/tools/databases_storage/_index
       title: Database & Storage
-      sections:
-        - file: contents/tools/databases_storage/feast/feast.ipynb
-          title: Feast (Feature Store)
+      # sections:
+      #   - file: contents/tools/databases_storage/feast/feast.ipynb
+      #     title: Feast (Feature Store)
 
     - file: contents/tools/aiml_frameworks/_index
       title: AI/ML Frameworks
       sections:
-        - file: contents/tools/aiml_frameworks/tensorflow/tensorflow.ipynb
-          title: TensorFlow
-        - file: contents/tools/aiml_frameworks/pytorch/pytorch.ipynb
-          title: PyTorch
+        # - file: contents/tools/aiml_frameworks/tensorflow/tensorflow.ipynb
+        #   title: TensorFlow
+        # - file: contents/tools/aiml_frameworks/pytorch/pytorch.ipynb
+        #   title: PyTorch
         - file: contents/tools/aiml_frameworks/gcp_vertex_ai/vertex_ai.md
           title: (GCP) Vertex AI
 
