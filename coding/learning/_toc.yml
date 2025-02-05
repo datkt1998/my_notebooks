@@ -202,7 +202,7 @@ parts:
             title: Big App Example
 
     - file: contents/tools/data_pipeline/_index
-      title: Data Engineering & Processing
+      title: Data Pipeline Tools
       sections:
         - file: contents/tools/data_pipeline/dbt/dbt.md
           title: DBT
@@ -214,9 +214,9 @@ parts:
           title: (GCP) Dataform
 
     - file: contents/tools/mlops_workflow/_index
-      title: MLOps & Workflow Automation
+      title: MLOps & Workflow
       sections:
-        - file: contents/tools/mlops_workflow/airflow/Airflow.ipynb
+        - file: contents/tools/mlops_workflow/airflow/airflow.ipynb
           title: Airflow
 
     - file: contents/tools/databases_storage/_index
@@ -249,7 +249,7 @@ parts:
   numbered: true
   chapters:
   - file: contents/topics_and_guides/code_guides/_index.md
-    title: Hands-on Code Snippets & Tricks
+    title: Code Snippets & Tricks
     sections:
     - file: contents/topics_and_guides/code_guides/ml_project_structure/1_source_code_structure_guide
       title: ML Project Structure
@@ -257,10 +257,10 @@ parts:
       title: VSCode Dev Containers
 
   - file: contents/topics_and_guides/data_pipeline/_index.md
-    title: Data Pipeline
+    title: Data Pipeline Guides
 
   - file: contents/topics_and_guides/ml_ops/_index.md
-    title: ML-Ops Engineering
+    title: ML-Ops
     sections:
     - file: contents/topics_and_guides/ml_ops/mlops_e2e_system_gcp/guide.ipynb
       title: Overview MLOps service on GCP
@@ -272,7 +272,7 @@ parts:
       title: Function Calling (GenAI) on GCP 
 
   - file: contents/topics_and_guides/problems/_index.md
-    title: Real-World ML Problems
+    title: AI/ML Problems
     sections:
     - file: contents/topics_and_guides/problems/recommendation_system/_index
       title: Recommendation System
@@ -287,7 +287,7 @@ parts:
       title: (Book) LLM Engineer's Handbook
 
   - file: contents/topics_and_guides/aiml_projects/_index.md
-    title: End-to-End ML Projects
+    title: ML Projects
     sections:
     - url: https://github.com/datkt1998/voc-sentiment-analysis
       title: "NLP (GCP API, Apache Beam): VOC Sentiment Analysis"
