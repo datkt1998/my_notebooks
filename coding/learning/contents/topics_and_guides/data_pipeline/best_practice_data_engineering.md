@@ -183,7 +183,7 @@ So sánh nhanh về Imperative và Declarative trong Data Engineering:
 
 ### 4. Một số phương pháp xử lý cho các vấn đề thường gặp
 
-#### **Xử lý SCD**
+#### Xử lý SCD
 
 Trong lĩnh vực Data, SCD là viết tắt của Slowly Changing Dimension. Đây là khái niệm trong quản lí dữ liệu nói về cách đối ứng với thay đổi của dữ liệu theo thời gian. SCD được chia thành 3 Type thông dụng:
 
@@ -196,6 +196,15 @@ Ngoài ra, có một số kiểu xử lý SCD theo dạng hybrid như:
 - **SCD Type 4** (kết hợp Type 1 và Type 2): Sử dụng một bảng để lưu và theo dõi record cũ.
 - **SCD Type 6** (kết hợp Type 1, 2 và 3): Lưu record mới khi có thay đổi, đồng thời thêm cột vào record cũ để cập nhật giá trị hiện tại cho tất cả record cũ.
 
+| SCD Type                                       | Mô tả                                                                                                  | Ưu điểm                                                      | Nhược điểm                                                     | Trường hợp sử dụng                                                                                                  |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------ | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **SCD Type 0** (Fixed)                         | Không thay đổi dữ liệu, giữ nguyên giá trị gốc.                                                        | Đơn giản, không cần xử lý cập nhật.                          | Không lưu trữ lịch sử thay đổi.                                | Khi dữ liệu cần cố định, không bao giờ thay đổi (VD: mã số thuế).                                                   |
+| **SCD Type 1** (Overwrite)                     | Ghi đè lên giá trị cũ khi có thay đổi.                                                                 | Giữ dữ liệu mới nhất, đơn giản trong triển khai.             | Mất lịch sử dữ liệu cũ.                                        | Khi không cần lưu lịch sử thay đổi (VD: số điện thoại liên hệ).                                                     |
+| **SCD Type 2** (Historical Tracking)           | Tạo bản ghi mới khi có thay đổi, kèm theo cột hiệu lực (start_date, end_date, is_active).              | Giữ đầy đủ lịch sử thay đổi, hữu ích để phân tích xu hướng.  | Tăng kích thước bảng dữ liệu nhanh chóng.                      | Khi cần lưu trữ lịch sử thay đổi (VD: địa chỉ khách hàng).                                                          |
+| **SCD Type 3** (Previous Value)                | Thêm cột mới để lưu giá trị trước đó.                                                                  | Giữ một mức lịch sử đơn giản mà không tăng số dòng.          | Chỉ lưu được một lần thay đổi, không theo dõi toàn bộ lịch sử. | Khi chỉ cần theo dõi một thay đổi gần nhất (VD: trạng thái tài khoản cũ và mới).                                    |
+| **SCD Type 4** (Hybrid – Historical + Current) | Duy trì bảng chính với dữ liệu hiện tại, lưu lịch sử vào bảng riêng.                                   | Kết hợp ưu điểm của Type 1 và Type 2, quản lý tốt hiệu suất. | Phức tạp trong thiết kế và bảo trì dữ liệu.                    | Khi cần truy vấn nhanh dữ liệu hiện tại nhưng vẫn lưu lịch sử (VD: phân tích giao dịch tài chính).                  |
+| **SCD Type 6** (Hybrid Type 1+2+3)             | Kết hợp cả Type 1, Type 2 và Type 3 (giữ lịch sử trong hàng, trong cột, và cập nhật giá trị mới nhất). | Đầy đủ thông tin lịch sử và dễ truy vấn dữ liệu hiện tại.    | Phức tạp nhất trong triển khai và bảo trì.                     | Khi cần phân tích lịch sử chi tiết nhưng vẫn cần truy vấn nhanh giá trị hiện tại (VD: hệ thống quản lý khách hàng). |
+
 Trong hệ sinh thái dữ liệu lớn, có 4 cách tiếp cận để giải quyết SCD:
 
 - **Phương pháp xử lý SCD truyền thống**: Các phương pháp này có thể phức tạp, dễ gặp lỗi với các tập dữ liệu lớn và làm chậm quá trình ETL.
@@ -203,7 +212,7 @@ Trong hệ sinh thái dữ liệu lớn, có 4 cách tiếp cận để giải q
 - **Nested data type**: Sử dụng các loại dữ liệu phức tạp như array hay map để theo dõi lịch sử thuộc tính mà không làm thay đổi cấu trúc của bảng.
 - **Delta Lake**: Phương pháp hiệu quả và đảm bảo tính toàn vẹn dữ liệu với tất cả sự xử lý phức tạp đều được thực hiện ngầm.
 
-#### **Xử lý dữ liệu trùng lặp**
+#### Xử lý dữ liệu trùng lặp
 
 Dữ liệu trùng lặp có thể là một vấn đề nghiêm trọng đối với một số ứng dụng, đặc biệt là trong lĩnh vực tài chính. Sự trùng lặp thường xảy ra do lỗi và quá trình retry sau đó, dẫn đến nguy cơ dữ liệu bị hỏng và ảnh hưởng đến các hệ thống liên quan.
 

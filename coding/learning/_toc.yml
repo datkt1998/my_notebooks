@@ -258,6 +258,10 @@ parts:
 
   - file: contents/topics_and_guides/data_pipeline/_index.md
     title: Data Pipeline Guides
+    sections:
+    - file: contents/topics_and_guides/data_pipeline/best_practice_data_engineering
+      title: Best Practice Data Engineering
+
 
   - file: contents/topics_and_guides/ml_ops/_index.md
     title: ML-Ops

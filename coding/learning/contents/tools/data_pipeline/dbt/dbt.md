@@ -1,7 +1,6 @@
 # DBT - Data Build Tool
 
-## Slowly Changing Dimensions  (SCD)
+## DBT overview
 
-### SCD type 0
+## DBT setup
 
-Data not updaing the DWH table when a dimensions changes
