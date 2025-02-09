@@ -81,10 +81,83 @@ dbt init dbtlearn
 
 Then config the DBT connection
 
-Let's check DBT after config
+Let's check DBT connection after config
 
 ```shell
 dbt debug
+```
+
+### About dbt projects / Folder structure
+
+| Resource                                                              | Description                                                                                                                                                                                                                                                                     |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [models](https://docs.getdbt.com/docs/build/models)                   | Each model lives in a single file and contains logic that either transforms raw data into a dataset that is ready for analytics or, more often, is an intermediate step in such a transformation.                                                                               |
+| [snapshots](https://docs.getdbt.com/docs/build/snapshots)             | A way to capture the state of your mutable tables so you can refer to it later.                                                                                                                                                                                                 |
+| [seeds](https://docs.getdbt.com/docs/build/seeds)                     | CSV files with static data that you can load into your data platform with dbt.                                                                                                                                                                                                  |
+| [data tests](https://docs.getdbt.com/docs/build/data-tests)           | SQL queries that you can write to test the models and resources in your project.                                                                                                                                                                                                |
+| [macros](https://docs.getdbt.com/docs/build/jinja-macros)             | Blocks of code that you can reuse multiple times.                                                                                                                                                                                                                               |
+| [docs](https://docs.getdbt.com/docs/build/documentation)              | Docs for your project that you can build.                                                                                                                                                                                                                                       |
+| [sources](https://docs.getdbt.com/docs/build/sources)                 | A way to name and describe the data loaded into your warehouse by your Extract and Load tools.                                                                                                                                                                                  |
+| [exposures](https://docs.getdbt.com/docs/build/exposures)             | A way to define and describe a downstream use of your project.                                                                                                                                                                                                                  |
+| [metrics](https://docs.getdbt.com/docs/build/build-metrics-intro)     | A way for you to define metrics for your project.                                                                                                                                                                                                                               |
+| [groups](https://docs.getdbt.com/docs/build/groups)                   | Groups enable collaborative node organization in restricted collections.                                                                                                                                                                                                        |
+| [analysis](https://docs.getdbt.com/docs/build/analyses)               | A way to organize analytical SQL queries in your project such as the general ledger from your QuickBooks.                                                                                                                                                                       |
+| [semantic models](https://docs.getdbt.com/docs/build/semantic-models) | Semantic models define the foundational data relationships in [MetricFlow](https://docs.getdbt.com/docs/build/about-metricflow) and the [dbt Semantic Layer](https://docs.getdbt.com/docs/use-dbt-semantic-layer/dbt-sl), enabling you to query metrics using a semantic graph. |
+| [saved queries](https://docs.getdbt.com/docs/build/saved-queries)     | Saved queries organize reusable queries by grouping metrics, dimensions, and filters into nodes visible in the dbt DAG.                                                                                                                                                         |
+
+```bash  
+dbtlearn/              
+├── README.md          
+├── dbt_project.yml    # Configuration file for the dbt project, specifying project settings and configurations. 
+│── profiles.yml         # Cấu hình kết nối tới Snowflake, BigQuery, Redshift, v.v.
+│── packages.yml         # Quản lý các package dbt (tương tự requirements.txt của Python)
+├── models/            # Contains SQL files that define dbt models, which are SQL queries that transform raw data into the desired format.  
+│   ├── staging/         # Các bảng tạm (staging tables) trước khi chuyển đổi
+│   ├── marts/           # Các bảng đầu ra (final data marts)
+│   ├── intermediate/    # Các bảng trung gian (dùng cho transformation)
+│   ├── sources.yml      # Định nghĩa nguồn dữ liệu (source tables)
+│   └── schema.yml       # Định nghĩa schema, kiểm tra và tài liệu mô hình
+├── snapshots/         # Contains SQL files that define dbt snapshots, which capture the state of a table at a specific point in time.  
+├── tests/             # Contains SQL files that define dbt tests, which are used to validate the data and ensure data quality.  
+├── macros/            # Contains SQL files that define dbt macros, which are reusable SQL snippets that can be used in models, tests, and other dbt files.  
+├── seeds/             # Contains CSV files that are used to seed data into the database, providing static data that can be referenced in models.  
+├── analysis/          # Contains SQL files for analysis purposes, allowing for ad-hoc queries and analysis outside of the main models.  
+├── logs/              # Contains log files generated by dbt operations, useful for debugging and tracking the execution of dbt commands.  
+│   └── dbt.log        # Log file for dbt operations  
+└── target/            # Contains compiled files and artifacts generated by dbt, including the manifest file which contains metadata about the dbt project.  
+    └── manifest.json  # JSON file containing the dbt manifest
+```
+
+### Project configuration
+
+`dbt_project.yml`: defines the directory of the dbt project and other project configurations.
+
+|YAML key|Value description|
+|---|---|
+|[name](https://docs.getdbt.com/reference/project-configs/name)|Your project’s name in [snake case](https://en.wikipedia.org/wiki/Snake_case)|
+|[version](https://docs.getdbt.com/reference/project-configs/version)|Version of your project|
+|[require-dbt-version](https://docs.getdbt.com/reference/project-configs/require-dbt-version)|Restrict your project to only work with a range of [dbt Core versions](https://docs.getdbt.com/docs/dbt-versions/core)|
+|[profile](https://docs.getdbt.com/reference/project-configs/profile)|The profile dbt uses to connect to your data platform|
+|[model-paths](https://docs.getdbt.com/reference/project-configs/model-paths)|Directories to where your model and source files live|
+|[seed-paths](https://docs.getdbt.com/reference/project-configs/seed-paths)|Directories to where your seed files live|
+|[test-paths](https://docs.getdbt.com/reference/project-configs/test-paths)|Directories to where your test files live|
+|[analysis-paths](https://docs.getdbt.com/reference/project-configs/analysis-paths)|Directories to where your analyses live|
+|[macro-paths](https://docs.getdbt.com/reference/project-configs/macro-paths)|Directories to where your macros live|
+|[snapshot-paths](https://docs.getdbt.com/reference/project-configs/snapshot-paths)|Directories to where your snapshots live|
+|[docs-paths](https://docs.getdbt.com/reference/project-configs/docs-paths)|Directories to where your docs blocks live|
+|[vars](https://docs.getdbt.com/docs/build/project-variables)|Project variables you want to use for data compilation|
+
+For complete details on project configurations, see [dbt_project.yml](https://docs.getdbt.com/reference/dbt_project.yml).
+> Chú ý sử dụng đúng naming convention: https://docs.getdbt.com/reference/dbt_project.yml#naming-convention
+### dbt Command
+
+```sh
+dbt run        # Chạy tất cả models
+dbt test       # Kiểm tra dữ liệu
+dbt seed       # Load dữ liệu CSV vào database
+dbt snapshot   # Chạy snapshot để lưu lịch sử dữ liệu
+dbt compile    # Biên dịch SQL (không chạy)
+dbt debug      # Kiểm tra kết nối database
 ```
 ### Models
 #### Code used in the lesson
