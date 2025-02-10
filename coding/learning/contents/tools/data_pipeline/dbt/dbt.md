@@ -389,7 +389,7 @@ models:
 - They live in SQL files in the `models` folder
 - Models can reference each other and use templates and macros
 
-#### Materializations types
+**Materializations types**
 
 | **Category**              | **View**                                                                                                               | **Table**                                                                                     | **Incremental**                                                                    | **Ephemeral (CTEs)**                                                              | **Materialized View**                                                                 |
 |--------------------------|-----------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|----------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
@@ -411,7 +411,7 @@ models:
       +materialized: table
 ```
 hoặc trong config block
-##### Table/View Models
+#### Table/View Models
 
 ```sql
 {{
@@ -439,7 +439,7 @@ FROM
     src_hosts
 ```
 
-##### Incremental Models
+#### Incremental Models
 
 The `fct/fct_reviews.sql` model:
 ```sql
@@ -460,110 +460,140 @@ WHERE review_text is not null
 {% endif %}
 ```
 
+#### Ephemeral view
 
-#### DIM listings with hosts
-The contents of `dim/dim_listings_w_hosts.sql`:
-```sql
-WITH
-l AS (
-    SELECT
-        *
-    FROM
-        {{ ref('dim_listings_cleansed') }}
-),
-h AS (
-    SELECT * 
-    FROM {{ ref('dim_hosts_cleansed') }}
-)
+`+materialized: ephemeral`
 
-SELECT 
-    l.listing_id,
-    l.listing_name,
-    l.room_type,
-    l.minimum_nights,
-    l.price,
-    l.host_id,
-    h.host_name,
-    h.is_superhost as host_is_superhost,
-    l.created_at,
-    GREATEST(l.updated_at, h.updated_at) as updated_at
-FROM l
-LEFT JOIN h ON (h.host_id = l.host_id)
+Mỗi 1 model dạng ephemeral sẽ được lưu thành query tạm (mà không tạo thành đối tượng trên database: table, view...)
+### Seeds
+
+**Seeds** là local files dùng để upload trực triếp lên data warehouse from DBT, được lưu trữ trong folder `/seeds/`
+
+- Các command run model project không tải lại các file seed lên warehouse, ta cần chạy lệnh `dbt seed` để load các folder lên data warehouse
+
+How to write [Seed properties](https://docs.getdbt.com/reference/seed-properties)
+
+```yml
+#seeds/<filename>.yml
+version: 2
+
+seeds:
+  - name: <string>
+    description: <markdown_string>
+    docs:
+      show: true | false
+      node_color: <color_id>
+    config:
+      <seed_config>: <config_value>
+    tests:
+      - <test>
+      - ... # declare additional tests
+    columns:
+      - name: <column name>
+        description: <markdown_string>
+        meta: {<dictionary>}
+        quote: true | false
+        tags: [<string>]
+        tests:
+          - <test>
+          - ... # declare additional tests
+
+      - name: ... # declare properties of additional columns
+
+  - name: ... # declare properties of additional seeds
 ```
+### Sources 
 
-#### Dropping the views after ephemeral materialization
-```sql
-DROP VIEW AIRBNB.DEV.SRC_HOSTS;
-DROP VIEW AIRBNB.DEV.SRC_LISTINGS;
-DROP VIEW AIRBNB.DEV.SRC_REVIEWS;
-```
+**Sources** là những data layer trừu tượng đại diện cho input data (data từ các nguồn database, schema khác) mà không bị thay đổi trong quá trình build và run DBT, tuy nhiên vì nó là data ở dạng database nên giá trị sẽ có tính chất freshness (thay vì cố định như **seeds local files**)
 
-##### Ephemeral view
+Định nghĩa **Sources** in `model/`,  check các [properties](https://docs.getdbt.com/reference/source-properties) and [config](https://docs.getdbt.com/reference/source-configs)
 
-### Sources and Seeds
-
-#### Full Moon Dates CSV
-Download the CSV from the lesson's _Resources_ section, or download it from the following S3 location:
-https://dbtlearn.s3.us-east-2.amazonaws.com/seed_full_moon_dates.csv
-
-Then place it to the `seeds` folder
-
-If you download from S3 on a Mac/Linux, can you import the csv straight to your seed folder by executing this command:
-```sh
-curl https://dbtlearn.s3.us-east-2.amazonaws.com/seed_full_moon_dates.csv -o seeds/seed_full_moon_dates.csv
-```
-
-#### Contents of models/sources.yml
-```yaml
+```yml
+# models/sources.yml
 version: 2
 
 sources:
-  - name: airbnb
-    schema: raw
-    tables:
-      - name: listings
-        identifier: raw_listings
+  - name: airbnb # Source name
+    schema: raw  # Schema name
+    tables:
+      - name: listings # reference to the table name
+        identifier: raw_listings # Table name
 
-      - name: hosts
-        identifier: raw_hosts
+      - name: hosts
+        identifier: raw_hosts
 
-      - name: reviews
-        identifier: raw_reviews
-        loaded_at_field: date
-        freshness:
-          warn_after: {count: 1, period: hour}
-          error_after: {count: 24, period: hour}
+      - name: reviews
+        identifier: raw_reviews
+        loaded_at_field: date # check mức độ freshness của trường 'date' với hiện tại, nếu date quá cũ sau hiện tại thì sẽ warning hoặc error
+        freshness:
+          warn_after: {count: 1, period: hour}
+          error_after: {count: 24, period: hour}
+          filter: datediff('day', date, current_timestamp) < 2 # optional
 ```
 
-#### Contents of models/mart/full_moon_reviews.sql
-```sql
-{{ config(
-  materialized = 'table',
-) }}
-
-WITH fct_reviews AS (
-    SELECT * FROM {{ ref('fct_reviews') }}
-),
-full_moon_dates AS (
-    SELECT * FROM {{ ref('seed_full_moon_dates') }}
-)
-
-SELECT
-  r.*,
-  CASE
-    WHEN fm.full_moon_date IS NULL THEN 'not full moon'
-    ELSE 'full moon'
-  END AS is_full_moon
-FROM
-  fct_reviews
-  r
-  LEFT JOIN full_moon_dates
-  fm
-  ON (TO_DATE(r.review_date) = DATEADD(DAY, 1, fm.full_moon_date))
-```
-
+**`filter`** sẽ thực hiện query filder bảng trước khi chạy assertions để tránh TH query cả bảng, nhằm tối ưu chi phí và performance.
 ### Snapshots
 
+**Strategy Snapshot** được sử dụng để ghi lại sự thay đổi của dữ liệu theo thời gian bằng cách tạo bảng snapshot. Điều này rất hữu ích cho việc theo dõi các thay đổi trong dữ liệu quan trọng, chẳng hạn như thông tin khách hàng, trạng thái đơn hàng hoặc bất kỳ dữ liệu nào có thể thay đổi theo thời gian.
+
+**Có 2 strategies cho việc snapshot:**
+
+*Timestamp Strategy (Chiến lược dựa trên dấu thời gian)*
+
+- Cơ chế hoạt động: So sánh unique_key `customer_id` + một cột dấu thời gian (`updated_at`, `modified_date`, v.v.) để xác định khi nào bản ghi đã thay đổi.
+- Nếu giá trị trong cột này thay đổi, DBT sẽ tạo một bản ghi snapshot mới.
+- **Phù hợp với:** Các bảng có một cột timestamp đại diện cho lần cập nhật gần nhất.
+    ```sql
+  snapshot customer_snapshot {   
+	target_database: my_database   
+	target_schema: snapshots   
+	unique_key: customer_id    
+	strategy: timestamp   
+	updated_at: updated_at 
+	}
+	```
+    
+- Ưu điểm:
+    - Hiệu suất cao vì chỉ cần kiểm tra một cột timestamp.
+    - Dễ triển khai nếu dữ liệu có cột timestamp đáng tin cậy.
+- Nhược điểm:
+    - Không thể theo dõi các thay đổi nếu dữ liệu không có cột `updated_at`.
+    - Nếu timestamp không được cập nhật đúng cách, có thể bỏ lỡ thay đổi.
+    
+
+*Check Strategy (Chiến lược kiểm tra toàn bộ hàng)*
+
+- Cơ chế hoạt động: So sánh toàn bộ giá trị của một hoặc nhiều cột để phát hiện thay đổi.
+- Nếu bất kỳ giá trị nào trong danh sách cột được kiểm tra thay đổi, DBT sẽ tạo một snapshot mới.
+- **Phù hợp với:** Các bảng không có cột `updated_at` hoặc khi bạn muốn theo dõi sự thay đổi của một tập hợp cột cụ thể.
+```sql
+snapshot order_snapshot {
+  target_database: my_database
+  target_schema: snapshots
+  unique_key: order_id
+  strategy: check
+  check_cols: ['status', 'total_price', 'customer_id']
+}
+```
+- Ưu điểm:
+    - Linh hoạt hơn vì không phụ thuộc vào cột timestamp.
+    - Có thể theo dõi nhiều thay đổi cùng lúc.
+- Nhược điểm:
+    - Tốn tài nguyên hơn vì phải so sánh toàn bộ dữ liệu trong các cột chỉ định.
+    - Cần chọn các cột kiểm tra phù hợp, nếu không có thể tạo quá nhiều snapshot không cần thiết.
+
+**So sánh Timestamp vs Check Strategy**
+
+|Tiêu chí|Timestamp Strategy|Check Strategy|
+|---|---|---|
+|Cơ chế|Dựa vào cột timestamp|So sánh nhiều cột chỉ định|
+|Hiệu suất|Cao hơn do chỉ kiểm tra một cột|Chậm hơn nếu nhiều cột được kiểm tra|
+|Dễ triển khai|Dễ nếu có cột timestamp|Phức tạp hơn|
+|Độ chính xác|Phụ thuộc vào độ tin cậy của timestamp|Chính xác hơn nếu chọn đúng cột|
+**Khi nào nên sử dụng từng loại?**
+
+- **Dùng `timestamp strategy`** nếu bảng dữ liệu có cột `updated_at` hoặc dấu thời gian đáng tin cậy.
+- **Dùng `check strategy`** nếu cần theo dõi sự thay đổi của nhiều cột hoặc không có cột timestamp.
 #### Snapshots for listing
 The contents of `snapshots/scd_raw_listings.sql`:
 
