@@ -76,7 +76,7 @@ mkdir %userprofile%\.dbt
 
 Create a dbt project (all platforms):
 ```sh
-dbt init dbtlearn
+dbt init <dbt project path>
 ```
 
 Then config the DBT connection
@@ -159,7 +159,218 @@ dbt snapshot   # Chạy snapshot để lưu lịch sử dữ liệu
 dbt compile    # Biên dịch SQL (không chạy)
 dbt debug      # Kiểm tra kết nối database
 ```
+
+## Configs & Properties
+
+### Models config [](https://docs.getdbt.com/reference/configs-and-properties)
+
+**Model configs có thể định nghĩa theo 3 cách:**
+- `dbt_project.yml`: nơi tổng hợp config của project và từng resource files (top-level)
+- `properties.yml`: đặt trong từng resources để apply config cho resource đó (mid-level , ghi đè top-level)
+- `config()` block trong từng file `.sql` (low-level, ghi đè mid-level và top-level)
+
+**Một số properties chỉ được cài đặt trong `properties.yml`:**
+- [`description`](https://docs.getdbt.com/reference/resource-properties/description)
+- [`tests`](https://docs.getdbt.com/reference/resource-properties/data-tests)
+- [`docs`](https://docs.getdbt.com/reference/resource-configs/docs)
+- [`columns`](https://docs.getdbt.com/reference/resource-properties/columns)
+- [`quote`](https://docs.getdbt.com/reference/resource-properties/quote)
+- [`source` properties](https://docs.getdbt.com/reference/source-properties) (e.g. `loaded_at_field`, `freshness`)
+- [`exposure` properties](https://docs.getdbt.com/reference/exposure-properties) (e.g. `type`, `maturity`)
+- [`macro` properties](https://docs.getdbt.com/reference/macro-properties) (e.g. `arguments`)
+
+```models/jaffle_shop.yml
+version: 2
+
+sources:
+  - name: raw_jaffle_shop
+    description: A replica of the postgres database used to power the jaffle_shop app.
+    tables:
+      - name: customers
+        columns:
+          - name: id
+            description: Primary key of the table
+            tests:
+              - unique
+              - not_null
+
+      - name: orders
+        columns:
+          - name: id
+            description: Primary key of the table
+            tests:
+              - unique
+              - not_null
+
+          - name: user_id
+            description: Foreign key to customers
+
+          - name: status
+            tests:
+              - accepted_values:
+                  values: ['placed', 'shipped', 'completed', 'return_pending', 'returned']
+
+
+models:
+  - name: stg_jaffle_shop__customers
+    config:
+      tags: ['pii']
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_jaffle_shop__orders
+    config:
+      materialized: view
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: status
+        tests:
+          - accepted_values:
+              values: ['placed', 'shipped', 'completed', 'return_pending', 'returned']
+              config:
+                severity: warn
+
+
+```
+
+**How to apply config on resource path**: ([follow the syntax](https://docs.getdbt.com/reference/resource-configs/resource-path))
+
+### General properties
+
+#### [columns](https://docs.getdbt.com/reference/resource-properties/columns)
+định nghĩa columns properties: data_type, description, quote, tests, tags, meta
+
+```yaml
+version: 2
+
+models:
+  - name: customers
+    description: "Thông tin về khách hàng"
+    columns:
+      - name: customer_id
+        description: "Mã định danh duy nhất của khách hàng"
+        data_type: "integer"
+        tests:
+          - not_null
+          - unique
+      - name: email
+        description: "Địa chỉ email của khách hàng"
+        data_type: "string"
+        tests:
+          - not_null
+          - unique
+        tags: ["PII"]
+        meta:
+          sensitivity: "high"
+
+```
+
+models `customers` có hai cột `customer_id` và `email`, mỗi cột được mô tả chi tiết với các thuộc tính như `description`, `data_type`, `tests`, `tags` và `meta`. Việc định nghĩa chi tiết này giúp cải thiện tài liệu hóa và đảm bảo chất lượng dữ liệu trong dự án dbt của bạn.
+#### [config](https://docs.getdbt.com/reference/resource-properties/config)
+
+#### constraints
+
+Các **constraints (ràng buộc)** trong dbt không chỉ đơn thuần là validation (kiểm tra dữ liệu) sau khi chạy model, mà chúng thực sự được áp dụng ở cấp độ **cấu trúc bảng** trên database.
+
+> constraints giúp **bảo vệ tính toàn vẹn dữ liệu ngay từ đầu**, trong khi `dbt test` giúp **phát hiện dữ liệu sai nhưng không ngăn chặn**. Nếu database của bạn hỗ trợ constraints, đây là một cách mạnh mẽ để kiểm soát chất lượng dữ liệu trực tiếp trong schema.
+
+Cụ thể:
+
+- Khi bạn **khai báo constraints trong model**, dbt sẽ yêu cầu database **áp dụng ràng buộc** trên bảng (ví dụ: cột không được null, cột phải unique, có khóa chính/khóa ngoại, v.v.).
+- Nếu dữ liệu vi phạm constraints này, database **sẽ chặn** việc nhập dữ liệu vào bảng ngay từ đầu.
+- Điều này khác với việc chạy **test** trong dbt (ví dụ: `dbt test`), vì test chỉ **kiểm tra sau khi dữ liệu đã được nạp vào**.
+
+#### [deprecation_date](https://docs.getdbt.com/reference/resource-properties/deprecation_date)
+
+#### [description](https://docs.getdbt.com/reference/resource-properties/description)
+
+**`description`** được sử dụng để cung cấp mô tả cho các resources như models, source, seed, snapshot, analyses, macro, test dữ liệu và các cột tương ứng của chúng. Những mô tả này giúp tài liệu hóa dự án và được hiển thị trên trang web tài liệu do dbt tạo ra.
+
+#### [lastest_version](https://docs.getdbt.com/reference/resource-properties/latest_version)
+
+**`latest_version`** được sử dụng để chỉ định phiên bản mới nhất của một mô hình đã được phiên bản hóa. Điều này đặc biệt hữu ích khi bạn có nhiều phiên bản của cùng một mô hình và muốn kiểm soát phiên bản nào sẽ được sử dụng mặc định trong các tham chiếu không chỉ định rõ ràng phiên bản.
+
+```yaml
+models:
+  - name: ten_mo_hinh
+    latest_version: 2
+    versions:
+      - v: 3
+      - v: 2
+      - v: 1
+```
+
+Trong ví dụ trên, mặc dù có ba phiên bản (`1`, `2`, `3`), nhưng `latest_version` được đặt là `2`. Điều này có nghĩa là bất kỳ tham chiếu nào đến mô hình `ten_mo_hinh` mà không chỉ định phiên bản cụ thể (ví dụ: `ref('ten_mo_hinh')`) sẽ mặc định trỏ đến phiên bản `2`. Phiên bản `3` sẽ được coi là "prerelease" (phiên bản chuẩn bị phát hành), trong khi phiên bản `1` được coi là "old" (cũ).
+
+Nếu không chỉ định `latest_version`, dbt sẽ mặc định coi phiên bản `3` là phiên bản mới nhất. Do đó, `ref('ten_mo_hinh')` sẽ trỏ đến `ten_mo_hinh.v3`
+
+#### [include-exclude columns](https://docs.getdbt.com/reference/resource-properties/include-exclude)
+
+#### [Data tests](https://docs.getdbt.com/reference/resource-properties/data-tests)
+
+**`tests`** property defines assertions about a column, table, or view. 4 kiểm thử tích hợp sẵn trong dbt:
+
+1. **`not_null`**: Xác nhận rằng không có giá trị `null` trong một cột.
+2. **`unique`**: Xác nhận rằng không có giá trị trùng lặp trong một cột.
+3. **`accepted_values`**: Xác nhận rằng tất cả các giá trị trong một cột đều nằm trong một danh sách giá trị được cung cấp.
+4. **`relationships`**: Xác nhận rằng tất cả các bản ghi trong bảng con có một bản ghi tương ứng trong bảng cha (tính toàn vẹn tham chiếu).
+
+Ngoài ra còn có các custom tests. 
+
+#### [versions](https://docs.getdbt.com/reference/resource-properties/versions)
+
+**`versions`** cho phép bạn quản lý và theo dõi các phiên bản khác nhau của một mô hình theo thời gian. Điều này đặc biệt hữu ích khi bạn cần thực hiện các thay đổi quan trọng đối với mô hình mà không muốn ảnh hưởng đến các quy trình hoặc người dùng hiện tại đang dựa vào phiên bản cũ.
+
+```models/<schema>.yml
+version: 2
+
+models:
+  - name: model_name
+    versions:
+      - v: <version_identifier> # required
+        defined_in: <file_name> # optional -- default is <model_name>_v<v>
+        columns:
+          # specify all columns, or include/exclude columns from the top-level model YAML definition
+          - [include](/reference/resource-properties/include-exclude): <include_value>
+            [exclude](/reference/resource-properties/include-exclude): <exclude_list>
+          # specify additional columns
+          - name: <column_name> # required
+      - v: ...
+    
+    # optional
+    [latest_version](/reference/resource-properties/latest_version): <version_identifier> 
+```
+
+### General configs
+
+| Cấu hình         | Mục đích                                                                                         |
+|-----------------|--------------------------------------------------------------------------------------------------|
+| [`docs`](https://docs.getdbt.com/reference/resource-configs/docs)               | Điều khiển việc hiển thị tài nguyên trong tài liệu tự động của dbt và đặt màu cho các nút. |
+| [`access`](https://docs.getdbt.com/reference/resource-configs/access)           | Xác định mức độ truy cập của mô hình (`private`, `protected`, `public`) để kiểm soát phạm vi tham chiếu. |
+| [`alias`](https://docs.getdbt.com/reference/resource-configs/alias)             | Đặt tên thay thế cho bảng hoặc view được tạo trong cơ sở dữ liệu. |
+| [`contract`](https://docs.getdbt.com/reference/resource-configs/contract)       | Xác định hợp đồng cho mô hình, bao gồm các ràng buộc về schema và dữ liệu. |
+| [`database`](https://docs.getdbt.com/reference/resource-configs/database)       | Chỉ định cơ sở dữ liệu nơi tài nguyên sẽ được tạo. |
+| [`enabled`](https://docs.getdbt.com/reference/resource-configs/enabled)         | Bật hoặc tắt tài nguyên trong quá trình chạy dbt. |
+| [`event_time`](https://docs.getdbt.com/reference/resource-configs/event_time)   | Đánh dấu một cột là cột thời gian sự kiện, hữu ích cho các thao tác liên quan đến thời gian. |
+| [`full_refresh`](https://docs.getdbt.com/reference/resource-configs/full_refresh) | Buộc làm mới hoàn toàn cho các mô hình gia tăng trong lần chạy tiếp theo. |
+| [`grants`](https://docs.getdbt.com/reference/resource-configs/grants)           | Áp dụng quyền truy cập cho các đối tượng cơ sở dữ liệu được tạo bởi dbt. |
+| [`group`](https://docs.getdbt.com/reference/resource-configs/group)             | Gán mô hình vào một nhóm để quản lý và tổ chức. |
+| [`meta`](https://docs.getdbt.com/reference/resource-configs/meta)               | Lưu trữ thông tin bổ sung tùy chỉnh cho tài nguyên. |
+| [`persist_docs`](https://docs.getdbt.com/reference/resource-configs/persist_docs) | Lưu trữ mô tả tài nguyên dưới dạng nhận xét trong cơ sở dữ liệu. |
+| [`pre-hook & post-hook`](https://docs.getdbt.com/reference/resource-configs/pre-hook-post-hook) | Thực thi các lệnh SQL hoặc macro trước và sau khi chạy một mô hình. |
+| [`schema`](https://docs.getdbt.com/reference/resource-configs/schema)           | Chỉ định schema nơi tài nguyên sẽ được tạo. |
+| [`tags`](https://docs.getdbt.com/reference/resource-configs/tags)               | Gắn thẻ cho tài nguyên để phân loại và lựa chọn trong các thao tác dbt. |
+| [`unique_key`](https://docs.getdbt.com/reference/resource-configs/unique_key)   | Xác định khóa duy nhất cho các mô hình gia tăng. |
+
 ### Models
+
+
 #### Code used in the lesson
 
 ##### SRC Listings 
@@ -212,9 +423,9 @@ FROM
 
 Create a model which builds on top of our `raw_hosts` table. 
 
-1) Call the model `models/src/src_hosts.sql`
-2) Use a CTE (common table expression) to define an alias called `raw_hosts`. This CTE select every column from the raw hosts table `AIRBNB.RAW.RAW_HOSTS`
-3) In your final `SELECT`, select every column and record from `raw_hosts` and rename the following columns:
+2) Call the model `models/src/src_hosts.sql`
+3) Use a CTE (common table expression) to define an alias called `raw_hosts`. This CTE select every column from the raw hosts table `AIRBNB.RAW.RAW_HOSTS`
+4) In your final `SELECT`, select every column and record from `raw_hosts` and rename the following columns:
    * `id` to `host_id`
    * `name` to `host_name` 
 
