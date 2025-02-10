@@ -244,53 +244,53 @@ parts:
 
 # -------------- TOPICS & GUIDES --------------
 
-- caption: TOPICS
+- caption: TOPICS & GUIDES
   maxdepth: 3
   numbered: true
   chapters:
-  - file: contents/topics_and_guides/code_guides/_index.md
+  - file: contents/guides/code_guides/_index.md
     title: Code Snippets & Tricks
     sections:
-    - file: contents/topics_and_guides/code_guides/ml_project_structure/1_source_code_structure_guide
+    - file: contents/guides/code_guides/ml_project_structure/1_source_code_structure_guide
       title: ML Project Structure
-    - file: contents/topics_and_guides/code_guides/vscode_dev_container/DevContainers.md
+    - file: contents/guides/code_guides/vscode_dev_container/DevContainers.md
       title: VSCode Dev Containers
 
-  - file: contents/topics_and_guides/data_pipeline/_index.md
+  - file: contents/guides/data_pipeline/_index.md
     title: Data Pipeline Guides
     sections:
-    - file: contents/topics_and_guides/data_pipeline/best_practice_data_engineering
+    - file: contents/guides/data_pipeline/best_practice_data_engineering
       title: Best Practice Data Engineering
 
 
-  - file: contents/topics_and_guides/ml_ops/_index.md
+  - file: contents/guides/ml_ops/_index.md
     title: ML-Ops
     sections:
-    - file: contents/topics_and_guides/ml_ops/mlops_e2e_system_gcp/guide.ipynb
+    - file: contents/guides/ml_ops/mlops_e2e_system_gcp/guide.ipynb
       title: Overview MLOps service on GCP
-    - file: contents/topics_and_guides/ml_ops/serving_ml_model_gcp/guide.ipynb
+    - file: contents/guides/ml_ops/serving_ml_model_gcp/guide.ipynb
       title: Serve model on GCP
-    - file: contents/topics_and_guides/ml_ops/train_ml_model_gcp/guide.ipynb
+    - file: contents/guides/ml_ops/train_ml_model_gcp/guide.ipynb
       title: Train model on GCP
-    - file: contents/topics_and_guides/ml_ops/function_calling_genai/guide.ipynb
+    - file: contents/guides/ml_ops/function_calling_genai/guide.ipynb
       title: Function Calling (GenAI) on GCP 
 
-  - file: contents/topics_and_guides/problems/_index.md
+  - file: contents/guides/problems/_index.md
     title: AI/ML Problems
     sections:
-    - file: contents/topics_and_guides/problems/recommendation_system/_index
+    - file: contents/guides/problems/recommendation_system/_index
       title: Recommendation System
       sections:
-      - file: contents/topics_and_guides/problems/recommendation_system/collaborative_filtering_als_spark.ipynb
+      - file: contents/guides/problems/recommendation_system/collaborative_filtering_als_spark.ipynb
         title: (CF) ALS - by PySpark
 
-  - file: contents/topics_and_guides/courses/_index.md
+  - file: contents/guides/courses/_index.md
     title: Courses, Books
     sections:
-    - file: contents/topics_and_guides/courses/book_llm_engineers_handbook/overview.md
+    - file: contents/guides/courses/book_llm_engineers_handbook/overview.md
       title: (Book) LLM Engineer's Handbook
 
-  - file: contents/topics_and_guides/aiml_projects/_index.md
+  - file: contents/guides/aiml_projects/_index.md
     title: ML Projects
     sections:
     - url: https://github.com/datkt1998/voc-sentiment-analysis
