@@ -54,10 +54,10 @@ virtualenv venv
 . venv/bin/activate
 ```
 
-### dbt installation
+### [dbt installation](https://docs.getdbt.com/docs/core/pip-install) 
 ```shell
-pip install dbt-snowflake==1.9.0
-# or : pip íntall dbt-bigquery
+pip install dbt-core dbt-ADAPTER_NAME
+# or : pip install dbt-core dbt-bigquery
 # or (run local): pip íntall dbt
 #On Linux/Mac: which dbt
 ```
@@ -149,22 +149,34 @@ dbtlearn/
 
 For complete details on project configurations, see [dbt_project.yml](https://docs.getdbt.com/reference/dbt_project.yml).
 > Chú ý sử dụng đúng naming convention: https://docs.getdbt.com/reference/dbt_project.yml#naming-convention
-### dbt Command
+### [dbt Command](https://docs.getdbt.com/reference/commands/build)
 
-```sh
-dbt run        # Chạy tất cả models
-dbt test       # Kiểm tra dữ liệu
-dbt seed       # Load dữ liệu CSV vào database
-dbt snapshot   # Chạy snapshot để lưu lịch sử dữ liệu
-dbt compile    # Biên dịch SQL (không chạy)
-dbt debug      # Kiểm tra kết nối database
-```
-
+| Command                                                                   | Description                                                                                 |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| [build](https://docs.getdbt.com/reference/commands/build)                 | Builds and tests all selected resources (models, seeds, snapshots, tests)                   |
+| [clean](https://docs.getdbt.com/reference/commands/clean)                 | Deletes artifacts present in the dbt project                                                |
+| [clone](https://docs.getdbt.com/reference/commands/clone)                 | Clones selected models from the specified state                                             |
+| [compile](https://docs.getdbt.com/reference/commands/compile)             | Compiles (but does not run) the models in a project                                         |
+| [debug](https://docs.getdbt.com/reference/commands/debug)                 | Debugs dbt connections and projects                                                         |
+| [deps](https://docs.getdbt.com/reference/commands/deps)                   | Downloads dependencies for a project                                                        |
+| [docs](https://docs.getdbt.com/reference/commands/cmd-docs)               | Generates documentation for a project                                                       |
+| [init](https://docs.getdbt.com/reference/commands/init)                   | Initializes a new dbt project                                                               |
+| [invocation](https://docs.getdbt.com/reference/commands/invocation)       | Enables users to debug long-running sessions by interacting with active invocations.        |
+| [list](https://docs.getdbt.com/reference/commands/list)                   | Lists resources defined in a dbt project                                                    |
+| [parse](https://docs.getdbt.com/reference/commands/parse)                 | Parses a project and writes detailed timing info                                            |
+| [retry](https://docs.getdbt.com/reference/commands/retry)                 | Retry the last run `dbt` command from the point of failure                                  |
+| [run](https://docs.getdbt.com/reference/commands/run)                     | Runs the models in a project                                                                |
+| [run-operation](https://docs.getdbt.com/reference/commands/run-operation) | Invokes a macro, including running arbitrary maintenance SQL against the database           |
+| [seed](https://docs.getdbt.com/reference/commands/seed)                   | Loads CSV files into the database                                                           |
+| [show](https://docs.getdbt.com/reference/commands/show)                   | Previews table rows post-transformation                                                     |
+| [snapshot](https://docs.getdbt.com/reference/commands/snapshot)           | Executes "snapshot" jobs defined in a project                                               |
+| [source](https://docs.getdbt.com/reference/commands/source)               | Provides tools for working with source data (including validating that sources are "fresh") |
+| [test](https://docs.getdbt.com/reference/commands/test)                   | Executes tests defined in a project                                                         |
 ## Configs & Properties
 
 ### Models config [](https://docs.getdbt.com/reference/configs-and-properties)
 
-**Model configs có thể định nghĩa theo 3 cách:**
+**Model configs có thể định nghĩa theo 3 cách:** ^886e82
 - `dbt_project.yml`: nơi tổng hợp config của project và từng resource files (top-level)
 - `properties.yml`: đặt trong từng resources để apply config cho resource đó (mid-level , ghi đè top-level)
 - `config()` block trong từng file `.sql` (low-level, ghi đè mid-level và top-level)
@@ -368,123 +380,38 @@ models:
 | [`tags`](https://docs.getdbt.com/reference/resource-configs/tags)               | Gắn thẻ cho tài nguyên để phân loại và lựa chọn trong các thao tác dbt. |
 | [`unique_key`](https://docs.getdbt.com/reference/resource-configs/unique_key)   | Xác định khóa duy nhất cho các mô hình gia tăng. |
 
-### Models
-
-
-#### Code used in the lesson
-
-##### SRC Listings 
-`models/src/src_listings.sql`:
-
-```sql
-WITH raw_listings AS (
-    SELECT
-        *
-    FROM
-        AIRBNB.RAW.RAW_LISTINGS
-)
-SELECT
-    id AS listing_id,
-    name AS listing_name,
-    listing_url,
-    room_type,
-    minimum_nights,
-    host_id,
-    price AS price_str,
-    created_at,
-    updated_at
-FROM
-    raw_listings
-
-```
-
-##### SRC Reviews
-`models/src/src_reviews.sql`:
-
-```sql
-WITH raw_reviews AS (
-    SELECT
-        *
-    FROM
-        AIRBNB.RAW.RAW_REVIEWS
-)
-SELECT
-    listing_id,
-    date AS review_date,
-    reviewer_name,
-    comments AS review_text,
-    sentiment AS review_sentiment
-FROM
-    raw_reviews
-```
-
-
-#### Exercise
-
-Create a model which builds on top of our `raw_hosts` table. 
-
-2) Call the model `models/src/src_hosts.sql`
-3) Use a CTE (common table expression) to define an alias called `raw_hosts`. This CTE select every column from the raw hosts table `AIRBNB.RAW.RAW_HOSTS`
-4) In your final `SELECT`, select every column and record from `raw_hosts` and rename the following columns:
-   * `id` to `host_id`
-   * `name` to `host_name` 
-
-##### Solution
-
-```sql
-WITH raw_hosts AS (
-    SELECT
-        *
-    FROM
-       AIRBNB.RAW.RAW_HOSTS
-)
-SELECT
-    id AS host_id,
-    NAME AS host_name,
-    is_superhost,
-    created_at,
-    updated_at
-FROM
-    raw_hosts
-```
+## Resources
 
 ### Models
-#### Code used in the lesson
 
-##### DIM Listings 
-`models/dim/dim_listings_cleansed.sql`:
+- Models are the basic building block of your business logic
+- Materialized as tables, views, etc...
+- They live in SQL files in the `models` folder
+- Models can reference each other and use templates and macros
 
-```sql
-WITH src_listings AS (
-  SELECT
-    *
-  FROM
-    {{ ref('src_listings') }}
-)
-SELECT
-  listing_id,
-  listing_name,
-  room_type,
-  CASE
-    WHEN minimum_nights = 0 THEN 1
-    ELSE minimum_nights
-  END AS minimum_nights,
-  host_id,
-  REPLACE(
-    price_str,
-    '$'
-  ) :: NUMBER(
-    10,
-    2
-  ) AS price,
-  created_at,
-  updated_at
-FROM
-  src_listings
+#### Materializations types
+
+| **Category**              | **View**                                                                                                               | **Table**                                                                                     | **Incremental**                                                                    | **Ephemeral (CTEs)**                                                              | **Materialized View**                                                                 |
+|--------------------------|-----------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|----------------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
+| **Pros**                 | - No additional data is stored. <br> - Always has the latest records from source data.                               | - Fast to query.                                                                             | - Significantly reduces build time by only transforming new records.             | - Allows reusable logic. <br> - Keeps the data warehouse clean by reducing table clutter. | - Combines query performance of a table with data freshness of a view. <br> - Can refresh automatically depending on the database. <br> - `dbt run` works like with views. |
+| **Cons**                 | - Slow for significant transformations or when stacked on top of other views.                                        | - Takes time to rebuild, especially for complex transformations. <br> - New records are not automatically added. | - Requires additional configuration and is more complex than other models.       | - Cannot be directly queried. <br> - Cannot be referenced (`ref()`) in `dbt run-operation`. <br> - Overuse can make queries harder to debug. | - Fewer configuration options depending on the database platform. <br> - Not all databases support materialized views. |
+| **Advice**               | - Start with views before switching to another materialization. <br> - Best for models that do not perform heavy transformations. | - Use for models queried by BI tools for better user experience. <br> - Suitable for slow transformations used by many downstream models. | - Best for event-style data. <br> - Use when dbt runs become too slow (do not start with incremental models). | - Use for lightweight transformations early in the DAG. <br> - Best for models used in only one or two downstream models. | - Use when incremental models are sufficient, but you want the data platform to manage incremental logic and refresh. |
+| **Use it when...**       | - You want a lightweight representation. <br> - You don’t reuse data too often.                                      | - You read from this model repeatedly.                                                       | - Fact tables. <br> - Appends to tables.                                         | - You merely want an alias to your data.                                          | - Similar use cases as incremental models but want the database to manage refresh. |
+| **Don't use it when...** | - You read from the same model several times.                                                                       | - Building single-use models. <br> - Your model is populated incrementally.                   | - You want to update historical records.                                         | - You read from the same model several times.                                    | - The database platform doesn’t support materialized views. |
+
+**Có thể config materializations trong 3 cách theo như** [[#^886e82]]
+
+Ví dụ trong `dbt_project.yml`
+
+```dbt_project.yml
+models:
+  dbtlearn:
+    +materialized: view
+    dim:
+      +materialized: table
 ```
-
-##### DIM hosts
-`models/dim/dim_hosts_cleansed.sql`:
+hoặc trong config block
+##### Table/View Models
 
 ```sql
 {{
@@ -512,40 +439,8 @@ FROM
     src_hosts
 ```
 
-#### Exercise
+##### Incremental Models
 
-Create a new model in the `models/dim/` folder called `dim_hosts_cleansed.sql`.
- * Use a CTE to reference the `src_hosts` model
- * SELECT every column and every record, and add a cleansing step to host_name:
-   * If host_name is not null, keep the original value 
-   * If host_name is null, replace it with the value ‘Anonymous’
-   * Use the NVL(column_name, default_null_value) function 
-Execute `dbt run` and verify that your model has been created 
-
-
-##### Solution
-
-```sql
-WITH src_hosts AS (
-    SELECT
-        *
-    FROM
-        {{ ref('src_hosts') }}
-)
-SELECT
-    host_id,
-    NVL(
-        host_name,
-        'Anonymous'
-    ) AS host_name,
-    is_superhost,
-    created_at,
-    updated_at
-FROM
-    src_hosts
-```
-
-#### Incremental Models
 The `fct/fct_reviews.sql` model:
 ```sql
 {{
@@ -565,22 +460,7 @@ WHERE review_text is not null
 {% endif %}
 ```
 
-Get every review for listing _3176_:
-```sql
-SELECT * FROM "AIRBNB"."DEV"."FCT_REVIEWS" WHERE listing_id=3176;
-```
 
-Add a new record to the table:
-```sql
-INSERT INTO "AIRBNB"."RAW"."RAW_REVIEWS"
-VALUES (3176, CURRENT_TIMESTAMP(), 'Zoltan', 'excellent stay!', 'positive');
-
-```
-
-Making a full-refresh:
-```
-dbt run --full-refresh
-```
 #### DIM listings with hosts
 The contents of `dim/dim_listings_w_hosts.sql`:
 ```sql
@@ -617,6 +497,8 @@ DROP VIEW AIRBNB.DEV.SRC_HOSTS;
 DROP VIEW AIRBNB.DEV.SRC_LISTINGS;
 DROP VIEW AIRBNB.DEV.SRC_REVIEWS;
 ```
+
+##### Ephemeral view
 
 ### Sources and Seeds
 
