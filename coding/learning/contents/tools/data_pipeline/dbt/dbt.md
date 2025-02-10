@@ -536,6 +536,8 @@ sources:
 
 **Strategy Snapshot** được sử dụng để ghi lại sự thay đổi của dữ liệu theo thời gian bằng cách tạo bảng snapshot. Điều này rất hữu ích cho việc theo dõi các thay đổi trong dữ liệu quan trọng, chẳng hạn như thông tin khách hàng, trạng thái đơn hàng hoặc bất kỳ dữ liệu nào có thể thay đổi theo thời gian.
 
+>**Snapshot** sẽ tạo ra các bảng có cấu trúc gần giống như các bảng được snapshot, bổ sung thêm các trường `snapshot_id`, `dbt_valid_from`, `dbt_valid_to`. Khi bảng gốc được thay đổi và chạy command `dbt snapshot` sẽ update lại row bị thay đổi trong bảng gốc trong bảng snapshot tương ứng.
+
 **Có 2 strategies cho việc snapshot:**
 
 *Timestamp Strategy (Chiến lược dựa trên dấu thời gian)*
@@ -594,58 +596,66 @@ snapshot order_snapshot {
 
 - **Dùng `timestamp strategy`** nếu bảng dữ liệu có cột `updated_at` hoặc dấu thời gian đáng tin cậy.
 - **Dùng `check strategy`** nếu cần theo dõi sự thay đổi của nhiều cột hoặc không có cột timestamp.
-#### Snapshots for listing
-The contents of `snapshots/scd_raw_listings.sql`:
+
+**Cấu trúc file snapshot**
 
 ```sql
+-- `snapshots/scd_raw_listings.sql`
+
+-- snapshot begining block
 {% snapshot scd_raw_listings %}
 
+-- define how to snapshot by snapshots config
 {{
    config(
        target_schema='DEV',
        unique_key='id',
        strategy='timestamp',
        updated_at='updated_at',
-       invalidate_hard_deletes=True
+       hard_delete="invalidate" 
    )
 }}
 
+-- define what is snapshoted ?
 select * FROM {{ source('airbnb', 'listings') }}
 
+-- snapshot ending block
 {% endsnapshot %}
 ```
 
-##### Updating the table
-```sql
-UPDATE AIRBNB.RAW.RAW_LISTINGS SET MINIMUM_NIGHTS=30,
-    updated_at=CURRENT_TIMESTAMP() WHERE ID=3176;
+#### [snapshot properties](https://docs.getdbt.com/reference/snapshot-properties)
 
-SELECT * FROM AIRBNB.DEV.SCD_RAW_LISTINGS WHERE ID=3176;
-```
-
-#### Snapshots for hosts
-The contents of `snapshots/scd_raw_hosts.sql`:
-```sql
-{% snapshot scd_raw_hosts %}
-
-{{
-   config(
-       target_schema='dev',
-       unique_key='id',
-       strategy='timestamp',
-       updated_at='updated_at',
-       invalidate_hard_deletes=True
-   )
-}}
-
-select * FROM {{ source('airbnb', 'hosts') }}
-
-{% endsnapshot %}
-```
-
+- `hard_deletes`: action cho record trong bảng snapshot khi record đó bị delete khỏi bảng nguồn
 ### Tests
 
 #### Generic Tests
+
+#### Singular Tests
+
+#### Custom Tests
+
+### Macros
+
+### Packages
+
+### Documentation
+
+### Analyses
+
+### Hooks
+
+### Exposures
+
+### Variables
+
+## Test & debug DBT
+
+## Deployment
+
+## Orchestration
+
+
+
 The contents of `models/schema.yml`:
 
 ```sql
