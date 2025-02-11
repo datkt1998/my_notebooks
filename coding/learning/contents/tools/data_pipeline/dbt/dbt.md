@@ -1545,7 +1545,3 @@ dbt run --select fct_reviews  --vars '{start_date: "2024-02-15 00:00:00", end_da
 ```
 
 Reference - Working with incremental strategies: https://docs.getdbt.com/docs/build/incremental-models#about-incremental_strategy
-
-
-
-
