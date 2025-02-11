@@ -8,7 +8,7 @@ sources:
         identifier: raw_listings # Table name
 
       - name: hosts
-        identifier: stg_hosts
+        identifier: raw_hosts
 
       - name: reviews
         identifier: raw_reviews
