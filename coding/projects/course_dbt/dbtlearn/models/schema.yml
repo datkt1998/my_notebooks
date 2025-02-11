@@ -23,10 +23,7 @@ models:
         description: Type of the apartment / room
         tests:
           - accepted_values:
-              values: ['Entire home/apt',
-                      'Private room',
-                      'Shared room',
-                      'Hotel room']
+              values: [ 'Entire home/apt', 'Private room', 'Shared room', 'Hotel room' ]
 
       - name: minimum_nights
         description: '{{ doc("dim_listing_cleansed__minimum_nights") }}'
@@ -41,17 +38,17 @@ models:
         tests:
           - not_null
           - unique
-      
+
       - name: host_name
         description: The name of the host
         tests:
           - not_null
-      
+
       - name: is_superhost
         description: Defines whether the hosts is a superhost.
         tests:
           - accepted_values:
-              values: ['t', 'f']
+              values: [ 't', 'f' ]
 
   - name: dim_listings_w_hosts
     tests:
@@ -63,7 +60,7 @@ models:
           - dbt_expectations.expect_column_values_to_be_of_type:
               column_type: number
           - dbt_expectations.expect_column_quantile_values_to_be_between:
-              quantile: .99
+              quantile: 0.99
               min_value: 50
               max_value: 500
           - dbt_expectations.expect_column_max_to_be_between:
@@ -78,12 +75,25 @@ models:
           - relationships:
               to: ref('dim_listings_cleansed')
               field: listing_id
+        data_type: number
 
       - name: reviewer_name
         tests:
           - not_null
-      
+        data_type: varchar
+
       - name: review_sentiment
         tests:
           - accepted_values:
-              values: ['positive', 'neutral', 'negative']
+              values:
+                - negative
+                - neutral
+                - positive
+        data_type: varchar
+      - name: review_id
+        data_type: varchar
+      - name: review_date
+        data_type: timestamp_ntz
+      - name: review_text
+        data_type: varchar
+    description: fact table for review

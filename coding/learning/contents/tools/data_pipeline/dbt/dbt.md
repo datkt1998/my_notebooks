@@ -1044,6 +1044,8 @@ models:
               values: ['positive', 'neutral', 'negative']
 
 ```
+
+**Định nghĩa tham chiếu trong file markdown**
 The contents of `models/docs.md`:
 ```txt
 {% docs dim_listing_cleansed__minimum_nights %}
@@ -1055,6 +1057,7 @@ to 0 in the source tables. Our cleansing algorithm updates this to `1`.
 {% enddocs %}
 ```
 
+**Định nghĩa tham chiếu trong file markdown chứa special assets**
 The contents of `models/overview.md`:
 ```md
 {% docs __overview__ %}
@@ -1068,7 +1071,17 @@ Here is the schema of our input data:
 {% enddocs %}
 ```
 
+> **Tips**: Có thể sử dụng VSCode Extension **Power User for dbt** để sửa documantation cho nhanh
+#### Build Documentation
+
+- `dbt docs generate`: build documantation
+- `dbt docs serve`: chạy website hiện metadata của project và DAG Linage Graph
 ### Analyses
+
+Folder **`analyses/`** được dùng để chứa **SQL ad-hoc queries**, **report**, hoặc **phân tích dữ liệu** mà không cần phải materialize (tạo bảng hoặc view) như các mô hình (`models/`).
+- Viết và lưu trữ **câu truy vấn SQL** mà bạn có thể chạy khi cần.
+- Phân tích dữ liệu mà không làm ảnh hưởng đến mô hình chính.
+- Chia sẻ truy vấn phức tạp giữa các thành viên trong nhóm.
 
 The contents of `analyses/full_moon_no_sleep.sql`:
 ```sql
@@ -1088,126 +1101,342 @@ ORDER BY
     is_full_moon,
     review_sentiment
 ```
+
+Sau khi viết xong file SQL query, chạy phân tích bằng `dbt compile` và check SQL sau khi compile bằng
+- For Mac: `cat target/compiled/{project_name}/<filepath>.sql`
+- Window: `type target/compiled/{project_name}/<filepath>.sql`
 ### Hooks
 
-**Create the REPORTER role and PRESET user in Snowflake**
+**Hooks** là **SQLs được chạy tự động** trước hoặc sau một sự kiện cụ thể, giúp kiểm soát và tối ưu quá trình ETL.
+
+| Hook Type          | Chạy Khi Nào?                                  | Ví Dụ                        |
+| ------------------ | ---------------------------------------------- | ---------------------------- |
+| **`pre-hook`**     | Trước khi chạy một model (model/seed/snapshot) | Xóa dữ liệu cũ               |
+| **`post-hook`**    | Sau khi chạy một model (model/seed/snapshot)   | Ghi log, kiểm tra dữ liệu    |
+| **`on-run-start`** | Khi bắt đầu `dbt run/seed/snapshot`            | Ghi log toàn bộ pipeline     |
+| **`on-run-end`**   | Khi kết thúc `dbt run/seed/snapshot`           | Cập nhật trạng thái pipeline |
+#### [`pre-hook` và `post-hook` cho model](https://docs.getdbt.com/reference/resource-configs/pre-hook-post-hook)
+
+Được sử dụng để chạy SQL trước (`pre-hook`) hoặc sau (`post-hook`) khi chạy một model.
+
+**Ví dụ 1: Audit logs trước khi chạy model**
 ```sql
-USE ROLE ACCOUNTADMIN;
-CREATE ROLE IF NOT EXISTS REPORTER;
-CREATE USER IF NOT EXISTS PRESET
- PASSWORD='presetPassword123'
- LOGIN_NAME='preset'
- MUST_CHANGE_PASSWORD=FALSE
- DEFAULT_WAREHOUSE='COMPUTE_WH'
- DEFAULT_ROLE=REPORTER
- DEFAULT_NAMESPACE='AIRBNB.DEV'
- COMMENT='Preset user for creating reports';
+-- models/orders.sql
+{{ config(
+    materialized='table',
+    pre_hook="INSERT INTO audit_logs (table_name, action, timestamp) VALUES ('orders', 'start', current_timestamp)",
+    post_hook="INSERT INTO audit_logs (table_name, action, timestamp) VALUES ('orders', 'end', current_timestamp)"
+) }}
 
-GRANT ROLE REPORTER TO USER PRESET;
-GRANT ROLE REPORTER TO ROLE ACCOUNTADMIN;
-GRANT ALL ON WAREHOUSE COMPUTE_WH TO ROLE REPORTER;
-GRANT USAGE ON DATABASE AIRBNB TO ROLE REPORTER;
-GRANT USAGE ON SCHEMA AIRBNB.DEV TO ROLE REPORTER;
+SELECT * FROM raw_data.orders;
+```
+📌 Khi chạy `dbt run`, dbt sẽ:
+1. Chạy `pre_hook`: Thêm log vào `audit_logs` trước khi chạy model.
+2. Chạy model `orders.sql`.
+3. Chạy `post_hook`: Thêm log vào `audit_logs` sau khi model chạy xong.
 
--- We don't want to grant select rights here; we'll do this through hooks:
--- GRANT SELECT ON ALL TABLES IN SCHEMA AIRBNB.DEV TO ROLE REPORTER;
--- GRANT SELECT ON ALL VIEWS IN SCHEMA AIRBNB.DEV TO ROLE REPORTER;
--- GRANT SELECT ON FUTURE TABLES IN SCHEMA AIRBNB.DEV TO ROLE REPORTER;
--- GRANT SELECT ON FUTURE VIEWS IN SCHEMA AIRBNB.DEV TO ROLE REPORTER;
+**Ví dụ 2: Xóa dữ liệu cũ trước khi load**
+
+```sql
+{{ config(
+    materialized='incremental',
+    pre_hook="DELETE FROM analytics.orders WHERE order_date >= '2024-01-01'"
+) }}
+SELECT * FROM raw_data.orders WHERE order_date >= '2024-01-01';
+```
+📌 Giúp tránh trùng dữ liệu khi load bảng mới.
+
+**Ví dụ 3: Thêm trực tiếp vào `dbt_project.yml` để thực hiện cho tất cả các models trong configs**
+
+```yaml
+# dbt_project.yml
++post-hook:
+      - "GRANT SELECT ON {{ this }} TO ROLE REPORTER"
+```
+#### [`on-run-start` và `on-run-end` (Chạy đầu/cuối dự án)](https://docs.getdbt.com/reference/project-configs/on-run-start-on-run-end)
+
+Các hooks này chạy **trước hoặc sau toàn bộ pipeline `dbt run`**, thay vì chỉ chạy cho từng model.
+
+**Ví dụ 4: Ghi log vào bảng `run_logs` khi bắt đầu và kết thúc pipeline**
+
+Trong file `dbt_project.yml`:
+```yaml
+on-run-start:
+  - "INSERT INTO run_logs (run_id, status, start_time) VALUES ('{{ invocation_id }}', 'started', current_timestamp)"
+
+on-run-end:
+  - "UPDATE run_logs SET status='completed', end_time=current_timestamp WHERE run_id='{{ invocation_id }}'"
 
 ```
+📌 Mục đích:
+- `on-run-start`: Ghi lại ID của lần chạy vào `run_logs` trước khi chạy models.
+- `on-run-end`: Cập nhật trạng thái khi quá trình chạy kết thúc.
+#### Khi nào nên dùng Hooks?
 
-### Exposures
+✅ **Audit Logging**: Ghi log trước/sau khi chạy models.  
+✅ **Data Cleanup**: Xóa dữ liệu cũ trước khi chạy (`pre-hook`).  
+✅ **Data Quality Checks**: Chạy `dbt test` tự động trước khi chạy models.  
+✅ **Session Configuration**: Set biến môi trường (`SET TIME ZONE 'UTC'`).  
+✅ **Incremental Loads**: Xóa dữ liệu trùng (`DELETE FROM table WHERE ...`).
+#### Lưu ý khi sử dụng Hooks
 
+⚠ **Hooks chạy trong transaction của dbt**, nên nếu model fail, `post-hook` có thể không chạy.  
+⚠ **Không lạm dụng hooks** vì có thể gây phức tạp cho pipeline.  
+⚠ **Chạy SQL nặng trong `post-hook` có thể ảnh hưởng hiệu suất**.
+
+### Exposures (Dashboard)
+
+**Exposures** trong dbt là cách để **theo dõi và quản lý những hệ thống, báo cáo, hoặc ứng dụng sử dụng dữ liệu từ dbt**. Nó giúp bạn hiểu ai đang sử dụng dữ liệu được tạo bởi dbt, từ đó giúp dễ dàng kiểm soát và đánh giá tác động khi thay đổi dữ liệu.
+
+**Mục tiêu:**
+🔹 **Quản lý tài nguyên phụ thuộc**: Biết được dashboard, ML model, hoặc hệ thống nào đang dùng dữ liệu.  
+🔹 **Cải thiện tài liệu (`dbt docs`)**: Hiển thị các ứng dụng sử dụng dbt models trong dbt docs.  
+🔹 **Hỗ trợ lineage (`dbt deps`)**: Xác định nếu có thay đổi trong models ảnh hưởng đến báo cáo nào.  
+🔹 **Tăng khả năng truy xuất nguồn gốc dữ liệu**: Biết ai đang tiêu thụ dữ liệu dbt.
+
+#### Config Exposure
+
+Tạo file `exposures.yml` (hoặc bất kỳ tên gì) trong thư mục `models/` hoặc `exposures/`:
+
+**Template**
+```yaml
+# models/<filename>.yml
+version: 2  
+  
+exposures:  
+- name: <string_with_underscores>  
+[description](https://docs.getdbt.com/reference/resource-properties/description): <markdown_string>  
+type: {dashboard, notebook, analysis, ml, application}  
+url: <string>  
+maturity: {high, medium, low} # Indicates level of confidence or stability in the exposure  
+[tags](https://docs.getdbt.com/reference/resource-configs/tags): [<string>]  
+[meta](https://docs.getdbt.com/reference/resource-configs/meta): {<dictionary>}  
+owner:  
+name: <string>  
+email: <string>  
+  
+depends_on:  
+- ref('model')  
+- ref('seed')  
+- source('name', 'table')  
+- metric('metric_name')  
+  
+label: "Human-Friendly Name for this Exposure!"  
+[config](https://docs.getdbt.com/reference/resource-properties/config):  
+enabled: true | false  
+  
+- name: ... # declare properties of additional exposures
+```
+
+```yaml
+# models/dashboard.yml
+version: 2
+
+exposures:
+  - name: executive_dashboard
+    label: Executive Dashboard
+    type: dashboard
+    maturity: low
+    url: https://00d200da.us1a.app.preset.io/superset/dashboard/x/?edit=true&native_filters_key=fnn_HJZ0z42ZJtoX06x7gRbd9oBFgFLbnPlCW2o_aiBeZJi3bZuyfQuXE96xfgB
+    description: Executive Dashboard about Airbnb listings and hosts
+      
+
+    depends_on:
+      - ref('dim_listings_w_hosts')
+      - ref('mart_fullmoon_reviews')
+
+    owner:
+      name: Zoltan C. Toth
+      email: dbtstudent@gmail.com
+```
+
+| **Thuộc tính** | **Ý nghĩa**                                                                 |
+| -------------- | --------------------------------------------------------------------------- |
+| `name`         | Tên duy nhất của exposure (không có dấu cách).                              |
+| `type`         | Loại hệ thống sử dụng dữ liệu (dashboard, ML, application, analysis, etc.). |
+| `label`        | Tên dễ đọc của exposure (hiển thị trong dbt docs).                          |
+| `description`  | Mô tả về hệ thống hoặc báo cáo đang dùng dữ liệu.                           |
+| `depends_on`   | Danh sách models dbt hoặc sources mà hệ thống này phụ thuộc vào.            |
+| `owner`        | Người chịu trách nhiệm cho hệ thống này (thường là team hoặc user cụ thể).  |
+
+**Các loại Exposures phổ biến**
+
+| **Loại (`type`)** | **Ý nghĩa**                                            |
+| ----------------- | ------------------------------------------------------ |
+| `dashboard`       | Các bảng điều khiển (Looker, Tableau, Power BI, etc.). |
+| `ml`              | Mô hình Machine Learning sử dụng dữ liệu từ dbt.       |
+| `application`     | Ứng dụng tiêu thụ dữ liệu từ dbt.                      |
+| `analysis`        | Báo cáo hoặc nghiên cứu dùng dữ liệu từ dbt.           |
+#### Hiển thị Exposures trong dbt docs
+
+Chạy lệnh sau để tạo tài liệu:
+
+```bash
+dbt docs generate
+dbt docs serve
+```
+ Sau đó, mở trình duyệt và xem lineage của exposures trong dbt UI.
+
+#### Kiểm tra dependencies của một Exposure
+
+```bash
+dbt ls --select exposure:sales_dashboard+
+```
+📌 **Mục đích:** Hiển thị toàn bộ models mà `sales_dashboard` phụ thuộc vào.
 ### Variables
 
-The contents of `marcos/variables.sql`:
+**Variables (`vars`) trong dbt** là các biến có thể được truyền vào dbt để sử dụng trong models, macros, hoặc tests. Chúng giúp **tùy chỉnh tham số**, giúp dbt linh hoạt hơn mà không cần sửa đổi SQL code trực tiếp.
+
+#### Cách thiết lập `vars` trong dbt
+
+Có 3 cách chính để thiết lập biến (`vars`):
+##### Định nghĩa trong `dbt_project.yml`
+
+Bạn có thể khai báo biến trực tiếp trong file `dbt_project.yml`:
+
+```yaml
+# dbt_project.yml
+
+vars:
+  country: "USA"
+  start_date: "2024-01-01"
+  max_orders: 1000
+```
+📌 Biến này sẽ có giá trị mặc định và có thể ghi đè khi chạy dbt.
+##### Truyền `vars` khi chạy `dbt run`
+
+Bạn có thể truyền biến khi chạy lệnh dbt:
+```bash
+dbt run --vars '{"country": "Canada", "start_date": "2024-02-01"}'
+```
+📌 Giá trị của biến sẽ thay thế giá trị trong `dbt_project.yml` chỉ trong lần chạy đó.
+##### Định nghĩa `vars` trong một model cụ thể
+
+Bạn có thể đặt `vars` chỉ cho một model trong `config`:
+
 ```sql
-{% macro learn_variables() %}
+{{ config(
+    materialized='table',
+    vars={"country": "UK"}
+) }}
 
-    {% set your_name_jinja = "Zoltan" %}
-    {{ log("Hello " ~ your_name_jinja, info=True) }}
+SELECT * 
+FROM customers 
+WHERE country = '{{ var("country", "USA") }}'
+```
+📌 Nếu biến `country` không được đặt, nó sẽ mặc định là `"USA"`.
+#### Cách sử dụng `vars` trong dbt
 
-    {{ log("Hello dbt user " ~ var("user_name", "NO USERNAME IS SET!!") ~ "!", info=True) }}
+##### Dùng `vars` trong SQL models
 
-    {% if var("in_test", False) %}
-       {{ log("In test", info=True) }}
-    {% else %}
-       {{ log("NOT in test", info=True) }}
-    {% endif %}
+Trong file `models/customers.sql`, bạn có thể sử dụng `vars` để lọc dữ liệu:
 
+```sql
+SELECT * 
+FROM customers 
+WHERE country = '{{ var("country", "USA") }}'
+```
+📌 Nếu chạy: `dbt run --vars '{"country": "Canada"}'` → Query sẽ chỉ lấy khách hàng ở `Canada`.
+
+##### Dùng `vars` trong macros
+
+Biến cũng có thể dùng trong macros (Jinja):
+```sql
+{% macro filter_by_country() %}
+    country = '{{ var("country", "USA") }}'
 {% endmacro %}
 ```
 
-We've added the following block to the end of `dbt_project.yml`:
-```yml
-vars:
-  user_name: default_user_name_for_this_project
+Sau đó có thể dùng macro này trong model:
+```sql
+SELECT * 
+FROM customers 
+WHERE {{ filter_by_country() }}
 ```
+##### Dùng `vars` trong seeds
 
-An example of passing variables:
-```cmd
-dbt run-operation learn_variables --vars "{user_name: zoltanctoth}"
+Nếu bạn có **seed CSV**, bạn có thể dùng `vars` để giới hạn dữ liệu:
+
 ```
+```yaml
 
-More information on variable passing: https://docs.getdbt.com/docs/build/project-variables
+CopyEdit
 
+`seeds:   my_project:     my_seed_file:       vars:         start_date: "2024-01-01"`
+
+Sau đó, trong SQL:
+
+sql
+
+CopyEdit
+
+`SELECT *  FROM {{ ref('my_seed_file') }} WHERE order_date >= '{{ var("start_date", "2023-01-01") }}'`
+
+📌 **Khi chạy `dbt seed`, dữ liệu sẽ được lọc theo `start_date`.**
+
+---
+
+### **d) Dùng `vars` trong tests**
+
+Bạn có thể tham chiếu `vars` khi viết test tùy chỉnh:
+
+yaml
+
+CopyEdit
+
+`tests:   - name: test_minimum_orders     description: "Check if number of orders is greater than threshold"     sql: >       SELECT COUNT(*)        FROM {{ ref('orders') }}        WHERE total_orders < {{ var("max_orders", 500) }}`
+
+📌 **Giá trị `max_orders` có thể thay đổi khi chạy dbt.**
 ## [DBT Command](https://docs.getdbt.com/reference/commands/build)
 
-| Command                                                                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [init](https://docs.getdbt.com/reference/commands/init)                   | Initializes a new dbt project<br><br>*Khởi tạo một dự án dbt mới trong thư mục hiện tại, tạo ra cấu trúc thư mục và các tệp cấu hình cần thiết.*<br><br>Khi muốn **tạo một dự án dbt mới**.<br>`dbt init my_project`:<br>✔️ Dự án mới được tạo.                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| [debug](https://docs.getdbt.com/reference/commands/debug)                 | Debugs dbt connections and projects<br><br>*Kiểm tra kết nối và cấu hình của dbt để đảm bảo rằng mọi thứ được thiết lập đúng cách.*<br><br>✔️ Kiểm tra và báo lỗi kết nối nếu có.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| [build](https://docs.getdbt.com/reference/commands/build)                 | Builds and tests all selected resources (models, seeds, snapshots, tests), this will do: run models, test tests, snapshot snapshots, seed seeds<br><br>*run model, test, snapshot và seed theo DAG order. Lệnh này giúp xây dựng toàn bộ dự án dbt một cách toàn diện.*<br><br>- Khi muốn chạy **toàn bộ pipeline dữ liệu** bao gồm: mô hình, kiểm thử, snapshot và seed theo đúng thứ tự phụ thuộc.<br>- Hữu ích trong **quá trình vận hành**, đảm bảo dữ liệu được xử lý đúng và kiểm thử dữ liệu tự động.<br><br>Kết quả:  <br>✔️ Mô hình mới được chạy trên database.  <br>✔️ Kiểm thử dữ liệu chạy để đảm bảo tính đúng đắn.  <br>✔️ Snapshot được cập nhật (nếu có). |
-| [run](https://docs.getdbt.com/reference/commands/run)                     | Runs the models in a project follow DAG order<br><br>*run models SQL đã được biên dịch trong dự án dbt trên cơ sở dữ liệu mục tiêu. Lệnh này tạo ra các bảng hoặc view dựa trên các mô hình đã định nghĩa.*<br><br>- Khi bạn chỉ muốn **chạy mô hình SQL** mà không cần chạy tests, seed, snapshot.<br>- Hữu ích trong **quá trình phát triển**, để kiểm tra mô hình có chạy đúng không.<br><br>`dbt run --select sales_report` : <br>✔️ Chạy mô hình `sales_report` trên database.                                                                                                                                                                                        |
-| [test](https://docs.getdbt.com/reference/commands/test)                   | Executes tests defined (models, sources, snapshots, seeds) in a project<br><br>*Chạy các kiểm thử dữ liệu được định nghĩa trên các mô hình, nguồn dữ liệu, snapshot và seed. Lệnh này giúp xác minh tính toàn vẹn và chất lượng của dữ liệu.*<br><br>- Khi muốn kiểm tra **tính đúng đắn của dữ liệu** (ví dụ: không có giá trị NULL, giá trị duy nhất, quan hệ khóa ngoại đúng).<br>- Hữu ích trong **quá trình vận hành**, giúp phát hiện lỗi dữ liệu kịp thời.<br><br>`dbt test`:<br>✔️ Hiển thị lỗi nếu có dữ liệu không hợp lệ.                                                                                                                                       |
-| [seed](https://docs.getdbt.com/reference/commands/seed)                   | Loads CSV files into the database<br><br>*Tải các tệp CSV vào cơ sở dữ liệu. Điều này hữu ích cho việc nhập dữ liệu tĩnh hoặc ít thay đổi, chẳng hạn như bảng mã quốc gia hoặc bảng tra cứu.*<br><br>- Khi muốn **nạp dữ liệu tĩnh** vào database từ file CSV (ví dụ: danh sách quốc gia, danh mục sản phẩm).<br>- Hữu ích khi khởi tạo dự án hoặc chạy thử nghiệm.<br><br>`dbt seed`:<br>✔️ Dữ liệu từ `country_list.csv` trong folder `seed/` được tải lên database.                                                                                                                                                                                                     |
-| [snapshot](https://docs.getdbt.com/reference/commands/snapshot)           | Executes "snapshot" jobs defined in a project<br><br>*Thực thi các công việc "snapshot" được định nghĩa trong dự án, cho phép theo dõi lịch sử thay đổi của dữ liệu theo thời gian.*<br><br>- Khi cần **lưu lại lịch sử thay đổi dữ liệu**, giúp phân tích dữ liệu theo thời gian.<br>- Hữu ích với dữ liệu có sự thay đổi theo thời gian như: **giá sản phẩm, trạng thái đơn hàng**.<br><br>`dbt snapshot`:<br>✔️ Lưu trạng thái hiện tại của khách hàng vào bảng snapshot.                                                                                                                                                                                               |
-| [docs](https://docs.getdbt.com/reference/commands/cmd-docs)               | Generates documentation for a project<br><br>*Tạo và phục vụ tài liệu cho dự án dbt. Lệnh này có hai lệnh con:*<br>- `dbt docs generate`: *Tạo trang web tài liệu cho dự án bằng cách biên dịch các tài nguyên và thu thập metadata từ cơ sở dữ liệu.*<br>- `dbt docs serve`: *Khởi động máy chủ web để phục vụ tài liệu và mở trang web tài liệu trong trình duyệt mặc định.*<br><br>- Khi muốn **tạo tài liệu tự động** cho mô hình dữ liệu.<br>- Hữu ích trong **quản lý dữ liệu**, giúp team dễ dàng tra cứu thông tin.<br><br>`dbt docs serve`:<br>✔️ Website tài liệu hiển thị metadata và lineage của các mô hình.<br>                                              |
-| [run-operation](https://docs.getdbt.com/reference/commands/run-operation) | Invokes a macro, including running arbitrary maintenance SQL against the database<br><br>*Gọi một macro, bao gồm việc chạy các lệnh SQL bảo trì tùy ý trên cơ sở dữ liệu.*<br><br>Khi muốn **chạy macro tùy chỉnh** (ví dụ: xóa cache, cập nhật metadata).<br><br>`dbt run-operation drop_old_tables`<br>✔️ Macro `drop_old_tables` chạy, xóa bảng cũ.                                                                                                                                                                                                                                                                                                                     |
-| [clean](https://docs.getdbt.com/reference/commands/clean)                 | Deletes artifacts present (folder: `\targer`) in the dbt project<br><br>Khi muốn **dọn dẹp** thư mục `target/` và `dbt_packages/`, tránh lỗi do dữ liệu cũ.<br><br>`dbt clean`:<br>✔️ Thư mục cũ bị xóa, đảm bảo môi trường sạch.                                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| [clone](https://docs.getdbt.com/reference/commands/clone)                 | Clones selected models from the specified state<br><br>*Sao chép các mô hình được chọn từ trạng thái được chỉ định.*<br><br>Khi muốn **sao chép trạng thái mô hình** từ một môi trường khác.<br>`dbt clone --state prod`<br>✔️ Sao chép dữ liệu từ môi trường `prod`.                                                                                                                                                                                                                                                                                                                                                                                                      |
-| [compile](https://docs.getdbt.com/reference/commands/compile)             | Compiles (but does not run) the models in a project<br><br>*Biên dịch các mô hình trong dự án mà không thực thi chúng, tạo ra các tệp SQL đã biên dịch trong thư mục `target`.*<br><br>Khi muốn **xem SQL đã biên dịch** của mô hình mà không chạy nó.<br><br>`dbt compile --select sales_report`:<br>✔️ File SQL được tạo trong `target/compiled/`.                                                                                                                                                                                                                                                                                                                       |
-| [deps](https://docs.getdbt.com/reference/commands/deps)                   | Downloads dependencies for a project<br><br>*Tải về các phụ thuộc cho dự án dbt, chẳng hạn như các gói dbt được chỉ định trong tệp `packages.yml`.*<br><br>Khi cần **tải về package dbt** từ `packages.yml` (ví dụ: `dbt_utils`).<br><br>`dbt deps`:<br>✔️ Các package được tải về thư mục `dbt_packages/`.                                                                                                                                                                                                                                                                                                                                                                |
-| [invocation](https://docs.getdbt.com/reference/commands/invocation)       | Enables users to debug long-running sessions by interacting with active invocations.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| [list](https://docs.getdbt.com/reference/commands/list)                   | Lists resources defined in a dbt project<br><br>*Liệt kê các tài nguyên được định nghĩa trong dự án dbt. Lệnh này chấp nhận các đối số lựa chọn tương tự như `dbt run`.*<br><br>Khi muốn **liệt kê các mô hình trong dự án**.<br><br>`dbt ls --resource-type model`:<br>✔️ Liệt kê tất cả các mô hình.                                                                                                                                                                                                                                                                                                                                                                     |
-| [parse](https://docs.getdbt.com/reference/commands/parse)                 | Parses a project and writes detailed timing info                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| [retry](https://docs.getdbt.com/reference/commands/retry)                 | Retry the last run `dbt` command from the point of failure<br><br>*Thử lại lệnh dbt cuối cùng từ điểm thất bại.*<br>`dbt retry`:<br>✔️ Tiếp tục từ chỗ lỗi trước đó.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| [show](https://docs.getdbt.com/reference/commands/show)                   | Previews table rows post-transformation<br><br>*Biên dịch định nghĩa dbt-SQL của một mô hình, kiểm thử, phân tích hoặc một truy vấn dbt-SQL tùy ý được truyền vào bằng `--inline`, sau đó chạy truy vấn đó trên kho dữ liệu và xem trước kết quả trong terminal.*<br><br>Khi muốn **xem trước dữ liệu của một mô hình**.<br><br>`dbt show --select sales_report`:<br>✔️ Hiển thị kết quả SQL của `sales_report`.<br>                                                                                                                                                                                                                                                       |
-| [source](https://docs.getdbt.com/reference/commands/source)               | Provides tools for working with source data (including validating that sources are "fresh")<br><br>*Cung cấp các lệnh con hữu ích khi làm việc với dữ liệu nguồn. Lệnh này có một lệnh con là `dbt source freshness`, dùng để kiểm tra độ mới của các bảng nguồn.*<br><br>Khi muốn **kiểm tra độ mới của dữ liệu nguồn**.<br><br>`dbt source freshness`:<br>✔️ Cảnh báo nếu dữ liệu quá cũ.                                                                                                                                                                                                                                                                                |
-
-
-
+| Command                                                                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [init](https://docs.getdbt.com/reference/commands/init)                   | Initializes a new dbt project<br><br>*Khởi tạo một dự án dbt mới trong thư mục hiện tại, tạo ra cấu trúc thư mục và các tệp cấu hình cần thiết.*<br><br>Khi muốn **tạo một dự án dbt mới**.<br>`dbt init my_project`:<br>✔️ Dự án mới được tạo.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| [debug](https://docs.getdbt.com/reference/commands/debug)                 | Debugs dbt connections and projects<br><br>*Kiểm tra kết nối và cấu hình của dbt để đảm bảo rằng mọi thứ được thiết lập đúng cách.*<br><br>✔️ Kiểm tra và báo lỗi kết nối nếu có.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [build](https://docs.getdbt.com/reference/commands/build)                 | Builds and tests all selected resources (models, seeds, snapshots, tests), this will do: run models, test tests, snapshot snapshots, seed seeds<br><br>*run model, test, snapshot và seed theo DAG order. Lệnh này giúp xây dựng toàn bộ dự án dbt một cách toàn diện.*<br><br>- Khi muốn chạy **toàn bộ pipeline dữ liệu** bao gồm: mô hình, kiểm thử, snapshot và seed theo đúng thứ tự phụ thuộc.<br>- Hữu ích trong **quá trình vận hành**, đảm bảo dữ liệu được xử lý đúng và kiểm thử dữ liệu tự động.<br><br>Kết quả:  <br>✔️ Mô hình mới được chạy trên database.  <br>✔️ Kiểm thử dữ liệu chạy để đảm bảo tính đúng đắn.  <br>✔️ Snapshot được cập nhật (nếu có).                                                                                                                                                                                                                                                            |
+| [run](https://docs.getdbt.com/reference/commands/run)                     | Runs the models in a project follow DAG order<br><br>*run models SQL đã được biên dịch trong dự án dbt trên cơ sở dữ liệu mục tiêu. Lệnh này tạo ra các bảng hoặc view dựa trên các mô hình đã định nghĩa.*<br><br>- Khi bạn chỉ muốn **chạy mô hình SQL** mà không cần chạy tests, seed, snapshot.<br>- Hữu ích trong **quá trình phát triển**, để kiểm tra mô hình có chạy đúng không.<br><br>🔹`dbt run --select sales_report` : <br>✔️ Chạy mô hình `sales_report` trên database.<br><br>🔹`dbt run --select sales_report+` : <br>✔️ Chạy mô hình `sales_report` và tất cả dependents (luồng downstream - các bảng mà phụ thuộc vào bảng đích) trên database.<br><br>🔹`dbt run --select +sales_report` : <br>✔️ Chạy mô hình `sales_report` và tất cả dependencies (luồng upstream - các bảng mà bảng đích phụ thuộc) trên database.<br><br>🔹`dbt run --select +sales_report+` : <br>✔️ Chạy full luồng mô hình `sales_report`. |
+| [test](https://docs.getdbt.com/reference/commands/test)                   | Executes tests defined (models, sources, snapshots, seeds) in a project<br><br>*Chạy các kiểm thử dữ liệu được định nghĩa trên các mô hình, nguồn dữ liệu, snapshot và seed. Lệnh này giúp xác minh tính toàn vẹn và chất lượng của dữ liệu.*<br><br>- Khi muốn kiểm tra **tính đúng đắn của dữ liệu** (ví dụ: không có giá trị NULL, giá trị duy nhất, quan hệ khóa ngoại đúng).<br>- Hữu ích trong **quá trình vận hành**, giúp phát hiện lỗi dữ liệu kịp thời.<br><br>`dbt test`:<br>✔️ Hiển thị lỗi nếu có dữ liệu không hợp lệ.                                                                                                                                                                                                                                                                                                                                                                                                  |
+| [seed](https://docs.getdbt.com/reference/commands/seed)                   | Loads CSV files into the database<br><br>*Tải các tệp CSV vào cơ sở dữ liệu. Điều này hữu ích cho việc nhập dữ liệu tĩnh hoặc ít thay đổi, chẳng hạn như bảng mã quốc gia hoặc bảng tra cứu.*<br><br>- Khi muốn **nạp dữ liệu tĩnh** vào database từ file CSV (ví dụ: danh sách quốc gia, danh mục sản phẩm).<br>- Hữu ích khi khởi tạo dự án hoặc chạy thử nghiệm.<br><br>`dbt seed`:<br>✔️ Dữ liệu từ `country_list.csv` trong folder `seed/` được tải lên database.                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| [snapshot](https://docs.getdbt.com/reference/commands/snapshot)           | Executes "snapshot" jobs defined in a project<br><br>*Thực thi các công việc "snapshot" được định nghĩa trong dự án, cho phép theo dõi lịch sử thay đổi của dữ liệu theo thời gian.*<br><br>- Khi cần **lưu lại lịch sử thay đổi dữ liệu**, giúp phân tích dữ liệu theo thời gian.<br>- Hữu ích với dữ liệu có sự thay đổi theo thời gian như: **giá sản phẩm, trạng thái đơn hàng**.<br><br>`dbt snapshot`:<br>✔️ Lưu trạng thái hiện tại của khách hàng vào bảng snapshot.                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| [docs](https://docs.getdbt.com/reference/commands/cmd-docs)               | Generates documentation for a project<br><br>*Tạo và phục vụ tài liệu cho dự án dbt. Lệnh này có hai lệnh con:*<br>- `dbt docs generate`: *Tạo trang web tài liệu cho dự án bằng cách biên dịch các tài nguyên và thu thập metadata từ cơ sở dữ liệu.*<br>- `dbt docs serve`: *Khởi động máy chủ web để phục vụ tài liệu và mở trang web tài liệu trong trình duyệt mặc định.*<br><br>- Khi muốn **tạo tài liệu tự động** cho mô hình dữ liệu.<br>- Hữu ích trong **quản lý dữ liệu**, giúp team dễ dàng tra cứu thông tin.<br><br>`dbt docs serve`:<br>✔️ Website tài liệu hiển thị metadata và lineage của các mô hình.<br>                                                                                                                                                                                                                                                                                                         |
+| [run-operation](https://docs.getdbt.com/reference/commands/run-operation) | Invokes a macro, including running arbitrary maintenance SQL against the database<br><br>*Gọi một macro, bao gồm việc chạy các lệnh SQL bảo trì tùy ý trên cơ sở dữ liệu.*<br><br>Khi muốn **chạy macro tùy chỉnh** (ví dụ: xóa cache, cập nhật metadata).<br><br>`dbt run-operation drop_old_tables`<br>✔️ Macro `drop_old_tables` chạy, xóa bảng cũ.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| [clean](https://docs.getdbt.com/reference/commands/clean)                 | Deletes artifacts present (folder: `\targer`) in the dbt project<br><br>Khi muốn **dọn dẹp** thư mục `target/` và `dbt_packages/`, tránh lỗi do dữ liệu cũ.<br><br>`dbt clean`:<br>✔️ Thư mục cũ bị xóa, đảm bảo môi trường sạch.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| [clone](https://docs.getdbt.com/reference/commands/clone)                 | Clones selected models from the specified state<br><br>*Sao chép các mô hình được chọn từ trạng thái được chỉ định.*<br><br>Khi muốn **sao chép trạng thái mô hình** từ một môi trường khác.<br>`dbt clone --state prod`<br>✔️ Sao chép dữ liệu từ môi trường `prod`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| [compile](https://docs.getdbt.com/reference/commands/compile)             | Compiles (but does not run) the models in a project<br><br>*Biên dịch các mô hình trong dự án mà không thực thi chúng, tạo ra các tệp SQL đã biên dịch trong thư mục `target`.*<br><br>Khi muốn **xem SQL đã biên dịch** của mô hình mà không chạy nó.<br><br>`dbt compile --select sales_report`:<br>✔️ File SQL được tạo trong `target/compiled/`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| [deps](https://docs.getdbt.com/reference/commands/deps)                   | Downloads dependencies for a project<br><br>*Tải về các phụ thuộc cho dự án dbt, chẳng hạn như các gói dbt được chỉ định trong tệp `packages.yml`.*<br><br>Khi cần **tải về package dbt** từ `packages.yml` (ví dụ: `dbt_utils`).<br><br>`dbt deps`:<br>✔️ Các package được tải về thư mục `dbt_packages/`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| [invocation](https://docs.getdbt.com/reference/commands/invocation)       | Enables users to debug long-running sessions by interacting with active invocations.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| [list](https://docs.getdbt.com/reference/commands/list)                   | Lists resources defined in a dbt project<br><br>*Liệt kê các tài nguyên được định nghĩa trong dự án dbt. Lệnh này chấp nhận các đối số lựa chọn tương tự như `dbt run`.*<br><br>Khi muốn **liệt kê các mô hình trong dự án**.<br><br>`dbt ls --resource-type model`:<br>✔️ Liệt kê tất cả các mô hình.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| [parse](https://docs.getdbt.com/reference/commands/parse)                 | Parses a project and writes detailed timing info                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| [retry](https://docs.getdbt.com/reference/commands/retry)                 | Retry the last run `dbt` command from the point of failure<br><br>*Thử lại lệnh dbt cuối cùng từ điểm thất bại.*<br>`dbt retry`:<br>✔️ Tiếp tục từ chỗ lỗi trước đó.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| [show](https://docs.getdbt.com/reference/commands/show)                   | Previews table rows post-transformation<br><br>*Biên dịch định nghĩa dbt-SQL của một mô hình, kiểm thử, phân tích hoặc một truy vấn dbt-SQL tùy ý được truyền vào bằng `--inline`, sau đó chạy truy vấn đó trên kho dữ liệu và xem trước kết quả trong terminal.*<br><br>Khi muốn **xem trước dữ liệu của một mô hình**.<br><br>`dbt show --select sales_report`:<br>✔️ Hiển thị kết quả SQL của `sales_report`.<br>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| [source](https://docs.getdbt.com/reference/commands/source)               | Provides tools for working with source data (including validating that sources are "fresh")<br><br>*Cung cấp các lệnh con hữu ích khi làm việc với dữ liệu nguồn. Lệnh này có một lệnh con là `dbt source freshness`, dùng để kiểm tra độ mới của các bảng nguồn.*<br><br>Khi muốn **kiểm tra độ mới của dữ liệu nguồn**.<br><br>`dbt source freshness`:<br>✔️ Cảnh báo nếu dữ liệu quá cũ.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 ## Test & debug DBT
 
-1. **Debugging Tests and Testing with dbt-expectations:**
 * The original Great Expectations project on GitHub: https://github.com/great-expectations/great_expectations
 * dbt-expectations: https://github.com/calogica/dbt-expectations 
 
 For the final code in _packages.yml_, _models/schema.yml_ and _models/sources.yml_, please refer to the course's Github repo:
 https://github.com/nordquant/complete-dbt-bootcamp-zero-to-hero
 
-2. **Testing a single model:**
+**Testing a single model:**
 
 ```
 dbt test --select dim_listings_w_hosts
 ```
 
-Testing individual sources:
+**Testing individual sources:**
 
 ```
 dbt test --select source:airbnb.listings
 ```
 
-3. **Debugging dbt:**
+**Debugging dbt:**
 
 ```
 dbt --debug test --select dim_listings_w_hosts
 ```
 
-Keep in mind that in the lecture we didn't use the _--debug_ flag after all as taking a look at the compiled sql file is the better way of debugging tests.
-
-4. **Logging:**
+**Logging:**
 
 The contents of `macros/logging.sql`:
 ```
@@ -1316,52 +1545,6 @@ dbt run --select fct_reviews  --vars '{start_date: "2024-02-15 00:00:00", end_da
 ```
 
 Reference - Working with incremental strategies: https://docs.getdbt.com/docs/build/incremental-models#about-incremental_strategy
-
-
-### Analyses, Hooks and Exposures
-
-
-
-#### Analyses
-
-#### Creating a Dashboard in Preset
-
-Getting the Snowflake credentials up to the screen:
-
-* Mac / Linux / Windows Powershell: `cat ~/.dbt/profiles.yml `
-* Windows (cmd): `type %USERPROFILE%\.dbt\profiles.yml`
-
-#### Exposures
-The contents of `models/dashboard.yml`:
-```yaml
-version: 2
-
-exposures:
-  - name: executive_dashboard
-    label: Executive Dashboard
-    type: dashboard
-    maturity: low
-    url: https://00d200da.us1a.app.preset.io/superset/dashboard/x/?edit=true&native_filters_key=fnn_HJZ0z42ZJtoX06x7gRbd9oBFgFLbnPlCW2o_aiBeZJi3bZuyfQuXE96xfgB
-    description: Executive Dashboard about Airbnb listings and hosts
-      
-
-    depends_on:
-      - ref('dim_listings_w_hosts')
-      - ref('mart_fullmoon_reviews')
-
-    owner:
-      name: Zoltan C. Toth
-      email: dbtstudent@gmail.com
-```
-
-#### Post-hook
-Add this to your `dbt_project.yml`:
-
-```
-+post-hook:
-      - "GRANT SELECT ON {{ this }} TO ROLE REPORTER"
-```
-
 
 
 
