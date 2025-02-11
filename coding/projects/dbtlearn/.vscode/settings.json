@@ -1,0 +1,6 @@
+{
+    "python-envs.pythonProjects": [],
+    "dbt.perspectiveTheme": "Monokai",
+    "dbt.queryLimit": 30,
+    "dbt.enableNewLineagePanel": true
+}
