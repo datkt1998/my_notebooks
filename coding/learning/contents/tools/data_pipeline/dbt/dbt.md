@@ -1327,7 +1327,7 @@ WHERE country = '{{ var("country", "USA") }}'
 📌 Nếu biến `country` không được đặt, nó sẽ mặc định là `"USA"`.
 #### Cách sử dụng `vars` trong dbt
 
-##### Dùng `vars` trong SQL models
+##### SQL models
 
 Trong file `models/customers.sql`, bạn có thể sử dụng `vars` để lọc dữ liệu:
 
@@ -1338,7 +1338,7 @@ WHERE country = '{{ var("country", "USA") }}'
 ```
 📌 Nếu chạy: `dbt run --vars '{"country": "Canada"}'` → Query sẽ chỉ lấy khách hàng ở `Canada`.
 
-##### Dùng `vars` trong macros
+##### macros
 
 Biến cũng có thể dùng trong macros (Jinja):
 ```sql
@@ -1353,40 +1353,40 @@ SELECT *
 FROM customers 
 WHERE {{ filter_by_country() }}
 ```
-##### Dùng `vars` trong seeds
+
+##### seeds
 
 Nếu bạn có **seed CSV**, bạn có thể dùng `vars` để giới hạn dữ liệu:
 
-```
 ```yaml
-
-CopyEdit
-
-`seeds:   my_project:     my_seed_file:       vars:         start_date: "2024-01-01"`
+seeds:
+  my_project:
+    my_seed_file:
+      vars:
+        start_date: "2024-01-01"
+```
 
 Sau đó, trong SQL:
+```sql
+SELECT * 
+FROM {{ ref('my_seed_file') }}
+WHERE order_date >= '{{ var("start_date", "2023-01-01") }}'
+```
+📌 Khi chạy `dbt seed`, dữ liệu sẽ được lọc theo `start_date`.
 
-sql
-
-CopyEdit
-
-`SELECT *  FROM {{ ref('my_seed_file') }} WHERE order_date >= '{{ var("start_date", "2023-01-01") }}'`
-
-📌 **Khi chạy `dbt seed`, dữ liệu sẽ được lọc theo `start_date`.**
-
----
-
-### **d) Dùng `vars` trong tests**
+##### tests
 
 Bạn có thể tham chiếu `vars` khi viết test tùy chỉnh:
-
-yaml
-
-CopyEdit
-
-`tests:   - name: test_minimum_orders     description: "Check if number of orders is greater than threshold"     sql: >       SELECT COUNT(*)        FROM {{ ref('orders') }}        WHERE total_orders < {{ var("max_orders", 500) }}`
-
-📌 **Giá trị `max_orders` có thể thay đổi khi chạy dbt.**
+```yaml
+tests:
+  - name: test_minimum_orders
+    description: "Check if number of orders is greater than threshold"
+    sql: >
+      SELECT COUNT(*) 
+      FROM {{ ref('orders') }} 
+      WHERE total_orders < {{ var("max_orders", 500) }}
+```
+📌 Giá trị `max_orders` có thể thay đổi khi chạy dbt.
 ## [DBT Command](https://docs.getdbt.com/reference/commands/build)
 
 | Command                                                                   | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
