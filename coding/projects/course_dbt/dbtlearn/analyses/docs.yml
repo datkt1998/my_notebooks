@@ -1,0 +1,7 @@
+version: 2
+
+analyses:
+  - name: full_moon_no_sleep
+    description: This analysis looks at the impact of a full moon on the number of nights booked.
+    docs:
+      show: true
