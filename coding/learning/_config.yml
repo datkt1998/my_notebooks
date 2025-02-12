@@ -13,7 +13,7 @@ only_build_toc_files: true
 execute:
   execute_notebooks: 'off'
   allow_errors: false
-  stderr_output: 'remove-warn'
+  stderr_output: 'remove' #'remove-warn'
   exclude_patterns: [_build, Thumbs.db, ".venv", .DS_Store, ".vscode", "**.ipynb_checkpoints", "__pycache__"]
 
 # Define the name of the latex output file for PDF builds
