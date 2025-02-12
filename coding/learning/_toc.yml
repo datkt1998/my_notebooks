@@ -191,8 +191,6 @@ parts:
         title: Pydantic
       - file: contents/tools/dev_frameworks/streamlit/Streamlit.ipynb
         title: Streamlit
-      - file: contents/tools/dev_frameworks/pytest/Pytest.ipynb
-        title: Pytest
       - file: contents/tools/dev_frameworks/fastapi/FastAPI.ipynb
         title: FastAPI
         sections:
@@ -200,6 +198,12 @@ parts:
             title: Small App Example
           - file: contents/tools/dev_frameworks/fastapi/example_big_app/guide.ipynb
             title: Big App Example
+
+    - file: contents/tools/test_functions/_index
+      title: Testing Functions
+      sections:
+      - file: contents/tools/dev_frameworks/pytest/Pytest.ipynb
+        title: Pytest
 
     - file: contents/tools/data_pipeline/_index
       title: Data Pipeline Tools
