@@ -187,6 +187,8 @@ parts:
       sections:
       - file: contents/tools/dev_frameworks/docker/Docker_guide
         title: Docker
+      - file: contents/tools/dev_frameworks/makefile/makefile
+        title: Makefile
       - file: contents/tools/dev_frameworks/pydantic/Pydantic.ipynb
         title: Pydantic
       - file: contents/tools/dev_frameworks/streamlit/Streamlit.ipynb
