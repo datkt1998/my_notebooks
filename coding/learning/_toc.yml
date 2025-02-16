@@ -222,7 +222,7 @@ parts:
     - file: contents/tools/mlops_workflow/_index
       title: MLOps & Workflow
       sections:
-        - file: contents/tools/mlops_workflow/airflow/airflow.ipynb
+        - file: contents/tools/mlops_workflow/airflow/airflow
           title: Airflow
 
     - file: contents/tools/databases_storage/_index
@@ -265,7 +265,7 @@ parts:
   - file: contents/guides/topics/_index.md
     title: Topics
     sections:
-    - file: contents/guides/data_pipeline/best_practice_data_engineering
+    - file: contents/guides/topics/best_practice_data_engineering
       title: Best Practice Data Engineering
     - file: contents/guides/topics/pull_push_api.md
       title: Pull & Push API
