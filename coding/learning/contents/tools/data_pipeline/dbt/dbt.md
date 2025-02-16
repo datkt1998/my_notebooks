@@ -80,6 +80,10 @@ Create a dbt project (all platforms):
 dbt init <dbt project path>
 ```
 
+Let's check the [DBT config for each platform](https://docs.getdbt.com/docs/core/connect-data-platform/about-core-connections):
+- [BigQuery](https://docs.getdbt.com/docs/core/connect-data-platform/bigquery-setup)
+- ...
+
 Then config the DBT connection
 
 Let's check DBT connection after config

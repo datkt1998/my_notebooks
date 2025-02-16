@@ -187,12 +187,12 @@ parts:
       sections:
       - file: contents/tools/dev_frameworks/docker/Docker_guide
         title: Docker
+      - file: contents/tools/dev_frameworks/makefile/makefile
+        title: Makefile
       - file: contents/tools/dev_frameworks/pydantic/Pydantic.ipynb
         title: Pydantic
       - file: contents/tools/dev_frameworks/streamlit/Streamlit.ipynb
         title: Streamlit
-      - file: contents/tools/dev_frameworks/pytest/Pytest.ipynb
-        title: Pytest
       - file: contents/tools/dev_frameworks/fastapi/FastAPI.ipynb
         title: FastAPI
         sections:
@@ -200,6 +200,12 @@ parts:
             title: Small App Example
           - file: contents/tools/dev_frameworks/fastapi/example_big_app/guide.ipynb
             title: Big App Example
+
+    - file: contents/tools/test_functions/_index
+      title: Testing Functions
+      sections:
+      - file: contents/tools/dev_frameworks/pytest/Pytest.ipynb
+        title: Pytest
 
     - file: contents/tools/data_pipeline/_index
       title: Data Pipeline Tools
@@ -256,11 +262,13 @@ parts:
     - file: contents/guides/code_guides/vscode_dev_container/DevContainers.md
       title: VSCode Dev Containers
 
-  - file: contents/guides/data_pipeline/_index.md
-    title: Data Pipeline Guides
+  - file: contents/guides/topics/_index.md
+    title: Topics
     sections:
     - file: contents/guides/data_pipeline/best_practice_data_engineering
       title: Best Practice Data Engineering
+    - file: contents/guides/topics/pull_push_api.md
+      title: Pull & Push API
 
 
   - file: contents/guides/ml_ops/_index.md
