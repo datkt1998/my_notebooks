@@ -267,6 +267,8 @@ parts:
     sections:
     - file: contents/guides/data_pipeline/best_practice_data_engineering
       title: Best Practice Data Engineering
+    - file: contents/guides/topics/pull_push_api.md
+      title: Pull & Push API
 
 
   - file: contents/guides/ml_ops/_index.md
