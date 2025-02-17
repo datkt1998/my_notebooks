@@ -1,6 +1,6 @@
 # Airflow
 
-## Overview & Setup
+## Overview
 
 Apache Airflow is a powerful workflow orchestration tool that helps you schedule, monitor, and manage data pipelines. Since you’re working with feature engineering and GCP, Airflow can be a great addition to automate your ML pipelines.
 
@@ -30,16 +30,14 @@ P/S : Airflow không phải một giải pháp về stream dữ liệu như Spar
 • *Branching & Conditional Execution* (BranchPythonOperator).
 • *TaskRetries & SLAs* (handling failures).
 
-**3. Installation & Setup**
-
-**4. Writing DAGs**
+**3. Writing DAGs**
 
 • How to define DAGs in Python.
 • Using **Operators** (BashOperator, PythonOperator, DummyOperator).
 • Task dependencies (set_upstream, set_downstream).
 • Using Jinja templating for dynamic DAGs.
 
-**5. Airflow with GCP**
+**4. Airflow with GCP**
 
 • Using **Google Cloud Operators**:
 	• **BigQueryOperator** – Querying BigQuery.
@@ -48,15 +46,18 @@ P/S : Airflow không phải một giải pháp về stream dữ liệu như Spar
 	• **KubernetesPodOperator** – Running tasks in GKE.
 • Integrating Airflow with **Vertex AI Pipelines**.
 
-**6. Airflow in Production**
+**5. Airflow in Production**
 
 • Airflow deployment strategies (Kubernetes, Cloud Composer).
 • Monitoring & logging best practices.
 • Handling failures & retries.
 • Airflow security & authentication.
 
-**7. Real-World Use Cases**
+**6. Real-World Use Cases**
 
 • Automating ML feature engineering pipelines with Airflow.
 • ETL/ELT pipelines with Airflow & BigQuery.
 • Orchestrating ML training & inference workflows.
+
+## Installation & Setup
+
