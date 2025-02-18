@@ -182,7 +182,7 @@ parts:
   numbered: true
   chapters:
     - file: contents/tools/programming/_index
-      title: Programming Languages
+      title: Programming
       sections:
         - file: contents/tools/programming/python/_index
           title: Python
@@ -201,7 +201,7 @@ parts:
           title: Bash
 
     - file: contents/tools/dev_frameworks/_index
-      title: Development Frameworks
+      title: Dev Frameworks
       sections:
       - file: contents/tools/dev_frameworks/pydantic/Pydantic.ipynb
         title: Pydantic
@@ -224,21 +224,8 @@ parts:
         - file: contents/tools/data_engineering/gcp_dataform/dataform.ipynb
           title: (GCP) Dataform
 
-    - file: contents/tools/web_api/_index
-      title: Web API
-      sections:
-        - file: contents/tools/web_api/streamlit/Streamlit.ipynb
-          title: Streamlit
-        - file: contents/tools/web_api/fastapi/FastAPI.ipynb
-          title: FastAPI
-          sections:
-            - file: contents/tools/web_api/fastapi/example_small_app/guide.ipynb
-              title: Small App Example
-            - file: contents/tools/web_api/fastapi/example_big_app/guide.ipynb
-              title: Big App Example
-
     - file: contents/tools/devops_mlops/_index
-      title: DevOps & MLOps
+      title: MLOps
       sections:
         - file: contents/tools/devops_mlops/airflow/airflow
           title: Airflow
@@ -259,6 +246,21 @@ parts:
         - file: contents/tools/devops_mlops/monitoring_logging/prometheus
           title: Prometheus
 
+
+    - file: contents/tools/web_api/_index
+      title: WebAPI
+      sections:
+        - file: contents/tools/web_api/streamlit/Streamlit.ipynb
+          title: Streamlit
+        - file: contents/tools/web_api/fastapi/FastAPI.ipynb
+          title: FastAPI
+          sections:
+            - file: contents/tools/web_api/fastapi/example_small_app/guide.ipynb
+              title: Small App Example
+            - file: contents/tools/web_api/fastapi/example_big_app/guide.ipynb
+              title: Big App Example
+
+
     - file: contents/tools/storage/_index
       title: Storage
       # sections:
@@ -266,7 +268,7 @@ parts:
       #     title: Feast (Feature Store)
 
     - file: contents/tools/cloud/_index
-      title: Cloud Service
+      title: Cloud
       sections:
         - file: contents/tools/cloud/aws/_index
           title: AWS
