@@ -1,0 +1,275 @@
+Directory structure:
+└── learning/
+     ├── contents/
+     │    ├── practice/
+     │    │    ├── knowledge/
+     │    │    │    ├── ai_agent.md
+     │    │    │    ├── best_practice_data_engineering.md
+     │    │    │    ├── ml_folder_structure.md
+     │    │    │    ├── pull_push_api.md
+     │    │    │    ├── vscode_dev_container/
+     │    │    │    │    ├── devcontainer.json
+     │    │    │    │    ├── DevContainers.md
+     │    │    │    │    └── _image/
+     │    │    │    │         ├── add_dev_con.webp
+     │    │    │    │         └── navigate_project.webp
+     │    │    │    └── _index.md
+     │    │    ├── labs/
+     │    │    │    ├── cicd_vertexai_machine/
+     │    │    │    │    └── guide.ipynb
+     │    │    │    ├── deploy_airflow_on_gke/
+     │    │    │    │    ├── guide.ipynb
+     │    │    │    │    └── read-only-port-metrics.yaml
+     │    │    │    ├── function_calling_genai/
+     │    │    │    │    └── guide.ipynb
+     │    │    │    ├── mlops_e2e_system_gcp/
+     │    │    │    │    ├── guide.ipynb
+     │    │    │    │    └── _image/
+     │    │    │    │         ├── gcp_service.webp
+     │    │    │    │         ├── mlops_funda.webp
+     │    │    │    │         ├── ml_wf.gif
+     │    │    │    │         ├── monitoring.webp
+     │    │    │    │         └── tracking.webp
+     │    │    │    ├── serving_ml_model_gcp/
+     │    │    │    │    ├── cloudbuild.yaml
+     │    │    │    │    ├── Dockerfile
+     │    │    │    │    ├── guide.ipynb
+     │    │    │    │    ├── main.py
+     │    │    │    │    ├── model.py
+     │    │    │    │    ├── requirements.txt
+     │    │    │    │    ├── Serving_ML_models_with_Vertex_AI.ipynb
+     │    │    │    │    ├── test.py
+     │    │    │    │    ├── train.py
+     │    │    │    │    └── _image/
+     │    │    │    │         └── import_model_registry.png
+     │    │    │    ├── train_ml_model_gcp/
+     │    │    │    │    └── guide.ipynb
+     │    │    │    └── _index.md
+     │    │    └── _index.md
+     │    ├── theory/
+     │    │    ├── aiml_algorithms/
+     │    │    │    ├── dl_computer_vision/
+     │    │    │    │    ├── 1_computer_vision_cnn.ipynb
+     │    │    │    │    └── _index.md
+     │    │    │    ├── dl_fundamental/
+     │    │    │    │    ├── 1_fundamental_overview.ipynb
+     │    │    │    │    ├── 2_process_data_augmentation.ipynb
+     │    │    │    │    ├── 3_transfer_learning.ipynb
+     │    │    │    │    ├── 4_multi_modal.ipynb
+     │    │    │    │    └── _index.md
+     │    │    │    ├── dl_llm/
+     │    │    │    │    └── _index.md
+     │    │    │    ├── dl_nlp/
+     │    │    │    │    ├── 1_nlp_rnn.ipynb
+     │    │    │    │    ├── 2_transformers.ipynb
+     │    │    │    │    └── _index.md
+     │    │    │    ├── dl_reinforcement_learning/
+     │    │    │    ├── ml_supervised_learning/
+     │    │    │    │    ├── supervised_learning.ipynb
+     │    │    │    ├── ml_unsupervised_learning/
+     │    │    │    │    ├── unsupervised_learning.ipynb
+     │    │    │    └── _index.md
+     │    │    ├── data_processing/
+     │    │    │    ├── 1_explore_data_analysis/
+     │    │    │    │    ├── 1_data_analysis_process.ipynb
+     │    │    │    │    ├── 2_read_datasets.ipynb
+     │    │    │    │    ├── 3_explore_data.ipynb
+     │    │    │    │    ├── 4_description_statistic.ipynb
+     │    │    │    │    ├── 5_inferential_statistic.ipynb
+     │    │    │    │    ├── 6_hypothesis_testing.ipynb
+     │    │    │    │    ├── 7_anova.ipynb
+     │    │    │    │    └── _index.md
+     │    │    │    ├── 2_feature_engineering/
+     │    │    │    │    ├── 01_customize_transform_function.ipynb
+     │    │    │    │    ├── 02_feature_extraction.ipynb
+     │    │    │    │    ├── 03_variable_overview.ipynb
+     │    │    │    │    ├── 04_missing_imputation.ipynb
+     │    │    │    │    ├── 05_categorical_encoding.ipynb
+     │    │    │    │    ├── 06_feature_transformation.ipynb
+     │    │    │    │    ├── 07_discretisation.ipynb
+     │    │    │    │    ├── 08_outliers_handling.ipynb
+     │    │    │    │    ├── 09_feature_scaling.ipynb
+     │    │    │    │    ├── 10_feature_selection.ipynb
+     │    │    │    │    └── _index.md
+     │    │    │    ├── 3_imbalance_data_handling/
+     │    │    │    │    ├── 01_data_level_approaches.ipynb
+     │    │    │    │    ├── 02_cost_sensitive_approaches.ipynb
+     │    │    │    │    ├── 03_ensemble_approaches.ipynb
+     │    │    │    │    └── _index.md
+     │    │    │    ├── 4_feature_selection_and_decomposition/
+     │    │    │    │    ├── 01_filter_methods.ipynb
+     │    │    │    │    ├── 02_wrapper_methods.ipynb
+     │    │    │    │    ├── 03_embedded_methods.ipynb
+     │    │    │    │    ├── 04_hybrid_methods.ipynb
+     │    │    │    │    ├── 05_feature_decomposition.ipynb
+     │    │    │    │    └── _index.md
+     │    │    │    ├── 5_evaluation_metrics/
+     │    │    │    │    ├── 01_list_metrics_and_customize_methods.ipynb
+     │    │    │    │    ├── 02_classification_metrics.ipynb
+     │    │    │    │    ├── 03_regression_metrics.ipynb
+     │    │    │    │    ├── 04_clustering_metrics.ipynb
+     │    │    │    │    ├── 05_pairwise_metrics.ipynb
+     │    │    │    │    ├── recommendation_system_metrics/
+     │    │    │    │    │    ├── 01_overview.ipynb
+     │    │    │    │    │    ├── 02_similarity_metrics.ipynb
+     │    │    │    │    │    ├── 03_candidate_generation_metrics.ipynb
+     │    │    │    │    │    ├── 04_rating_metrics.ipynb
+     │    │    │    │    │    ├── 05_ranking_metrics.ipynb
+     │    │    │    │    │    └── _index.md
+     │    │    │    │    └── _index.md
+     │    │    │    ├── 6_model_monitoring/
+     │    │    │    │    ├── 01_overview.ipynb
+     │    │    │    │    ├── 02_function_level_monitoring.ipynb
+     │    │    │    │    ├── 03_operation_level_monitoring.ipynb
+     │    │    │    │    └── _index.md
+     │    │    │    └── _index.md
+     │    │    ├── mathematics/
+     │    │    │    ├── 1_Linear_algebra.ipynb
+     │    │    │    ├── 2_Calculus_and_optimization.ipynb
+     │    │    │    ├── 3_Distribution_and_statistic.ipynb
+     │    │    │    ├── 4_Information_theory.ipynb
+     │    │    │    ├── 5_Graph_theory.ipynb
+     │    │    │    └── _index.md
+     │    │    └── topics/
+     │    │         ├── recommendation_system/
+     │    │         │    ├── docs/
+     │    │         │    │    └── Deep Dive_ How to Build the TikTok Recommender System End-to-End.pdf
+     │    │         │    ├── labs/
+     │    │         │    │    ├── collaborative_filtering_als_spark.ipynb
+     │    │         │    │    └── _index.md
+     │    │         │    └── _index.md
+     │    │         └── _index.md
+     │    └── tools/
+     │         ├── cloud/
+     │         │    ├── aws/
+     │         │    │    └── _index.md
+     │         │    ├── gcp/
+     │         │    │    ├── vertex_ai/
+     │         │    │    │    ├── vertex_ai.md
+     │         │    │    └── _index.md
+     │         │    └── _index.md
+     │         ├── data_engineering/
+     │         │    ├── dbt/
+     │         │    │    └── dbt.md
+     │         │    ├── gcp_dataflow_apache_beam/
+     │         │    │    └── apache_beam.ipynb
+     │         │    ├── gcp_dataform/
+     │         │    │    └── dataform.ipynb
+     │         │    ├── gcp_dataproc_pyspark_procedure/
+     │         │    │    └── pyspark_procedure_sparkjob.ipynb
+     │         │    ├── polars/
+     │         │    │    └── Polars.ipynb
+     │         │    ├── pyspark/
+     │         │    │    └── PySpark.ipynb
+     │         │    └── _index.md
+     │         ├── devops_mlops/
+     │         │    ├── airflow/
+     │         │    │    └── airflow.md
+     │         │    ├── cicd/
+     │         │    │    ├── 4_Git.ipynb
+     │         │    │    ├── jenkins.md
+     │         │    ├── docker/
+     │         │    │    ├── Docker_guide.md
+     │         │    │    └── example/
+     │         │    │         ├── nlp_function/
+     │         │    │         │    ├── 01_sentiment_analysis.py
+     │         │    │         │    ├── 02_name_entity_recognition.py
+     │         │    │         │    ├── 03_text_classification.py
+     │         │    │         │    ├── 04_text_summarization.py
+     │         │    │         │    ├── 05_language_translation.py
+     │         │    │         │    ├── Dockerfile
+     │         │    │         │    ├── entrypoint.sh
+     │         │    │         │    ├── language_mapping.py
+     │         │    │         │    ├── README.md
+     │         │    │         │    └── requirements.txt
+     │         │    │         ├── text_summarizer_gcp/
+     │         │    │         │    ├── app.py
+     │         │    │         │    ├── config/
+     │         │    │         │    │    └── config.py
+     │         │    │         │    ├── deployments/
+     │         │    │         │    │    ├── cloud/
+     │         │    │         │    │    │    ├── cloudbuild.yaml
+     │         │    │         │    │    │    └── vertex_ai.py
+     │         │    │         │    │    ├── docker-compose.yml
+     │         │    │         │    │    ├── Dockerfile
+     │         │    │         │    │    ├── gcp_deployment.yaml
+     │         │    │         │    │    └── kubernetes/
+     │         │    │         │    │         ├── deployment.yaml
+     │         │    │         │    │         └── service.yaml
+     │         │    │         │    ├── dev.ipynb
+     │         │    │         │    ├── environment.yml
+     │         │    │         │    ├── main.py
+     │         │    │         │    ├── README.md
+     │         │    │         │    ├── requirements.txt
+     │         │    │         │    └── summarizer/
+     │         │    │         │         ├── bigquery_utils.py
+     │         │    │         │         ├── model.py
+     │         │    │         │         └── __init__.py
+     │         │    │         └── _index.md
+     │         │    ├── infa/
+     │         │    │    └── terraform.md
+     │         │    ├── k8s/
+     │         │    │    └── kubernetes.md
+     │         │    ├── makefile/
+     │         │    │    └── makefile.md
+     │         │    ├── monitoring_logging/
+     │         │    │    ├── grafana.md
+     │         │    │    └── prometheus.md
+     │         │    └── _index.md
+     │         ├── dev_frameworks/
+     │         │    ├── pydantic/
+     │         │    │    ├── Pydantic.ipynb
+     │         │    │    ├── test.py
+     │         │    │    ├── validators_mode_ordering.png
+     │         │    │    └── validators_mode_ordering_in_pipeline.excalidraw.md
+     │         │    ├── pytest/
+     │         │    │    └── Pytest.ipynb
+     │         │    ├── pytorch/
+     │         │    │    └── pytorch.ipynb
+     │         │    ├── tensorflow/
+     │         │    │    └── tensorflow.ipynb
+     │         │    └── _index.md
+     │         ├── programming/
+     │         │    ├── 2_NoSQL.ipynb
+     │         │    ├── 3_SQL.ipynb
+     │         │    ├── bash.md
+     │         │    ├── python/
+     │         │    │    ├── 1_Python.ipynb
+     │         │    │    ├── 2_Concurrency_and_parallelism.ipynb
+     │         │    │    ├── 3_python_environment.ipynb
+     │         │    │    ├── test.py
+     │         │    │    └── _index.md
+     │         │    └── _index.md
+     │         ├── storage/
+     │         │    ├── feast/
+     │         │    └── _index.md
+     │         └── web_api/
+     │              ├── fastapi/
+     │              │    ├── example_big_app/
+     │              │    │    ├── dependencies.py
+     │              │    │    ├── guide.ipynb
+     │              │    │    ├── internal/
+     │              │    │    │    ├── admin.py
+     │              │    │    │    └── __init__.py
+     │              │    │    ├── main.py
+     │              │    │    ├── routers/
+     │              │    │    │    ├── items.py
+     │              │    │    │    ├── users.py
+     │              │    │    │    └── __init__.py
+     │              │    │    └── __init__.py
+     │              │    ├── example_small_app/
+     │              │    │    ├── crud.py
+     │              │    │    ├── database.py
+     │              │    │    ├── guide.ipynb
+     │              │    │    ├── main.py
+     │              │    │    ├── models.py
+     │              │    │    ├── schemas.py
+     │              │    │    └── __init__.py
+     │              │    ├── FastAPI.ipynb
+     │              │    ├── main.py
+     │              │    ├── security.py
+     │              │    └── test_app_client.py
+     │              ├── streamlit/
+     │              │    └── Streamlit.ipynb
+     │              └── _index.md
+     ├── folder_structure.txt

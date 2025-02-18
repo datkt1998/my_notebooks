@@ -724,7 +724,7 @@ Có nhiều cách setup airflow ([xem thêm](https://airflow.apache.org/docs/apa
 
 Chúng ta sẽ thực hiện setup airflow bằng docker-compose:
 **1. Setup docker-compose**
-```terminal
+```bash
 sudo curl -L "https://github.com/docker/compose/releases/download/v2.9.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
 sudo chmod +x /usr/local/bin/docker-compose
@@ -754,7 +754,7 @@ P/S: Nếu bạn muốn cài thêm một số thư viện python hoặc nâng c�
 
 **3. Khởi tạo môi trường**
 Trước khi chạy Airflow lần đầu, bạn cần phải chuẩn bị môi trường chút: tạo files, folders cần thiết, khởi tạo cơ sở dữ liệu
-```cmd
+```bash
 mkdir -p ./dags ./logs ./plugins
 echo -e "AIRFLOW_UID=$(id -u)" > .env
 ```
@@ -765,7 +765,7 @@ echo -e "AIRFLOW_UID=$(id -u)" > .env
 
 **4. Khởi chạy**
 
-```cmd
+```bash
 # Khởi tạo cơ sở dữ liệu và tài khoản trước
 docker-compose up airflow-init
 
@@ -831,7 +831,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 ```
 
 **Build and Tag the Docker Image:** Navigate to the directory containing your `Dockerfile` and execute the build command:
-```cmd
+```bash
 docker build . --pull --tag my-airflow-image:latest
 ```
 --> builds the image and tags it as `my-airflow-image:latest`
