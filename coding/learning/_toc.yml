@@ -158,6 +158,22 @@ parts:
       - file: contents/theory/aiml_algorithms/dl_nlp/2_transformers.ipynb
         title: Transformers
 
+    - file: contents/theory/aiml_algorithms/dl_llm/_index
+      title: DL LLM
+
+
+  - file: contents/theory/topics/_index.md
+    title: Topics
+    sections:
+
+    - file: contents/theory/topics/recommendation_system/_index
+      title: Recommendation System
+      sections:
+      - file: contents/theory/topics/recommendation_system/labs/_index
+        title: Labs
+        sections:
+        - file: contents/theory/topics/recommendation_system/labs/collaborative_filtering_als_spark.ipynb
+          title: (CF) ALS - by PySpark
 
 # --------------- PROGRAMMING & FRAMEWORKS --------------
 
@@ -166,7 +182,7 @@ parts:
   numbered: true
   chapters:
     - file: contents/tools/programming/_index
-      title: Programming Languages
+      title: Programming
       sections:
         - file: contents/tools/programming/python/_index
           title: Python
@@ -181,152 +197,134 @@ parts:
           title: NoSQL
         - file: contents/tools/programming/3_SQL.ipynb
           title: SQL
+        - file: contents/tools/programming/bash.md
+          title: Bash
 
     - file: contents/tools/dev_frameworks/_index
-      title: Development Frameworks
+      title: Dev Frameworks
       sections:
-      - file: contents/tools/dev_frameworks/docker/Docker_guide
-        title: Docker
-      - file: contents/tools/dev_frameworks/makefile/makefile
-        title: Makefile
       - file: contents/tools/dev_frameworks/pydantic/Pydantic.ipynb
         title: Pydantic
-      - file: contents/tools/dev_frameworks/streamlit/Streamlit.ipynb
-        title: Streamlit
-      - file: contents/tools/dev_frameworks/fastapi/FastAPI.ipynb
-        title: FastAPI
-        sections:
-          - file: contents/tools/dev_frameworks/fastapi/example_small_app/guide.ipynb
-            title: Small App Example
-          - file: contents/tools/dev_frameworks/fastapi/example_big_app/guide.ipynb
-            title: Big App Example
-
-    - file: contents/tools/test_functions/_index
-      title: Testing Functions
-      sections:
       - file: contents/tools/dev_frameworks/pytest/Pytest.ipynb
         title: Pytest
-
-    - file: contents/tools/data_pipeline/_index
-      title: Data Pipeline Tools
-      sections:
-        - file: contents/tools/data_pipeline/dbt/dbt.md
-          title: DBT
-        - file: contents/tools/data_pipeline/polars/Polars.ipynb
-          title: Polars
-        - file: contents/tools/data_pipeline/pyspark/PySpark.ipynb
-          title: PySpark
-        - file: contents/tools/data_pipeline/gcp_dataform/dataform.ipynb
-          title: (GCP) Dataform
-
-    - file: contents/tools/mlops_workflow/_index
-      title: MLOps & Workflow
-      sections:
-        - file: contents/tools/mlops_workflow/airflow/airflow
-          title: Airflow
-
-    - file: contents/tools/databases_storage/_index
-      title: Database & Storage
-      # sections:
-      #   - file: contents/tools/databases_storage/feast/feast.ipynb
-      #     title: Feast (Feature Store)
-
-    - file: contents/tools/aiml_frameworks/_index
-      title: AI/ML Frameworks
-      sections:
         # - file: contents/tools/aiml_frameworks/tensorflow/tensorflow.ipynb
         #   title: TensorFlow
         # - file: contents/tools/aiml_frameworks/pytorch/pytorch.ipynb
         #   title: PyTorch
-        - file: contents/tools/aiml_frameworks/gcp_vertex_ai/vertex_ai.md
-          title: (GCP) Vertex AI
 
-    - file: contents/tools/version_control/_index
-      title: Version Control & CI/CD
+    - file: contents/tools/data_engineering/_index
+      title: Data Engineering
       sections:
-        - file: contents/tools/version_control/git/4_Git.ipynb
+        - file: contents/tools/data_engineering/dbt/dbt.md
+          title: DBT
+        - file: contents/tools/data_engineering/polars/Polars.ipynb
+          title: Polars
+        - file: contents/tools/data_engineering/pyspark/PySpark.ipynb
+          title: PySpark
+        - file: contents/tools/data_engineering/gcp_dataform/dataform.ipynb
+          title: (GCP) Dataform
+
+    - file: contents/tools/devops_mlops/_index
+      title: MLOps
+      sections:
+        - file: contents/tools/devops_mlops/airflow/airflow
+          title: Airflow
+        - file: contents/tools/devops_mlops/docker/Docker_guide
+          title: Docker
+        - file: contents/tools/devops_mlops/makefile/makefile
+          title: Makefile
+        - file: contents/tools/devops_mlops/cicd/4_Git.ipynb
           title: Git
+        - file: contents/tools/devops_mlops/cicd/jenkins
+          title: Jenkins
+        - file: contents/tools/devops_mlops/k8s/kubernetes
+          title: Kubernetes
+        - file: contents/tools/devops_mlops/infa/terraform
+          title: Terraform
+        - file: contents/tools/devops_mlops/monitoring_logging/grafana
+          title: Grafana
+        - file: contents/tools/devops_mlops/monitoring_logging/prometheus
+          title: Prometheus
 
 
-# -------------- TOPICS & GUIDES --------------
+    - file: contents/tools/web_api/_index
+      title: WebAPI
+      sections:
+        - file: contents/tools/web_api/streamlit/Streamlit.ipynb
+          title: Streamlit
+        - file: contents/tools/web_api/fastapi/FastAPI.ipynb
+          title: FastAPI
+          sections:
+            - file: contents/tools/web_api/fastapi/example_small_app/guide.ipynb
+              title: Small App Example
+            - file: contents/tools/web_api/fastapi/example_big_app/guide.ipynb
+              title: Big App Example
 
-- caption: TOPICS & GUIDES
+
+    - file: contents/tools/storage/_index
+      title: Storage
+      # sections:
+      #   - file: contents/tools/storage/feast/feast.ipynb
+      #     title: Feast (Feature Store)
+
+    - file: contents/tools/cloud/_index
+      title: Cloud
+      sections:
+        - file: contents/tools/cloud/aws/_index
+          title: AWS
+        - file: contents/tools/cloud/gcp/_index
+          title: GCP
+          sections:
+            - file: contents/tools/cloud/gcp/vertex_ai/vertex_ai.md
+              title: Vertex AI
+
+
+
+# -------------- TOPICS --------------
+
+- caption: PRACTICE
   maxdepth: 6
   numbered: true
   chapters:
-  - file: contents/guides/code_guides/_index.md
-    title: Code Snippets & Tricks
+
+  - file: contents/practice/knowledge/_index.md
+    title: Knowledge
     sections:
-    - file: contents/guides/code_guides/ml_project_structure/1_source_code_structure_guide
+    - file: contents/practice/knowledge/best_practice_data_engineering
+      title: Best Practice Data Engineering
+    - file: contents/practice/knowledge/pull_push_api.md
+      title: Pull & Push API
+    - file: contents/practice/knowledge/ai_agent.md
+      title: AI Agent
+    - file: contents/practice/knowledge/ml_folder_structure
       title: ML Project Structure
-    - file: contents/guides/code_guides/vscode_dev_container/DevContainers.md
+    - file: contents/practice/knowledge/vscode_dev_container/DevContainers.md
       title: VSCode Dev Containers
 
-  - file: contents/guides/topics/_index.md
-    title: Topics
+  - file: contents/practice/labs/_index.md
+    title: Labs
     sections:
-    - file: contents/guides/topics/best_practice_data_engineering
-      title: Best Practice Data Engineering
-    - file: contents/guides/topics/pull_push_api.md
-      title: Pull & Push API
-
-
-  - file: contents/guides/ml_ops/_index.md
-    title: ML-Ops
-    sections:
-    - file: contents/guides/ml_ops/mlops_e2e_system_gcp/guide.ipynb
+    - file: contents/practice/labs/mlops_e2e_system_gcp/guide.ipynb
       title: Overview MLOps service on GCP
-    - file: contents/guides/ml_ops/serving_ml_model_gcp/guide.ipynb
+    - file: contents/practice/labs/serving_ml_model_gcp/guide.ipynb
       title: Serve model on GCP
-    - file: contents/guides/ml_ops/train_ml_model_gcp/guide.ipynb
+    - file: contents/practice/labs/train_ml_model_gcp/guide.ipynb
       title: Train model on GCP
-    - file: contents/guides/ml_ops/function_calling_genai/guide.ipynb
+    - file: contents/practice/labs/function_calling_genai/guide.ipynb
       title: Function Calling (GenAI) on GCP 
+    # - file: contents/practice/labs/deploy_airflow_on_gke/guide.ipynb
+    #  title: Deploy Airflow on GKE
 
-  - file: contents/guides/problems/_index.md
-    title: AI/ML Problems
-    sections:
-    - file: contents/guides/problems/recommendation_system/_index
-      title: Recommendation System
-      sections:
-      - file: contents/guides/problems/recommendation_system/collaborative_filtering_als_spark.ipynb
-        title: (CF) ALS - by PySpark
-
-  - file: contents/guides/courses/_index.md
-    title: Courses, Books
-    sections:
-    - file: contents/guides/courses/book_llm_engineers_handbook/overview.md
-      title: (Book) LLM Engineer's Handbook
-
-  - file: contents/guides/aiml_projects/_index.md
-    title: ML Projects
-    sections:
-    - url: https://github.com/datkt1998/voc-sentiment-analysis
-      title: "NLP (GCP API, Apache Beam): VOC Sentiment Analysis"
-    - url: https://github.com/datkt1998/pinetree-news-intelli-sense
-      title: "NLP (GCP API, Cloud Function): NEWS AI Intelli-Sense"
 
 
 
 # ------------------ MY FUNCTIONS ------------------
 
-- caption: FUNCTIONS
+- caption: REPORITORIES
   maxdepth: 2
   numbered: true
   chapters:
-  - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/functions/pyfunc/cleaning
-    title: Cleaning
-  - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/functions/pyfunc/preprocessing
-    title: Preprocessing
-  - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/functions/pyfunc/models
-    title: Models
-  - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/functions/pyfunc/evaluation
-    title: Evaluation
-  - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/functions/pyfunc/monitoring
-    title: Monitoring
-  - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/functions/pyfunc/connection
-    title: Connection
-  - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/functions/pyfunc/deployment
-    title: Deployment
-  - url: https://github.com/datkt1998/my_notebooks/tree/master/coding/functions/pyfunc/utils
-    title: Utils
+  - url: https://github.com/datkt1998/voc-sentiment-analysis
+    title: "NLP (GCP API, Apache Beam): VOC Sentiment Analysis"
+  - url: https://github.com/datkt1998/pinetree-news-intelli-sense
+    title: "NLP (GCP API, Cloud Function): NEWS AI Intelli-Sense"
