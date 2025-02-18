@@ -269,6 +269,8 @@ parts:
       title: Best Practice Data Engineering
     - file: contents/guides/topics/pull_push_api.md
       title: Pull & Push API
+    - file: contents/guides/topics/ai_agent.md
+      title: AI Agent
 
 
   - file: contents/guides/ml_ops/_index.md
@@ -282,6 +284,8 @@ parts:
       title: Train model on GCP
     - file: contents/guides/ml_ops/function_calling_genai/guide.ipynb
       title: Function Calling (GenAI) on GCP 
+    {# - file: contents/guides/ml_ops/deploy_airflow_on_gke/guide.ipynb
+      title: Deploy Airflow on GKE #}
 
   - file: contents/guides/problems/_index.md
     title: AI/ML Problems
