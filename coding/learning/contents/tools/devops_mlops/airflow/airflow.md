@@ -2,7 +2,7 @@
 
 ## Overview
 
-Apache Airflow is a powerful workflow orchestration tool that helps you schedule, monitor, and manage data pipelines. Since you’re working with feature engineering and GCP, Airflow can be a great addition to automate your ML pipelines.
+Apache Airflow is a powerful workflow orchestration tool that helps you schedule, monitor, and manage data pipelines by **right way, right order and right time**. Since you’re working with feature engineering and GCP, Airflow can be a great addition to automate your ML pipelines.
 
 Nguyên tắc của Airflow:
 
@@ -14,50 +14,54 @@ Nguyên tắc của Airflow:
 P/S : Airflow không phải một giải pháp về stream dữ liệu như Spark Streaming, Apache Storm
 
 **1. Core components:**
-• *DAGs (Directed Acyclic Graphs)* – Define workflows. (đọc bởi scheduler và executor ( với mọi worker mà executor có ))
-• *Tasks & Operators* – Atomic units of execution.
-• *Schedulers* – Manage task execution (chạy workflow , gửi các tasks tới executor)
-• *Executors* – Define how tasks run (Local, Celery, Kubernetes, etc.) (quản lý các workers, xử lý các tác vụ đang chạy)
-• *Metadata Database* – Stores execution history. (nơi lưu trạng thái của scheduler, executor, webserver)
-• *Web UI* – Monitor DAGs visually. (giao diện web cho phép kiểm tra, kích hoạt, sửa lỗi các tasks và DAGs)
+- *DAGs (Directed Acyclic Graphs)* – Define workflows. (đọc bởi scheduler và executor ( với mọi worker mà executor có ))
+- *Tasks & Operators* – Atomic units of execution: những functions sử dụng trong Task or DAGs
+	- Action Operators: là function thực hiện 1 nhiệm vụ execute xử lý nào đó
+	- Transfer Operator: Transfer data from source to destination
+	- Sensor Operator: wait to somethings happen
+- *Schedulers* – Manage task execution (chạy workflow , gửi các tasks tới executor)
+- *Executors* – Define how tasks run (Local, Celery, Kubernetes, etc.) (quản lý các workers, xử lý các tác vụ đang chạy): difined how to run your task should be executed
+- *Worker*: process/sub-processs executing your task
+- *Metadata Database* – Stores execution history. (nơi lưu trạng thái của scheduler, executor, webserver)
+- *Web UI* – Monitor DAGs visually. (giao diện web cho phép kiểm tra, kích hoạt, sửa lỗi các tasks và DAGs)
 
 ![](https://images.viblo.asia/cf6457f8-82c2-4d05-9ac5-f33fadbe5d15.png)
 
 **2. Advanced Features**
-• *Sensors* (waiting for events like files in GCS).
-• *Hooks* (connectors to external services like BigQuery, Pub/Sub).
-• *XComs* (passing data between tasks).
-• *Branching & Conditional Execution* (BranchPythonOperator).
-• *TaskRetries & SLAs* (handling failures).
+- *Sensors* (waiting for events like files in GCS).
+- *Hooks* (connectors to external services like BigQuery, Pub/Sub).
+- *XComs* (passing data between tasks).
+- *Branching & Conditional Execution* (BranchPythonOperator).
+- *TaskRetries & SLAs* (handling failures).
 
 **3. Writing DAGs**
 
-• How to define DAGs in Python.
-• Using **Operators** (BashOperator, PythonOperator, DummyOperator).
-• Task dependencies (set_upstream, set_downstream).
-• Using Jinja templating for dynamic DAGs.
+- How to define DAGs in Python.
+- Using **Operators** (BashOperator, PythonOperator, DummyOperator).
+- Task dependencies (set_upstream, set_downstream).
+- Using Jinja templating for dynamic DAGs.
 
 **4. Airflow with GCP**
 
-• Using **Google Cloud Operators**:
-	• **BigQueryOperator** – Querying BigQuery.
-	• **DataflowTemplateOperator** – Running Dataflow jobs.
-	• **PubSubPublishMessageOperator** – Publishing messages.
-	• **KubernetesPodOperator** – Running tasks in GKE.
-• Integrating Airflow with **Vertex AI Pipelines**.
+- Using **Google Cloud Operators**:
+	- **BigQueryOperator** – Querying BigQuery.
+	- **DataflowTemplateOperator** – Running Dataflow jobs.
+	- **PubSubPublishMessageOperator** – Publishing messages.
+	- **KubernetesPodOperator** – Running tasks in GKE.
+- Integrating Airflow with **Vertex AI Pipelines**.
 
 **5. Airflow in Production**
 
-• Airflow deployment strategies (Kubernetes, Cloud Composer).
-• Monitoring & logging best practices.
-• Handling failures & retries.
-• Airflow security & authentication.
+- Airflow deployment strategies (Kubernetes, Cloud Composer).
+- Monitoring & logging best practices.
+- Handling failures & retries.
+- Airflow security & authentication.
 
 **6. Real-World Use Cases**
 
-• Automating ML feature engineering pipelines with Airflow.
-• ETL/ELT pipelines with Airflow & BigQuery.
-• Orchestrating ML training & inference workflows.
+- Automating ML feature engineering pipelines with Airflow.
+- ETL/ELT pipelines with Airflow & BigQuery.
+- Orchestrating ML training & inference workflows.
 
 
 
@@ -708,7 +712,56 @@ Hình vẽ trên tổng quan về các thành phần cơ bản của Apache Airf
 - **DAG Directory**: một thư mục chứa các file DAG của các quy trình xử lý dữ liệu (data pipelines) trong Airflow.
 - **Metabase Database**: được sử dụng bởi Scheduler, Executor và Web Server để lưu trữ thông tin quan trọng của từng DAG, ví dụ như các phiên bản, số liệu thống kê mỗi lần chạy, khoảng thời gian lên lịch, ...
 
+#### Luồng đi của Multi-Nodes Architecture
 
+Airflow sử dụng **Celery Executor** trong mô hình **Multi Nodes Architecture**, giúp phân tán và xử lý các tác vụ (tasks) trên nhiều worker nodes. Dưới đây là luồng đi của Airflow trong kiến trúc này:
+```mermaid
+graph TD;
+    A[User] -->|Tương tác với| B[Web Server]
+    B -->|Gửi thông tin DAG đến| C[Metastore]
+    B -->|Gửi DAG đến| D[Scheduler]
+    D -->|Lập lịch Task| E[Executor]
+    E -->|Đưa Task vào| F[Queue]
+    F -->|Gửi Task đến| G1[Worker Node 1]
+    F -->|Gửi Task đến| G2[Worker Node 2]
+    F -->|Gửi Task đến| G3[Worker Node 3]
+    G1 -->|Cập nhật trạng thái| C
+    G2 -->|Cập nhật trạng thái| C
+    G3 -->|Cập nhật trạng thái| C
+    C -->|Cung cấp thông tin Task| B
+```
+
+**Người dùng tương tác với Web Server**
+
+- Người dùng truy cập **Web Server** trên **Node 1** để tạo, sửa đổi, hoặc chạy DAGs (Directed Acyclic Graphs).
+- Web Server gửi thông tin DAG đến **Metastore** trên **Node 2**, nơi lưu trữ thông tin về DAGs, Task Instances và Logs.
+
+**Scheduler lập lịch và gửi tác vụ đến Executor**
+
+- **Scheduler** trên **Node 1** đọc thông tin từ **Metastore** và quyết định tác vụ nào cần chạy.
+- Scheduler gửi tác vụ đến **Executor**.
+
+**Executor đưa tác vụ vào hàng đợi (Queue)**
+
+- Executor sử dụng **Queue** (có thể là Redis hoặc RabbitMQ) để lưu các tác vụ chờ thực thi.
+- Hàng đợi đóng vai trò trung gian, giúp phân phối nhiệm vụ đến các worker.
+
+**Workers nhận tác vụ và thực thi**
+
+- Các **Worker Nodes** (Worker Node 1, 2, 3) liên tục lấy công việc từ **Queue** và thực hiện chúng.
+- Mỗi **Worker Node** chạy một hoặc nhiều **Airflow Workers**, xử lý các tác vụ theo DAG.
+
+**Kết quả được cập nhật về Metastore**
+
+- Sau khi hoàn thành, worker gửi trạng thái của task (thành công/thất bại) trở lại **Metastore** trên **Node 2**.
+- Người dùng có thể kiểm tra trạng thái trên **Web Server**.
+
+**Tóm tắt lại quy trình Airflow (Celery Executor)**
+2. Người dùng tạo DAG trên **Web Server**.
+3. Scheduler lên lịch và đẩy task vào **Queue**.
+4. Các **Workers** lấy task từ hàng đợi và xử lý chúng.
+5. Trạng thái task được cập nhật trong **Metastore**.
+6. Người dùng có thể xem trạng thái trên **Web Server**.
 ## Installation & Setup
 
 ### Installation
@@ -800,9 +853,9 @@ Khi bạn sử dụng **Docker Compose** để chạy Apache Airflow, tất cả
 
 Với Docker Compose, cách tối ưu nhất để cài đặt thêm thư viện hoặc thay đổi cài đặt là:
 
-1. **Tạo một Dockerfile** để mở rộng image gốc của Airflow.
-2. **Cài đặt thêm thư viện, dependencies vào image mới**.
-3. **Cập nhật file `.env` để sử dụng image này** thay vì image gốc.
+7. **Tạo một Dockerfile** để mở rộng image gốc của Airflow.
+8. **Cài đặt thêm thư viện, dependencies vào image mới**.
+9. **Cập nhật file `.env` để sử dụng image này** thay vì image gốc.
 
 🔹 **Ví dụ** về `Dockerfile` để thêm thư viện `pandas` và `requests`:
 
@@ -977,3 +1030,5 @@ snowflake_to_slack_dag()
 Việc quản lý các **Connection** cũng khá giống với Variable khi ta có thể để Airflow đọc chúng thông qua các biến môi trường có tiền tố là `AIRFLOW_CONN_` hoặc quản lý thông qua WebUI như dưới đây
 
 ![Untitled 5.png](https://images.viblo.asia/87cdf9e6-d073-44bf-8756-54ce343196fc.png)
+
+## Airflow Command
