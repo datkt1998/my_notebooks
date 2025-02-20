@@ -1,6 +1,10 @@
 # Welcome to Dat's Notebook
 
-Check out the content pages.
+**ROADMAP**
+
+![road map](roadmap-11.svg)
+
+**TABLE OF CONTENT**
 
 ```{tableofcontents}
 ```

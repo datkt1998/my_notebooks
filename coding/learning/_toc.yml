@@ -169,10 +169,10 @@ parts:
     - file: contents/theory/topics/recommendation_system/_index
       title: Recommendation System
       sections:
-      - file: contents/theory/topics/recommendation_system/labs/_index
+      - url: https://github.com/datkt1998/practical-labs/tree/master/aiml/recommendation_system
         title: Labs
         sections:
-        - file: contents/theory/topics/recommendation_system/labs/collaborative_filtering_als_spark.ipynb
+        - url: https://github.com/datkt1998/practical-labs/tree/master/aiml/recommendation_system/collaborative_filtering_als_spark.ipynb
           title: (CF) ALS - by PySpark
 
 # --------------- PROGRAMMING & FRAMEWORKS --------------
@@ -282,49 +282,59 @@ parts:
 
 # -------------- TOPICS --------------
 
-- caption: PRACTICE
+- caption: BLOGS
   maxdepth: 6
   numbered: true
   chapters:
-
-  - file: contents/practice/knowledge/_index.md
-    title: Knowledge
-    sections:
-    - file: contents/practice/knowledge/best_practice_data_engineering
-      title: Best Practice Data Engineering
-    - file: contents/practice/knowledge/pull_push_api.md
-      title: Pull & Push API
-    - file: contents/practice/knowledge/ai_agent.md
-      title: AI Agent
-    - file: contents/practice/knowledge/ml_folder_structure
-      title: ML Project Structure
-    - file: contents/practice/knowledge/vscode_dev_container/DevContainers.md
-      title: VSCode Dev Containers
-
-  - file: contents/practice/labs/_index.md
-    title: Labs
-    sections:
-    - file: contents/practice/labs/mlops_e2e_system_gcp/guide.ipynb
-      title: Overview MLOps service on GCP
-    - file: contents/practice/labs/serving_ml_model_gcp/guide.ipynb
-      title: Serve model on GCP
-    - file: contents/practice/labs/train_ml_model_gcp/guide.ipynb
-      title: Train model on GCP
-    - file: contents/practice/labs/function_calling_genai/guide.ipynb
-      title: Function Calling (GenAI) on GCP 
-    # - file: contents/practice/labs/deploy_airflow_on_gke/guide.ipynb
-    #  title: Deploy Airflow on GKE
+  - file: contents/practice/knowledge/ml_folder_structure
+    title: ML Project Structure
+  - file: contents/practice/knowledge/vscode_dev_container/DevContainers.md
+    title: VSCode Dev Containers
+  - file: contents/practice/knowledge/best_practice_data_engineering
+    title: Best Practice Data Engineering
+  - file: contents/practice/knowledge/pull_push_api.md
+    title: Pull & Push API
+  - file: contents/practice/knowledge/ai_agent.md
+    title: AI Agent
 
 
+# ------------------ MY REPOSITORY AND LABS ------------------
 
-
-# ------------------ MY FUNCTIONS ------------------
-
-- caption: REPORITORIES
+- caption: REPORITORIES & LABS
   maxdepth: 2
   numbered: true
   chapters:
-  - url: https://github.com/datkt1998/voc-sentiment-analysis
-    title: "NLP (GCP API, Apache Beam): VOC Sentiment Analysis"
-  - url: https://github.com/datkt1998/pinetree-news-intelli-sense
-    title: "NLP (GCP API, Cloud Function): NEWS AI Intelli-Sense"
+  - url: https://github.com/datkt1998?tab=repositories
+    title: My Repositories
+    sections:
+    - url: https://github.com/datkt1998/voc-sentiment-analysis
+      title: "NLP (GCP API, Apache Beam): VOC Sentiment Analysis"
+    - url: https://github.com/datkt1998/pinetree-news-intelli-sense
+      title: "NLP (GCP API, Cloud Function): NEWS AI Intelli-Sense"
+
+  - url: https://github.com/datkt1998/practical-labs
+    title: My Labs
+    sections:
+      - url: https://github.com/datkt1998/practical-labs/tree/master/de
+        title: Data Engineering Labs
+        sections:
+          - url: https://github.com/datkt1998/practical-labs/tree/master/de/course_dbt/dbtlearn
+            title: DBT Learn Course
+
+      - url: https://github.com/datkt1998/practical-labs/tree/master/aiml
+        title: AI/ML Labs
+        sections:
+          - url: https://github.com/datkt1998/practical-labs/tree/master/aiml/recommendation_system
+            title: Recommendation System
+            # sections:
+              # - url:
+          - url: https://github.com/datkt1998/practical-labs/tree/master/aiml/llm
+            title: LLM
+
+      - url: https://github.com/datkt1998/practical-labs/tree/master/mlops
+        title: MLOps Labs
+        sections:
+          - url: https://github.com/datkt1998/practical-labs/tree/master/mlops/airflow_learning
+            title: Airflow Learning Course
+          - url: https://github.com/datkt1998/practical-labs/tree/master/mlops/real-time-ml-inference-with-spark-streaming-and-kafka
+            title: Real-time ML Inference with Spark Streaming and Kafka
