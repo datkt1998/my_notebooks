@@ -168,12 +168,6 @@ parts:
 
     - file: contents/theory/topics/recommendation_system/_index
       title: Recommendation System
-      sections:
-      - url: https://github.com/datkt1998/practical-labs/tree/master/aiml/recommendation_system
-        title: Labs
-        sections:
-        - url: https://github.com/datkt1998/practical-labs/tree/master/aiml/recommendation_system/collaborative_filtering_als_spark.ipynb
-          title: (CF) ALS - by PySpark
 
 # --------------- PROGRAMMING & FRAMEWORKS --------------
 
@@ -304,7 +298,7 @@ parts:
   maxdepth: 2
   numbered: true
   chapters:
-  - url: https://github.com/datkt1998?tab=repositories
+  - file: contents/repo/repo.md
     title: My Repositories
     sections:
     - url: https://github.com/datkt1998/voc-sentiment-analysis
@@ -312,26 +306,26 @@ parts:
     - url: https://github.com/datkt1998/pinetree-news-intelli-sense
       title: "NLP (GCP API, Cloud Function): NEWS AI Intelli-Sense"
 
-  - url: https://github.com/datkt1998/practical-labs
+  - file: contents/repo/labs.md
     title: My Labs
     sections:
-      - url: https://github.com/datkt1998/practical-labs/tree/master/de
+      - file: contents/repo/labs_de.md
         title: Data Engineering Labs
-        sections:
+        sections: 
           - url: https://github.com/datkt1998/practical-labs/tree/master/de/course_dbt/dbtlearn
             title: DBT Learn Course
 
-      - url: https://github.com/datkt1998/practical-labs/tree/master/aiml
+      - file: contents/repo/labs_aiml.md
         title: AI/ML Labs
         sections:
-          - url: https://github.com/datkt1998/practical-labs/tree/master/aiml/recommendation_system
+          - file: contents/repo/labs_aiml_rec.md
             title: Recommendation System
             # sections:
               # - url:
-          - url: https://github.com/datkt1998/practical-labs/tree/master/aiml/llm
+          - file: contents/repo/labs_aiml_llm.md
             title: LLM
 
-      - url: https://github.com/datkt1998/practical-labs/tree/master/mlops
+      - file: contents/repo/labs_mlops.md
         title: MLOps Labs
         sections:
           - url: https://github.com/datkt1998/practical-labs/tree/master/mlops/airflow_learning
