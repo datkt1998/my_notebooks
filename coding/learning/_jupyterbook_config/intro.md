@@ -2,7 +2,7 @@
 
 **ROADMAP**
 
-![road map](roadmap-11.svg)
+[![road map](roadmap-11.svg)](roadmap-11.svg)
 
 **TABLE OF CONTENT**
 
