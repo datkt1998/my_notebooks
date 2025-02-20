@@ -1,9 +1,0 @@
-
-target/
-dbt_packages/
-logs/
-.venv/
-__pycache__/
-.idea/
-.vscode/
-*.csv

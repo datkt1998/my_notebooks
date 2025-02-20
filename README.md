@@ -1,4 +1,4 @@
-# [👉 Link website notebooks](https://datkt1998.github.io/my_notebooks/)
+# [👉 Link website notebooks](https://datkt1998.github.io/notebooks/)
 
 # Hướng Dẫn Thêm Tài Liệu Mới Vào Jupyter Book
 
