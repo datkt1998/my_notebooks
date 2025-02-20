@@ -277,25 +277,25 @@ parts:
 # -------------- TOPICS --------------
 
 - caption: BLOGS
-  maxdepth: 6
+  maxdepth: 4
   numbered: true
   chapters:
-  - file: contents/practice/knowledge/ml_folder_structure
+  - file: contents/blogs/ml_folder_structure
     title: ML Project Structure
-  - file: contents/practice/knowledge/vscode_dev_container/DevContainers.md
+  - file: contents/blogs/vscode_dev_container/DevContainers.md
     title: VSCode Dev Containers
-  - file: contents/practice/knowledge/best_practice_data_engineering
+  - file: contents/blogs/best_practice_data_engineering
     title: Best Practice Data Engineering
-  - file: contents/practice/knowledge/pull_push_api.md
+  - file: contents/blogs/pull_push_api.md
     title: Pull & Push API
-  - file: contents/practice/knowledge/ai_agent.md
+  - file: contents/blogs/ai_agent.md
     title: AI Agent
 
 
 # ------------------ MY REPOSITORY AND LABS ------------------
 
 - caption: REPORITORIES & LABS
-  maxdepth: 2
+  maxdepth: 5
   numbered: true
   chapters:
   - file: contents/repo/repo.md
