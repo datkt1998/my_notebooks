@@ -275,17 +275,17 @@ parts:
     - file: contents/tools_blogs/blogs/_index
       title: Blogs
       sections:
-        - file: contents/blogs/ai_ml_workflow
+        - file: contents/tools_blogs/blogs/ai_ml_workflow
           title: AI/ML Workflow
-        - file: contents/blogs/ml_folder_structure
+        - file: contents/tools_blogs/blogs/ml_folder_structure
           title: ML Project Structure
-        - file: contents/blogs/vscode_dev_container/DevContainers.md
+        - file: contents/tools_blogs/blogs/vscode_dev_container/DevContainers.md
           title: VSCode Dev Containers
-        - file: contents/blogs/best_practice_data_engineering
+        - file: contents/tools_blogs/blogs/best_practice_data_engineering
           title: Best Practice Data Engineering
-        - file: contents/blogs/pull_push_api.md
+        - file: contents/tools_blogs/blogs/pull_push_api.md
           title: Pull & Push API
-        - file: contents/blogs/ai_agent.md
+        - file: contents/tools_blogs/blogs/ai_agent.md
           title: AI Agent
 
 
