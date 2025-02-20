@@ -29,7 +29,7 @@ latex:
 
 # Information about where the book exists on the web
 repository:
-  url: https://github.com/datkt1998/my_notebooks  # Online location of your book
+  url: https://github.com/datkt1998/notebooks  # Online location of your book
   path_to_book: coding/learning  # Optional path to your book, relative to the repository root
   branch: master  # Which branch of the repository should be used when creating links (optional)
 

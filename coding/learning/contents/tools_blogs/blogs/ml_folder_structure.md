@@ -89,7 +89,7 @@ project_name/
 
 ```
 
-CODE PYTHON để gen structure theo template trên : [Project Structure Gennerator](https://github.com/datkt1998/my_notebooks/tree/master/coding/functions/pyfunc/utils/project_structure_gen.py)
+CODE PYTHON để gen structure theo template trên : [Project Structure Gennerator](https://github.com/datkt1998/notebooks/tree/master/coding/functions/pyfunc/utils/project_structure_gen.py)
 
 ## Ignore file
 
