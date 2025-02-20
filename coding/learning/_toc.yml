@@ -171,125 +171,122 @@ parts:
 
 # --------------- PROGRAMMING & FRAMEWORKS --------------
 
-- caption: TOOLS
+- caption: TOOLS & BLOGS
   maxdepth: 6
   numbered: true
   chapters:
-    - file: contents/tools/programming/_index
+    - file: contents/tools_blogs/programming/_index
       title: Programming
       sections:
-        - file: contents/tools/programming/python/_index
+        - file: contents/tools_blogs/programming/python/_index
           title: Python
           sections:
-            - file: contents/tools/programming/python/1_Python.ipynb
+            - file: contents/tools_blogs/programming/python/1_Python.ipynb
               title: Python Basics
-            - file: contents/tools/programming/python/2_Concurrency_and_parallelism.ipynb
+            - file: contents/tools_blogs/programming/python/2_Concurrency_and_parallelism.ipynb
               title: Concurrency & Parallelism
-            - file: contents/tools/programming/python/3_python_environment.ipynb
+            - file: contents/tools_blogs/programming/python/3_python_environment.ipynb
               title: Python Environment
-        - file: contents/tools/programming/2_NoSQL.ipynb
+        - file: contents/tools_blogs/programming/2_NoSQL.ipynb
           title: NoSQL
-        - file: contents/tools/programming/3_SQL.ipynb
+        - file: contents/tools_blogs/programming/3_SQL.ipynb
           title: SQL
-        - file: contents/tools/programming/bash.md
+        - file: contents/tools_blogs/programming/bash.md
           title: Bash
 
-    - file: contents/tools/dev_frameworks/_index
+    - file: contents/tools_blogs/dev_frameworks/_index
       title: Dev Frameworks
       sections:
-      - file: contents/tools/dev_frameworks/pydantic/Pydantic.ipynb
+      - file: contents/tools_blogs/dev_frameworks/pydantic/Pydantic.ipynb
         title: Pydantic
-      - file: contents/tools/dev_frameworks/pytest/Pytest.ipynb
+      - file: contents/tools_blogs/dev_frameworks/pytest/Pytest.ipynb
         title: Pytest
-        # - file: contents/tools/aiml_frameworks/tensorflow/tensorflow.ipynb
+        # - file: contents/tools_blogs/aiml_frameworks/tensorflow/tensorflow.ipynb
         #   title: TensorFlow
-        # - file: contents/tools/aiml_frameworks/pytorch/pytorch.ipynb
+        # - file: contents/tools_blogs/aiml_frameworks/pytorch/pytorch.ipynb
         #   title: PyTorch
 
-    - file: contents/tools/data_engineering/_index
+    - file: contents/tools_blogs/data_engineering/_index
       title: Data Engineering
       sections:
-        - file: contents/tools/data_engineering/dbt/dbt.md
+        - file: contents/tools_blogs/data_engineering/dbt/dbt.md
           title: DBT
-        - file: contents/tools/data_engineering/polars/Polars.ipynb
+        - file: contents/tools_blogs/data_engineering/polars/Polars.ipynb
           title: Polars
-        - file: contents/tools/data_engineering/pyspark/PySpark.ipynb
+        - file: contents/tools_blogs/data_engineering/pyspark/PySpark.ipynb
           title: PySpark
-        - file: contents/tools/data_engineering/gcp_dataform/dataform.ipynb
+        - file: contents/tools_blogs/data_engineering/gcp_dataform/dataform.ipynb
           title: (GCP) Dataform
 
-    - file: contents/tools/devops_mlops/_index
+    - file: contents/tools_blogs/devops_mlops/_index
       title: MLOps
       sections:
-        - file: contents/tools/devops_mlops/airflow/airflow
+        - file: contents/tools_blogs/devops_mlops/airflow/airflow
           title: Airflow
-        - file: contents/tools/devops_mlops/docker/Docker_guide
+        - file: contents/tools_blogs/devops_mlops/docker/Docker_guide
           title: Docker
-        - file: contents/tools/devops_mlops/makefile/makefile
+        - file: contents/tools_blogs/devops_mlops/makefile/makefile
           title: Makefile
-        - file: contents/tools/devops_mlops/cicd/4_Git.ipynb
+        - file: contents/tools_blogs/devops_mlops/cicd/4_Git.ipynb
           title: Git
-        - file: contents/tools/devops_mlops/cicd/jenkins
+        - file: contents/tools_blogs/devops_mlops/cicd/jenkins
           title: Jenkins
-        - file: contents/tools/devops_mlops/k8s/kubernetes
+        - file: contents/tools_blogs/devops_mlops/k8s/kubernetes
           title: Kubernetes
-        - file: contents/tools/devops_mlops/infa/terraform
+        - file: contents/tools_blogs/devops_mlops/infa/terraform
           title: Terraform
-        - file: contents/tools/devops_mlops/monitoring_logging/grafana
+        - file: contents/tools_blogs/devops_mlops/monitoring_logging/grafana
           title: Grafana
-        - file: contents/tools/devops_mlops/monitoring_logging/prometheus
+        - file: contents/tools_blogs/devops_mlops/monitoring_logging/prometheus
           title: Prometheus
 
 
-    - file: contents/tools/web_api/_index
+    - file: contents/tools_blogs/web_api/_index
       title: WebAPI
       sections:
-        - file: contents/tools/web_api/streamlit/Streamlit.ipynb
+        - file: contents/tools_blogs/web_api/streamlit/Streamlit.ipynb
           title: Streamlit
-        - file: contents/tools/web_api/fastapi/FastAPI.ipynb
+        - file: contents/tools_blogs/web_api/fastapi/FastAPI.ipynb
           title: FastAPI
           sections:
-            - file: contents/tools/web_api/fastapi/example_small_app/guide.ipynb
+            - file: contents/tools_blogs/web_api/fastapi/example_small_app/guide.ipynb
               title: Small App Example
-            - file: contents/tools/web_api/fastapi/example_big_app/guide.ipynb
+            - file: contents/tools_blogs/web_api/fastapi/example_big_app/guide.ipynb
               title: Big App Example
 
 
-    - file: contents/tools/storage/_index
+    - file: contents/tools_blogs/storage/_index
       title: Storage
       # sections:
-      #   - file: contents/tools/storage/feast/feast.ipynb
+      #   - file: contents/tools_blogs/storage/feast/feast.ipynb
       #     title: Feast (Feature Store)
 
-    - file: contents/tools/cloud/_index
+    - file: contents/tools_blogs/cloud/_index
       title: Cloud
       sections:
-        - file: contents/tools/cloud/aws/_index
+        - file: contents/tools_blogs/cloud/aws/_index
           title: AWS
-        - file: contents/tools/cloud/gcp/_index
+        - file: contents/tools_blogs/cloud/gcp/_index
           title: GCP
           sections:
-            - file: contents/tools/cloud/gcp/vertex_ai/vertex_ai.md
+            - file: contents/tools_blogs/cloud/gcp/vertex_ai/vertex_ai.md
               title: Vertex AI
 
-
-
-# -------------- TOPICS --------------
-
-- caption: BLOGS
-  maxdepth: 4
-  numbered: true
-  chapters:
-  - file: contents/blogs/ml_folder_structure
-    title: ML Project Structure
-  - file: contents/blogs/vscode_dev_container/DevContainers.md
-    title: VSCode Dev Containers
-  - file: contents/blogs/best_practice_data_engineering
-    title: Best Practice Data Engineering
-  - file: contents/blogs/pull_push_api.md
-    title: Pull & Push API
-  - file: contents/blogs/ai_agent.md
-    title: AI Agent
+    - file: contents/tools_blogs/blogs/_index
+      title: Blogs
+      sections:
+        - file: contents/blogs/ai_ml_workflow
+          title: AI/ML Workflow
+        - file: contents/blogs/ml_folder_structure
+          title: ML Project Structure
+        - file: contents/blogs/vscode_dev_container/DevContainers.md
+          title: VSCode Dev Containers
+        - file: contents/blogs/best_practice_data_engineering
+          title: Best Practice Data Engineering
+        - file: contents/blogs/pull_push_api.md
+          title: Pull & Push API
+        - file: contents/blogs/ai_agent.md
+          title: AI Agent
 
 
 # ------------------ MY REPOSITORY AND LABS ------------------
