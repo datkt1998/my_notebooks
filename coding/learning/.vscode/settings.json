@@ -1,3 +1,4 @@
 {
-    "system-info.hideMemoryUsage": true
+    "system-info.hideMemoryUsage": true,
+    "python-envs.pythonProjects": []
 }

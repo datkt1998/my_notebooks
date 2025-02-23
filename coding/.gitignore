@@ -2,3 +2,7 @@ data/
 datasets/
 dataset/
 _build/
+
+**/idea/*
+**/.venv/**
+**/.vscode/**
