@@ -153,13 +153,19 @@ parts:
     - file: contents/theory/aiml_algorithms/dl_nlp/_index
       title: DL NLP
       sections:
-      - file: contents/theory/aiml_algorithms/dl_nlp/1_nlp_rnn.ipynb
-        title: NLP Overview & RNN
-      - file: contents/theory/aiml_algorithms/dl_nlp/2_transformers.ipynb
-        title: Transformers
+      - file: contents/theory/aiml_algorithms/dl_nlp/1_nlp_overview.ipynb
+        title: Overview
+      - file: contents/theory/aiml_algorithms/dl_nlp/2_nlp_preprocessing.ipynb
+        title: Preprocessing
 
-    - file: contents/theory/aiml_algorithms/dl_llm/_index
-      title: DL LLM
+
+      - file: contents/theory/aiml_algorithms/dl_nlp/llm/_index
+        title: Large Language Model
+        sections:
+          - file: contents/theory/aiml_algorithms/dl_nlp/llm/generative_ai_overview.md
+            title: Generative AI Overview
+          - file: contents/theory/aiml_algorithms/dl_nlp/llm/transformers.ipynb
+            title: Transformers
 
 
   - file: contents/theory/topics/_index.md
