@@ -153,8 +153,8 @@ parts:
     - file: contents/theory/aiml_algorithms/dl_nlp/_index
       title: DL NLP
       sections:
-      - file: contents/theory/aiml_algorithms/dl_nlp/1_nlp_overview.ipynb
-        title: Overview
+      - file: contents/theory/aiml_algorithms/dl_nlp/1_nlp_theory.ipynb
+        title: NLP Theory Overview
       - file: contents/theory/aiml_algorithms/dl_nlp/2_nlp_preprocessing.ipynb
         title: Preprocessing
 
