@@ -157,15 +157,17 @@ parts:
         title: NLP Theory Overview
       - file: contents/theory/aiml_algorithms/dl_nlp/2_nlp_preprocessing.ipynb
         title: Preprocessing
-
-
+      - file: contents/theory/aiml_algorithms/dl_nlp/3_nlp_embedding.ipynb
+        title: Embedding
+      - file: contents/theory/aiml_algorithms/dl_nlp/4_nlp_basic_applications.ipynb
+        title: Basic Applications
       - file: contents/theory/aiml_algorithms/dl_nlp/llm/_index
-        title: Large Language Model
+        title: Large Language Model (LLM)
         sections:
           - file: contents/theory/aiml_algorithms/dl_nlp/llm/generative_ai_overview.md
             title: Generative AI Overview
-          - file: contents/theory/aiml_algorithms/dl_nlp/llm/transformers.ipynb
-            title: Transformers
+          - file: contents/theory/aiml_algorithms/dl_nlp/llm/transformer.ipynb
+            title: Transformer
 
 
   - file: contents/theory/topics/_index.md
