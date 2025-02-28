@@ -5,19 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="302d41ba-5a86-41ae-88cf-fab95aeee47b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/contents/theory/aiml_algorithms/dl_nlp/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contents/theory/aiml_algorithms/dl_nlp/nlp_basic_applications.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/ruff.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_toc.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_toc.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contents/theory/aiml_algorithms/dl_nlp/1_nlp_theory.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/contents/theory/aiml_algorithms/dl_nlp/nlp_theory.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contents/theory/aiml_algorithms/dl_nlp/2_nlp_preprocessing.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/contents/theory/aiml_algorithms/dl_nlp/nlp_preprocessing_tokenization_embedding.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contents/theory/aiml_algorithms/dl_nlp/3_nlp_embedding.ipynb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/contents/theory/aiml_algorithms/dl_nlp/4_nlp_basic_applications.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/theory/aiml_algorithms/dl_nlp/nlp_basic_applications.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/contents/theory/aiml_algorithms/dl_nlp/nlp_basic_applications.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contents/theory/aiml_algorithms/dl_nlp/nlp_preprocessing_tokenization_embedding.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/contents/theory/aiml_algorithms/dl_nlp/nlp_preprocessing_tokenization_embedding.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Jupyter Notebook" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
@@ -47,21 +50,22 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "dev",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
+    "settings.editor.selected.configurable": "com.koxudaxi.ruff.RuffConfigurable",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-PY-243.23654.177" />
-        <option value="bundled-python-sdk-91d3a02ef49d-43b77aa2d136-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.23654.177" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-PY-243.25659.43" />
+        <option value="bundled-python-sdk-181015f7ab06-4df51de95216-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-243.25659.43" />
       </set>
     </attachedChunks>
   </component>
@@ -79,6 +83,8 @@
       <workItem from="1740627134167" duration="781000" />
       <workItem from="1740627938975" duration="126000" />
       <workItem from="1740628086855" duration="17689000" />
+      <workItem from="1740722661778" duration="157000" />
+      <workItem from="1740723012055" duration="9991000" />
     </task>
     <servers />
   </component>
