@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="302d41ba-5a86-41ae-88cf-fab95aeee47b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/ruff.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contents/theory/aiml_algorithms/dl_nlp/nlp_basic_applications.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/contents/theory/aiml_algorithms/dl_nlp/nlp_basic_applications.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contents/theory/aiml_algorithms/dl_nlp/nlp_preprocessing_tokenization_embedding.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/contents/theory/aiml_algorithms/dl_nlp/nlp_preprocessing_tokenization_embedding.ipynb" afterDir="false" />
-    </list>
+    <list default="true" id="302d41ba-5a86-41ae-88cf-fab95aeee47b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,7 +52,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.koxudaxi.ruff.RuffConfigurable",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -85,6 +80,7 @@
       <workItem from="1740628086855" duration="17689000" />
       <workItem from="1740722661778" duration="157000" />
       <workItem from="1740723012055" duration="9991000" />
+      <workItem from="1740966906146" duration="132000" />
     </task>
     <servers />
   </component>
