@@ -1032,3 +1032,51 @@ Việc quản lý các **Connection** cũng khá giống với Variable khi ta c
 ![Untitled 5.png](https://images.viblo.asia/87cdf9e6-d073-44bf-8756-54ce343196fc.png)
 
 ## Airflow Command
+
+### Quản lý Docker
+
+- **Hiển thị các container Docker đang chạy:**  `docker ps`
+
+- **Thực thi lệnh `/bin/bash` trong container có `container_id` để mở một phiên shell:** `docker exec -it container_id /bin/bash`
+  
+### Quản lý thư mục và đường dẫn
+
+- **Hiển thị đường dẫn hiện tại bạn đang đứng:** `pwd`
+
+- **Hiển thị danh sách các file và thư mục trong thư mục hiện tại:** `ls`
+### Quản lý cơ sở dữ liệu của Airflow
+
+- **Khởi tạo metadatabase:** `airflow db init`
+
+- **Khởi tạo lại metadatabase (xóa tất cả dữ liệu):** `airflow db reset`
+
+- **Nâng cấp metadatabase (áp dụng schema và giá trị mới nhất):** `airflow db upgrade`
+
+### Khởi động các thành phần của Airflow
+
+- **Khởi động webserver của Airflow:** `airflow webserver`
+
+- **Khởi động scheduler của Airflow:** `airflow scheduler`
+
+- **Khởi động một Celery worker (hữu ích trong chế độ phân tán để phân chia nhiệm vụ giữa các máy/nút):** `airflow celery worker`
+
+### Quản lý DAGs
+
+- **Liệt kê danh sách các DAG đã biết (bao gồm các DAG trong thư mục `examples` hoặc `dags`):** `airflow dags list`
+
+- **Kích hoạt DAG `example_python_operator` với ngày hiện tại làm execution date:** `airflow dags trigger example_python_operator`
+
+- **Kích hoạt DAG `example_python_operator` với một ngày trong quá khứ làm execution date (Lưu ý: Lệnh này sẽ không kích hoạt các task của DAG nếu không đặt tùy chọn `catchup=True` trong định nghĩa DAG):**  
+  `airflow dags trigger example_python_operator -e 2021-01-01`
+
+- **Kích hoạt DAG `example_python_operator` với một ngày trong tương lai (điều chỉnh sao cho có thêm khoảng 2 phút so với ngày hiện tại hiển thị trong giao diện Airflow UI). DAG sẽ được lên lịch chạy vào ngày đó:**  
+  `airflow dags trigger example_python_operator -e '2021-01-01 19:04:00+00:00'`
+
+- **Hiển thị lịch sử các lần chạy của DAG `example_python_operator`:** `airflow dags list-runs -d example_python_operator`
+
+### Quản lý Tasks
+
+- **Liệt kê các task có trong DAG `example_python_operator`:** `airflow tasks list example_python_operator`
+
+- **Kiểm thử task `print_the_context` của DAG `example_python_operator` cho ngày `2021-01-01` mà không cần quan tâm đến dependencies hoặc các lần chạy trước đó (Hữu ích cho việc debug):**  
+  `airflow tasks test example_python_operator print_the_context 2021-01-01`

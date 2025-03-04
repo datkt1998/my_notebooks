@@ -153,12 +153,24 @@ parts:
     - file: contents/theory/aiml_algorithms/dl_nlp/_index
       title: DL NLP
       sections:
-      - file: contents/theory/aiml_algorithms/dl_nlp/nlp_theory.ipynb
-        title: NLP Theory Overview
-      - file: contents/theory/aiml_algorithms/dl_nlp/nlp_preprocessing_tokenization_embedding.ipynb
-        title: Preprocessing, Tokenization & Embedding
-      - file: contents/theory/aiml_algorithms/dl_nlp/nlp_basic_applications.ipynb
-        title: Basic Applications
+      - file: contents/theory/aiml_algorithms/dl_nlp/foundation/_index
+        title: NLP Foundation
+        sections:
+        - file: contents/theory/aiml_algorithms/dl_nlp/foundation/introduction.ipynb
+          title: Introduction
+        - file: contents/theory/aiml_algorithms/dl_nlp/foundation/preprocessing.ipynb
+          title: Text Preprocessing
+        - file: contents/theory/aiml_algorithms/dl_nlp/foundation/embedding.ipynb
+          title: Embedding
+        - file: contents/theory/aiml_algorithms/dl_nlp/foundation/core_models.ipynb
+          title: Core Models
+
+      - file: contents/theory/aiml_algorithms/dl_nlp/applications/_index
+        title: NLP Applications
+        sections:
+        - file: contents/theory/aiml_algorithms/dl_nlp/nlp_basic_applications.ipynb
+          title: Basic Applications
+
       - file: contents/theory/aiml_algorithms/dl_nlp/llm/_index
         title: Large Language Model (LLM)
         sections:
