@@ -172,10 +172,10 @@ parts:
           title: Basic Applications
 
       - file: contents/theory/aiml_algorithms/dl_nlp/llm/_index
-        title: Large Language Model (LLM)
+        title: LLM
         sections:
           - file: contents/theory/aiml_algorithms/dl_nlp/llm/generative_ai_overview.md
-            title: Generative AI Overview
+            title: Generative AI
           - file: contents/theory/aiml_algorithms/dl_nlp/llm/transformer.ipynb
             title: Transformer
 
@@ -213,7 +213,7 @@ parts:
           title: Bash
 
     - file: contents/tools/dev_frameworks/_index
-      title: Dev Frameworks
+      title: Frameworks
       sections:
       - file: contents/tools/dev_frameworks/pydantic/Pydantic.ipynb
         title: Pydantic
@@ -225,7 +225,7 @@ parts:
         #   title: PyTorch
 
     - file: contents/tools/data_engineering/_index
-      title: Data Engineering
+      title: Engineering
       sections:
         - file: contents/tools/data_engineering/dbt/dbt.md
           title: DBT
@@ -236,26 +236,41 @@ parts:
         - file: contents/tools/data_engineering/gcp_dataform/dataform.ipynb
           title: (GCP) Dataform
 
-    - file: contents/tools/devops_mlops/_index
+    - file: contents/tools/mlops/_index
       title: MLOps
       sections:
-        - file: contents/tools/devops_mlops/airflow/airflow
+        - file: contents/tools/mlops/airflow/_index
           title: Airflow
-        - file: contents/tools/devops_mlops/docker/Docker_guide
+          sections:
+            - file: contents/tools/mlops/airflow/overview.md
+              title: Overview
+            - file: contents/tools/mlops/airflow/workflow.md
+              title: Workflow
+            - file: contents/tools/mlops/airflow/dags_tasks
+              title: DAGs & Tasks
+            - file: contents/tools/mlops/airflow/operator
+              title: Operator
+            - file: contents/tools/mlops/airflow/workflow
+              title: Workflow
+            - file: contents/tools/mlops/airflow/deploy
+              title: Deployment
+            - file: contents/tools/mlops/airflow/monitor_and_security_and_variable
+              title: Monitor, Security & Variable
+        - file: contents/tools/mlops/docker/Docker_guide
           title: Docker
-        - file: contents/tools/devops_mlops/makefile/makefile
+        - file: contents/tools/mlops/makefile/makefile
           title: Makefile
-        - file: contents/tools/devops_mlops/cicd/4_Git.ipynb
+        - file: contents/tools/mlops/cicd/4_Git.ipynb
           title: Git
-        - file: contents/tools/devops_mlops/cicd/jenkins
+        - file: contents/tools/mlops/cicd/jenkins
           title: Jenkins
-        - file: contents/tools/devops_mlops/k8s/kubernetes
+        - file: contents/tools/mlops/k8s/kubernetes
           title: Kubernetes
-        - file: contents/tools/devops_mlops/infa/terraform
+        - file: contents/tools/mlops/infa/terraform
           title: Terraform
-        - file: contents/tools/devops_mlops/monitoring_logging/grafana
+        - file: contents/tools/mlops/monitoring_logging/grafana
           title: Grafana
-        - file: contents/tools/devops_mlops/monitoring_logging/prometheus
+        - file: contents/tools/mlops/monitoring_logging/prometheus
           title: Prometheus
 
 

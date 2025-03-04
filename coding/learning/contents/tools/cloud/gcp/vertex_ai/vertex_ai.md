@@ -240,6 +240,7 @@ To use these magics, you must first register them. Run the `%load_ext` magic i
 The `%%bigquery` magic runs a SQL query and returns the results as a pandas `DataFrame`
 
 ```python
+
 %%bigquery  
 SELECT name, SUM(number) as count  
 FROM `bigquery-public-data.usa_names.usa_1910_current`  

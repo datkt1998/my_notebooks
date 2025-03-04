@@ -107,48 +107,48 @@ EXPOSE 8000
  `devcontainer.json`: là file cấu hình dành riêng cho Visual Studio Code. Nó chỉ định cách Visual Studio Code sẽ khởi tạo và kết nối với Dev Container, và có thể định nghĩa các cài đặt khác như extensions, biến môi trường, và các lệnh sau khi container được tạo.
 ```json
 {
-    // Tên của Dev Container, được hiển thị trong Visual Studio Code
+//   Tên của Dev Container, được hiển thị trong Visual Studio Code
     "name": "Python Dev Container",
     
-    // Image is Standard Image or Custom Image
-    // More info: https://containers.dev/guide/dockerfile  
-    // "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bullseye"      
+//     // Image is Standard Image or Custom Image
+//     // More info: https://containers.dev/guide/dockerfile  
+//     // "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bullseye"      
 
-    // Chỉ định tên file Dockerfile để xây dựng container.
+//     // Chỉ định tên file Dockerfile để xây dựng container.
     "dockerFile": "Dockerfile",
     "context": "..",
 
-    // các tham số khi chạy docker run thành image
+//     // các tham số khi chạy docker run thành image
     "runArgs": [
         "-p", "8080:80"
-        // ,"--memory", "2g"
-        // ,"--cpus", "2"
+//         // ,"--memory", "2g"
+//         // ,"--cpus", "2"
     ],
 
-    // Thêm Features bổ sung cho dev container: https://containers.dev/features.
-    // "features": {},                                                    
+//     // Thêm Features bổ sung cho dev container: https://containers.dev/features.
+//     // "features": {},                                                    
 
-    // Cài đặt port của containe
-    // Chỉ định các port được mở từ container ra local "host:port"
+//     // Cài đặt port của containe
+//     // Chỉ định các port được mở từ container ra local "host:port"
     "forwardPorts": [3000, "db:9999"],  
       
-    // Cấu hình thuộc tính cho các cổng được mở trong container.                                          
+//     // Cấu hình thuộc tính cho các cổng được mở trong container.                                          
     "portsAttributes": { "8000": { "label": "App", "onAutoForward": "notify" }},
     
-    // Chạy các lệnh được lưu trong file .devcontainer/post-create.sh sau khi container được tạo xong
+//     // Chạy các lệnh được lưu trong file .devcontainer/post-create.sh sau khi container được tạo xong
     "postCreateCommand": "bash .devcontainer/post-create.sh",
-    // "postCreateCommand": "pip3 install --user -r requirements.txt",  
+//     // "postCreateCommand": "pip3 install --user -r requirements.txt",  
   
-    // Thiết lập các biến môi trường
+//     // Thiết lập các biến môi trường
     "containerEnv": {
         "PYTHONUNBUFFERED": "1", // đảm bảo rằng output của Python sẽ không bị buffer hóa, giúp dễ dàng theo dõi log trong thời gian thực.
         "ENV": "dev"
     },
 
-    // định nghĩa user chạy trong container, should be non-root if using Dockerfile
+//     // định nghĩa user chạy trong container, should be non-root if using Dockerfile
     "remoteUser": "devuser",
 
-    // Configure tool-specific properties.  
+//     // Configure tool-specific properties.  
     "customizations": {
         "settings": {
             "workbench.iconTheme":"vscode-icons",
@@ -242,11 +242,11 @@ EXPOSE 8000
          },
     "extensions": [
         "akamud.vscode-theme-onedark",
-        // "alefragnani.bookmarks",
+//         // "alefragnani.bookmarks",
         "charliermarsh.ruff",
         "codeium.codeium",
-        // "cweijan.dbclient-jdbc",
-        // "cweijan.vscode-database-client2",  
+//         // "cweijan.dbclient-jdbc",
+//         // "cweijan.vscode-database-client2",  
         "donjayamanne.python-environment-manager",
         "donjayamanne.python-extension-pack",
         "eamodio.gitlens",
@@ -256,7 +256,7 @@ EXPOSE 8000
         "jsjlewis96.one-dark-pro-italic-vivid",
         "kevinrose.vsc-python-indent",
         "ima-miz-vscode.pip-package-manager",
-        // "masshuu12.system-info",
+//         // "masshuu12.system-info",
         "mechatroner.rainbow-csv",
         "ms-azuretools.vscode-docker",
         "ms-python.black-formatter",
@@ -268,17 +268,17 @@ EXPOSE 8000
         "ms-toolsai.jupyter",
         "ms-toolsai.jupyter-keymap",
         "ms-toolsai.jupyter-renderers",
-        // "ms-toolsai.vscode-jupyter-cell-tags",
-        // "ms-toolsai.vscode-jupyter-slideshow",
-        // "ms-vscode-remote.remote-containers",
-        // "ms-vscode-remote.remote-ssh",
-        // "ms-vscode-remote.remote-ssh-edit",
-        // "ms-vscode-remote.remote-wsl",
-        // "ms-vscode-remote.vscode-remote-extensionpack",
-        // "ms-vscode.remote-explorer",
-        // "ms-vscode.remote-server",
-        // "mtxr.sqltools",
-        // "mtxr.sqltools-driver-sqlite",
+//         // "ms-toolsai.vscode-jupyter-cell-tags",
+//         // "ms-toolsai.vscode-jupyter-slideshow",
+//         // "ms-vscode-remote.remote-containers",
+//         // "ms-vscode-remote.remote-ssh",
+//         // "ms-vscode-remote.remote-ssh-edit",
+//         // "ms-vscode-remote.remote-wsl",
+//         // "ms-vscode-remote.vscode-remote-extensionpack",
+//         // "ms-vscode.remote-explorer",
+//         // "ms-vscode.remote-server",
+//         // "mtxr.sqltools",
+//         // "mtxr.sqltools-driver-sqlite",
         "gruntfuggly.todo-tree",
         "pkief.material-icon-theme",
         "postman.postman-for-vscode",
@@ -290,7 +290,7 @@ EXPOSE 8000
         ]
     },  
     
-    // Mount thư mục từ host vào container
+//     // Mount thư mục từ host vào container
     "mounts": [
         "source=path_on_host,target=path_in_container,type=bind" ,
         "source=/path/to/local/config.json,target=/workspace/config.json,type=bind"

@@ -1,4 +1,4 @@
-# Airflow
+# Airflow Overview
 
 ## Overview
 
@@ -712,7 +712,7 @@ Hình vẽ trên tổng quan về các thành phần cơ bản của Apache Airf
 - **DAG Directory**: một thư mục chứa các file DAG của các quy trình xử lý dữ liệu (data pipelines) trong Airflow.
 - **Metabase Database**: được sử dụng bởi Scheduler, Executor và Web Server để lưu trữ thông tin quan trọng của từng DAG, ví dụ như các phiên bản, số liệu thống kê mỗi lần chạy, khoảng thời gian lên lịch, ...
 
-#### Luồng đi của Multi-Nodes Architecture
+### Luồng đi của Multi-Nodes Architecture
 
 Airflow sử dụng **Celery Executor** trong mô hình **Multi Nodes Architecture**, giúp phân tán và xử lý các tác vụ (tasks) trên nhiều worker nodes. Dưới đây là luồng đi của Airflow trong kiến trúc này:
 ```mermaid

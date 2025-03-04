@@ -95,7 +95,7 @@ CODE PYTHON để gen structure theo template trên : [Project Structure Gennera
 
 ### `.gitignore` sample
 
-```plain text
+```text
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -268,7 +268,7 @@ data/
 
 ### `.gcloudignore` sample
 
-```plain text
+```text
 .gcloudignore
 .gitignore
 README.md

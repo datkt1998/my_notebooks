@@ -179,7 +179,8 @@ For complete details on project configurations, see [dbt_project.yml](https://d
 - [`exposure` properties](https://docs.getdbt.com/reference/exposure-properties) (e.g. `type`, `maturity`)
 - [`macro` properties](https://docs.getdbt.com/reference/macro-properties) (e.g. `arguments`)
 
-```models/jaffle_shop.yml
+```yaml
+# models/jaffle_shop.yml
 version: 2
 
 sources:
@@ -329,7 +330,8 @@ Ngoài ra còn có các custom tests.
 
 **`versions`** cho phép bạn quản lý và theo dõi các phiên bản khác nhau của một mô hình theo thời gian. Điều này đặc biệt hữu ích khi bạn cần thực hiện các thay đổi quan trọng đối với mô hình mà không muốn ảnh hưởng đến các quy trình hoặc người dùng hiện tại đang dựa vào phiên bản cũ.
 
-```models/<schema>.yml
+```yaml
+# models/<schema>.yml
 version: 2
 
 models:
@@ -397,7 +399,8 @@ models:
 
 Ví dụ trong `dbt_project.yml`
 
-```dbt_project.yml
+```yaml
+# dbt_project.yml
 models:
   dbtlearn:
     +materialized: view
@@ -405,6 +408,7 @@ models:
       +materialized: table
 ```
 hoặc trong config block
+
 #### Table/View Models
 
 ```sql
@@ -469,7 +473,7 @@ Mỗi 1 model dạng ephemeral sẽ được lưu thành query tạm (mà không
 
 How to write [Seed properties](https://docs.getdbt.com/reference/seed-properties)
 
-```yml
+```yaml
 #seeds/<filename>.yml
 version: 2
 
@@ -507,7 +511,7 @@ seeds:
 
 Định nghĩa **Sources** in `model/`,  check các [properties](https://docs.getdbt.com/reference/source-properties) and [config](https://docs.getdbt.com/reference/source-configs)
 
-```yml
+```yaml
 # models/sources.yml
 version: 2
 
@@ -799,12 +803,12 @@ models:
 Nếu trong TH chạy test bị lỗi, thông báo sẽ chỉ ra file `.sql` chạy test bị fail. Để check file `.sql` đó:
 
 - For Mac/Linux
-```terminal
+```bash
 cat <filepath>
 ```
 
 - For Windows:
-```cmd
+```shell
 type <filepath>
 ```
 ### Macros
@@ -1473,15 +1477,18 @@ dbt run-operation learn_logging
 ### Dagster
 
 **Set up your environment**
-Let's create a virtualenv and install dbt and dagster. These packages are located in [requirements.txt](requirements.txt).
+
+Let's create a virtualenv and install dbt and dagster. These packages are located in [requirements.txt].
 ```
 virutalenv venv -p python3.11
 pip install -r requirements.txt
 ```
 
 **Create a dagster project**
+
 Dagster has a command for creating a dagster project from an existing dbt project: 
-```
+
+```bash
 dagster-dbt project scaffold --project-name dbt_dagster_project --dbt-project-dir=dbtlearn
 ```
 
